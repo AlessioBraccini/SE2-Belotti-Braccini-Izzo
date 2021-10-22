@@ -64,7 +64,7 @@ Telangana needs an efficient application to increase the general productivity of
 The user base is expected to be the entire population of Telangana, starting with those who works in the agricolture sector up to normal citizens.
 
 \subsection{Scope} %analysis of the world and shared phenomena
-
+%ADD: basic service and advanced functionalities
 \subsubsection*{Phenomena controlled by the Machine}
 \rowcolors{2}{gray!50}{}
 \begin{tabular}{|c|c|c|}
@@ -78,21 +78,23 @@ The user base is expected to be the entire population of Telangana, starting wit
 \end{tabular}
 
 \subsubsection*{Phenomena controlled by the World}
-\rowcolors{2}{gray!50}{}
-\begin{tabular}{|c|c|c|}
-    \hline
-    \textbf{ID} & \textbf{Phenomenom} & \textbf{Shared} \\\hline\hline
-    W1 & User login & Yes\\\hline
-    W2 & User share best practice & Yes\\\hline
-    W3 & User ask for help on forum & Yes\\\hline
-    W4 & Collect land data from sensor & Yes\\\hline
-    W5 & User create topic in forum & Yes\\\hline 
-    W6 & User insert post & Yes\\\hline
-    W7 & User reply to a post & Yes \\\hline
-    W8 & User update daily plan & Yes\\\hline
-    W9 & User check weather forcast & Yes\\\hline
-    \hline
-\end{tabular}
+\begin{center}
+    \rowcolors{2}{gray!50}{}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{ID} & \textbf{Phenomenom} & \textbf{Shared} \\\hline\hline
+        W1 & User login & Yes\\\hline
+        W2 & User share best practice & Yes\\\hline
+        W3 & User ask for help on forum & Yes\\\hline
+        W4 & Collect land data from sensor & Yes\\\hline
+        W5 & User create topic in forum & Yes\\\hline 
+        W6 & User insert post & Yes\\\hline
+        W7 & User reply to a post & Yes \\\hline
+        W8 & User update daily plan & Yes\\\hline
+        W9 & User check weather forcast & Yes\\\hline
+        \hline
+    \end{tabular}
+\end{center}
 
 \subsubsection{Goals}
 \underline{Telangana's policy makers}
@@ -140,7 +142,15 @@ The user base is expected to be the entire population of Telangana, starting wit
     \item \textbf{Confirm the daily plan}\\
     Confirm the daily plan at the end of the day or update it in case of deviations.
 \end{enumerate}
+
 \subsection{Definitions, acronyms, abbreviations}
+\subsubsection*{Definitions}
+\subsubsection*{Acronyms}
+\begin{itemize}
+    \item \textbf{RASD}: Requirement Analysis and Specification Document
+    \item \textbf{DREAM}: \emph{Data-driven predictive farming} project
+    \item \textbf{Telangana}: Indian state promoting the \emph{DREAM} project
+\end{itemize}
 \subsection{Revision history}
 \subsection{Reference documents}
 \begin{itemize}
@@ -150,11 +160,29 @@ The user base is expected to be the entire population of Telangana, starting wit
     \item BPMN documentation: https://www.bpmn.org/
     \item Paper: "The World and the Machine" by M. Jackson and P. Zave
 \end{itemize}
+
 \subsection{Document structure}
+\begin{itemize}
+    \item \textbf{Section 1} gives an introduction about the problem to tackle and about which functionalities will be implemented in the final product in order to solve it.
+    \item \textbf{Section 2} contains the overall description of the whole project, presenting it in a more formal way through class diagrams which will contain the backbone blocks that will build the final application. Furthermore, there will be presented the so-called \emph{actors} who are the ones that will use the application, the expected functionalities and the domain assumptions taken in consideration throughout the whole project, from the specification phase to the actual developing phase.
+    \item \textbf{Section 3} delves deeply into the technical aspects of the topics presented in \emph{Section 2}, in order to be more useful for the development, by providing a standard interfaces' system \textit{a priori} to  stick to during the project implementation. It will show functional and non-functional requirements. The former will be presented through some use-cases and scenarios as meaningful examples; while the latter will be disclosed by analysing performance, design and software system features that the project will have.
+    \item \textbf{Section 4} 
+\end{itemize}
 
 \section{Overall Description}
 \subsection{Product perspective}
 \subsection{Product functions}
+\subsubsection{Sign-up and shared functions}
+\begin{itemize}
+    \item \textbf{Sign-up}: let the user sign-up thorugh an email and a password, creating a profile tailored for the user's job. Specify the area in which they live and what type of cultivation they manage.
+\end{itemize}
+\subsubsection{Policy makers functions}
+\subsubsection{Farmers functions}
+\begin{itemize}
+    \item 
+\end{itemize}
+\subsubsection{Agronomists functions}
+
 \subsection{User characteristics}
 \subsection{Assumptions, dependencies and constraints}
 
