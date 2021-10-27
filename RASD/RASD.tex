@@ -174,14 +174,30 @@ The user base is expected to be the entire population of Telangana, starting wit
 \subsection{Product functions}
 \subsubsection{Sign-up and shared functions}
 \begin{itemize}
-    \item \textbf{Sign-up}: let the user sign-up thorugh an email and a password, creating a profile tailored for the user's job. Specify the area in which they live and what type of cultivation they manage.
+    \item \textbf{Sign-up: }let the user sign-up thorugh an email and a password, creating a profile tailored for the user's job. Specify the area in which they live and what type of cultivation they manage.
 \end{itemize}
 \subsubsection{Policy makers functions}
+\begin{itemize}                                 
+    \item \textbf{Visualize relevant data and initiative: }let the policy makers know a variety of different data like the performances of the farmers by grouping them in a rank to know who are the farmers that are performing well and who are the worst one based on informations insert by them.
+    Policy makers can also visualize the steering iniziative presented by the agronomist in a specific subsection of their view. (ok so che non è view ma non mi viene il nome)
+\end{itemize}
 \subsubsection{Farmers functions}
 \begin{itemize}
-    \item 
+    \item \textbf{Profile edit: }allow the farmers change their profile in order to upgrade information like: 
+    \subitem Area: allow to change the area where farmers have their plantation;
+    \subitem Plant type: allow to change the type of plant;
+    \subitem Username and password: allow to change their username and password.
+
+    \item \textbf{Manipulation of informations: }allow farmers to visualize every kind of their interest like the wheather forecast for the day or for the next few days or some suggestions about own crops and specific fertilizers.
+    \item \textbf{Send message: }allow farmers to send messages to the agronomist.
+    \item \textbf{Usage of the forum: }allow farmers to create a new topic or reply to a message in the dedicated forum.
 \end{itemize}
 \subsubsection{Agronomists functions}
+\begin{itemize}
+    \item \textbf{Area functions: }allow the agronomist to insert their responsability area and visualize the correspondant data like wheather forecast or the rank of the farmers.
+    \item \textbf{Manage farmers requests: }farmers can send help or suggestion request to whom agronomist have to reply.
+    \item \textbf{Manage daily plan: }allow the agronomist to make their daily plan by registring the incoming visits to the farmers. Some days before visits they can confirm the plan and send a notification to farmers or deviate to the plan and inform farmers of this change.   
+\end{itemize}
 
 \subsection{User characteristics}
 \subsection{Assumptions, dependencies and constraints}
@@ -194,54 +210,6 @@ The user base is expected to be the entire population of Telangana, starting wit
 \subsubsection{Communication Interfaces}
 
 \subsection{Functional Requirements}
-\subsubsection{Scenarios}
-\begin{enumerate}
-    \item Carletto is a farmer that would like to share some best-practices about a particular product that he has cultivated during the last year.
-    He decides to open a new discussion on the forum and invites all his colleagues.
-    \begin{itemize}
-        \item He opens the app on his device, if he is already registered he logs in
-        \item The system shows the homepage for a farmer user
-        \item He clicks on the "Forum" and access the forum section
-        \item Now he clicks on the "Create new topic" where he can select the name of the discussion
-        \item Finally he writes a new message in the discussion
-    \end{itemize}
-    \item Pajeet is one of the main policy makers in the state of Telangana.
-    He wants to distribute special incentives to the best farmers and to do this he decides
-    to open the app and visualize the data.
-    \begin{itemize}
-        \item He opens the app on his device, if he is already registered he logs in
-        \item The system shows the homepage for a policy maker user
-        \item He visualize the ranking of the well-performing farmers
-        \item He clicks on the name of a farmer
-        \item Now the system shows the profile of the selected farmer
-        \item Here the policy maker can find useful contact informations such as phone number and email
-        \item He takes note of the desirable contact informations and close the app
-    \end{itemize}
-    \item Shaleena is an agronomist responsible of Mahbubnagar, one of the biggest region in Telangana.
-    She wants to compose the daily plan to decides which farms to visit today and for this reason she decides to open the app.
-    \begin{itemize}
-        \item She opens the app on his device, if she is already registered she logs in
-        \item The system shows the homepage for an agronomist user
-        \item She clicks on the "Daily plan" and access the new section
-        \item She can add the farms she wants to visit to the daily plan by choosing them from the list of available ones
-        \item Now the system shows the addresses and the date of the last visit of the selected farms
-        \item She takes note of the addresses of the farms to visit and close the app
-    \end{itemize}
-    \item Chaitanya is an agronomist that after a hard day of work wants to update the daily plan on the app.
-    At the end of the day she realizes that she has visited three farms instead of the two indicated in the daily plan.
-    \begin{itemize}
-        \item She opens the app on his device, if she is already registered she logs in
-        \item The system shows the homepage for an agronomist user
-        \item She clicks on the "Daily plan" and access the new section
-        \item Here she can visualize the daily plan
-        \item She can click on the "Add" or on the "Remove"
-        \item In case of "Add" the system would redirect her to the list of available ones, in case of "Remove" she can delete a farm 
-        from the list simply by clicking on the cross at the right
-        \item She clicks on the "Confirm" to validate the daily plan
-        \item The system returns to the homepage
-        \item Finally she close the app
-    \end{itemize}
-\end{enumerate}
 \subsection{Performance Requirements}
 Test.
 
