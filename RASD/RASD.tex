@@ -7,6 +7,8 @@
 \usepackage{hyperref}
 \usepackage[table]{xcolor}
 
+\hyphenation{Te-lan-ga-na}
+\hyphenation{an-a-lys-ing}
 \titleformat{\paragraph}
 {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}
@@ -166,7 +168,7 @@ The user base is expected to be the entire population of Telangana, starting wit
     \item \textbf{Section 1} gives an introduction about the problem to tackle and about which functionalities will be implemented in the final product in order to solve it.
     \item \textbf{Section 2} contains the overall description of the whole project, presenting it in a more formal way through class diagrams which will contain the backbone blocks that will build the final application. Furthermore, there will be presented the so-called \emph{actors} who are the ones that will use the application, the expected functionalities and the domain assumptions taken in consideration throughout the whole project, from the specification phase to the actual developing phase.
     \item \textbf{Section 3} delves deeply into the technical aspects of the topics presented in \emph{Section 2}, in order to be more useful for the development, by providing a standard interfaces' system \textit{a priori} to  stick to during the project implementation. It will show functional and non-functional requirements. The former will be presented through some use-cases and scenarios as meaningful examples; while the latter will be disclosed by analysing performance, design and software system features that the project will have.
-    \item \textbf{Section 4} 
+    \item \textbf{Section 4} presents the Alloy code briefly explainig the purpose of it in modeling the given problem.
 \end{itemize}
 
 \section{Overall Description}
@@ -174,7 +176,7 @@ The user base is expected to be the entire population of Telangana, starting wit
 \subsection{Product functions}
 \subsubsection{Sign-up and shared functions}
 \begin{itemize}
-    \item \textbf{Sign-up: }let the user sign-up thorugh an email and a password, creating a profile tailored for the user's job. Specify the area in which they live and what type of cultivation they manage.
+    \item \textbf{Sign-up:} let the user sign-up thorugh an email and a password, creating a profile tailored for the user's job. Specify the area in which they live and what type of cultivation they manage.
 \end{itemize}
 \subsubsection{Policy makers functions}
 \begin{itemize}                                 
@@ -200,6 +202,13 @@ The user base is expected to be the entire population of Telangana, starting wit
 \end{itemize}
 
 \subsection{User characteristics}
+The application has been thought for the three different user categories that follows:
+\begin{itemize}
+    \item \textbf{Policy makers} are government's employees that are in charge of analysing the general agricolture trends among all the districts in Telangana, then promote based state-wide policies to better the whole food system. Their main goal is not only to secure the current provision, but also to identify now the best practices that will lead to a flourishing food production in the future. By doing so, the plan is to grow more resiliant and profitable crops and prepare the lands to face future menaces, for instance the climate that is getting more hostile or the foreseen increment of the food demand. As a consequence, they want to be notified about the best performing farmers in order to contact them and get more insight from them about their procedures, with the aim to acquire best practises to be shared and applied on a larger scale. At the same time, they need to know who, on the other hand, is performing particularly badly, so that they can be given the help they need to better their results, since obtaining the foresaid goal requires the structure to run smoothly in all its parts. 
+    Policy makers also need a feedback system that let them be aware of the true impact \textit{a posteriori} of the initiatives carried out by the agronomists in collaboration with the knowledge and practice of the best farmers.
+    \item \textbf{Farmers} are interested in functionalities that will help with their day-to-day life at work, so they would like to receive in one place all the information about the weather to plan before hand the work day and useful data, like suggestions and news about the specific crop they cultivate, if some crop's illness is spreading in their area and how to treat it, which fertilizers boost the plant's production, etc. Moreover, they should insert data about their own production and ask for help to a regional agronomist through the app if it's needed. Being part of a larger community of people that share the same purpose (such as being more productive) brings more knowledge in general, so it's easier for the farmers to get in touch with their collegues that grow the same crops and might have faced the same challenges they do through the in-app forum. The feature allows them to enlarge their pool of acquaintances and brings them together online, even though they might be kilometers away from each other.
+    \item \textbf{Agronomists} are the experts in the agricolture field, so the main function needed for them is the possibility of helping out the farmers that reach out to them. Each agronomist is in charge of a specific geographical area in Telangana, in order to be efficiently present on the territory in a fair and useful way according to the actual helping demand. In fact, they visit each farm spread among their area at least twice a year. That said, agronomists would like some functionalities that help them planning out their trips on the field in an simple yet flexible way. Furthermore, they would like to be notified of the farms' performace, especially the ones scoring poor results in order to plan their visits more often for those, depending on the problem their facing. Nonetheless, in order to make a complete and axhaustive report about the area productivity for the central government, they are also interested into acknowledging the top performing farms. %wheather forcast? go deeper in explaining daily plan funct?
+\end{itemize}
 \subsection{Assumptions, dependencies and constraints}
 
 \section{Specific Requirements}
@@ -236,7 +245,7 @@ Test.
     \begin{tabular}{| c || c | c| c| c |}
         \hline
         Student & Time for S.1 & S.2 & S.3 & S.4 \\ \hline
-        Ottavia Belotti & 30min & ? & ? & ? \\
+        Ottavia Belotti & 1h & 2h & ? & ? \\
         Alessio Braccini & 2h & ? & ? & ? \\
         Riccardo Izzo & 2h & ? & ? & ? \\
         \hline
