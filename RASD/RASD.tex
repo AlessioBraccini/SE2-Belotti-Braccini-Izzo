@@ -210,6 +210,17 @@ The application has been thought for the three different user categories that fo
     \item \textbf{Agronomists} are the experts in the agricolture field, so the main function needed for them is the possibility of helping out the farmers that reach out to them. Each agronomist is in charge of a specific geographical area in Telangana, in order to be efficiently present on the territory in a fair and useful way according to the actual helping demand. In fact, they visit each farm spread among their area at least twice a year. That said, agronomists would like some functionalities that help them planning out their trips on the field in an simple yet flexible way. Furthermore, they would like to be notified of the farms' performace, especially the ones scoring poor results in order to plan their visits more often for those, depending on the problem their facing. Nonetheless, in order to make a complete and axhaustive report about the area productivity for the central government, they are also interested into acknowledging the top performing farms. %wheather forcast? go deeper in explaining daily plan funct?
 \end{itemize}
 \subsection{Assumptions, dependencies and constraints}
+\begin{itemize}
+    \item D1: Agronomists actually stick to the scheduled daily plan
+    \item D2: Agronomists correct their schedule at the end of the day if deviations occur
+    \item D3: Each user registers according to their role and always feeds correct information to the app
+    \item D4: The internet connection works properly
+    \item D5: The sensors measuring humidity level of the soil work properly
+    \item D6: Weather forecasts are accurate up to a 80\% for the short-term and up to 60\% on the long-term
+    \item D7: Water irrigation system send the information accurately, with an error of at most 1\%
+    \item D8: Agronomists always replay to farmers requests of help
+    \item D9: Farmers periodically insert data about their crop status and resulting production
+\end{itemize}
 
 \section{Specific Requirements}
 \subsection{External Interface Requirements}
@@ -219,6 +230,54 @@ The application has been thought for the three different user categories that fo
 \subsubsection{Communication Interfaces}
 
 \subsection{Functional Requirements}
+\subsubsection{Scenarios}
+\begin{enumerate}
+    \item Carletto is a farmer that would like to share some best-practices about a particular product that he has cultivated during the last year.
+    He decides to open a new discussion on the forum and invites all his colleagues.
+    \begin{itemize}
+        \item He opens the app on his device, if he is already registered he logs in
+        \item The system shows the homepage for a farmer user
+        \item He clicks on the "Forum" and access the forum section
+        \item Now he clicks on the "Create new topic" where he can select the name of the discussion
+        \item Finally he writes a new message in the discussion
+    \end{itemize}
+    \item Pajeet is one of the main policy makers in the state of Telangana.
+    He wants to distribute special incentives to the best farmers and to do this he decides
+    to open the app and visualize the data.
+    \begin{itemize}
+        \item He opens the app on his device, if he is already registered he logs in
+        \item The system shows the homepage for a policy maker user
+        \item He visualize the ranking of the well-performing farmers
+        \item He clicks on the name of a farmer
+        \item Now the system shows the profile of the selected farmer
+        \item Here the policy maker can find useful contact informations such as phone number and email
+        \item He takes note of the desirable contact informations and close the app
+    \end{itemize}
+    \item Shaleena is an agronomist responsible of Mahbubnagar, one of the biggest region in Telangana.
+    She wants to compose the daily plan to decides which farms to visit today and for this reason she decides to open the app.
+    \begin{itemize}
+        \item She opens the app on his device, if she is already registered she logs in
+        \item The system shows the homepage for an agronomist user
+        \item She clicks on the "Daily plan" and access the new section
+        \item She can add the farms she wants to visit to the daily plan by choosing them from the list of available ones
+        \item Now the system shows the addresses and the date of the last visit of the selected farms
+        \item She takes note of the addresses of the farms to visit and close the app
+    \end{itemize}
+    \item Chaitanya is an agronomist that after a hard day of work wants to update the daily plan on the app.
+    At the end of the day she realizes that she has visited three farms instead of the two indicated in the daily plan.
+    \begin{itemize}
+        \item She opens the app on his device, if she is already registered she logs in
+        \item The system shows the homepage for an agronomist user
+        \item She clicks on the "Daily plan" and access the new section
+        \item Here she can visualize the daily plan
+        \item She can click on the "Add" or on the "Remove"
+        \item In case of "Add" the system would redirect her to the list of available ones, in case of "Remove" she can delete a farm 
+        from the list simply by clicking on the cross at the right
+        \item She clicks on the "Confirm" to validate the daily plan
+        \item The system returns to the homepage
+        \item Finally she close the app
+    \end{itemize}
+\end{enumerate}
 \subsection{Performance Requirements}
 Test.
 
