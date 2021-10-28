@@ -177,6 +177,13 @@ The user base is expected to be the entire population of Telangana, starting wit
 \subsubsection{Sign-up and shared functions}
 \begin{itemize}
     \item \textbf{Sign-up:} let the user sign-up thorugh an email and a password, creating a profile tailored for the user's job. Specify the area in which they live and what type of cultivation they manage.
+    \begin{center}
+        \begin{figure}[!h]
+            \includegraphics[width=\textwidth]{assets/SignUpBpmn}
+            \caption{Sign Up BPMN}
+            \label{fig: singup}
+        \end{figure}
+    \end{center}
 \end{itemize}
 \subsubsection{Policy makers functions}
 \begin{itemize}                                 
@@ -186,19 +193,41 @@ The user base is expected to be the entire population of Telangana, starting wit
 \subsubsection{Farmers functions}
 \begin{itemize}
     \item \textbf{Profile edit: }allow the farmers change their profile in order to upgrade information like: 
-    \subitem Area: allow to change the area where farmers have their plantation;
-    \subitem Plant type: allow to change the type of plant;
-    \subitem Username and password: allow to change their username and password.
-
+    \begin{itemize}
+        \item[] Area: allow to change the area where farmers have their plantation;
+        \item[] Plant type: allow to change the type of plant;
+        \item[] Username and password: allow to change their username and password.
+    \end{itemize}
+    \begin{center}
+        \begin{figure}[!h]
+            \includegraphics[width=\textwidth]{assets/ProfileEditBpmn}
+            \caption{Profile edit BPMN}
+            \label{fig: profileedit}
+        \end{figure}
+    \end{center}
     \item \textbf{Manipulation of informations: }allow farmers to visualize every kind of their interest like the wheather forecast for the day or for the next few days or some suggestions about own crops and specific fertilizers.
     \item \textbf{Send message: }allow farmers to send messages to the agronomist.
     \item \textbf{Usage of the forum: }allow farmers to create a new topic or reply to a message in the dedicated forum.
+    \item \begin{center}
+        \begin{figure}[!h]
+            \includegraphics[width=\textwidth]{assets/ForumBpmn}
+            \caption{Forum BPMN}
+            \label{fig: forum}
+        \end{figure}
+    \end{center}
 \end{itemize}
 \subsubsection{Agronomists functions}
 \begin{itemize}
     \item \textbf{Area functions: }allow the agronomist to insert their responsability area and visualize the correspondant data like wheather forecast or the rank of the farmers.
     \item \textbf{Manage farmers requests: }farmers can send help or suggestion request to whom agronomist have to reply.
-    \item \textbf{Manage daily plan: }allow the agronomist to make their daily plan by registring the incoming visits to the farmers. Some days before visits they can confirm the plan and send a notification to farmers or deviate to the plan and inform farmers of this change.   
+    \item \textbf{Manage daily plan: }allow the agronomist to make their daily plan by registring the incoming visits to the farmers. At the end of the day a farmers must confirm if they were able to complete the plan or specify the deviations occurred during the day.   
+    \begin{center}
+        \begin{figure}[!h]
+            \includegraphics[width=\textwidth]{assets/DailyPlanBpmn}
+            \caption{Daily plan BPMN}
+            \label{fig: dailyplan}
+        \end{figure}
+    \end{center}
 \end{itemize}
 
 \subsection{User characteristics}
