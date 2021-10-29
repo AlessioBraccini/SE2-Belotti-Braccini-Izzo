@@ -225,7 +225,7 @@ There are four types of data:
 \subsubsection{Policy makers functions}
 \begin{itemize}                                 
     \item \textbf{Visualize relevant data and initiative: }let the policy makers know a variety of different data like the performances of the farmers by grouping them in a rank to know who are the farmers that are performing well and who are the worst one based on informations insert by them.
-    Policy makers can also visualize the steering iniziative presented by the agronomist in a specific subsection of their view. (OK SO CHE NON è VIEW MA NON MI VIENE IL NOME)
+    Policy makers can also visualize the steering iniziative presented by the agronomist in a specific subsection of their system.
 \end{itemize}
 \subsubsection{Farmers functions}
 \begin{itemize}
@@ -298,7 +298,7 @@ Everyone that needs to use this service would connect to it through a web broswe
 It must be easy to use as it will have to be used from different kind of people, sometimes with a not great affinity with technologies.
 
 \subsubsection{Hardware Interfaces}
-The system "as it is" does not provide specific hardware equipment in order to access to web site. To use all functionalities it's required to have an IT devices connected to the internet, eventually a user can decide to use GPS to insert (it's????) own location and only proper devices with GPS equipment can do this. 
+The system "as it is" does not provide specific hardware equipment in order to access to web site. To use all functionalities it's required to have an IT devices connected to the internet, eventually a user can decide to use GPS to insert his own location and only proper devices with GPS equipment can do this. 
 
 Soil data, obtained from sensors, are collect by someone else and will be added by the policy makers, also this not requires any special kind of hardware.
 
@@ -308,13 +308,15 @@ In order to use the system it's required the use of a web broswer, on that will 
 
 System will also use some important interfaces in order to accomplish its functionalities.
 
-First is an external APIs to access maps which will use the position acquired by the user settings to return an interactive map with a marker on that exact position.
+First is an external API to access maps which will use the position acquired by the user settings to return an interactive map with a marker on that exact position.
 
-Another API service used is the one of the DBMS system which will be adopted in order to query the database.
+Second API service used is the one of the DBMS system which will be adopted in order to query the internal database.
+
+Another API will be use to access the external database containing data reguarding the sensor data and the other external data that the system need.
 
 \subsubsection{Communication Interfaces}
 Internet connection is mandatory in order to access to every formation that the system will display.
-Users that want full functionalities have to have (BRUTTO) a GPS system on their device.
+Users that want full functionalities have to have a GPS system on their device in order to guarantee a certain level of precision in the localization phase.
 
 \subsection{Functional Requirements}
 \subsubsection{Scenarios}
@@ -417,7 +419,7 @@ Test.
         \hline
         Student & Time for S.1 & S.2 & S.3 & S.4 \\ \hline
         Ottavia Belotti & 1h & 2h & ? & ? \\
-        Alessio Braccini & 2h & ? & ? & ? \\
+        Alessio Braccini & 2h & 2 & 2 & ? \\
         Riccardo Izzo & 2h & ? & ? & ? \\
         \hline
     \end{tabular}
