@@ -173,16 +173,44 @@ The user base is expected to be the entire population of Telangana, starting wit
 
 \section{Overall Description}
 \subsection{Product perspective}
+DREAM is a system that offers the functionalities described in the \textit{Product Functions (\ref{product_functions})} section.
+It manages to use some external interfaces, for more details refers to the \textit{Software Interfaces (\ref{software_interfaces})} section.
+We can see below an high-level class diagram that shows the basic structure of the system.
+\subsubsection{Class diagram}
+A UML class diagram that describes the main entities in the system.
+Three types of actors can access the system: farmers, policy makers and agronomists.
+During sign up they all create a user account with basic informations such as username, password and email.
+At this point users are requested to insert other informations based on their type of account.
+For example, to complete the registration, farmers need to specify the address of their farm and agronomists must declare their area of responsability.
+The system provides several functionalities, one of this is the forum.
+When the farmers select the forum section they basically access the topics that are characterized by a list of messages where the sender is specified. 
+The agronomists can confirm and update a daily plan.
+This is composed by the current date, the list of farms visited and a status flag that indicates whether the plan has already been confimed or not.
+Moreover they have access to the list of farmers currently under their area of responsability.
+Finally there are various type of data that can be visualized and analyzed by the users, which ones to display dependes on the type of account.
+There are four types of data:
+\begin{itemize}
+    \item Sensor data\\
+    Acquired by the sensors distributed all over the territory, characterized by a value that is the humidity of soil.
+    \item Weather forecast data\\
+    Meteorological short-term and long-term forecast acquired by the Telangana's government and displayed on their official website.
+    The data to display to the user are temperature, rainfall, wind and humidity.
+    \item Water irrigation data\\
+    Acquired by the water irrigation system installed in the farm, the only significant value is the amount of water.
+    \item Production data\\
+    Provided by the farmers, this type of data is displayed as a table that map the type of product to the amount produced.
+\end{itemize}
 \begin{center}
     \begin{figure}[!h]
         \hspace{-110px}
         \includegraphics[scale=0.45]{assets/UML/UML.png}
-        \caption{High level UML}
+        \caption{High-level UML}
         \label{fig: UML}
     \end{figure}
 \end{center}
 \newpage
 \subsection{Product functions}
+\label{product_functions}
 \subsubsection{Sign-up and shared functions}
 \begin{itemize}
     \item \textbf{Sign-up:} let the user sign-up thorugh an email and a password, creating a profile tailored for the user's job. Specify the area in which they live and what type of cultivation they manage.
@@ -275,6 +303,7 @@ The system "as it is" does not provide specific hardware equipment in order to a
 Soil data, obtained from sensors, are collect by someone else and will be added by the policy makers, also this not requires any special kind of hardware.
 
 \subsubsection{Software Interfaces}
+\label{software_interfaces}
 In order to use the system it's required the use of a web broswer, on that will run the application.
 
 System will also use some important interfaces in order to accomplish its functionalities.
