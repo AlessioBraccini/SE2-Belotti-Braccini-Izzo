@@ -7,9 +7,12 @@
 \usepackage{hyperref}
 \usepackage[table]{xcolor}
 \usepackage{float}
+\usepackage[export]{adjustbox}
+\usepackage{longtable}
 
 \hyphenation{Te-lan-ga-na}
 \hyphenation{an-a-lys-ing}
+\hyphenation{a-gron-o-mists}
 \titleformat{\paragraph}
 {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}
@@ -204,8 +207,7 @@ There are four types of data:
 \end{itemize}
 \begin{center}
     \begin{figure}[!h]
-        \hspace{-110px}
-        \includegraphics[scale=0.45]{assets/UML/UML.png}
+        \includegraphics[scale=0.45, center]{assets/UML/UML.png}
         \caption{High-level UML}
         \label{fig: UML}
     \end{figure}
@@ -323,12 +325,52 @@ Users that want full functionalities have to have a GPS system on their device i
 \subsection{Functional Requirements}
 
 \subsubsection{List of Requirements}
+\newcounter{RequirementCtr}
+
+\begin{longtable}{|c|p{0.69\textwidth}|}
+    \hline %this line gives a warning but it's the longtable that's bugged
+    \textbf{ID} & \textbf{Requirement}\\ \hline\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system can be used only by registered and logged-in users.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & If the IT device is equipped with GPS technology, then the system must suggest the users the area in which they are during the registration phase. In any case, the final decision will be up to the registering user.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system must allow the users to change their location in any moment, except when they have connectivity issues.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation systems and soil humidity sensors.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system must let Farmers insert their production information every day, even without connection.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & If a Farmer has temporary connectivity issues while trying to upload production data, the system must keep them locally stored until connection is restablished. Once there is connectio, data must be uploaded to the database.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system must notify Agronomists of unresolved requests of help from Farmers.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system must show weather forcasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system must present news concerning crop only if relevant to the Farmer's own crop type.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system must allow every user registered as Farmer to access the forum, to create new discussions and to post replies to already existing ones.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system must suggest to the Agronomists which farms to visit (among the ones in their area of competence) while planning the Daily Plan based upon the last visit day following a FIFO policy. Exceptions to the FIFO policy are the farms under-performing, which shall has higher priority.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system must allow the Agronomists to add a schedule for the day each day, even without connection.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr}    & The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day. If the user doesn't confirm before 23:59, the system must register the already uploaded schedule as definitive.\\\hline
+\end{longtable}
 
 \subsubsection{Mapping}
 
 \subsubsection{Use Cases}
 \setcounter{secnumdepth}{4}
-
+    \rowcolors{1}{white!100}{}
     \paragraph{Use Cases Diagram}
 
 
@@ -342,9 +384,9 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{Sign Up}
                 \item[] 
                 \centering
-                \begin{tabular}{c m{.70\textwidth}}
+                \begin{tabular}{|c|m{0.69\textwidth}|}
                     \hline
-                    \textbf{Use Case} & Sign Up\\ 
+                    \textbf{Use Case} & Sign Up\\ \hline
                     \textbf{Actor} & Policy Maker, Farmer, Agronomist\\ \hline
                     \textbf{Entry condition} & User want to register in the system\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
@@ -365,7 +407,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{Log In}
                 \item[]  
                 \centering
-                \begin{tabular}{c m{.70\textwidth}}
+                \begin{tabular}{|c| m{.69\textwidth}|}
                     \hline
                     \textbf{Use Case} & Log In\\ \hline
                     \textbf{Actor} & Policy Maker, Farmer, Agronomist\\ \hline
@@ -388,7 +430,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{View Initiative Report}
                 \item[] 
                 \centering
-                \begin{tabular}{c m{.70\textwidth}}
+                \begin{tabular}{|c| m{.69\textwidth}|}
                     \hline
                     \textbf{Use Case} & View Initiative Report\\ \hline
                     \textbf{Actor} & Policy Maker\\ \hline
@@ -407,7 +449,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{Check Soil Humidity Data}
                 \item[] 
                 \centering
-                \begin{tabular}{c m{.70\textwidth}}
+                \begin{tabular}{|c| m{.69\textwidth}|}
                     \hline
                     \textbf{Use Case} & Check Soil Humidity Data\\ \hline
                     \textbf{Actor} & Policy Maker \\ \hline
@@ -428,7 +470,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{Check Water Irrigation Data}
                 \item[] 
                 \centering
-                \begin{tabular}{c m{.70\textwidth}}
+                \begin{tabular}{|c| m{.69\textwidth}|}
                     \hline
                     \textbf{Use Case} & Check Water Irrigation Data\\ \hline
                     \textbf{Actor} & Policy Maker \\ \hline
@@ -449,7 +491,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{View Farmers Ranking}
                 \item[] 
                 \centering
-                \begin{tabular}{c m{.70\textwidth}}
+                \begin{tabular}{|c| m{.69\textwidth}|}
                     \hline
                     \textbf{Use Case} & View Farmers Ranking\\ \hline
                     \textbf{Actor} & Policy Maker\\ \hline
@@ -469,7 +511,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{View Specific Farmer Informations (View Farmers Ranking)}
                 \item[] 
                 \centering
-                \begin{tabular}{c m{.70\textwidth}}
+                \begin{tabular}{|c| m{.69\textwidth|}}
                     \hline
                     \textbf{Use Case} & View Specific Farmer Informations (View Farmers Ranking)\\ \hline
                     \textbf{Actor} & Policy Maker\\ \hline
@@ -492,7 +534,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{Profiel Edit}
                 \item[] 
                 \centering
-                \begin{tabular}{c m{.70\textwidth}}
+                \begin{tabular}{|c |m{.69\textwidth|}}
                     \hline
                     \textbf{Use Case} & Profile Edit\\ \hline
                     \textbf{Actor} & Farmers\\ \hline
@@ -515,7 +557,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{Insert Production Data}
                 \item[] 
                 \centering
-                \begin{tabular}{c m{.70\textwidth}}
+                \begin{tabular}{|c |m{.69\textwidth}|}
                     \hline
                     \textbf{Use Case} & Insert Production Data\\ \hline
                     \textbf{Actor} & Farmers\\ \hline
@@ -539,7 +581,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{Check News}
                 \item[] 
                 \centering
-                \begin{tabular}{c m{.70\textwidth}}
+                \begin{tabular}{|c |m{.69\textwidth}|}
                     \hline
                     \textbf{Use Case} & Check News\\ \hline
                     \textbf{Actor} & Farmers\\ \hline
@@ -558,7 +600,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{Post in Forum}
                 \item[] 
                 \centering
-                \begin{tabular}{c m{.70\textwidth}}
+                \begin{tabular}{|c| m{.69\textwidth}|}
                     \hline
                     \textbf{Use Case} & Post in Forum\\ \hline
                     \textbf{Actor} & Farmers\\ \hline
@@ -580,7 +622,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{Chek Wheather Forecast}
                 \item[] 
                 \centering
-                \begin{tabular}{c m{.70\textwidth}}
+                \begin{tabular}{|c |m{.69\textwidth}|}
                     \hline
                     \textbf{Use Case} & Check Weather Forecast\\ \hline
                     \textbf{Actor} & Farmers\\ \hline
@@ -598,7 +640,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{Send an Help Request}
                 \item[] 
                 \centering
-                \begin{tabular}{c m{.70\textwidth}}
+                \begin{tabular}{|c |m{.69\textwidth}|}
                     \hline
                     \textbf{Use Case} & Send an Help Request\\ \hline
                     \textbf{Actor} & Farmers\\ \hline
