@@ -780,22 +780,44 @@ Also the average workload of the system is expected to be high, the goal is to g
 A mid-term goal could be to improve the scalability of the system in order to guarantee an efficient service to all users.
 Finally the system should have a good response time, less than 3 seconds is reasonable.
 \subsection{Design Constraints}
-Test.
 
 \subsubsection{Standards compliance}
+DREAM's user data must be treated respecting the law according to the PDPA.
+All hardware devices distributed all over the territory (sensors) must comply the CE safety standards.
 \subsubsection{Hardware limitations}
-\subsubsection{Any other constraint}
+The software is designed to enhance the portability, in fact it is enough to have a device with a stable internet connection.
+In order to use the application correctly it is required to have a device equipped with GPS.
+%\subsubsection{Any other constraint}
 
 \subsection{Software System Attributes}
 \subsubsection{Reliability}
-Test.
+To ensure data consistency the system must have a fully backup infrastructure, this allows to recover from general failures in the main system.
 
 \subsubsection{Availability}
-Test.
+The system should be up almost 24/7 in order to allow users to use the application's services at any time.
+The peak of use is expected during the working hours, it means that it is better to do all the maintainance activities during the night hours.
+
+\begin{center}
+    \begin{figure}[!h]
+        \includegraphics[scale=0.60, center]{assets/bar-graph-daily-usage.png}
+        \caption{DREAM daily usage}
+        \label{fig: daily_usage}
+    \end{figure}
+\end{center}
 
 \subsubsection{Security}
+All the data stored by the system must be encrypted with a standard algorithm like the AES (Advanced Encryption Standard).
+The communications goes on a secure channel powered by the SSL protocol.
+In addition users can request a two-factor authentication (2FA) to improve the security of the personal account.
+All data should be stored in compliance with PDPA's regulation.
 \subsubsection{Maintainability}
+The maintainability is guaranteed by high standard of code, the use of design patterns will enhance this point and guarantee high reusability.
+The code must be extensively tested.
+The system must be extendible in order to support future updates.
+User's application will be regularly updated.
 \subsubsection{Portability}
+The system is designed to work on different operating systems like Windows, MacOS and Linux.
+All main browsers are supported.
 
 \section{Formal Analysis using Alloy}
 \section{Effort Spent}
@@ -803,8 +825,8 @@ Test.
         \hline
         Student & Time for S.1 & S.2 & S.3 & S.4 \\ \hline
         Ottavia Belotti & 1h & 2h & ? & ? \\
-        Alessio Braccini & 2h & 2 & 2 & ? \\
-        Riccardo Izzo & 2h & ? & ? & ? \\
+        Alessio Braccini & 2h & 2h & 2h & ? \\
+        Riccardo Izzo & 2h & 2h & 2h & ? \\
         \hline
     \end{tabular}
 
