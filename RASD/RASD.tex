@@ -370,21 +370,20 @@ Users that want full functionalities have to have a GPS system on their device i
 
 \subsubsection{Use Cases}
 \setcounter{secnumdepth}{4}
-    \rowcolors{1}{white!100}{}
-    \paragraph{Use Cases Diagram}
+\rowcolors{1}{white!100}{}
 
+\paragraph{Use Cases Diagram}
 
     \paragraph{Use Cases Description}
     
         \begin{itemize}
             \item \textbf {Shared Use Cases}
-
             
             \begin{table}[H]
                 \item[] \textbf{Sign Up}
                 \item[] 
                 \centering
-                \begin{tabular}{|c|m{0.69\textwidth}|}
+                \begin{tabular}{|c |m{0.69\textwidth}|}
                     \hline
                     \textbf{Use Case} & Sign Up\\ \hline
                     \textbf{Actor} & Policy Maker, Farmer, Agronomist\\ \hline
@@ -426,7 +425,7 @@ Users that want full functionalities have to have a GPS system on their device i
             \item \textbf{Policy Makers}
             
             \begin{center}
-                \begin{figure}[!h]
+                \begin{figure}[H]
                     \includegraphics[scale=0.55, center]{assets/Use cases/UseCase_PolicyMaker.png}
                     \caption{Policy Maker - Use Case Diagram}
                     \label{fig: UseCase_PolicyMaker}
@@ -518,7 +517,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{View Specific Farmer Informations (View Farmers Ranking)}
                 \item[] 
                 \centering
-                \begin{tabular}{|c| m{.69\textwidth|}}
+                \begin{tabular}{|c| m{.69\textwidth}|}
                     \hline
                     \textbf{Use Case} & View Specific Farmer Informations (View Farmers Ranking)\\ \hline
                     \textbf{Actor} & Policy Maker\\ \hline
@@ -537,7 +536,7 @@ Users that want full functionalities have to have a GPS system on their device i
             \item \textbf {Farmers}
             
             \begin{center}
-                \begin{figure}[!h]
+                \begin{figure}[H]
                     \includegraphics[scale=0.60, center]{assets/Use cases/UseCase_Farmer.png}
                     \caption{Farmer - Use Case Diagram}
                     \label{fig: UseCase_Farmer}
@@ -549,7 +548,7 @@ Users that want full functionalities have to have a GPS system on their device i
                 \item[] \textbf{Profile Edit}
                 \item[] 
                 \centering
-                \begin{tabular}{|c |m{.69\textwidth|}}
+                \begin{tabular}{|c |m{.69\textwidth}|}
                     \hline
                     \textbf{Use Case} & Profile Edit\\ \hline
                     \textbf{Actor} & Farmers\\ \hline
@@ -673,36 +672,126 @@ Users that want full functionalities have to have a GPS system on their device i
                 \end{tabular}
             \end{table}
 
-            \item \textbf{Agronomists}
-        
+            \item \textbf{Agronomist}
+            
             \begin{center}
-                \begin{figure}[!h]
+                \begin{figure}[H]
                     \includegraphics[scale=0.60, center]{assets/Use cases/UseCase_Agronomist.png}
                     \caption{Agronomist - Use Case Diagram}
                     \label{fig: UseCase_Agronomist}
                 \end{figure}
             \end{center}
+            
+            \begin{table}[H]
+                \item[] \textbf{Manage Daily Plan}
+                \item[] 
+                \centering
+                \begin{tabular}{|c| m{.69\textwidth}|}
+                    \hline
+                    \textbf{Use Case} & Manage Daily Plan\\ \hline
+                    \textbf{Actor} & Agronomist\\ \hline
+                    \textbf{Entry condition} & User want to manage its daily plan\\  \hline
+                    \textbf{Flow of events} & \begin{enumerate}
+                                                \item Press the daily "Daily Plan" button
+                                                \item Choose the farmers that he want to visit during the day
+                                                \item Check if the fdarmers has at least two visit
+                                                \item Confirm the plan with the "Confirm" button
+                                            \end{enumerate}\\ \hline
+                    \textbf{Exit condition} & System display a confirmation message\\ \hline
+                    \textbf{Exceptions} &  \begin{enumerate}
+                        \item At the end of the year a farmer has less than two visit
+                    \end{enumerate}\\ \hline                    
+                \end{tabular}
+            \end{table}
 
-            %\begin{table}[H]
-            %   \centering
-            %    \begin{tabular}{c m{.70\textwidth}}
-            %        \hline
-            %        \textbf{Use Case} & \\ \hline
-            %        \textbf{Actor} & Farmers\\ \hline
-            %        \textbf{Entry condition} & \\  \hline
-            %        \textbf{Flow of events} & \begin{enumerate}
-            %                                    \item 
-            %                                \end{enumerate}\\ \hline
-            %        \textbf{Exit condition} & \\ \hline
-            %        \textbf{Exceptions} &  \begin{enumerate}
-            %            \item 
-            %        \end{enumerate}\\ \hline                    
-            %    \end{tabular}
-            %\end{table}
+            \begin{table}[H]
+                \item[] \textbf{Manage Farmers Request}
+                \item[] 
+                \centering
+                \begin{tabular}{|c| m{.69\textwidth}|}
+                    \hline
+                    \textbf{Use Case} & Manage Farmers Request\\ \hline
+                    \textbf{Actor} & Agronomist\\ \hline
+                    \textbf{Entry condition} & User wants to reply to a farmer help request\\  \hline
+                    \textbf{Flow of events} & \begin{enumerate}
+                                                \item System displays the notification of an incoming message
+                                                \item User press the inbox icon
+                                                \item User insert the object
+                                                \item User replys the request
+                                                \item User send the message
+                                            \end{enumerate}\\ \hline
+                    \textbf{Exit condition} & System show the user a confirmation message\\ \hline
+                    \textbf{Exceptions} &  \begin{enumerate}
+                        \item Object field is empty
+                        \item Message field is empty 
+                        \item User press the "Cancel" button    
+                    \end{enumerate}\\ \hline                    
+                \end{tabular}
+            \end{table}
+
+            \begin{table}[H]
+                \item[] \textbf{Insert Responsability Area}
+                \item[] 
+                \centering
+                \begin{tabular}{|c |m{.69\textwidth}|}
+                    \hline
+                    \textbf{Use Case} & Insert Responsability Area\\ \hline
+                    \textbf{Actor} & Agronomist\\ \hline
+                    \textbf{Entry condition} & User wants to insert its own coverage area\\  \hline
+                    \textbf{Flow of events} & \begin{enumerate}
+                                                \item User press the setings button
+                                                \item User select the new responsability area
+                                                \item User press the "Confirm" button 
+                                            \end{enumerate}\\ \hline
+                    \textbf{Exit condition} & \\ \hline
+                    \textbf{Exceptions} &  \begin{enumerate}
+                        \item User press the "Cancel" button
+                        \item User select an already taken area
+                    \end{enumerate}\\ \hline                    
+                \end{tabular}
+            \end{table}
+
+            \begin{table}[H]
+                \item[] \textbf{Check Weather Forecast}
+                \item[] 
+                \centering
+                \begin{tabular}{|c |m{.69\textwidth}|}
+                    \hline
+                    \textbf{Use Case} & Check Weather Forecast\\ \hline
+                    \textbf{Actor} & Agronomist\\ \hline
+                    \textbf{Entry condition} & User wants to check the weather forecast in its responasbility area \\  \hline
+                    \textbf{Flow of events} & \begin{enumerate}
+                                                \item User press the wheather widget
+                                                \item System retrive and display data 
+                                            \end{enumerate}\\ \hline
+                    \textbf{Exit condition} & User press "Home" button\\ \hline
+                    \textbf{Exceptions} & \\ \hline                    
+                \end{tabular}
+            \end{table}
+
+            \begin{table}[H]
+                \item[] \textbf{View Farmers Area Ranking}
+                \item[] 
+                \centering
+                \begin{tabular}{|c |m{.69\textwidth}|}
+                    \hline
+                    \textbf{Use Case} & View Farmers Area Ranking\\ \hline
+                    \textbf{Actor} & Agronomist\\ \hline
+                    \textbf{Entry condition} & User wants to see the ranking of farmers in the area\\  \hline
+                    \textbf{Flow of events} & \begin{enumerate}
+                                                \item User press the ranking widget 
+                                                \item System retrives and displays data
+                                            \end{enumerate}\\ \hline
+                    \textbf{Exit condition} & User press "Home" button\\ \hline
+                    \textbf{Exceptions} & \\ \hline                    
+                \end{tabular}
+            \end{table}
             
         \end{itemize}
 
-\newpage
+
+
+
 \subsubsection{Scenarios}
 \begin{enumerate}
     \item Sahil is a farmer that would like to share some best-practices about a particular product that he has cultivated during the last year.
@@ -825,8 +914,8 @@ All main browsers are supported.
         \hline
         Student & Time for S.1 & S.2 & S.3 & S.4 \\ \hline
         Ottavia Belotti & 1h & 2h & ? & ? \\
-        Alessio Braccini & 2h & 2h & 2h & ? \\
-        Riccardo Izzo & 2h & 2h & 2h & ? \\
+        Alessio Braccini & 2h & 2 & 4 & ? \\
+        Riccardo Izzo & 2h & ? & ? & ? \\
         \hline
     \end{tabular}
 
