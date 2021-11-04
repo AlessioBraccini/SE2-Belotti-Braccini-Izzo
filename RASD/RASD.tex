@@ -98,7 +98,7 @@ The user base is expected to be the entire population of Telangana, starting wit
         W6 & User insert post & Yes\\\hline
         W7 & User reply to a post & Yes \\\hline
         W8 & User update daily plan & Yes\\\hline
-        W9 & User check weather forcast & Yes\\\hline
+        W9 & User check weather forecast & Yes\\\hline
         \hline
     \end{tabular}
 \end{center}
@@ -150,11 +150,21 @@ The user base is expected to be the entire population of Telangana, starting wit
 
 \subsection{Definitions, acronyms, abbreviations}
 \subsubsection*{Definitions}
+\begin{itemize}
+    \item \textbf{Telangana}: Indian state promoting the \emph{DREAM} project
+    \item \textbf{User}: either Policy Makers, Farmers or Agronomists
+    \item \textbf{Production}: anytype of 
+    \item \textbf{Forum}:
+    \item \textbf{Agronomist}:
+    \item \textbf{Policy Maker}:
+    \item \textbf{Farmer}:
+    \item \textbf{Daily plan}:
+\end{itemize}
 \subsubsection*{Acronyms}
 \begin{itemize}
     \item \textbf{RASD}: Requirement Analysis and Specification Document
     \item \textbf{DREAM}: \emph{Data-driven predictive farming} project
-    \item \textbf{Telangana}: Indian state promoting the \emph{DREAM} project
+    \item \textbf{PDPA}: Personal Data Protection Act 
 \end{itemize}
 \subsection{Revision history}
 \subsection{Reference documents}
@@ -275,7 +285,7 @@ The application has been thought for the three different user categories that fo
     \item \textbf{Policy makers} are government's employees that are in charge of analysing the general agricolture trends among all the districts in Telangana, then promote based state-wide policies to better the whole food system. Their main goal is not only to secure the current provision, but also to identify now the best practices that will lead to a flourishing food production in the future. By doing so, the plan is to grow more resiliant and profitable crops and prepare the lands to face future menaces, for instance the climate that is getting more hostile or the foreseen increment of the food demand. As a consequence, they want to be notified about the best performing farmers in order to contact them and get more insight from them about their procedures, with the aim to acquire best practises to be shared and applied on a larger scale. At the same time, they need to know who, on the other hand, is performing particularly badly, so that they can be given the help they need to better their results, since obtaining the foresaid goal requires the structure to run smoothly in all its parts. 
     Policy makers also need a feedback system that let them be aware of the true impact \textit{a posteriori} of the initiatives carried out by the agronomists in collaboration with the knowledge and practice of the best farmers.
     \item \textbf{Farmers} are interested in functionalities that will help with their day-to-day life at work, so they would like to receive in one place all the information about the weather to plan before hand the work day and useful data, like suggestions and news about the specific crop they cultivate, if some crop's illness is spreading in their area and how to treat it, which fertilizers boost the plant's production, etc. Moreover, they should insert data about their own production and ask for help to a regional agronomist through the app if it's needed. Being part of a larger community of people that share the same purpose (such as being more productive) brings more knowledge in general, so it's easier for the farmers to get in touch with their collegues that grow the same crops and might have faced the same challenges they do through the in-app forum. The feature allows them to enlarge their pool of acquaintances and brings them together online, even though they might be kilometers away from each other.
-    \item \textbf{Agronomists} are the experts in the agricolture field, so the main function needed for them is the possibility of helping out the farmers that reach out to them. Each agronomist is in charge of a specific geographical area in Telangana, in order to be efficiently present on the territory in a fair and useful way according to the actual helping demand. In fact, they visit each farm spread among their area at least twice a year. That said, agronomists would like some functionalities that help them planning out their trips on the field in an simple yet flexible way. Furthermore, they would like to be notified of the farms' performace, especially the ones scoring poor results in order to plan their visits more often for those, depending on the problem their facing. Nonetheless, in order to make a complete and axhaustive report about the area productivity for the central government, they are also interested into acknowledging the top performing farms. %wheather forcast? go deeper in explaining daily plan funct?
+    \item \textbf{Agronomists} are the experts in the agricolture field, so the main function needed for them is the possibility of helping out the farmers that reach out to them. Each agronomist is in charge of a specific geographical area in Telangana, in order to be efficiently present on the territory in a fair and useful way according to the actual helping demand. In fact, they visit each farm spread among their area at least twice a year. That said, agronomists would like some functionalities that help them planning out their trips on the field in an simple yet flexible way. Furthermore, they would like to be notified of the farms' performace, especially the ones scoring poor results in order to plan their visits more often for those, depending on the problem their facing. Nonetheless, in order to make a complete and axhaustive report about the area productivity for the central government, they are also interested into acknowledging the top performing farms. %wheather forecast? go deeper in explaining daily plan funct?
 \end{itemize}
 \subsection{Assumptions, dependencies and constraints}
 \begin{itemize}
@@ -286,8 +296,10 @@ The application has been thought for the three different user categories that fo
     \item D5: The sensors measuring humidity level of the soil work properly
     \item D6: Weather forecasts are accurate up to a 80\% for the short-term and up to 60\% on the long-term
     \item D7: Water irrigation system send the information accurately, with an error of at most 1\%
-    \item D8: Agronomists always replay to farmers requests of help
+    \item D8: Agronomists always reply to farmers requests of help
     \item D9: Farmers periodically insert data about their crop status and resulting production
+    \item D10: Data inserted by the Farmers sticks to the reality of the produced quantity.
+    \item D11: Agronomists periodically report their initiatives to the central government.
 \end{itemize}
 
 \section{Specific Requirements}
@@ -343,13 +355,13 @@ Users that want full functionalities have to have a GPS system on their device i
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must let Farmers insert their production information every day, even without connection.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & If a Farmer has temporary connectivity issues while trying to upload production data, the system must keep them locally stored until connection is restablished. Once there is connectio, data must be uploaded to the database.\\\hline
+    R\arabic{RequirementCtr}    & If a Farmer has temporary connectivity issues while trying to upload production data, the system must keep them locally stored until connection is restablished. Once there is connection, data must be uploaded to the database.\\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.\\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must notify Agronomists of unresolved requests of help from Farmers.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must show weather forcasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
+    R\arabic{RequirementCtr}    & The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must present news concerning crop only if relevant to the Farmer's own crop type.\\\hline
     \stepcounter{RequirementCtr}
@@ -362,6 +374,8 @@ Users that want full functionalities have to have a GPS system on their device i
     R\arabic{RequirementCtr}    & The system must allow the Agronomists to add a schedule for the day each day, even without connection.\\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day. If the user doesn't confirm before 23:59, the system must register the already uploaded schedule as definitive.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr} & The system must allow Policy Makers to retrive all agronomists' steering initiative reports uploaded to the database.\\\hline
 \end{longtable}
 
 \subsubsection{Mapping}
@@ -375,12 +389,90 @@ Users that want full functionalities have to have a GPS system on their device i
              \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Make crops weather-resiliant across the State\\\hline
             \cellcolor{pink!50}D5 & The sensors measuring humidity level of the soil work properly\\\hline
             \cellcolor{pink!50}D7 & Water irrigation system sends the information accurately, with an error of at most 1\% \\\hline
-            \cellcolor{SpringGreen!50}R & ...\\\hline
-            %insert requirements
+            \cellcolor{SpringGreen!50}R4 & The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation system and soil humidity sensors.\\\hline
         \end{tabular}
     \end{center}
 \end{table}
 %written explanation of how the G,D and R go together
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|c | p{0.69\textwidth}|}
+            \hline
+             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Reach out to farmers in need of help\\\hline
+            \cellcolor{pink!50}D3 & Each user registers according to their role and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D4 & The internet connection works properly\\\hline
+            \cellcolor{pink!50}D8 & Agronomists always reply to farmers requests of help \\\hline
+            \cellcolor{SpringGreen!50}R9 & The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.\\\hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|c | p{0.69\textwidth}|}
+            \hline
+             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Identification of well-performing farmers\\\hline
+            \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production\\\hline
+            \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity.\\\hline
+            \cellcolor{SpringGreen!50}R5 & The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
+            \cellcolor{SpringGreen!50}R6 & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
+            \cellcolor{SpringGreen!50}R7 & The system must let Farmers insert their production information every day, even without connection.\\\hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|c | p{0.69\textwidth}|}
+            \hline
+             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Identification of under-performing farmers\\\hline
+             \cellcolor{pink!50}D3 & Each user registers according to their role and always feeds correct information to the app.\\\hline
+             \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production\\\hline
+             \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity.\\\hline
+             \cellcolor{SpringGreen!50}R5 & The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
+             \cellcolor{SpringGreen!50}R6 & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
+             \cellcolor{SpringGreen!50}R7 & The system must let Farmers insert their production information every day, even without connection.\\\hline
+         \end{tabular}
+    \end{center}
+\end{table}
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|c | p{0.69\textwidth}|}
+            \hline
+             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Visualize the results of steering initiatives\\\hline
+            \cellcolor{pink!50}D5 & Each user registers according to their role and always feeds correct information to the app.\\\hline
+            \cellcolor{pink!50}D11 & Agronomists periodically report their initiatives to the central government. \\\hline
+            \cellcolor{SpringGreen!50}R18 & The system must allow Policy Makers to retrive all agronomists' steering initiative reports uploaded to the database.\\\hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|c | p{0.69\textwidth}|}
+            \hline
+             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Visualize relevant data for the business\\\hline
+             \cellcolor{pink!50}D3 & Each user registers according to their role and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D6 & Weather forecasts are accurate up to a 80\% for the short-term and up to 60\% on the lonr-term\\\hline
+            \cellcolor{SpringGreen!50}R11 & The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomists.\\\hline
+            \cellcolor{SpringGreen!50}R12 & The system must present news concerning crop only if relevant to the Farmer's own crop type.\\\hline
+            \cellcolor{SpringGreen!50}R13 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|c | p{0.69\textwidth}|}
+            \hline
+             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Keep track of the production\\\hline
+            \cellcolor{pink!50}D3 & Each user registers according to their role and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production.\\\hline
+            \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity\\\hline
+            \cellcolor{SpringGreen!50}R7 & The system must let Farmers insert their production information every day, even without connection.\\\hline
+            \cellcolor{SpringGreen!50}R8 & If a Farmer has temporary connectivity issues while trying to upload production data, the system must keep the, locally stored until connection is restablished. Once there is connection, data must be uploaded to the database.\\\hline
+        \end{tabular}
+    \end{center}
+\end{table}
 
 \subsubsection{Use Cases}
 \setcounter{secnumdepth}{4}
@@ -1110,9 +1202,9 @@ All main browsers are supported.
     \begin{tabular}{| c || c | c| c| c |}
         \hline
         Student & Time for S.1 & S.2 & S.3 & S.4 \\ \hline
-        Ottavia Belotti & 1h & 2h & ? & ? \\
-        Alessio Braccini & 2h & 2 & 6 & ? \\
-        Riccardo Izzo & 2h & ? & ? & ? \\
+        Ottavia Belotti & 2h & 2h & 2h & ? \\
+        Alessio Braccini & 2h & 2h & 6h & ? \\
+        Riccardo Izzo & 2h & 2h & 2h & ? \\
         \hline
     \end{tabular}
 
