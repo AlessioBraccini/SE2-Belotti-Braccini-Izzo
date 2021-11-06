@@ -186,6 +186,125 @@ The user base is expected to be the entire population of Telangana, starting wit
 
 \section{Overall Description}
 \subsection{Product perspective}
+
+\subsubsection{Scenarios}
+\begin{enumerate}
+
+    \item Ottavia has just passed her test to become a policy maker, so she decides to download and install DREAM in order to visualize the data concerning her job.
+    \begin{itemize}
+        \item She open the app and click on the "Sign Up" button
+        \item She insert all its data in order to fill every mandatory field and press the "Confirm" button
+        \item System verifies that the e-mail isn't already present in the database and if it's all ok send the conirmation back
+        \item He check his mail account in order to verify that all it ends good
+    \end{itemize}
+
+    \item Apu is an expert policy maker, he want to know what are the latest data with reguard to soil humidity and wwater ittigation.
+    \begin{itemize}
+        \item He takes his phone and log in DREAM app 
+        \item He press the "watch data" button
+        \item The system retrive data from a database and show them to him
+        \item He carefully look into the soil humidity data and compare them with the water irrigation data
+        \item Staisfied he return to the home page
+    \end{itemize} 
+
+    \item Pajeet is one of the main policy makers in the state of Telangana.
+    He wants to distribute special incentives to the best farmers and to do this he decides
+    to open the app and visualize the data.
+    \begin{itemize}
+        \item He opens the app on his device, if he is already registered he logs in
+        \item The system shows the homepage for a policy maker user
+        \item He visualize the ranking of the well-performing farmers
+        \item He clicks on the name of a farmer
+        \item Now the system shows the profile of the selected farmer
+        \item Here the policy maker can find useful contact informations such as phone number and email
+        \item He takes note of the desirable contact informations and close the app
+    \end{itemize}
+
+    \item Chandran is an old farmer, he recently decides to move out from his previous field in order to give to his son, Aakesh, a bigger field to cultivatea and also changing the crop type because the news report an imminent bug invasion that will destroy mais cultivation.
+    \begin{itemize}
+        \item He log in DREAM app
+        \item He press the edit button in order to change his area and crop type
+        \item He change the two value by inserting a new area and a new crop type
+        \item He confirm by pressing the confirm button
+    \end{itemize}
+
+    \item Sahil is a farmer that would like to share some best-practices about a particular product that he has cultivated during the last year.
+    He decides to open a new discussion on the forum and invites all his colleagues.
+    \begin{itemize}
+        \item He opens the app on his device, if he is already registered he logs in
+        \item The system shows the homepage for a farmer user
+        \item He clicks on the "Forum" and access the forum section
+        \item Now he clicks on the "Create new topic" where he can select the name of the discussion
+        \item Finally he writes a new message in the discussion
+    \end{itemize}
+
+    \item Damayanti is a farmer that would like to improve the productivity of his farm.
+    To do so he decides to consult the section regarding the suggestions on specific crops to plant or specific fertilizers to use.
+    \begin{itemize}
+        \item He opens the app on his device, if he is already registered he logs in
+        \item The system shows the homepage for a farmer user
+        \item He clicks on the "News" and access the new section
+        \item Here he visualizes suggestions based on his type of production and on his location
+        \item If he is not satisfied he clicks on the "Request for suggestions" to aks agronomists or other farmers
+        \item Otherwise he takes note of the suggestions
+        \item He closes the app
+    \end{itemize}
+
+    \item Chakrika is a young farmer. She decided to insert the data reguarding last week production.
+    \begin{itemize}
+        \item She sat in front of her computer and log in DREAM
+        \item System shows her the farmers home page
+        \item She press the insert production data button
+        \item She insert the data reguarding the last week production 
+        \item She rewatch the insert data and press confirmation button 
+        \item If it was all ok system send her to home page
+    \end{itemize}
+
+    \item Shaleena is an agronomist responsible of Mahbubnagar, one of the biggest region in Telangana.
+    She wants to compose the daily plan to decides which farms to visit today and for this reason she decides to open the app.
+    \begin{itemize}
+        \item She opens the app on his device, if she is already registered she logs in
+        \item The system shows the homepage for an agronomist user
+        \item She clicks on the "Daily plan" and access the new section
+        \item She can add the farms she wants to visit to the daily plan by choosing them from the list of available ones
+        \item Now the system shows the addresses and the date of the last visit of the selected farms
+        \item She takes note of the addresses of the farms to visit and close the app
+    \end{itemize}
+    \item Chaitanya is an agronomist that after a hard day of work wants to update the daily plan on the app.
+    At the end of the day she realizes that she has visited three farms instead of the two indicated in the daily plan.
+    \begin{itemize}
+        \item She opens the app on his device, if she is already registered she logs in
+        \item The system shows the homepage for an agronomist user
+        \item She clicks on the "Daily plan" and access the new section
+        \item Here she can visualize the daily plan
+        \item She can click on the "Add" or on the "Remove"
+        \item In case of "Add" the system would redirect her to the list of available ones, in case of "Remove" she can delete a farm 
+        from the list simply by clicking on the cross at the right
+        \item She clicks on the "Confirm" to validate the daily plan
+        \item The system returns to the homepage
+        \item Finally she close the app
+    \end{itemize}
+    
+    \item Pradeep is an agronomist who wants to take care about help requests before going to work.
+    \begin{itemize}
+        \item He opens the app on his device, if he is already registered he logs in
+        \item The system shows the homepage for an agronomist user
+        \item He clicks on the "Mail box" and access the new section
+        \item Here he visualizes a list of help requests
+        \item By clicking on a help request he can visualize the request and answer 
+        \item He do this for every help request until they are finished
+        \item Finally he closes the app and begins his working day
+    \end{itemize} 
+
+    \item Sonya is an agronomist that want to check who are the best farmers of her responsability area.
+    \begin{enumerate}
+        \item She take her IT device and log in the system 
+        \item She can already see who are the top farmers of the area
+        \item She press the widget and look deeply the ranking
+        \item She press the home button to return to home page
+    \end{enumerate}
+\end{enumerate}
+
 DREAM is a system that offers the functionalities described in the \textit{Product Functions (\ref{product_functions})} section.
 It manages to use some external interfaces, for more details refers to the \textit{Software Interfaces (\ref{software_interfaces})} section.
 We can see below an high-level class diagram that shows the basic structure of the system.
@@ -255,7 +374,7 @@ There are four types of data:
         \end{figure}
     \end{center}
     \item \textbf{Manipulation of informations: }allow farmers to visualize every kind of their interest like the wheather forecast for the day or for the next few days or some suggestions about own crops and specific fertilizers.
-    \item \textbf{Send message: }allow farmers to send messages to the agronomist.
+    \item \textbf{Agronomists Interactions: }allow farmers to send messages to the agronomist.
     \item \textbf{Usage of the forum: }allow farmers to create a new topic or reply to a message in the dedicated forum.
     \item \begin{center}
         \begin{figure}[!h]
@@ -343,9 +462,9 @@ Users that want full functionalities have to have a GPS system on their device i
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system can be used only by registered and logged-in users.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & If the IT device is equipped with GPS technology, then the system must suggest the users the area in which they are during the registration phase. In any case, the final decision will be up to the registering user.\\\hline
+    R\arabic{RequirementCtr}    & If the IT device is equipped with GPS technology, then the system must suggest the users the area in which they are during the registration phase. In any case, the final decision will be up to the registering user.\\\hline  
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must allow the users to change their location in any moment, except when they have connectivity issues.\\\hline
+    R\arabic{RequirementCtr}    & The system must allow the users to change their location in any moment, except when they have connectivity issues.\\\hline%no, l'app senza internet non va
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation systems and soil humidity sensors.\\\hline
     \stepcounter{RequirementCtr}
@@ -353,13 +472,13 @@ Users that want full functionalities have to have a GPS system on their device i
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must let Farmers insert their production information every day, even without connection.\\\hline
+    R\arabic{RequirementCtr}    & The system must let Farmers insert their production information every day, even without connection.\\\hline  % noooo
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & If a Farmer has temporary connectivity issues while trying to upload production data, the system must keep them locally stored until connection is restablished. Once there is connection, data must be uploaded to the database.\\\hline
+    R\arabic{RequirementCtr}    & If a Farmer has temporary connectivity issues while trying to upload production data, the system must keep them locally stored until connection is restablished. Once there is connection, data must be uploaded to the database.\\\hline    % nooo
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must notify Agronomists of unresolved requests of help from Farmers.\\\hline
+    R\arabic{RequirementCtr}    & The system must notify Agronomists of unresolved requests of help from Farmers.\\\hline    % più di uno o solo uno?
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
     \stepcounter{RequirementCtr}
@@ -371,7 +490,7 @@ Users that want full functionalities have to have a GPS system on their device i
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must suggest to the Agronomists which farms to visit (among the ones in their area of competence) while planning the Daily Plan based upon the last visit day following a FIFO policy. Exceptions to the FIFO policy are the farms under-performing, which shall has higher priority.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must allow the Agronomists to add a schedule for the day each day, even without connection.\\\hline
+    R\arabic{RequirementCtr}    & The system must allow the Agronomists to add a schedule for the day each day, even without connection.\\\hline  %nooooo
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day. If the user doesn't confirm before 23:59, the system must register the already uploaded schedule as definitive.\\\hline
     \stepcounter{RequirementCtr}
@@ -989,24 +1108,25 @@ Users that want full functionalities have to have a GPS system on their device i
 
             \item \textbf{Farmers}\\
             
-            \textbf{Profile Edit}\\
+            \textbf{Profile Edit}
             \begin{center}
                 \begin{figure}[H]
-                    \vspace{-120px}
-                    \includegraphics[scale=0.45, center]{assets/Sequence diagrams/Farmer/Profile Edit.png}
+                    %\vspace{-120px}
+                    \includegraphics[scale=0.4, center]{assets/Sequence diagrams/Farmer/Profile Edit.png}
                     \caption{Farmers - Profile Edit Sequence Diagram}
                     \label{fig: sequence_editprofile}
                 \end{figure}
             \end{center}
             
-            \textbf{Insert Production Data}\\
+            
+            \textbf{Insert Production Data}
             \begin{center}
                 \begin{figure}[H]
-                    \includegraphics[scale=0.50, center]{assets/Sequence diagrams/Farmer/Insert Production Data.png}
+                    \includegraphics[scale=0.46, center]{assets/Sequence diagrams/Farmer/Insert Production Data.png}
                     \caption{Farmers - Insert Production Data Sequence Diagram}
                     \label{fig: sequence_production}
                 \end{figure}
-            \end{center}
+            \end{center}            
             
             \textbf{Check News}\\
             \begin{center}
@@ -1103,75 +1223,7 @@ Users that want full functionalities have to have a GPS system on their device i
         \end{itemize}
         \newpage
 
-\subsubsection{Scenarios}
-\begin{enumerate}
-    \item Sahil is a farmer that would like to share some best-practices about a particular product that he has cultivated during the last year.
-    He decides to open a new discussion on the forum and invites all his colleagues.
-    \begin{itemize}
-        \item He opens the app on his device, if he is already registered he logs in
-        \item The system shows the homepage for a farmer user
-        \item He clicks on the "Forum" and access the forum section
-        \item Now he clicks on the "Create new topic" where he can select the name of the discussion
-        \item Finally he writes a new message in the discussion
-    \end{itemize}
-    \item Pajeet is one of the main policy makers in the state of Telangana.
-    He wants to distribute special incentives to the best farmers and to do this he decides
-    to open the app and visualize the data.
-    \begin{itemize}
-        \item He opens the app on his device, if he is already registered he logs in
-        \item The system shows the homepage for a policy maker user
-        \item He visualize the ranking of the well-performing farmers
-        \item He clicks on the name of a farmer
-        \item Now the system shows the profile of the selected farmer
-        \item Here the policy maker can find useful contact informations such as phone number and email
-        \item He takes note of the desirable contact informations and close the app
-    \end{itemize}
-    \item Shaleena is an agronomist responsible of Mahbubnagar, one of the biggest region in Telangana.
-    She wants to compose the daily plan to decides which farms to visit today and for this reason she decides to open the app.
-    \begin{itemize}
-        \item She opens the app on his device, if she is already registered she logs in
-        \item The system shows the homepage for an agronomist user
-        \item She clicks on the "Daily plan" and access the new section
-        \item She can add the farms she wants to visit to the daily plan by choosing them from the list of available ones
-        \item Now the system shows the addresses and the date of the last visit of the selected farms
-        \item She takes note of the addresses of the farms to visit and close the app
-    \end{itemize}
-    \item Chaitanya is an agronomist that after a hard day of work wants to update the daily plan on the app.
-    At the end of the day she realizes that she has visited three farms instead of the two indicated in the daily plan.
-    \begin{itemize}
-        \item She opens the app on his device, if she is already registered she logs in
-        \item The system shows the homepage for an agronomist user
-        \item She clicks on the "Daily plan" and access the new section
-        \item Here she can visualize the daily plan
-        \item She can click on the "Add" or on the "Remove"
-        \item In case of "Add" the system would redirect her to the list of available ones, in case of "Remove" she can delete a farm 
-        from the list simply by clicking on the cross at the right
-        \item She clicks on the "Confirm" to validate the daily plan
-        \item The system returns to the homepage
-        \item Finally she close the app
-    \end{itemize}
-    \item Damayanti is a farmer that would like to improve the productivity of his farm.
-    To do so he decides to consult the section regarding the suggestions on specific crops to plant or specific fertilizers to use.
-    \begin{itemize}
-        \item He opens the app on his device, if he is already registered he logs in
-        \item The system shows the homepage for a farmer user
-        \item He clicks on the "News" and access the new section
-        \item Here he visualizes suggestions based on his type of production and on his location
-        \item If he is not satisfied he clicks on the "Request for suggestions" to aks agronomists or other farmers
-        \item Otherwise he takes note of the suggestions
-        \item He closes the app
-    \end{itemize}
-    \item Pradeep is an agronomist who wants to take care about help requests before going to work.
-    \begin{itemize}
-        \item He opens the app on his device, if he is already registered he logs in
-        \item The system shows the homepage for an agronomist user
-        \item He clicks on the "Mail box" and access the new section
-        \item Here he visualizes a list of help requests
-        \item By clicking on a help request he can visualize the request and answer 
-        \item He do this for every help request until they are finished
-        \item Finally he closes the app and begins his working day
-    \end{itemize} 
-\end{enumerate}
+
 \subsection{Performance Requirements}
 The majority of the user base will be represented by the farmers that cover the 58\% of the entire population of Telengana.
 According to Unique Identification Aadhar India the Telangana population in 2021 is estimated to be 39.9 million.
