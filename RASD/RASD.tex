@@ -1328,6 +1328,8 @@ In order to use the application correctly it is required to have a device equipp
 \subsection{Software System Attributes}
 \subsubsection{Reliability}
 To ensure data consistency the system must have a fully backup infrastructure, this allows to recover from general failures in the main system.
+The four components shown in the \textit{Figure(\ref{fig: availability})} operate in parallel, this guarantees high reliability and the correct functioning of the overall system in the case of a single component failure.
+Finally all the components of the system must be characterized by the highest MTTF and by the lowest MTTR possible.
 
 \subsubsection{Availability}
 The system should be up almost 24/7 in order to allow users to use the application's services at any time.
@@ -1340,6 +1342,31 @@ The peak of use is expected during the working hours, it means that it is better
         \label{fig: daily_usage}
     \end{figure}
 \end{center}
+
+\begin{center}
+    \begin{figure}[!h]
+        \includegraphics[scale=0.60, center]{assets/Availability.png}
+        \caption{DREAM combined availability}
+        \label{fig: availability}
+    \end{figure}
+\end{center}
+
+\begin{table}[H]
+    \begin{center}
+      \label{tab:availability}
+      \begin{tabular}{l|c|r}
+        \textbf{Component} & \textbf{Availability} & \textbf{Downtime}\\
+        \hline
+        Main System & 99.999\% (5-nines) & 5 minutes/year\\
+        Government Website & 99.9\% (3-nines) & 8.76 hours/year\\
+        Water Irrigation System & 99.9\% (3-nines) & 8.76 hours/year\\
+        Humidity Sensors & 99\% (2-nines) & 3.65 days/year\\
+        GPS & 99.999\% (5-nines) & 5 minutes/year\\
+        \hline
+        Entire System & 99.998\% & 10 minutes/year
+      \end{tabular}
+    \end{center}
+\end{table}
 
 \subsubsection{Security}
 All the data stored by the system must be encrypted with a standard algorithm like the AES (Advanced Encryption Standard).
@@ -1362,7 +1389,7 @@ All main browsers are supported.
         Student & Time for S.1 & S.2 & S.3 & S.4 \\ \hline
         Ottavia Belotti & 2h & 2h & 2h & ? \\
         Alessio Braccini & 2h & 2h & 6h & ? \\
-        Riccardo Izzo & 2h & 2h & 5h & ? \\
+        Riccardo Izzo & 2h & 2h & 6h & ? \\
         \hline
     \end{tabular}
 
