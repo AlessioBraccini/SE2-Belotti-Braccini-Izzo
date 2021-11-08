@@ -262,8 +262,8 @@ We can see below an high-level class diagram that shows the basic structure of t
         \item He visualizes the ranking of the well-performing farmers
         \item He clicks on the name of a farmer
         \item Now the system shows the profile of the selected farmer
-        \item Here the policy maker can find useful contact informations such as phone number (if it has been given by the farmer) and email
-        \item He takes note of the desirable contact informations and closes the app
+        \item Here the policy maker can find useful contact information such as phone number (if it has been given by the farmer) and email
+        \item He takes note of the desirable contact information and closes the app
     \end{itemize}
 
     \item Chandran is an old farmer that has been cultivating mais for all his life. He has recently decided to move out from his previous field in order to give it to his son, Aakesh. Aakesh has already his own land near his dad's one, so he wants to add the new gifted area to his DREAM account. Furthermore, he found out that wheat is more productive and more bug-resistant than mais, so he also wants to change the crop type for both the lands from mais to wheat.
@@ -342,7 +342,7 @@ We can see below an high-level class diagram that shows the basic structure of t
         \item Finally he closes the app and begins his working day
     \end{itemize} 
 
-    \item Sonya is an agronomist that want to check who are the best farmers of her responsability area.
+    \item Sonya is an agronomist that want to check who are the best farmers of her responsibility area.
     \begin{itemize}
         \item She take her IT device and log in the system 
         \item She can already see who are the top farmers of the area
@@ -353,31 +353,31 @@ We can see below an high-level class diagram that shows the basic structure of t
 
 
 \subsubsection{Class diagram}
-A UML class diagram that describes the main entities in the system.
+A UML class diagram describes the main entities in the system.
 Three types of actors can access the system: farmers, policy makers and agronomists.
-During sign up they all create a user account with basic informations such as username, password and email.
-At this point users are requested to insert other informations based on their type of account.
-For example, to complete the registration, farmers need to specify the address of their farm and agronomists must declare their area of responsability.
-The system provides several functionalities, one of this is the forum.
-When the farmers select the forum section they basically access the topics that are characterized by a list of messages where the sender is specified. 
-The agronomists can confirm and update a daily plan.
-This is composed by the current date, the list of farms visited and a status flag that indicates whether the plan has already been confimed or not.
-Moreover they have access to the list of farmers currently under their area of responsability.
-Finally there are various type of data that can be visualized and analyzed by the users, which ones to display dependes on the type of account.
+During the sign-up, they all create a user account with basic information such as username, password and e-mail.
+At this point, users are requested to choose what type of account to create. It is crucial that phisycal users register themselves accordingly to their job to ensure that the system works properly. Furthermore, this choice affects the next steps in the registration phase; for example, to complete the registration, farmers need to specify the address of their farm and what type of crop they grow, whereas agronomists must declare their area of responsibility.
+
+The system provides several functionalities tailored for the type of user, one of these is the forum for the farmers. When the farmers select the forum section, they are presented with the topics that are already active. For each topic, the discussion that has evolved through time can be seen: it's composed by the original post and its replies from other users. From here, the user can join an already ongoing discussion or create a new one generating a new topic and post the first message for it.
+
+Another functionality is the \textit{daily plan} feature for the agronomists.
+A daily plan is a list of farms that an agronomist has decided to visit on a particular day of the year, it has a date and a status flag that indicates whether the plan has already been confirmed or not. The schedule can be planned from the day before the actual visit and be confirmed until 23:59 of the visiting day. If the agronomist fills the plan and doesn't confirm it before the time limit expires, then the system will automatically assumes that the schedule has been followed and will archive it at the end of the day. For the planner, agronomists have access to the list of farmers currently in their area of responsibility.
+
+Finally, there are various types of data that can be visualized and analyzed by the users
+depending on the type of their account.
 There are four types of data:
 \begin{itemize}
-    \item Sensor data\\
-    Acquired by the sensors distributed all over the territory, characterized by a value that is the humidity of soil.
-    \item Weather forecast data\\
-    Meteorological short-term and long-term forecast acquired by the Telangana's government and displayed on their official website.
-    The data to display to the user are temperature, rainfall, wind and humidity.
-    \item Water irrigation data\\
-    Acquired by the water irrigation system installed in the farm, the only significant value is the amount of water.
-    \item Production data\\
-    Provided by the farmers, this type of data is displayed as a table that map the type of product to the amount produced.
+    \item \textbf{Soil humidity sensors data}\\
+    Acquired by the sensors distributed all over the territory, they report values that represent the soil moisture level of the land they cover.
+    \item \textbf{Weather forecast data}\\
+    Meteorological short-term and long-term forecast acquired by Telangana's government and displayed on their official website. They are comprehensive of temperature, rainfall probability and quantity, direction and strength of the wind and air humidity.
+    \item \textbf{Water irrigation data}\\
+    Acquired by the water irrigation system installed in the farms, the only significant value is the amount of water used by the system during the day.
+    \item \textbf{Production data}\\
+    Provided by the farmers, this type of data is displayed as a table that maps the type of cultivated product to the sown amount and the respective harvested quantity.
 \end{itemize}
 \begin{center}
-    \begin{figure}[!h]
+    \begin{figure}[H]
         \includegraphics[scale=0.45, center]{assets/UML/UML.png}
         \caption{High-level UML}
         \label{fig: UML}
@@ -398,48 +398,48 @@ There are four types of data:
 \end{itemize}
 \subsubsection{Policy makers functions}
 \begin{itemize}                                 
-    \item \textbf{Visualize relevant data and initiative: }let the policy makers know a variety of different data like the performances of the farmers by grouping them in a rank to know who are the farmers that are performing well and who are the worst one based on informations insert by them.
-    Policy makers can also visualize the steering iniziative presented by the agronomist in a specific subsection of their system.
+    \item \textbf{Visualize relevant data and initiative: }let the policy makers know a variety of data like the performances of the farmers by grouping them in a rank to know who are the farmers that are performing well and who are the worst one mainly based upon the production data provided by them.
+    Policy makers can also visualize the steering iniziatives presented by the agronomist in a specific subsection of their application.
 \end{itemize}
 \subsubsection{Farmers functions}
 \begin{itemize}
-    \item \textbf{Profile edit: }allow the farmers change their profile in order to upgrade information like: 
+    \item \textbf{Profile edit: }allow the farmers to change their profile in order to upgrade information like: 
     \begin{itemize}
         \item[] Area: allow to change the area where farmers have their plantation;
-        \item[] Plant type: allow to change the type of plant;
+        \item[] Crop type: allow to change the type of the crop they're cultivating;
         \item[] Username and password: allow to change their username and password.
     \end{itemize}
     \begin{center}
-        \begin{figure}[!h]
+        \begin{figure}[H]
             \includegraphics[width=\textwidth]{assets/BPMN/ProfileEditBpmn}
             \caption{Profile edit BPMN}
             \label{fig: profileedit}
         \end{figure}
     \end{center}
-    \item \textbf{Manipulation of informations: }allow farmers to visualize every kind of their interest like the wheather forecast for the day or for the next few days or some suggestions about own crops and specific fertilizers.
-    \item \textbf{Agronomists Interactions: }allow farmers to send messages to the agronomist.
-    \item \textbf{Usage of the forum: }allow farmers to create a new topic or reply to a message in the dedicated forum.
-    \item \begin{center}
-        \begin{figure}[!h]
-            \includegraphics[width=\textwidth]{assets/BPMN/ForumBpmn}
-            \caption{Forum BPMN}
-            \label{fig: forum}
-        \end{figure}
-    \end{center}
+    \item \textbf{Getting information about the agricolture field:} allow farmers to visualize news relevant to their business interests such as: wheather forecast for the day or for the next few days, articles posted on major online farming magazines that are related to their own crop type and specific fertilizers for their needs.
+    \item \textbf{Agronomists Interactions:} allow farmers to send messages to the agronomist.
+    \item \textbf{Building a useful community on the forum:} allow farmers to create a new topic or reply to a message in the dedicated forum.
 \end{itemize}
+\begin{center}
+    \begin{figure}[H]
+        \includegraphics[width=\textwidth]{assets/BPMN/ForumBpmn}
+        \caption{Forum BPMN}
+        \label{fig: forum}
+    \end{figure}
+\end{center}
 \subsubsection{Agronomists functions}
 \begin{itemize}
-    \item \textbf{Area functions: }allow the agronomist to insert their responsability area and visualize the correspondant data like wheather forecast or the rank of the farmers.
-    \item \textbf{Manage farmers requests: }farmers can send help or suggestion request to whom agronomist have to reply.
-    \item \textbf{Manage daily plan: }allow the agronomist to make their daily plan by registring the incoming visits to the farmers. At the end of the day a farmers must confirm if they were able to complete the plan or specify the deviations occurred during the day.   
-    \begin{center}
-        \begin{figure}[!h]
-            \includegraphics[width=\textwidth]{assets/BPMN/DailyPlanBpmn}
-            \caption{Daily plan BPMN}
-            \label{fig: dailyplan}
-        \end{figure}
-    \end{center}
+    \item \textbf{Area functions:} allow the agronomists to insert their responsibility area and visualize related data like wheather forecast or the rank of the farmers in that region.
+    \item \textbf{Manage farmers requests:} agronomists reply to farmers' requests for help or suggestion.
+    \item \textbf{Manage daily plan:} allow the agronomist to make their daily plan by registring the scheduled visits to the farmers. At the end of the day an agronomist must confirm if they were able to complete the plan or specify the deviations occurred during the day.   
 \end{itemize}
+\begin{center}
+    \begin{figure}[H]
+        \includegraphics[width=\textwidth]{assets/BPMN/DailyPlanBpmn}
+        \caption{Daily plan BPMN}
+        \label{fig: dailyplan}
+    \end{figure}
+\end{center}
 
 \subsection{User characteristics}
 The application has been thought for the three different user categories that follows:
@@ -450,18 +450,21 @@ The application has been thought for the three different user categories that fo
     \item \textbf{Agronomists} are the experts in the agricolture field, so the main function needed for them is the possibility of helping out the farmers that reach out to them. Each agronomist is in charge of a specific geographical area in Telangana, in order to be efficiently present on the territory in a fair and useful way according to the actual helping demand. In fact, they visit each farm spread among their area at least twice a year. That said, agronomists would like some functionalities that help them planning out their trips on the field in an simple yet flexible way. Furthermore, they would like to be notified of the farms' performace, especially the ones scoring poor results in order to plan their visits more often for those, depending on the problem their facing. Nonetheless, in order to make a complete and axhaustive report about the area productivity for the central government, they are also interested into acknowledging the top performing farms. %wheather forecast? go deeper in explaining daily plan funct?
 \end{itemize}
 \subsection{Assumptions, dependencies and constraints}
+\newcounter{assumptionCtr}
 \begin{itemize}
-    \item D1: Agronomists actually stick to the scheduled daily plan
-    \item D2: Agronomists correct their schedule at the end of the day if deviations occur
-    \item D3: Each user registers according to their role and always feeds correct information to the app
-    \item D4: The internet connection works properly
-    \item D5: The sensors measuring humidity level of the soil work properly
-    \item D6: Weather forecasts are accurate up to a 80\% for the short-term and up to 60\% on the long-term
-    \item D7: Water irrigation system send the information accurately, with an error of at most 1\%
-    \item D8: Agronomists always reply to farmers requests of help
-    \item D9: Farmers periodically insert data about their crop status and resulting production
-    \item D10: Data inserted by the Farmers sticks to the reality of the produced quantity.
-    \item D11: Agronomists periodically report their initiatives to the central government.
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Agronomists actually stick to the scheduled daily plan
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Agronomists correct their schedule at the end of the day if deviations occur
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Each user registers according to their role and always feeds correct information to the app
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: The internet connection works properly
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: The sensors measuring humidity level of the soil work properly, with at most an error of 1\%
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Weather forecasts are accurate up to a 80\% for the short-term and up to 60\% on the long-term
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Water irrigation system send the information accurately, with an error of at most 1\%
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Agronomists always reply to farmers requests of help
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Farmers periodically insert data about their crop status and resulting production
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Data inserted by the Farmers sticks to the reality of the produced quantity.
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Agronomists periodically report their initiatives to the central government.
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Users own an IT device to connect to the application
+    \item Devices external to the system (e.g. humidity sensors, water irrigation systems, weather stations) are active and working properly for 99.9\% of the year
 \end{itemize}
 
 \section{Specific Requirements}
@@ -883,14 +886,14 @@ Users that want full functionalities have to have a GPS system on their device i
             \end{table}
 
             \begin{table}[H]
-                \item[] \textbf{View Specific Farmer Informations (View Farmers Ranking)}
+                \item[] \textbf{View Specific Farmer Information (View Farmers Ranking)}
                 \item[] 
                 \centering
                 \begin{tabular}{|c| m{.69\textwidth}|}
                     \hline
-                    \textbf{Use Case} & View Specific Farmer Informations (View Farmers Ranking)\\ \hline
+                    \textbf{Use Case} & View Specific Farmer information (View Farmers Ranking)\\ \hline
                     \textbf{Actor} & Policy Maker\\ \hline
-                    \textbf{Entry condition} & User wants to see the specific informations of a farmer\\  \hline
+                    \textbf{Entry condition} & User wants to see the specific information of a farmer\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
                                                 \item First three events are the same of the "View Farmers Ranking" use case 
                                                 \item User press on a farmer name
@@ -1105,17 +1108,17 @@ Users that want full functionalities have to have a GPS system on their device i
             \end{table}
 
             \begin{table}[H]
-                \item[] \textbf{Insert Responsability Area}
+                \item[] \textbf{Insert responsibility Area}
                 \item[] 
                 \centering
                 \begin{tabular}{|c |m{.69\textwidth}|}
                     \hline
-                    \textbf{Use Case} & Insert Responsability Area\\ \hline
+                    \textbf{Use Case} & Insert responsibility Area\\ \hline
                     \textbf{Actor} & Agronomist\\ \hline
                     \textbf{Entry condition} & User wants to insert its own coverage area\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
                                                 \item User press the setings button
-                                                \item User select the new responsability area
+                                                \item User select the new responsibility area
                                                 \item User press the "Confirm" button 
                                             \end{enumerate}\\ \hline
                     \textbf{Exit condition} & \\ \hline
@@ -1225,11 +1228,11 @@ Users that want full functionalities have to have a GPS system on their device i
                 \end{figure}
             \end{center}
             \newpage
-            \textbf{View Specific Farmers Informations}\\
+            \textbf{View Specific Farmers information}\\
             \begin{center}
                 \begin{figure}[H]
-                    \includegraphics[scale=0.55, center]{assets/Sequence diagrams/Policy Maker/View Specific Farmer Informations .png}
-                    \caption{Policy Makers - View Specific Farmers Informations Sequence Diagram}
+                    \includegraphics[scale=0.55, center]{assets/Sequence diagrams/Policy Maker/View Specific Farmer Information.png}
+                    \caption{Policy Makers - View Specific Farmers information Sequence Diagram}
                     \label{fig: sequence_specificinfo}
                 \end{figure}
             \end{center}
@@ -1326,7 +1329,7 @@ Users that want full functionalities have to have a GPS system on their device i
             \begin{center}
                 \begin{figure}[H]
                     \includegraphics[scale=0.65, center]{assets/Sequence diagrams/Agronomist/Insert Responsibility Area.png}
-                    \caption{Agronomists - Insert Responsability Area Sequence Diagram}
+                    \caption{Agronomists - Insert responsibility Area Sequence Diagram}
                     \label{fig: sdAgronomist_insertResponsibilityArea}
                 \end{figure}
             \end{center}
