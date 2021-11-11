@@ -514,11 +514,11 @@ Users that want full functionalities have to have a GPS system on their device i
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation systems and soil humidity sensors.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must give Policy Makers and Agronomists up-to-date ranking of the best and worst performing farmers.\\\hline
+    R\arabic{RequirementCtr}    & The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must let Farmers insert their production information every day\\\hline
+    R\arabic{RequirementCtr}    & The system must let Farmers insert their production information every day.\\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.\\\hline
     \stepcounter{RequirementCtr}
@@ -539,6 +539,13 @@ Users that want full functionalities have to have a GPS system on their device i
     R\arabic{RequirementCtr}    & The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day. If the user doesn't confirm before 23:59, the system must register the already uploaded schedule as definitive.\\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr} & The system must allow Policy Makers to retrive all agronomists' steering initiative reports uploaded to the database.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr} & The system shall allow users to be identified by an email of their choosing.\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr} & The system shall allow farmers to change their username, password, crop type and area\\\hline
+    \stepcounter{RequirementCtr}
+    R\arabic{RequirementCtr} & The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area.\\\hline
+    
 \end{longtable}
 
 \subsubsection{Mapping}
@@ -1117,7 +1124,7 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Actor} & Agronomist\\ \hline
                     \textbf{Entry condition} & User wants to insert its own coverage area\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press the setings button
+                                                \item User press the settings button
                                                 \item User select the new responsibility area
                                                 \item User press the "Confirm" button 
                                             \end{enumerate}\\ \hline
@@ -1165,7 +1172,89 @@ Users that want full functionalities have to have a GPS system on their device i
                 \end{tabular}
             \end{table}
             
-        \end{itemize}
+        
+        \newpage
+
+        \item \textbf{Use Cases to requirement mapping}
+        
+        \item[] \begin{longtable}{|p{0.31\textwidth}|p{0.69\textwidth}|}
+                    \hline
+                    \cellcolor{SpringGreen!50}\textbf{1)Sign Up}\centering & R2) If the IT device is equipp ed with GPS technology, then the system must suggest the users the area in which they are during the registration phase. In any case, the final decision will be up to the registering user.
+
+                                                                     R3) The system must allow the users to change their location.
+                                                                     
+                                                                     R18) The system shall allow users to be identified by a username of their choosing.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{2)Log In}\centering & R18) The system shall allow users to be identified by a username of their choosing. \\\hline
+                    \cellcolor{SpringGreen!50}\textbf{3)View Initiative Reports}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+
+                                                                                     R17) The system must allow Policy Makers to retrive all agronomists' steering initiative rep orts uploaded to the database.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{4)Check Soil Humidity Data}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+
+                                                                                                                             R4) The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation systems and soil humidity sensors.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{5)Check Water Irrigation Data}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+
+                                                                                                                             R4) The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation systems and soil humidity sensors.\\\hline
+                    
+                    \cellcolor{SpringGreen!50}\textbf{6)View Farmers Ranking}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+
+                                                                                 R5) The system must give Policy Makers up-to-date ranking of the b est and worst performing farmers.
+
+                                                                                 R6) The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{7)Profile Edit}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+
+                                                                         R3) The system must allow the users to change their location.
+                    
+                                                                         R19) The system shall allow farmers to change their username, password, crop type and area\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{8)Insert Production Data}\centering & R1) The system must allow only registered and logged-in users to use the app.
+
+                                                                                  R7) The system must let Farmers insert their production information every day.
+                                                                                  
+                                                                                  R12) If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{9)Check news}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                                                                       
+                                                                       R11) The system must present news concerning crop only if relevant to the Farmer's own crop type.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{10)Post in the Forum}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    
+                                                                               R12) If users are experimenting connectivity issues, the system must inform them to try later.
+                                                                               
+                                                                               R13) The system must allow every user registered as Farmer to access the forum, to create new discussions and to post replies to already existing ones.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{11)Check Weather Forecast}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    
+                                                                                    R10) The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{12)Send an Help Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    
+                                                                                  R8) The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.
+                                                                                  
+                                                                                  R12) If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{13)Confirm Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    
+                                                                                          R15) The system must allow the Agronomists to add a new schedule for the day each day.
+                                                                                        
+                                                                                          R16) The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day. If the user doesn't confirm before 23:59, the system must register the already uploaded schedule as definitive.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{14)Update Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    
+                                                                                         R15) The system must allow the Agronomists to add a new schedule for the day each day.
+                                                                                        
+                                                                                         R16) The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day. If the user doesn't confirm before 23:59, the system must register the already uploaded schedule as definitive.\\\hline
+                    
+                    \cellcolor{SpringGreen!50}\textbf{15)Manage Farmers Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    
+                                                                                    R9) The system must notify Agronomists of unresolved requests of help from Farmers.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{16)Insert Responsibility Area}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    
+                                                                                        R3) The system must allow the users to change their location.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{17)Check Wheather Forecasat}\centering & R1) The system must allow only registered and logged-in users to use the app.
+                    
+                                                                                     R10) The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{18)View Farmers Area Ranking}\centering&  R1) The system must allow only registered and logged-in users to use the app.
+
+                                                                                       R6) The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.
+                                                                                       
+                                                                                       R20) The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area.\\\hline
+                    
+        \end{longtable}
+    
+    \end{itemize}
 
         \newpage
         \subsubsection{Sequence Diagrams}
