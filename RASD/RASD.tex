@@ -13,6 +13,7 @@
 \hyphenation{Te-lan-ga-na}
 \hyphenation{an-a-lys-ing}
 \hyphenation{a-gron-o-mists}
+\hyphenation{a-gron-o-mist}
 \titleformat{\paragraph}
 {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}
@@ -386,7 +387,7 @@ There are four types of data:
 \label{product_functions}
 \subsubsection{Sign-up and shared functions}
 \begin{itemize}
-    \item \textbf{Sign-up:} let the user sign-up thorugh an email and a password, creating a profile tailored for the user's job. Specify the area in which they live and what type of cultivation they manage.
+    \item \textbf{Sign-up:} let the user sign-up thorugh an email and a password, creating a profile tailored for the user's job. Specify the area in which they live and what type of cultivation they manage. The adding of a farmland is done by inserting its coordinates (raw coordinates or by selecting a spot on the map) into the app, since it's difficult to find a location through an address in rural areas.
     \begin{center}
         \begin{figure}[!h]
             \includegraphics[width=\textwidth]{assets/BPMN/SignUpBpmn}
@@ -464,6 +465,7 @@ The application has been thought for the three different user categories that fo
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Agronomists periodically report their initiatives to the central government.
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Users own an IT device to connect to the application
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Devices external to the system (e.g. humidity sensors, water irrigation systems, weather stations) are active and working properly for 99.9\% of the year
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Each Telangana's district has one and only one Agronomist
 \end{itemize}
 \newpage
 \section{Specific Requirements}
@@ -482,15 +484,15 @@ Soil data, obtained from sensors, are collect by someone else and will be added 
 
 \subsubsection{Software Interfaces}
 \label{software_interfaces}
-In order to use the system it's required the use of a web broswer, on that will run the application.
+In order to use the system, web broswer is required to run the application.
 
-System will also use some important interfaces in order to accomplish its functionalities.
+The system will also take advantage of some interfaces in order to accomplish its functionalities.
 
-First is an external API to access maps which will use the position acquired by the user settings to return an interactive map with a marker on that exact position.
+Firstly, an external API is necessary to visualize on maps a farm's position or to let farmers locate their farm in registration phase.
 
-Second API service used is the one of the DBMS system which will be adopted in order to query the internal database.
+Then, another API service will be the one of the DBMS system which will be adopted in order to query the internal database.
 
-Another API will be use to access the external database containing data regarding the sensor data and the other external data that the system need.
+Finally, an API will be use to access the external database containing data regarding the sensors data and the other external systems data that the application needs.
 
 \subsubsection{Communication Interfaces}
 Internet connection is mandatory in order to access to every formation that the system will display.
@@ -500,7 +502,7 @@ Users that want full functionalities have to have a GPS system on their device i
 
 \subsubsection{List of Requirements}
 \newcounter{RequirementCtr}
-
+\rowcolors{2}{}{PineGreen!25}
 \begin{longtable}{|c|p{0.69\textwidth}|}
     \hline %this line gives a warning but it's the longtable that's bugged
     \textbf{ID} & \textbf{Requirement}\\ \hline\hline
@@ -519,7 +521,7 @@ Users that want full functionalities have to have a GPS system on their device i
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must let Farmers insert their production information every day.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.\\\hline
+    R\arabic{RequirementCtr}    & The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must notify Agronomists of unresolved requests of help from Farmers.\\\hline %just one agronomist for district or more than one?
     \stepcounter{RequirementCtr}
@@ -578,8 +580,9 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{pink!50}D4 & The internet connection works properly\\\hline
             \cellcolor{pink!50}D8 & Agronomists always reply to farmers requests of help \\\hline
             \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
+            \cellcolor{pink!50}D14 & Each Telangana's district has one and only one Agronomist\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
-            \cellcolor{SpringGreen!50}R8 & The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.\\\hline
+            \cellcolor{SpringGreen!50}R8 & The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
         \end{tabular}
     \end{center}
@@ -636,6 +639,7 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{pink!50}D11 & Agronomists periodically report their initiatives to the central government. \\\hline
             \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
             \cellcolor{pink!50}D13 & Devices external to the system (e.g. humidity sensors, water irrigation systems, weather stations) are active and working properly for 99.9\% of the year\\\hline
+            \cellcolor{pink!50}D14 & Each Telangana's district has one and only one Agronomist\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
             \cellcolor{SpringGreen!50}R17 & The system must allow Policy Makers to retrive all agronomists' steering initiative reports uploaded to the database.\\\hline
@@ -683,8 +687,9 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{pink!50}D4 & The internet connection works properly.\\\hline
             \cellcolor{pink!50}D8 & Agronomists always reply to farmers' requests of help.\\\hline
             \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
+            \cellcolor{pink!50}D14 & Each Telangana's district has one and only one Agronomist\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
-            \cellcolor{SpringGreen!50}R8 & The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.\\\hline
+            \cellcolor{SpringGreen!50}R8 & The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
             \cellcolor{SpringGreen!50}R9 & The system must notify Agronomists of unresolved requests for help from Farmers.\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
         \end{tabular}
@@ -712,8 +717,9 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
             \cellcolor{pink!50}D4 & The internet connection works properly.\\\hline
             \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
+            \cellcolor{pink!50}D14 & Each Telangana's district has one and only one Agronomist\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
-            \cellcolor{SpringGreen!50}R & The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.\\\hline
+            \cellcolor{SpringGreen!50}R8 & The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
             \cellcolor{SpringGreen!50}R9 & The system must notify Agronomists of unresolved requests for help from the Farmers.\\\hline
         \end{tabular}
     \end{center}
@@ -829,8 +835,9 @@ Users that want full functionalities have to have a GPS system on their device i
                     \hline
                     \textbf{Use Case} & Log In\\ \hline
                     \textbf{Actor} & Policy Maker, Farmer, Agronomist\\ \hline
-                    \textbf{Entry condition} & User want to log in the system\\  \hline
+                    \textbf{Entry condition} & User wants to log in the system\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
+                                                \item User opens DREAM app
                                                 \item User puts its own username and password
                                                 \item System correctly log in the user and redirects it the home page
                                             \end{enumerate}\\ \hline
@@ -1321,7 +1328,7 @@ Users that want full functionalities have to have a GPS system on their device i
                                                                                     R10) The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
                     \cellcolor{SpringGreen!50}\textbf{13)Send an Help Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
-                                                                                  R8) The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.
+                                                                                  R8) The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.
                                                                                   
                                                                                   R12) If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
                     \cellcolor{SpringGreen!50}\textbf{14)Confirm Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
@@ -1545,10 +1552,10 @@ Users that want full functionalities have to have a GPS system on their device i
 
 
 \subsection{Performance Requirements}
-The majority of the user base will be represented by the farmers that cover the 58\% of the entire population of Telengana.
+The majority of the user base will be represented by the farmers that cover the 58\% of the entire population of Telengana, while the number of policy-maker and agronomist users is irrelevant.
 According to Unique Identification Aadhar India the Telangana population in 2021 is estimated to be 39.9 million.
 This means that the system is expected to be widely adopted with the registration of millions of users just in the first year.
-Also the average workload of the system is expected to be high, the goal is to guarantee the simultaneous connection of 200.000 individuals.
+Also the average workload of the system is expected to be high, the goal is to guarantee the simultaneous connection of at least 2 millions of individuals.
 A mid-term goal could be to improve the scalability of the system in order to guarantee an efficient service to all users.
 Finally the system should have a good response time, less than 3 seconds is reasonable.
 \subsection{Design Constraints}
@@ -1606,8 +1613,7 @@ The peak of use is expected during the working hours, it means that it is better
 
 \subsubsection{Security}
 All the data stored by the system must be encrypted with a standard algorithm like the AES (Advanced Encryption Standard).
-The communications goes on a secure channel powered by the SSL protocol.
-In addition users can request a two-factor authentication (2FA) to improve the security of the personal account.
+The communication passes through a secure channel powered by the SSL protocol.
 All data should be stored in compliance with PDPA's regulation.
 \subsubsection{Maintainability}
 The maintainability is guaranteed by high standard of code, the use of design patterns will enhance this point and guarantee high reusability.
@@ -1623,17 +1629,11 @@ All main browsers are supported.
     \begin{tabular}{| c || c | c| c| c |}
         \hline
         Student & Time for S.1 & S.2 & S.3 & S.4 \\ \hline
-        Ottavia Belotti & 2.5h & 3h & 4h & ? \\
-        Alessio Braccini & 2h & 2h & 6h & ? \\
-        Riccardo Izzo & 2h & 2h & 6h & ? \\
+        Ottavia Belotti & 2.5h & 5h & 9.5h & ? \\
+        Alessio Braccini & 2h & 4h & 12h & ? \\
+        Riccardo Izzo & 2h & 3h & 11h & ? \\
         \hline
     \end{tabular}
 
 \section{References}
 \end{document}
-
-
-% aggiungere da dove arrivano i goal e requiremnet e assumption
-% no design o implementation choiche in rasd quindi no mockup e selezione dei best farmers in DD
-% spostare sceniari nella sezione 2
-% NON LASCIARE NULLA AL CASO, SPECIFICARE TUTTO.
