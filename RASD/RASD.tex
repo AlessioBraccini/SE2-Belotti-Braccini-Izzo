@@ -491,7 +491,7 @@ First is an external API to access maps which will use the position acquired by 
 
 Second API service used is the one of the DBMS system which will be adopted in order to query the internal database.
 
-Another API will be use to access the external database containing data reguarding the sensor data and the other external data that the system need.
+Another API will be use to access the external database containing data regarding the sensor data and the other external data that the system need.
 
 \subsubsection{Communication Interfaces}
 Internet connection is mandatory in order to access to every formation that the system will display.
@@ -778,17 +778,22 @@ Users that want full functionalities have to have a GPS system on their device i
                     \hline
                     \textbf{Use Case} & Sign Up\\ \hline
                     \textbf{Actor} & Policy Maker, Farmer, Agronomist\\ \hline
-                    \textbf{Entry condition} & User want to register in the system\\  \hline
+                    \textbf{Entry condition} & User wants to register in the system\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press the sign up button
-                                                \item User select its username, password and role
+                                                \item User opens DREAM app
+                                                \item User presses the sign up button
+                                                \item User selects its username, password and job role
+                                                \item User presses the confirm button
+                                                \item System shows a confirmation message to the user
+                                                \item An email is sent to the user
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & The system shows a confirmation message to the user \\ \hline
+                    \textbf{Exit condition} & User data are saved into the system and registration ends successfully  \\ \hline
                     \textbf{Exceptions} &  \begin{enumerate}
                         \item If the user insert an already taken username
                         \item If the user press the cancel button
                         \item Internet connection isn't working
-                    \end{enumerate}\\ \hline                    
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 3\\ \hline                    
                 \end{tabular}
             \end{table}
 
@@ -802,13 +807,15 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Actor} & Policy Maker, Farmer, Agronomist\\ \hline
                     \textbf{Entry condition} & User want to log in the system\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User put its own username and password
+                                                \item User puts its own username and password
+                                                \item System correctly log in the user and redirects it the home page
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & The system correctly log in the system\\ \hline
+                    \textbf{Exit condition} & The user correctly log in the system\\ \hline
                     \textbf{Exceptions} &  \begin{enumerate}
-                        \item If the user insert a wrong username and password
+                        \item If the user inserts a wrong username and password
                         \item Internet connection isn't working
-                    \end{enumerate}\\ \hline                    
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 1\\ \hline                    
                 \end{tabular}
             \end{table}
 
@@ -825,11 +832,17 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Actor} & Policy Maker\\ \hline
                     \textbf{Entry condition} & User wants to check the Steering Initiative proposed by agronomists\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press the "View Initiatives Reports" button
-                                                \item System send to the user the steering initiative insert by the agronomist
+                                                \item User presses the "View Initiatives Reports" button
+                                                \item System retrives the information
+                                                \item System sends to the user the steering initiative insert by the agronomist
+                                                \item System displays the data
+                                                \item User presses the back button and return to home page
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & User press the back button \\ \hline
-                    \textbf{Exceptions} &  \\ \hline                    
+                    \textbf{Exit condition} & User presses the back button \\ \hline
+                    \textbf{Exceptions} &   \begin{enumerate}
+                        \item Internet connection isn't working
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 1\\ \hline                    
                 \end{tabular}
             \end{table}
                 
@@ -843,13 +856,17 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Actor} & Policy Maker \\ \hline
                     \textbf{Entry condition} & User wants to check the soil humidity data\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press the "Check Sensors Data" button
-                                                \item User press the soil humidity data button
-                                                \item System retrive soil humidity data and send them back to the user
-                                                \item System display the data
+                                                \item User presses the "Check Sensors Data" button
+                                                \item User presess the soil humidity data button
+                                                \item System retrives soil humidity data and send them back to the user
+                                                \item System displays the data
+                                                \item User presses the home button and return to home page
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & User press the "Home" button\\ \hline
-                    \textbf{Exceptions} &  \\ \hline                   
+                    \textbf{Exit condition} & User presses the "Home" button\\ \hline
+                    \textbf{Exceptions} &  \begin{enumerate}
+                        \item Internet connection isn't working
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 1\\ \hline                   
                 \end{tabular}
             \end{table}
 
@@ -863,13 +880,17 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Actor} & Policy Maker \\ \hline
                     \textbf{Entry condition} & User wants to check the water irrigation data\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press the "Check Sensors Data" button
-                                                \item User press the water irrigation button
-                                                \item System retrive water irrigation data and send them back to the user 
-                                                \item System display the data
+                                                \item User presses the "Check Sensors Data" button
+                                                \item User presses the water irrigation button
+                                                \item System retrives water irrigation data and send them back to the user 
+                                                \item System displays the data
+                                                \item User presses the home button and return to home page
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & User press the "Home" button\\ \hline
-                    \textbf{Exceptions} &  \\ \hline                   
+                    \textbf{Exit condition} & User presses the "Home" button\\ \hline
+                    \textbf{Exceptions} & \begin{enumerate}
+                        \item Internet connection isn't working
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 1\\ \hline                   
                 \end{tabular}
             \end{table}
 
@@ -883,12 +904,16 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Actor} & Policy Maker\\ \hline
                     \textbf{Entry condition} & User wants to see the farmers ranking\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press the best or the worst performing ranking
-                                                \item System retrive data on farmers ranking
-                                                \item System show ranking data 
+                                                \item User presses the best or the farmers rank widget
+                                                \item System retrives data on farmers ranking
+                                                \item System shows ranking data
+                                                \item User presses back button and return to home page
                                             \end{enumerate}\\ \hline
                     \textbf{Exit condition} & User press the "Back" button\\ \hline
-                    \textbf{Exceptions} &  \\ \hline                    
+                    \textbf{Exceptions} &  \begin{enumerate}
+                        \item Internet connection isn't working
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 1\\ \hline                    
                 \end{tabular}
             \end{table}
 
@@ -903,11 +928,12 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Entry condition} & User wants to see the specific information of a farmer\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
                                                 \item First three events are the same of the "View Farmers Ranking" use case 
-                                                \item User press on a farmer name
-                                                \item System retrive farmer data 
-                                                \item System display farmer data
+                                                \item User presses on a farmer name
+                                                \item System retrives farmer data 
+                                                \item System displays farmer data
+                                                \item User presses back button to return on the rank page
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & User press "Back" button\\ \hline
+                    \textbf{Exit condition} & User presses "Back" button\\ \hline
                     \textbf{Exceptions} &  \\ \hline                    
                 \end{tabular}
             \end{table}
@@ -927,15 +953,19 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Actor} & Farmers\\ \hline
                     \textbf{Entry condition} & User wants to modify or update its profile\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press the "Settings" button on its home page
-                                                \item User modify the interest data (username, password, crop type or area)
-                                                \item User press "Confirm" button
+                                                \item User presses the "Setting" button on its home page
+                                                \item User modifies the interest data (username, password, crop type or area)
+                                                \item User presses "Confirm" button
+                                                \item System applies the change
+                                                \item User receives a confirmation message
+                                                \item User is redirect to hom epage
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & User receive a confirmation message\\ \hline
+                    \textbf{Exit condition} & User receives a confirmation message\\ \hline
                     \textbf{Exceptions} &  \begin{enumerate}
                         \item User choose an already taken username
                         \item User choose the old password
-                    \end{enumerate}\\ \hline                    
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 2\\ \hline                    
                 \end{tabular}
             \end{table}
 
@@ -949,16 +979,18 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Actor} & Farmers\\ \hline
                     \textbf{Entry condition} & User wants to insert the production data\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press the "Insert Production Data" button
-                                                \item User insert data reguarding its coultivation performance
+                                                \item User presses the "Insert Production Data" button
+                                                \item User fills the interested fields
                                                 \item User press "Confirm" button
-                                                \item System collect and analiyze data
+                                                \item System collect analiyze and store the data
+                                                \item System shows a confirmation message to the user and redirects it to the home page
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & User receive a confirmation message\\ \hline
+                    \textbf{Exit condition} & User receives a confirmation message\\ \hline
                     \textbf{Exceptions} &  \begin{enumerate}
                         \item User insert data in a wrong manner
                         \item User press "Back" button
-                    \end{enumerate}\\ \hline                    
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 2\\ \hline                    
                 \end{tabular}
             \end{table}
             
@@ -970,13 +1002,18 @@ Users that want full functionalities have to have a GPS system on their device i
                     \hline
                     \textbf{Use Case} & Check News\\ \hline
                     \textbf{Actor} & Farmers\\ \hline
-                    \textbf{Entry condition} & User want to check the news\\  \hline
+                    \textbf{Entry condition} & User wants to check the news\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
                                                 \item User press the news box
-                                                \item The system retrive data reguarding news 
+                                                \item The system retrive data regarding news 
+                                                \item System displays the news
+                                                \item User presses the back button
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & User press "Back" button\\ \hline
-                    \textbf{Exceptions} &  \\ \hline                    
+                    \textbf{Exit condition} & User presses "Back" button\\ \hline
+                    \textbf{Exceptions} &  \begin{enumerate}
+                        \item Internet connection isn't working
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 1\\ \hline                    
                 \end{tabular}
             \end{table}
 
@@ -990,14 +1027,19 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Actor} & Farmers\\ \hline
                     \textbf{Entry condition} & User wants to post in the forum\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press "Forum" button
-                                                \item User choose a thread to reply in or the creation of new thread
-                                                \item User write the text
+                                                \item User presses "Forum" button
+                                                \item User chooses a thread to reply in or the creation of new thread
+                                                \item User writes the text
+                                                \item User presses the "Post" button
+                                                \item System shows a confirmation message and redirects the user to the "Forum" page
+                                                \item User presses "Back" button and returns to home page 
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & User press "Post" button\\ \hline
+                    \textbf{Exit condition} & User presses "Back" button\\ \hline
                     \textbf{Exceptions} &  \begin{enumerate}
                         \item User exceed the maximum number of character 
-                    \end{enumerate}\\ \hline                    
+                        \item Internet connection isn't working
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 2\\ \hline                    
                 \end{tabular}
             \end{table}
 
@@ -1011,10 +1053,16 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Actor} & Farmers\\ \hline
                     \textbf{Entry condition} & User wants to check weather forecast\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press on the weather forecast widget
+                                                \item User presses on the weather forecast widget
+                                                \item System retirves weather data 
+                                                \item System displays data
+                                                \item User presses the home button and returns to home page
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & User press "Home" button\\ \hline
-                    \textbf{Exceptions} & \\ \hline                    
+                    \textbf{Exit condition} & User presses "Home" button\\ \hline
+                    \textbf{Exceptions} & \begin{enumerate}
+                        \item Internet connection isn't working
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 1\\ \hline                    
                 \end{tabular}
             \end{table}
 
@@ -1028,15 +1076,18 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Actor} & Farmers\\ \hline
                     \textbf{Entry condition} & User needs the agronomist help\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press "Contact Agronomist" button
-                                                \item User choose the object of its help request
-                                                \item User write the message
-                                                \item User send the request by pressing "Send request" button
+                                                \item User presses "Contact Agronomist" button
+                                                \item User chooses the object of its help request
+                                                \item User writes the message
+                                                \item User sends the request by pressing "Send request" button
+                                                \item System shows a confirmation message and redirects the user to the home page 
                                             \end{enumerate}\\ \hline
                     \textbf{Exit condition} & The system shows a confirmation message to the user \\ \hline
                     \textbf{Exceptions} &  \begin{enumerate}
-                        \item User doesn't fill every mandatory boxes 
-                    \end{enumerate}\\ \hline                    
+                        \item User doesn't fill every mandatory boxes
+                        \item Internet connection isn't working 
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 1\\ \hline                    
                 \end{tabular}
             \end{table}
 
@@ -1051,17 +1102,20 @@ Users that want full functionalities have to have a GPS system on their device i
                     \hline
                     \textbf{Use Case} & Confirm Daily Plan\\ \hline
                     \textbf{Actor} & Agronomist\\ \hline
-                    \textbf{Entry condition} & User want to confirm its daily plan\\  \hline
+                    \textbf{Entry condition} & User wants to confirm its daily plan\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item Press the daily "Daily Plan" button
-                                                \item Choose the farmers that he want to visit during the day
-                                                \item Check if the farmers has at least two visit
-                                                \item Confirm the plan with the "Confirm" button
+                                                \item User presses the daily "Daily Plan" button
+                                                \item User chooses the farmers that he want to visit during the day
+                                                \item User checks if the farmers has at least two visit
+                                                \item User confirms the plan with the "Confirm" button
+                                                \item System displays a confirmation button and redirects the user to the home page
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & System display a confirmation message\\ \hline
+                    \textbf{Exit condition} & System displays a confirmation message\\ \hline
                     \textbf{Exceptions} &  \begin{enumerate}
                         \item At the end of the year a farmer has less than two visit
-                    \end{enumerate}\\ \hline                    
+                        \item Internet connection isn't working
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 1\\ \hline                    
                 \end{tabular}
             \end{table}
 
@@ -1073,19 +1127,21 @@ Users that want full functionalities have to have a GPS system on their device i
                     \hline
                     \textbf{Use Case} & Update Daily Plan\\ \hline
                     \textbf{Actor} & Agronomist\\ \hline
-                    \textbf{Entry condition} & User want to update its daily plan\\  \hline
+                    \textbf{Entry condition} & User wants to update its daily plan\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item Press the daily "Daily Plan" button
-                                                \item User press the "Modify" button
-                                                \item Choose the farmers to add or the ones to remove
-                                                \item Check if the farmers has at least two visit 
-                                                \item Check if there are farmers to visit in the list
-                                                \item Confirm the plan with the "Confirm" button
+                                                \item User presses the daily "Daily Plan" button
+                                                \item User presses the "Modify" button
+                                                \item User writes its deviations
+                                                \item User confirms the plan with the "Confirm" button
+                                                \item System diplays a confirmation message and redirects the user to the home page
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & System display a confirmation message\\ \hline
+                    \textbf{Exit condition} & System displays a confirmation message\\ \hline
                     \textbf{Exceptions} &  \begin{enumerate}
-                        \item At the end of the year a farmer has less than two visit
-                    \end{enumerate}\\ \hline                    
+                        \item User doesn't fill every mandatory fields
+                        \item Internet connection isn't working
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 3\\ \hline                    
+                    
                 \end{tabular}
             \end{table}
 
@@ -1100,17 +1156,20 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Entry condition} & User wants to reply to a farmer help request\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
                                                 \item System displays the notification of an incoming message
-                                                \item User press the inbox icon
-                                                \item User insert the object
+                                                \item User presses the inbox icon
+                                                \item User inserts the object
                                                 \item User replys the request
-                                                \item User send the message
+                                                \item User sends the message by pressing the "Send" button
+                                                \item System displays a confirmation message and redirects the user to the inbox page
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & System show the user a confirmation message\\ \hline
+                    \textbf{Exit condition} & System displays the user a confirmation message\\ \hline
                     \textbf{Exceptions} &  \begin{enumerate}
                         \item Object field is empty
                         \item Message field is empty 
-                        \item User press the "Cancel" button    
-                    \end{enumerate}\\ \hline                    
+                        \item User press the "Cancel" button
+                        \item Internet connection isn't working   
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 2\\ \hline                    
                 \end{tabular}
             \end{table}
 
@@ -1122,17 +1181,20 @@ Users that want full functionalities have to have a GPS system on their device i
                     \hline
                     \textbf{Use Case} & Insert responsibility Area\\ \hline
                     \textbf{Actor} & Agronomist\\ \hline
-                    \textbf{Entry condition} & User wants to insert its own coverage area\\  \hline
+                    \textbf{Entry condition} & User wants to update its own coverage area\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press the settings button
-                                                \item User select the new responsibility area
-                                                \item User press the "Confirm" button 
+                                                \item User presses the settings button
+                                                \item User selects the new responsibility area
+                                                \item User presses the "Confirm" button 
+                                                \item System displays a confirmation message and redirects the user to the home page
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & \\ \hline
+                    \textbf{Exit condition} & System displays a confirmation message\\ \hline
                     \textbf{Exceptions} &  \begin{enumerate}
                         \item User press the "Cancel" button
                         \item User select an already taken area
-                    \end{enumerate}\\ \hline                    
+                        \item Internet connection isn't working
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 1\\ \hline                    
                 \end{tabular}
             \end{table}
 
@@ -1146,11 +1208,16 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Actor} & Agronomist\\ \hline
                     \textbf{Entry condition} & User wants to check the weather forecast in its responasbility area \\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press the wheather widget
-                                                \item System retrive and display data 
+                                                \item User presses the wheather widget
+                                                \item System retrives and display data 
+                                                \item System displays the data
+                                                \item User presses the home button to return to the home page
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & User press "Home" button\\ \hline
-                    \textbf{Exceptions} & \\ \hline                    
+                    \textbf{Exit condition} & User presses "Home" button\\ \hline
+                    \textbf{Exceptions} &\begin{enumerate}
+                        \item Internet connection isn't working
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 1 \\ \hline                    
                 \end{tabular}
             \end{table}
 
@@ -1164,11 +1231,15 @@ Users that want full functionalities have to have a GPS system on their device i
                     \textbf{Actor} & Agronomist\\ \hline
                     \textbf{Entry condition} & User wants to see the ranking of farmers in the area\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User press the ranking widget 
-                                                \item System retrives and displays data
+                                                \item User presses the ranking widget 
+                                                \item System retrives and displays the data
+                                                \item User presses the back button and returns to the home page
                                             \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & User press "Home" button\\ \hline
-                    \textbf{Exceptions} & \\ \hline                    
+                    \textbf{Exit condition} & User presses "Home" button\\ \hline
+                    \textbf{Exceptions} & \begin{enumerate}
+                        \item Internet connection isn't working
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 1\\ \hline                    
                 \end{tabular}
             \end{table}
             
@@ -1200,53 +1271,58 @@ Users that want full functionalities have to have a GPS system on their device i
                                                                                            R5) The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.
 
                                                                                            R6) The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{7)Profile Edit}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{7)View Farmers Ranking}\centering &  R1) The system must allow only registered and logged-in users to use the app.
 
-                                                                         R3) The system must allow the users to change their location.
-                    
-                                                                         R19) The system shall allow farmers to change their username, password, crop type and area\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{8)Insert Production Data}\centering & R1) The system must allow only registered and logged-in users to use the app.
+                                                                                           R5) The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{8)Profile Edit}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+
+                                                                                   R3) The system must allow the users to change their location.
+                                
+                                                                                   R19) The system shall allow farmers to change their username, password, crop type and area\\\hline
+                    \cellcolor{SpringGreen!50}\textbf{9)Insert Production Data}\centering & R1) The system must allow only registered and logged-in users to use the app.
 
                                                                                   R7) The system must let Farmers insert their production information every day.
                                                                                   
                                                                                   R12) If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{9)Check news}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{10)Check news}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                                                                        
                                                                                  R11) The system must present news concerning crop only if relevant to the Farmer's own crop type.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{10)Post in the Forum}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{11)Post in the Forum}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                R12) If users are experimenting connectivity issues, the system must inform them to try later.
                                                                                
                                                                                R13) The system must allow every user registered as Farmer to access the forum, to create new discussions and to post replies to already existing ones.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{11)Check Weather Forecast}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{12)Check Weather Forecast}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                     R10) The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{12)Send an Help Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{13)Send an Help Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                   R8) The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.
                                                                                   
                                                                                   R12) If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{13)Confirm Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{14)Confirm Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
+                                                                                          R14) The system must suggest to the Agronomists which farms to visit (among the ones in their area of competence) while planning the Daily Plan based up on the last visit day following a FIFO policy. Exceptions to the FIFO policy are the farms under-performing, which shall have higher priority.
+
                                                                                           R15) The system must allow the Agronomists to add a new schedule for the day each day.
                                                                                         
                                                                                           R16) The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day. If the user doesn't confirm before 23:59, the system must register the already uploaded schedule as definitive.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{14)Update Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{15)Update Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                          R15) The system must allow the Agronomists to add a new schedule for the day each day.
                                                                                         
                                                                                          R16) The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day. If the user doesn't confirm before 23:59, the system must register the already uploaded schedule as definitive.\\\hline
                     
-                    \cellcolor{SpringGreen!50}\textbf{15)Manage Farmers Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{16)Manage Farmers Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                     R9) The system must notify Agronomists of unresolved requests of help from Farmers.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{16)Insert Responsibility Area}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{17)Insert Responsibility Area}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                         R3) The system must allow the users to change their location.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{17)Check Wheather Forecasat}\centering & R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{18)Check Wheather Forecasat}\centering & R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                      R10) The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{18)View Farmers Area Ranking}\centering&  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{19)View Farmers Area Ranking}\centering&  R1) The system must allow only registered and logged-in users to use the app.
 
                                                                                        R6) The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.
                                                                                        
