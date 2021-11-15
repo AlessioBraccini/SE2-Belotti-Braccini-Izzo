@@ -106,7 +106,7 @@ The user base is expected to include a large part of Telangana's population, bri
 \begin{enumerate}
     \item \textbf{(\stepcounter{goalCtr}G\arabic{goalCtr}) Receive requests for help/suggestion all in one place}\\
     Here the agronomist can manage all the incoming request for help or suggestion and will have an higher chance of intervening promptly in critical situations before it's too late. In fact, having just one place in which all the requests that need attention are cumulated makes easier for them to not miss them, rather than losing them because of the different means they could come from and in a cluttered way.
-    \item \textbf{(\stepcounter{goalCtr}G\arabic{goalCtr}) Visualize area stats}\\
+    \item \textbf{(\stepcounter{goalCtr}G\arabic{goalCtr}) Visualize area statistics}\\
     Keep track of the area general performance through a list of best-performing farmers and visualize data about whether forecast.
     %The list of best-performing farmers is based on the productivity over a selected period of time.
     \item \textbf{(\stepcounter{goalCtr}G\arabic{goalCtr}) Easy daily planning procedure}\\
@@ -225,7 +225,7 @@ The user base is expected to include a large part of Telangana's population, bri
     \item \textbf{Section 3} delves deeply into the technical aspects of the topics presented in \emph{Section 2}, in order to be extremely clear in setting the bounds between what the application must implement and what not. It will show functional and non-functional requirements. The former will be presented through some use-cases as meaningful examples; while the latter will be disclosed by analysing performance, design choices and software system features that the project shall have.
     \item \textbf{Section 4} presents the Alloy code briefly explainig the purpose of it in modeling the given problem.
 \end{itemize}
-
+\newpage
 \section{Overall Description}
 \subsection{Product perspective}
 DREAM is a system that offers the functionalities described in the \textit{Product Functions (\ref{product_functions})} section.
@@ -430,7 +430,7 @@ There are four types of data:
 \begin{itemize}
     \item \textbf{Area functions:} allow the agronomists to insert their responsibility area and visualize related data like wheather forecast or the rank of the farmers in that region.
     \item \textbf{Manage farmers requests:} agronomists reply to farmers' requests for help or suggestion.
-    \item \textbf{Manage daily plan:} allow the agronomist to make their daily plan by registring the scheduled visits to the farmers. At the end of the day an agronomist must confirm if they were able to complete the plan or specify the deviations occurred during the day.   
+    \item \textbf{Manage daily plan:} allow the agronomist to make their daily plan by registring the scheduled visits to the farmers. At the end of the day an agronomist must confirm if they were able to complete the plan or specify the deviations occurred during the day. Updating the daily plan because of a deviation means either adding a farm that has been visited during that day that was not originally in the plan, or removing one from the schedule if the agronomist has not been able to pay a visit that same day.  
 \end{itemize}
 \begin{center}
     \begin{figure}[H]
@@ -446,14 +446,14 @@ The application has been thought for the three different user categories that fo
     \item \textbf{Policy makers} are government's employees that are in charge of analysing the general agricolture trends among all the districts in Telangana, then promote based state-wide policies to better the whole food system. Their main goal is not only to secure the current provision, but also to identify now the best practices that will lead to a flourishing food production in the future. By doing so, the plan is to grow more resiliant and profitable crops and prepare the lands to face future menaces, for instance the climate that is getting more hostile or the foreseen increment of the food demand. As a consequence, they want to be notified about the best performing farmers in order to contact them and get more insight from them about their procedures, with the aim to acquire best practises to be shared and applied on a larger scale. At the same time, they need to know who, on the other hand, is performing particularly badly, so that they can be given the help they need to better their results, since obtaining the foresaid goal requires the structure to run smoothly in all its parts. 
     Policy makers also need a feedback system that let them be aware of the true impact \textit{a posteriori} of the initiatives carried out by the agronomists in collaboration with the knowledge and practice of the best farmers.
     \item \textbf{Farmers} are interested in functionalities that will help with their day-to-day life at work, so they would like to receive in one place all the information about the weather to plan before hand the work day and useful data, like suggestions and news about the specific crop they cultivate, if some crop's illness is spreading in their area and how to treat it, which fertilizers boost the plant's production, etc. Moreover, they should insert data about their own production and ask for help to a regional agronomist through the app if it's needed. Being part of a larger community of people that share the same purpose (such as being more productive) brings more knowledge in general, so it's easier for the farmers to get in touch with their collegues that grow the same crops and might have faced the same challenges they do through the in-app forum. The feature allows them to enlarge their pool of acquaintances and brings them together online, even though they might be kilometers away from each other.
-    \item \textbf{Agronomists} are the experts in the agricolture field, so the main function needed for them is the possibility of helping out the farmers that reach out to them. Each agronomist is in charge of a specific geographical area in Telangana, in order to be efficiently present on the territory in a fair and useful way according to the actual helping demand. In fact, they visit each farm spread among their area at least twice a year. That said, agronomists would like some functionalities that help them planning out their trips on the field in an simple yet flexible way. Furthermore, they would like to be notified of the farms' performace, especially the ones scoring poor results in order to plan their visits more often for those, depending on the problem their facing. Nonetheless, in order to make a complete and axhaustive report about the area productivity for the central government, they are also interested into acknowledging the top performing farms. %wheather forecast? go deeper in explaining daily plan funct?
+    \item \textbf{Agronomists} are the experts in the agricolture field, so the main function needed for them is the possibility of helping out the farmers that reach out to them. Each agronomist is in charge of a specific geographical area in Telangana, in order to be efficiently present on the territory in a fair and useful way according to the actual helping demand. In fact, they visit each farm spread among their area at least twice a year. That said, agronomists would like some functionalities that help them planning out their trips on the field in an simple yet flexible way. Furthermore, they would like to be notified of the farms' performace, especially the ones scoring poor results in order to plan their visits more often for those, depending on the problem their facing. Nonetheless, in order to make a complete and exhaustive report about the area productivity for the central government, they are also interested into acknowledging the top performing farms. %wheather forecast? go deeper in explaining daily plan funct?
 \end{itemize}
 \subsection{Assumptions, dependencies and constraints}
 \newcounter{assumptionCtr}
 \begin{itemize}
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Agronomists actually stick to the scheduled daily plan
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Agronomists correct their schedule at the end of the day if deviations occur
-    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Each user registers according to their role and always feeds correct information to the app
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Each user registers only once, according to their job, and always feeds correct information to the app
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: The internet connection works properly
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: The sensors measuring humidity level of the soil work properly, with at most an error of 1\%
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Weather forecasts are accurate up to a 80\% for the short-term and up to 60\% on the long-term
@@ -464,9 +464,8 @@ The application has been thought for the three different user categories that fo
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Agronomists periodically report their initiatives to the central government.
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Users own an IT device to connect to the application
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Devices external to the system (e.g. humidity sensors, water irrigation systems, weather stations) are active and working properly for 99.9\% of the year
-    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: A user register only once, choosing just one type of account accordingly to their real job
 \end{itemize}
-
+\newpage
 \section{Specific Requirements}
 
 \subsection{External Interface Requirements}
@@ -542,7 +541,7 @@ Users that want full functionalities have to have a GPS system on their device i
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr} & The system shall allow users to be identified by an email of their choosing.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr} & The system shall allow farmers to change their username, password, crop type and area\\\hline
+    R\arabic{RequirementCtr} & The system shall allow farmers to change their username, password, crop type and area.\\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr} & The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area.\\\hline
     
@@ -557,8 +556,12 @@ Users that want full functionalities have to have a GPS system on their device i
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
              \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Make crops weather-resiliant across the State\\\hline
+             \cellcolor{pink!50}D4 & The internet connection works properly\\\hline
             \cellcolor{pink!50}D5 & The sensors measuring humidity level of the soil work properly\\\hline
             \cellcolor{pink!50}D7 & Water irrigation system sends the information accurately, with an error of at most 1\% \\\hline
+            \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production\\\hline
+            \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity\\\hline
+            \cellcolor{pink!50}D13 & Devices external to the system (e.g. humidity sensors, water irriation systems, weather stations) are active and working properly for 99.9\% of the year\\\hline
             \cellcolor{SpringGreen!50}R1 & The system can be used only by regstered and logged-in users.\\\hline
             \cellcolor{SpringGreen!50}R4 & The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation system and soil humidity sensors.\\\hline
         \end{tabular}
@@ -571,9 +574,10 @@ Users that want full functionalities have to have a GPS system on their device i
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
              \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Reach out to farmers in need of help\\\hline
-            \cellcolor{pink!50}D3 & Each user registers according to their role and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
             \cellcolor{pink!50}D4 & The internet connection works properly\\\hline
             \cellcolor{pink!50}D8 & Agronomists always reply to farmers requests of help \\\hline
+            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R8 & The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
@@ -585,9 +589,12 @@ Users that want full functionalities have to have a GPS system on their device i
     \begin{center}
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
-             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Identification of well-performing farmers\\\hline
+            \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Identification of well-performing farmers\\\hline
+            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D4 & The internet connection works properly\\\hline
             \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production\\\hline
             \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity.\\\hline
+            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R5 & The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
             \cellcolor{SpringGreen!50}R6 & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
@@ -602,9 +609,11 @@ Users that want full functionalities have to have a GPS system on their device i
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
              \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Identification of under-performing farmers\\\hline
-             \cellcolor{pink!50}D3 & Each user registers according to their role and always feeds correct information to the app.\\\hline
+             \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
+             \cellcolor{pink!50}D4 & The internet connection works properlu\\\hline
              \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production\\\hline
              \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity.\\\hline
+             \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
              \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
              \cellcolor{SpringGreen!50}R5 & The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
              \cellcolor{SpringGreen!50}R6 & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
@@ -618,8 +627,15 @@ Users that want full functionalities have to have a GPS system on their device i
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
              \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Visualize the results of steering initiatives\\\hline
-            \cellcolor{pink!50}D5 & Each user registers according to their role and always feeds correct information to the app.\\\hline
+            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
+            \cellcolor{pink!50}D4 & The internet connection works properly\\\hline
+            \cellcolor{pink!50}D5 & The sensors measuring humidity level of the soil work properly\\\hline
+            \cellcolor{pink!50}D7 & Water irrigation system sends the information accurately, with an error of at most 1\% \\\hline
+            \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production\\\hline
+            \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity\\\hline
             \cellcolor{pink!50}D11 & Agronomists periodically report their initiatives to the central government. \\\hline
+            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
+            \cellcolor{pink!50}D13 & Devices external to the system (e.g. humidity sensors, water irrigation systems, weather stations) are active and working properly for 99.9\% of the year\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
             \cellcolor{SpringGreen!50}R17 & The system must allow Policy Makers to retrive all agronomists' steering initiative reports uploaded to the database.\\\hline
@@ -630,9 +646,11 @@ Users that want full functionalities have to have a GPS system on their device i
     \begin{center}
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
-             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Visualize relevant data for the business\\\hline
-             \cellcolor{pink!50}D3 & Each user registers according to their role and always feeds correct information to the app.\\\hline
+            \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Visualize relevant data for the business\\\hline
+            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
+            \cellcolor{pink!50}D4 & The internet connection works properly\\\hline
             \cellcolor{pink!50}D6 & Weather forecasts are accurate up to a 80\% for the short-term and up to 60\% on the long-term.\\\hline
+            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R10 & The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomists.\\\hline
             \cellcolor{SpringGreen!50}R11 & The system must present news concerning crop only if relevant to the Farmer's own crop type.\\\hline
@@ -644,10 +662,12 @@ Users that want full functionalities have to have a GPS system on their device i
     \begin{center}
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
-             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Keep track of the production\\\hline
-            \cellcolor{pink!50}D3 & Each user registers according to their role and always feeds correct information to the app\\\hline
+            \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Keep track of the production\\\hline
+            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D4 & The internet connection works properly\\\hline
             \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production.\\\hline
             \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity\\\hline
+            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R7 & The system must let Farmers insert their production information every day.\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
         \end{tabular}
@@ -659,9 +679,10 @@ Users that want full functionalities have to have a GPS system on their device i
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
              \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Request for help/suggestion\\\hline
-            \cellcolor{pink!50}D3 & Each user registers according to their role and always feeds correct information to the app.\\\hline
+            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
             \cellcolor{pink!50}D4 & The internet connection works properly.\\\hline
             \cellcolor{pink!50}D8 & Agronomists always reply to farmers' requests of help.\\\hline
+            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R8 & The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.\\\hline
             \cellcolor{SpringGreen!50}R9 & The system must notify Agronomists of unresolved requests for help from Farmers.\\\hline
@@ -674,8 +695,9 @@ Users that want full functionalities have to have a GPS system on their device i
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
              \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Create and participate in discussions concerning the agricolture field\\\hline
-            \cellcolor{pink!50}D3 & Each user registers according to their role and always feeds correct information to the app.\\\hline
+            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
             \cellcolor{pink!50}D4 & The internet connection works properly.\\\hline
+            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
             \cellcolor{SpringGreen!50}R13 & The system must allow every user registered as Farmer to access the forum, to create new discussions and to post replies to already existing ones.\\\hline
@@ -686,9 +708,10 @@ Users that want full functionalities have to have a GPS system on their device i
     \begin{center}
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
-             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Receive requests for help/suggestion all in one place\\\hline
-            \cellcolor{pink!50}D3 & Each user registers according to their role and always feeds correct information to the app\\\hline
+            \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Receive requests for help/suggestion all in one place\\\hline
+            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
             \cellcolor{pink!50}D4 & The internet connection works properly.\\\hline
+            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R & The system must suggest a list of agronomists appointed to the area of the Farmer requesting professional help.\\\hline
             \cellcolor{SpringGreen!50}R9 & The system must notify Agronomists of unresolved requests for help from the Farmers.\\\hline
@@ -699,11 +722,12 @@ Users that want full functionalities have to have a GPS system on their device i
     \begin{center}
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
-             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Visualize area stats\\\hline
-            \cellcolor{pink!50}D3 & Each user registers according to their role and always feeds correct information to the app\\\hline
+            \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Visualize area statistics\\\hline
+            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
             \cellcolor{pink!50}D4 & The internet connection works properly.\\\hline
             \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production.\\\hline
             \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity\\\hline
+            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R6 & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
             \cellcolor{SpringGreen!50}R10 & The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
@@ -717,10 +741,10 @@ Users that want full functionalities have to have a GPS system on their device i
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
              \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Easy daily planning procedure\\\hline
-            \cellcolor{pink!50}D3 & Each user registers according to their role and always feeds correct information to the app\\\hline
-            \cellcolor{pink!50}D4 & The internet connection works properly.\\\hline
-            \cellcolor{pink!50}D1 & Agronomists actually stick to the scheduled daily plan.\\\hline
-            \cellcolor{pink!50}D2 & Agronomists correct their schedule at the end of the day if deviations occur.\\\hline
+             \cellcolor{pink!50}D1 & Agronomists actually stick to the scheduled daily plan.\\\hline
+             \cellcolor{pink!50}D2 & Agronomists correct their schedule at the end of the day if deviations occur.\\\hline
+            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D4 & The internet connection works properly.\\\hline  
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues,the system must inform them to try later.\\\hline
             \cellcolor{SpringGreen!50}R14 & The system must suggest to the Agronomists which farms to visit while planning the Daily Plan based upon the last visit day following a FIFO policy. Exceptions to the FIFO policy are the farms under-performing, which shall have higher priority.\\\hline
@@ -1593,7 +1617,7 @@ User's application will be regularly updated.
 \subsubsection{Portability}
 The system is designed to work on different operating systems like Windows, MacOS and Linux.
 All main browsers are supported.
-
+\newpage
 \section{Formal Analysis using Alloy}
 \section{Effort Spent}
     \begin{tabular}{| c || c | c| c| c |}

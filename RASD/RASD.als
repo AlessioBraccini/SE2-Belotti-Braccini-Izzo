@@ -20,7 +20,7 @@ sig Agronomist extends User{
 region: one District,
 dailyPlan : some DailyPlan,
 dailyVisits: some Visit,
-requests: some HelpRequest{}
+requests: some HelpRequest
 }
 
 abstract sig DataProvider{}
@@ -83,7 +83,7 @@ pred isGoodFarmer[f: Farmer]{}
 //-------FACTS-------
 //an agronomist insert a daily plan for each day
 fact planningDaily{
-all a : Agronomist |
+//all a : Agronomist |
 }
 
 //production cropType is the same of the farm
