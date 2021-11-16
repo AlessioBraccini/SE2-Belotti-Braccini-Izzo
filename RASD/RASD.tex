@@ -208,6 +208,17 @@ The user base is expected to include a large part of Telangana's population, bri
     \item \textbf{DREAM}: \emph{Data-driven predictive farming} project
     \item \textbf{PDPA}: Personal Data Protection Act 
     \item \textbf{RASD}: Requirement Analysis and Specification Document
+    \item \textbf{API}: Application Programming Interface
+    \item \textbf{DBMS}: Database Management System
+    \item \textbf{UML}: Unified Modeling Language
+    \item \textbf{PDPA}: Personal Data Protection Act
+    \item \textbf{MTTF}: Mean Time To Failure
+    \item \textbf{MTTR}: Mean Time To Repair
+    \item \textbf{CE}: Conformité Européenne
+    \item \textbf{GPS}: Global Positioning System
+    \item \textbf{AES}: Advanced Encryption Standard
+    \item \textbf{SSL}: Secure Sockets Layer
+    \item \textbf{IT}: Information Technology
 \end{itemize}
 \subsection{Revision history}
 \subsection{Reference documents}
@@ -231,11 +242,13 @@ The user base is expected to include a large part of Telangana's population, bri
 \subsection{Product perspective}
 DREAM is a system that offers the functionalities described in the \textit{Product Functions (\ref{product_functions})} section.
 It manages to use some external interfaces, for more details refers to the \textit{Software Interfaces (\ref{software_interfaces})} section.
-We can see below an high-level class diagram that shows the basic structure of the system.
+In the following subsections we can see a list of the most common scenarios \textit{(\ref{scenarios})} and an high-level class diagram \textit{(\ref{class_diagram})} that shows the basic structure of the system.
 \subsubsection{Scenarios}
+\label{scenarios}
 \begin{enumerate}
 
-    \item Aanya has just passed her test to become a policy maker, so she decides to download and install DREAM in order to visualize the data concerning her job.
+    \item Aanya has just passed her test to become a policy maker and wants to consult the app.
+    To do so she decides to download and install DREAM in order to visualize the data concerning her job.
     \begin{itemize}
         \item She opens the app and click on the "Sign Up" button
         \item She inserts all her data in order to fill every mandatory field and presses the "Confirm" button
@@ -246,11 +259,12 @@ We can see below an high-level class diagram that shows the basic structure of t
     \item Apu is an expert policy maker, he wants to know what are the latest data regarding soil humidity and water irrigation.
     \begin{itemize}
         \item He takes his phone and logs in DREAM app 
-        \item He presses the "watch data" button
-        \item The system retrives data from a database and shows him the soil moisture and the consumed liters of water by the irrigation system thorughtout graphs that computes the average quantities across the Country in a span of 1 year
-        \item He wishes to have more detailed information about the soil humidity and the water irrigation in Adilabad district since he read an alaarming report about that region, so he choses it from the menu, setting the time span at 2 weeks
-        \item The system gives him new graphs reporting only data about soil humidity and water used for irrigation retrieved by Adilabad's sensors in the last 2 weeks
-        \item He analiyzes them and decides that he will talk about it later with a colleague, then he returns to the home page
+        \item He presses the "Visualize Data" button
+        \item The system retrives data from a database and shows him the soil moisture and the consumed liters of water by the irrigation system thorughtout graphs that computes the average quantities across the Country in a span of one year
+        \item He wishes to have more detailed information about the soil humidity and the water irrigation in Adilabad district since he read an alarming report about that region.
+        He choses it from the menu and sets the time span at two weeks
+        \item The system gives him new graphs reporting only data about soil humidity and water used for irrigation retrieved by Adilabad's sensors in the last two weeks
+        \item He analyzes them and decides that he will talk about it later with a colleague, then he returns to the home page
     \end{itemize} 
 
     \item Pajeet is one of the main policy makers in the state of Telangana.
@@ -269,9 +283,9 @@ We can see below an high-level class diagram that shows the basic structure of t
     \item Chandran is an old farmer that has been cultivating mais for all his life. He has recently decided to move out from his previous field in order to give it to his son, Aakesh. Aakesh has already his own land near his dad's one, so he wants to add the new gifted area to his DREAM account. Furthermore, he found out that wheat is more productive and more bug-resistant than mais, so he also wants to change the crop type for both the lands from mais to wheat.
     \begin{itemize}
         \item He logs in DREAM app
-        \item He presses the profile edit button in order to change his area and crop type
-        \item He change the two value by inserting a new area and a new crop type
-        \item He confirm by pressing the confirm button
+        \item He presses the "Profile Edit" button in order to change his area and crop type
+        \item He changes the two value by inserting a new area and a new crop type
+        \item He confirms by pressing the "Confirm" button
     \end{itemize}
 
     \item Sahil is a farmer that would like to share some best-practices about a particular product that he has cultivated during the last year.
@@ -279,9 +293,10 @@ We can see below an high-level class diagram that shows the basic structure of t
     \begin{itemize}
         \item He opens the app on his device. Since he's already registered, he logs in
         \item The system shows the homepage for a farmer user
-        \item He clicks on the "Forum" and access the forum section
-        \item Now he clicks on the "Create new topic" where he can select the name of the discussion
-        \item Finally he posts a new message in the discussion and leaves the device to go check it out later to see if someone has joined his topic and replied to him
+        \item He clicks on the "Forum" button and access the forum section
+        \item Now he clicks on the "Create new topic" button where he can select the name of the discussion
+        \item He posts a new message in the discussion
+        \item Finally some time later he checks if someone has joined his topic and replied to him
     \end{itemize}
 
     \item Damayanti is a farmer that would like to improve the productivity of his farm.
@@ -289,20 +304,21 @@ We can see below an high-level class diagram that shows the basic structure of t
     \begin{itemize}
         \item He opens the app on his device, if he is already registered he logs in
         \item The system shows the homepage for a farmer user
-        \item He clicks on the "News" and access the news section
+        \item He clicks on the "News" button and access the news section
         \item Here he visualizes suggestions based on his type of production and on his location
-        \item If he is not satisfied, then he clicks on the "Request for help" to send a message to an agronomist of the area, which the app presents to him, and type his requests for suggestions
+        \item If he is not satisfied, then he clicks on the "Request for help" button to send a message
+        \item Here the app suggests him the agronomist responsible of the area and opens a text section where he can type his requests for suggestions
         \item Otherwise, he takes note from the article he read
         \item He closes the app
     \end{itemize}
 
-    \item Chakrika is a young farmer. She decided to insert the data regarding last week production.
+    \item Chakrika is a young farmer and decided to insert the data regarding last week production.
     \begin{itemize}
-        \item She sat in front of her computer and logs in DREAM
+        \item She takes her computer and logs in DREAM
         \item The system shows her the farmers home page
-        \item She presses the "insert production data" button
-        \item She insert the total quantity of rice harvested last week 
-        \item She checks the inserted data and finally press the confirmation button 
+        \item She presses the "Insert production data" button
+        \item She inserts the total quantity of rice harvested last week 
+        \item She checks the inserted data and finally press the "Confirm" button 
         \item The system sends her back to the home page
     \end{itemize}
 
@@ -311,34 +327,34 @@ We can see below an high-level class diagram that shows the basic structure of t
     \begin{itemize}
         \item She opens the app on his device, if she is already registered she logs in
         \item The system shows the homepage for an agronomist user
-        \item She clicks on the "Daily plan" and access the new section
-        \item She can add the farms she wants to visit to the daily plan by choosing them from the list of available ones
+        \item She clicks on the "Daily plan" button and access the new section
+        \item She adds the farms she wants to visit to the daily plan by choosing them from the list of available ones
         \item Now the system shows the addresses and the date of the last visit of the selected farms
-        \item She takes note of the addresses of the farms to visit and close the app
+        \item She takes note of the addresses and close the app
     \end{itemize}
     \item Chaitanya is an agronomist that after a hard day of work wants to update the daily plan on the app.
     At the end of the day she realizes that she has visited three farms instead of the two indicated in the daily plan.
     \begin{itemize}
         \item She opens the app on his device, if she is already registered she logs in
         \item The system shows the homepage for an agronomist user
-        \item She clicks on the "Daily plan" and access the new section
+        \item She clicks on the "Daily plan" button and access the new section
         \item Here she can visualize the daily plan
-        \item She can click on the "Add" or on the "Remove"
+        \item She can click on the "Add" or on the "Remove" button
         \item In case of "Add" the system would redirect her to the list of available ones, in case of "Remove" she can delete a farm 
         from the list simply by clicking on the cross at the right
-        \item She clicks on the "Confirm" to validate the daily plan
+        \item She clicks on the "Confirm" button to validate the daily plan
         \item The system returns to the homepage
-        \item Finally she close the app
+        \item Finally she closes the app
     \end{itemize}
     
     \item Pradeep is an agronomist who wants to take care about help requests before going to work.
     \begin{itemize}
         \item He opens the app on his device, if he is already registered he logs in
         \item The system shows the homepage for an agronomist user
-        \item He clicks on the "Mail box" and access the new section
+        \item He clicks on the "Mail box" button and access the new section
         \item Here he visualizes a list of help requests
-        \item By clicking on a help request he can visualize the request and answer 
-        \item He do this for every help request until they are finished
+        \item By clicking on a help request he can visualize the request and answer it
+        \item He does this for every help request until they are finished
         \item Finally he closes the app and begins his working day
     \end{itemize} 
 
@@ -347,12 +363,13 @@ We can see below an high-level class diagram that shows the basic structure of t
         \item She take her IT device and log in the system 
         \item She can already see who are the top farmers of the area
         \item She press the widget and look deeply the ranking
-        \item She press the home button to return to home page
+        \item She press the "Home" button to return to home page
     \end{itemize}
 \end{enumerate}
 
 
 \subsubsection{Class diagram}
+\label{class_diagram}
 A UML class diagram describes the main entities in the system.
 Three types of actors can access the system: farmers, policy makers and agronomists.
 During the sign-up, they all create a user account with basic information such as username, password and e-mail.
