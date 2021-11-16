@@ -526,9 +526,9 @@ Users that want full functionalities have to have a GPS system on their device i
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must allow only registered and logged-in users to use the app.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & If the IT device is equipped with GPS technology, then the system must suggest the users the area in which they are during the registration phase. In any case, the final decision will be up to the registering user.\\\hline  
+    R\arabic{RequirementCtr}    & If the IT device is equipped with GPS technology, then the system must suggest to the users the area in which they are during the registration phase. In any case, the final decision will be up to the registering user.\\\hline  
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must allow the users to change their location.\\\hline
+    R\arabic{RequirementCtr}    & \textcolor{red}{DELETE} The system must allow the users to change their location.\\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation systems and soil humidity sensors.\\\hline
     \stepcounter{RequirementCtr}
@@ -560,8 +560,6 @@ Users that want full functionalities have to have a GPS system on their device i
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr} & The system shall allow users to be identified by an email of their choosing.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr} & The system shall allow farmers to change their username, password, crop type and area.\\\hline
-    \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr} & The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area.\\\hline
     
 \end{longtable}
@@ -583,6 +581,8 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{pink!50}D13 & Devices external to the system (e.g. humidity sensors, water irriation systems, weather stations) are active and working properly for 99.9\% of the year\\\hline
             \cellcolor{SpringGreen!50}R1 & The system can be used only by regstered and logged-in users.\\\hline
             \cellcolor{SpringGreen!50}R4 & The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation system and soil humidity sensors.\\\hline
+            \cellcolor{SpringGreen!50}R5 & The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
+            \cellcolor{SpringGreen!50}R6 & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation\\\hline
         \end{tabular}
     \end{center}
 \end{table}
@@ -592,7 +592,7 @@ Users that want full functionalities have to have a GPS system on their device i
     \begin{center}
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
-             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Reach out to farmers in need of help\\\hline
+            \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Reach out to farmers in need of help\\\hline
             \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
             \cellcolor{pink!50}D4 & The internet connection works properly\\\hline
             \cellcolor{pink!50}D8 & Agronomists always reply to farmers requests of help \\\hline
@@ -600,7 +600,12 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{pink!50}D14 & Each Telangana's district has one and only one Agronomist\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R8 & The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
+            \cellcolor{SpringGreen!50}R9 & The system must notify Agronomists of unresolved requests of help from Farmers\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
+            %%NOT SURE ABOUT R14
+            \cellcolor{SpringGreen!50}R14 & The system must suggest to the Agronomists which farms to visit (among the ones in their area of competence) while planning the Daly Plan based upon the last visit day following a FIFO policy. Exceptions to the FIFO policy are the farms under-perfoming, which shall have higher priority.\\\hline
+            \cellcolor{SpringGreen!50}R18 & The system shall allow users to be identified by an email of their choosing\\\hline
+            \cellcolor{SpringGreen!50}R19 & The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area\\\hline
         \end{tabular}
     \end{center}
 \end{table}
@@ -620,6 +625,8 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{SpringGreen!50}R6 & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
             \cellcolor{SpringGreen!50}R7 & The system must let Farmers insert their production information every day.\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
+            \cellcolor{SpringGreen!50}R18 & The system shall allow users to be identified by an email of their choosing\\\hline
+            \cellcolor{SpringGreen!50}R19 & The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsability area\\\hline
         \end{tabular}
     \end{center}
 \end{table}
@@ -639,6 +646,8 @@ Users that want full functionalities have to have a GPS system on their device i
              \cellcolor{SpringGreen!50}R6 & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
              \cellcolor{SpringGreen!50}R7 & The system must let Farmers insert their production information every day.\\\hline
              \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
+             \cellcolor{SpringGreen!50}R18 & The system shall allow users to be identified by an email of their choosing\\\hline
+            \cellcolor{SpringGreen!50}R19 & The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsability area\\\hline
          \end{tabular}
     \end{center}
 \end{table}
@@ -660,6 +669,7 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
             \cellcolor{SpringGreen!50}R17 & The system must allow Policy Makers to retrive all agronomists' steering initiative reports uploaded to the database.\\\hline
+            \cellcolor{SpringGreen!50}R18 & The system shall allow users to be identified by an email of their choosing\\\hline
         \end{tabular}
     \end{center}
 \end{table}
@@ -673,9 +683,12 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{pink!50}D6 & Weather forecasts are accurate up to a 80\% for the short-term and up to 60\% on the long-term.\\\hline
             \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
+            \cellcolor{SpringGreen!50}R2 & If the IT device is equipped with GPS technology, then the system must suggest to the users the area in which they are during the registration phase. In any case, the final decision will be up to the registering user\\\hline
+            \cellcolor{SpringGreen!50}R3 & The system must allow the users to change their location\\\hline
             \cellcolor{SpringGreen!50}R10 & The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomists.\\\hline
             \cellcolor{SpringGreen!50}R11 & The system must present news concerning crop only if relevant to the Farmer's own crop type.\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
+            \cellcolor{SpringGreen!50}R18 & The system shall allow users to be identified by an email of their choosing\\\hline
         \end{tabular}
     \end{center}
 \end{table}
@@ -689,7 +702,8 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production.\\\hline
             \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity\\\hline
             \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
-            \cellcolor{SpringGreen!50}R7 & The system must let Farmers insert their production information every day.\\\hline
+            \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app\\\hline
+            \cellcolor{SpringGreen!50}R7 & The system must let Farmers insert their production information every day.\\\hline  
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
         \end{tabular}
     \end{center}
@@ -708,6 +722,7 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R8 & The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
             \cellcolor{SpringGreen!50}R9 & The system must notify Agronomists of unresolved requests for help from Farmers.\\\hline
+            \cellcolor{SpringGreen!50}R11 & The system must present news concerning crop only if relevant to the Farmer's own crop type\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
         \end{tabular}
     \end{center}
@@ -716,7 +731,7 @@ Users that want full functionalities have to have a GPS system on their device i
     \begin{center}
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
-             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Create and participate in discussions concerning the agricolture field\\\hline
+            \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Create and participate in discussions concerning the agricolture field\\\hline
             \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
             \cellcolor{pink!50}D4 & The internet connection works properly.\\\hline
             \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
@@ -755,7 +770,7 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{SpringGreen!50}R6 & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
             \cellcolor{SpringGreen!50}R10 & The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
             \cellcolor{SpringGreen!50}R12 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
-            \cellcolor{SpringGreen!50}R20 & The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area.\\\hline
+            \cellcolor{SpringGreen!50}R19 & The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area.\\\hline
         \end{tabular}
     \end{center}
 \end{table}
@@ -1322,11 +1337,8 @@ Users that want full functionalities have to have a GPS system on their device i
                     \cellcolor{SpringGreen!50}\textbf{7)View Farmers Ranking}\centering &  R1) The system must allow only registered and logged-in users to use the app.
 
                                                                                            R5) The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{8)Profile Edit}\centering &  R1) The system must allow only registered and logged-in users to use the app.
-
-                                                                                   R3) The system must allow the users to change their location.
+                    \cellcolor{SpringGreen!50}\textbf{8)Profile Edit}\centering &  R1) The system must allow only registered and logged-in users to use the app.\\\hline
                                 
-                                                                                   R19) The system shall allow farmers to change their username, password, crop type and area\\\hline
                     \cellcolor{SpringGreen!50}\textbf{9)Insert Production Data}\centering & R1) The system must allow only registered and logged-in users to use the app.
 
                                                                                   R7) The system must let Farmers insert their production information every day.
@@ -1374,7 +1386,7 @@ Users that want full functionalities have to have a GPS system on their device i
 
                                                                                        R6) The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.
                                                                                        
-                                                                                       R20) The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area.\\\hline
+                                                                                       R19) The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area.\\\hline
                     
         \end{longtable}
     
