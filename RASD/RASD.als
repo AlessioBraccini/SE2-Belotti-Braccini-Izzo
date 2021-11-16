@@ -1,26 +1,34 @@
+sig AppSystem{
+users: some User,
+externalData: some DataProvider
+}
+
 abstract sig User{
-userDevice : some SmartDevice
+userDevice : some SmartDevice,
+email: one String
 }{
 #userDevice > 0
 }
 sig PolicyMaker extends User{}
-abstract sig Farmer extends User{
+sig Farmer extends User{
 region: one District,
 userFarm : one Farm, //RASD: is it true?
-productionData: some ProductionData,
-helpRequests: some HelpRequest,
-replies: some HelpReply,
-forumDiscussions: some ForumTopic
+productionData: set ProductionData,
+helpRequests: set HelpRequest,
+helpReplies: set HelpReply,
+forumDiscussions: set ForumTopic
 }{
-#helpRequests >= #replies
+#helpRequests >= #helpReplies
 }
-//sig GoodFarmer extends Farmer{}
-//sig BadFarmer extends Farmer{}
+
 sig Agronomist extends User{
 region: one District,
-dailyPlan : some DailyPlan,
-dailyVisits: some Visit,
-requests: some HelpRequest
+dailyPlan : set DailyPlan,
+dailyVisits: set Visit,
+helpRequests: set HelpRequest,
+helpReplies: set HelpReply
+}{
+#helpRequests >= #helpReplies
 }
 
 abstract sig DataProvider{}
@@ -48,7 +56,7 @@ farm: one Farm
 }
 
 sig Forum{
-topics: some ForumTopic
+topics: set ForumTopic
 }
 sig ForumTopic{
 posts: some Post
@@ -58,8 +66,14 @@ user: one Farmer,
 date: one Date
 }
 abstract sig Message{}
-sig HelpRequest extends Message{}
-sig HelpReply extends Message{}
+sig HelpRequest extends Message{
+sender: one Farmer,
+receiver: one Agronomist
+}
+sig HelpReply extends Message{
+sender: one Agronomist,
+receiver: one Farmer
+}
 
 sig Farm{
 position : one Location,
@@ -67,7 +81,9 @@ cropType: one Crop
 }
 sig Location{}
 
-sig District{}
+sig District{
+manager: one Agronomist
+}
 sig Date{}
 
 sig SmartDevice{
@@ -78,15 +94,46 @@ sig GPS{}
 //-------UTILITIES-----
 
 //------usefulPREDICATES---
-pred isGoodFarmer[f: Farmer]{}
+//pred isGoodFarmer[f: Farmer]{}
 
 //-------FACTS-------
-//an agronomist insert a daily plan for each day
-fact planningDaily{
-//all a : Agronomist |
+fact oneRegistrationInOneRoleForEachUser{
+	all disj u1, u2: User | u1.email=u2.email
 }
 
-//production cropType is the same of the farm
+fact oneAgronomistOneDistrict{
+	all disj d1,d2: District | d1.manager!=d2.manager
+}
 
-//---------ASSERTIONS AND PREDICATES-----
+fact senderIsTheFarmer{
+	all f: Farmer | no m: Message | ((m in f.helpRequests) and m.sender!=f) 
+							or ((m in f.helpReplies) and m.receiver=f)
+}
 
+fact senderIsAgronomist{
+	all a: Agronomist | no m: Message | a.helpRequests=m and m.receiver!=a
+							or a.helpReplies=m and m.sender!=a
+}
+
+fact farmerSendMessageToAreaAgronomist{
+	all f: Farmer | all m: Message | (m in f.helpRequests)
+							implies (m.sender).region = (m.receiver).region
+}
+
+fact farmerReceiveMessageFromAreaAgronomist{
+	all f: Farmer | all m:Message | (m in f.helpReplies) implies (m.sender).region = (m.receiver).region
+}						
+
+
+// +an agronomist insert a daily plan from the day before to the same date (pred/assert)
+//fact planningDaily{
+//all a : Agronomist |
+//}
+
+// + interaction external data with application
+
+//message: check agronomist.area=farmer.area & 
+
+//+ production cropType is the same of the farm (pred/assert)
+
+//---------ASSERTIONS AND PREDICATES
