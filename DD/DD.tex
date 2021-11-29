@@ -75,6 +75,7 @@ This document also extends in part to the implementation and testing plan, where
     \item \textbf{UML}: Unified Modeling Language
     \item \textbf{GPS}: Global Positioning System
     \item \textbf{IT}: Information Technology
+    \item \textbf{GUI}: Graphic User Interface
 \end{itemize}
 \subsection{Revision history}
 
@@ -99,9 +100,56 @@ This document also extends in part to the implementation and testing plan, where
 
 
 \subsection{Overview}
+\begin{center}
+    \begin{figure}[H]
+        \includegraphics[scale=0.60, center]{assets/three-layer-architecture.png}
+        \caption{Three-Layer Architecture}
+        \label{fig: three-layer-architecture}
+    \end{figure}
+\end{center}
+
+The system is a distributed application that follow the common client-server paradigm.
+The architecture of the application is structured in three logic layers:
+\begin{itemize}
+    \item \textbf{Presentation Layer (P)}: it manages the presentation logic and handles the user actions.
+    It is characterized by a GUI (Graphic User Interface) that allow the user to interact with the application in a simple and effective way.
+    \item \textbf{Logic or Application Layer (A)}: it manages all the functionalities that has to be provided to the users, it is also responsible of data exchange between the client and the data sources.
+    \item \textbf{Data Layer (D)}: it manages the access to data sources, it gets data from the database and move them through the other layers.
+    It is essential to guarantee a high level of abstraction from the database in order to provide a model easy to use.
+\end{itemize}
+
+\begin{center}
+    \begin{figure}[H]
+        \includegraphics[scale=0.65, center]{assets/4-tier-architecture-scheme.jpg}
+        \caption{High Level Architecture}
+        \label{fig: high_level_architecture}
+    \end{figure}
+\end{center}
+
+The system is based on a four-tier architecture(Client, Web Server, Application Server and Database Server), this ensures more flexibility and scalability.
+The tiers are separated by firewalls in order to guarantee a higher level of security of the whole system.
+A thin client is used to prevent heavy computation load client side, all the heavy operations are executed at the server side.
+The client's devices can be a personal computer or a mobile device, both communicate directly with the application server through a web browser.
+The application server communicates with the database server to store data.
+For what concern the other components (water irrigation system, humidity sensors and weather forecasts system) they are connected to the web server that exchange data with the application server.
+This allow to retrieve data like weather forecasts directly from it in order to show them to the user.
+The web server also manages the data coming from the irrigation system and the humidity sensors.
+Finally, to enable the geolocalization, the application server use the API provided by Open Street Map.
+All the components will be described in depth in the following sections.
 
 \subsection{Component view}
+\subsubsection*{General Component View}
+% don't panic: this is just the first draft of the general component
+\begin{center}
+    \begin{figure}[H]
+        \includegraphics[scale=0.50, center]{assets/general-component-view.jpg}
+        \caption{General Component View}
+        \label{fig: general_component_view}
+    \end{figure}
+\end{center}
 
+\subsubsection*{Application Server Component View}
+% TODO: detailed component view 
 \subsection{Deployment view}
 
 \subsection{Runtime view}
