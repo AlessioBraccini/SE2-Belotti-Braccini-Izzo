@@ -79,13 +79,13 @@ The user base is expected to include a large part of Telangana's population, bri
 \end{enumerate}
 \underline{Telangana's policy makers}
 \begin{enumerate}
-    \item \textbf{(\stepcounter{goalCtr}G\arabic{goalCtr}) Identification of well-performing farmers}\\
+    \item \textbf{(\stepcounter{goalCtr}G\arabic{goalCtr}) Identification of well-performing  and under-performing farmers}\\
     Main goal of the policy makers is to identify farmers that are resilient to meteorological adverse events.
     This can be done comparing the productivity ratio defined as the produced amount per product in adverse condition over the amount in standard conditions.
     This farmers will receive special incentives and will be asked to help other farmers 
     with useful practices.
-    \item \textbf{(\stepcounter{goalCtr}G\arabic{goalCtr}) Identification of bad-performing farmers}\\
-    Identify farmers that are performing badly in order to seek the help for them to get back on track. In fact, they are the ones that need to be helped by the well-performing farmers.
+
+    Identify farmers that are performing badly in order to seek the help for them to get back on track. In fact, they are the ones that need to be helped by the agronomists and policy makers.
     \item \textbf{(\stepcounter{goalCtr}G\arabic{goalCtr}) Visualize the results of steering initiatives}\\
     Visualize and evaluate the results produced by the steering initiatives from agronomists and good farmers in order to assess which are resulting useful and actually improving the food production system, so that those practices can be applied on a larger scale.
 \end{enumerate}
@@ -225,7 +225,7 @@ The user base is expected to include a large part of Telangana's population, bri
     \item Alloy documentation: https://alloytools.org/documentation.html
     \item UML documentation: https://www.uml-diagrams.org/
     \item BPMN documentation: https://www.bpmn.org/
-    \item Paper: "The World and the Machine" by M. Jackson and P. Zave
+    \item Paper: "The World and the Machine" by M. Jackson and P. Zave   
 \end{itemize}
 
 \subsection{Document structure}
@@ -390,6 +390,8 @@ There are four types of data:
     Acquired by the water irrigation system installed in the farms, the only significant value is the amount of water used by the system during the day.
     \item \textbf{Production data}\\
     Provided by the farmers, this type of data is displayed as a table that maps the type of cultivated product to the sown amount and the respective harvested quantity.
+    \item \textbf{Report}\\
+    Reports are written by Agronomists whenever they lead a new initiatives aiming to better the results of cultivation in their area. The reports include a detailed explanation of the content of the initiative and the feedback they've been collecting since their attuation.
 \end{itemize}
 \begin{center}
     \begin{figure}[H]
@@ -413,8 +415,8 @@ There are four types of data:
 \end{itemize}
 \subsubsection{Policy makers functions}
 \begin{itemize}                                 
-    \item \textbf{Visualize relevant data and initiative: }let the policy makers know a variety of data like the performances of the farmers by grouping them in a rank to know who are the farmers that are performing well and who are the worst one mainly based upon the production data provided by them.
-    Policy makers can also visualize the steering iniziatives presented by the agronomist in a specific subsection of their application.
+    \item \textbf{Visualize relevant data and initiatives: }let the policy makers know a variety of data like the performances of the farmers by grouping them in a rank to know who are the farmers that are performing well and who are the worst one mainly based upon the production data provided by them.
+    Policy makers can also visualize the steering iniziatives presented by the agronomists' reports that are collected into a specific subsection of their application.
 \end{itemize}
 \subsubsection{Farmers functions}
 \begin{itemize}
@@ -480,9 +482,9 @@ The application has been thought for the three different user categories that fo
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Agronomists periodically report their initiatives to the central government.
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Users own an IT device to connect to the application
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Devices external to the system (e.g. humidity sensors, water irrigation systems, weather stations) are active and working properly for 99.9\% of the year
-    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Each Telangana's district has one and only one Agronomist
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Each Telangana's district has one and only one Agronomist\footnotemark[\value{footnote}]
 \end{itemize}
-\footnotetext{This constraint is purposely stronger than what it could be in order to simplify a future implementation of the prototype that won't allow local storaging of data while the device is not connected to internet. It could be relaxed in a further release of the application.}
+\footnotetext{This constraint is purposely stronger than what it could be in order to simplify a future implementation of the prototype (e.g. it won't allow local storaging of data while the device is not connected to internet, just one agronomist per district, etc.). It could be relaxed in a further release of the application.}
 \newpage
 \section{Specific Requirements}
 
@@ -520,7 +522,7 @@ Users that want full functionalities have to have a GPS system on their device i
 \newcounter{RequirementCtr}
 \rowcolors{2}{}{PineGreen!25}
 \begin{longtable}{|c|p{0.69\textwidth}|}
-    \hline %this line gives a warning but it's the longtable that's bugged
+    \hline
     \textbf{ID} & \textbf{Requirement}\\ \hline\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must allow only registered and logged-in users to use the app.\\\hline
@@ -580,7 +582,7 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R2 & The system shall allow users to be identified by an email of their choosing\\\hline
             \cellcolor{SpringGreen!50}R4 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
-            \cellcolor{SpringGreen!50}R/ & The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
+            \cellcolor{SpringGreen!50}R7 & The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
             \cellcolor{SpringGreen!50}R10 & The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
             \cellcolor{SpringGreen!50}R12 & The system must notify Agronomists of unresolved requests of help from Farmers\\\hline      
             \cellcolor{SpringGreen!50}R14 & The system must suggest to the Agronomists which farms to visit (among the ones in their area of competence) while planning the Daly Plan based upon the last visit day following a FIFO policy. Exceptions to the FIFO policy are the farms under-perfoming, which shall have higher priority.\\\hline
@@ -593,7 +595,7 @@ Users that want full functionalities have to have a GPS system on their device i
     \begin{center}
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
-            \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Identification of well-performing farmers\\\hline
+            \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Identification of well-performing and under-performing farmers\\\hline
             \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
             \cellcolor{pink!50}D4 & The internet connection works properly when the application is being used\\\hline
             \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production\\\hline
@@ -610,26 +612,6 @@ Users that want full functionalities have to have a GPS system on their device i
     \end{center}
 \end{table}
 
-\begin{table}[H]
-    \begin{center}
-        \begin{tabular}{|c | p{0.69\textwidth}|}
-            \hline
-             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Identification of under-performing farmers\\\hline
-             \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
-             \cellcolor{pink!50}D4 & The internet connection works properlu\\\hline
-             \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production\\\hline
-             \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity.\\\hline
-             \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
-             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
-             \cellcolor{SpringGreen!50}R2 & The system shall allow users to be identified by an email of their choosing\\\hline
-             \cellcolor{SpringGreen!50}R4 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
-             \cellcolor{SpringGreen!50}R7 & The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
-             \cellcolor{SpringGreen!50}R8 & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
-             \cellcolor{SpringGreen!50}R9 & The system must let Farmers insert their production information every day.\\\hline
-            \cellcolor{SpringGreen!50}R17 & The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsability area\\\hline
-         \end{tabular}
-    \end{center}
-\end{table}
 \begin{table}[H]
     \begin{center}
         \begin{tabular}{|c | p{0.69\textwidth}|}
@@ -729,6 +711,7 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
             \cellcolor{pink!50}D14 & Each Telangana's district has one and only one Agronomist\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
+            \cellcolor{SpringGreen!50}R4 & If users are experimenting connectivity issues, the system must inform them to try later.\\\hline
             \cellcolor{SpringGreen!50}R10 & The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
             \cellcolor{SpringGreen!50}R12 & The system must notify Agronomists of unresolved requests for help from the Farmers.\\\hline
         \end{tabular}
@@ -1562,8 +1545,8 @@ Users that want full functionalities have to have a GPS system on their device i
 
 
 \subsection{Performance Requirements}
-The majority of the user base will be represented by the farmers that cover the 58\% of the entire population of Telengana, while the number of policy-maker and agronomist users is irrelevant.
-According to Unique Identification Aadhar India the Telangana population in 2021 is estimated to be 39.9 million.
+The majority of the user base will be represented by the farmers that cover the 58\% \cite{specification} of the entire population of Telengana, while the number of policy-maker and agronomist users is irrelevant.
+According to Unique Identification Aadhar India, Telangana population in 2021 is estimated to be 39.9 million\cite{population}.
 This means that the system is expected to be widely adopted with the registration of millions of users just in the first year.
 Also the average workload of the system is expected to be high, the goal is to guarantee the simultaneous connection of at least 2 millions of individuals.
 A mid-term goal could be to improve the scalability of the system in order to guarantee an efficient service to all users.
@@ -1571,8 +1554,7 @@ Finally the system should have a good response time, less than 3 seconds is reas
 \subsection{Design Constraints}
 
 \subsubsection{Standards compliance}
-DREAM's user data must be treated respecting the law according to the PDPA.
-All hardware devices distributed all over the territory (sensors) must comply the CE safety standards.
+DREAM's user data must be treated respecting the law according to the PDPA\cite{pdpa}.
 \subsubsection{Hardware limitations}
 The software is designed to enhance the portability, in fact it is enough to have a device with a stable internet connection.
 In order to use the application correctly it is required to have a device equipped with GPS.
@@ -1635,6 +1617,8 @@ The system is designed to work on different operating systems like Windows, MacO
 All main browsers are supported.
 \newpage
 \section{Formal Analysis using Alloy}
+
+
 \section{Effort Spent}
     \begin{tabular}{| c || c | c| c| c |}
         \hline
@@ -1646,4 +1630,18 @@ All main browsers are supported.
     \end{tabular}
 
 \section{References}
+
+\begin{thebibliography}{9}
+    \bibitem{specification}
+    Software Engineering 2,
+    \emph{Requirement Engineering and Design Project: goal, schedule and rules}, A.Y. 2021-2022.
+
+    \bibitem{population}
+    \url{https://www.populationu.com/in/telangana-population}
+
+    \bibitem{pdpa}
+    \url{https://en.wikipedia.org/wiki/Personal_Data_Protection_Bill,_2019}
+
+\end{thebibliography}
+
 \end{document}
