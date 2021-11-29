@@ -1,0 +1,130 @@
+\documentclass[table, 12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{float}
+\usepackage[export]{adjustbox}
+\usepackage{longtable}
+
+\hyphenation{Te-lan-ga-na}
+\hyphenation{an-a-lys-ing}
+\hyphenation{a-gron-o-mists}
+\hyphenation{a-gron-o-mist}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+
+\begin{document}
+\begin{titlepage}
+    \centering
+    {\scshape\large AY 2021/2022 \par}
+    \vfill
+    \includegraphics[width=100pt]{assets/logo-polimi-new}\par\vspace{1cm}
+    {\scshape\LARGE Politecnico di Milano \par}
+    \vspace{1.5cm}
+    {\huge\bfseries DD\@: Design Document \par}
+    \vspace{2cm}
+    {\Large {Ottavia Belotti\quad Alessio Braccini\quad Riccardo Izzo}\par}
+    \vfill
+    {\large Professor\par
+        Elisabetta \textsc{Di Nitto}}
+    \vfill
+    {\large \textbf{Version 1.0}\\ \today \par}
+\end{titlepage}
+
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+\thispagestyle{plain}
+\pagenumbering{gobble}
+\mbox{}
+\newpage
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+\section{Introduction}
+
+
+\subsection{Purpose}
+The purpose of this document is to provide a full technical description of the system described in the RASD document.
+In this design document we discuss about both hardware and software architectures in terms of interaction among the components that represent the system.
+Moreover there are mentions about the implementation, testing and integration process.
+This document will include technical language so is primarily addressed to programmers but stakeholders are also invited to read it in order to understand the characteristics of the project.
+
+\subsection{Scope}
+The scope of this design document is to define the behavior of the system in both general and critical cases, and to design the architecture of the system by describing
+logical allocation of the components and the interaction between them.
+This document also extends in part to the implementation and testing plan, where one possible course of action is explained, user interface design of user applications and requirements traceability relating to the RASD.
+\subsection{Definitions, acronyms, abbreviations}
+\subsubsection*{Acronyms}
+\begin{itemize}
+    \item \textbf{DREAM}: \emph{Data-driven predictive farming}
+    \item \textbf{RASD}: Requirement Analysis and Specification Document
+    \item \textbf{DD}: Design Document
+    \item \textbf{API}: Application Programming Interface
+    \item \textbf{DBMS}: Database Management System
+    \item \textbf{UML}: Unified Modeling Language
+    \item \textbf{GPS}: Global Positioning System
+    \item \textbf{IT}: Information Technology
+\end{itemize}
+\subsection{Revision history}
+
+\subsection{Reference documents}
+\begin{itemize}
+    \item Specification document: "Assignment RDD AY 2021-2022"
+    \item Requirements Analysis Specification Document (RASD)
+    \item UML documentation: https://www.uml-diagrams.org/
+    \item ArchiMate documentation: https://pubs.opengroup.org/architecture/archimate3-doc/
+    \item Slides of the lectures
+\end{itemize}
+\subsection{Document structure}
+\begin{itemize}
+    \item \textbf{Section 1} gives a brief description of the design document, it describes the purpose and the scope of it including all the definitions, acronyms and abbreviations used. 
+    \item \textbf{Section 2} delves deeply into the system architecture by providing a detailed description of the components, the interfaces and all the technical choices made for the development of the application.
+    It also includes detailed sequence, component and ArchiMate diagrams that describes in depth the system.
+    \item \textbf{Section 3} contains a complete description of the user interface, it includes all the client-side mockups with some graphs useful to understand the correct execution flow.
+    \item \textbf{Section 4} links the RASD and the DD, it maps the goals and the requirements described in the RASD to the actual functionalities presented in this DD.
+    \item \textbf{Section 5} presents a description of the implementation, testing and integration phases of the system components.
+\end{itemize}
+\section{Architectural Design}
+
+
+\subsection{Overview}
+
+\subsection{Component view}
+
+\subsection{Deployment view}
+
+\subsection{Runtime view}
+
+\subsection{Component interfaces}
+
+\subsection{Selected architectural styles and patterns}
+
+\subsection{Other design decisions}
+
+\section{User Interface Design}
+
+
+\section{Requirements Traceability}
+
+
+\section{Implementation, Integration and Test Plan}
+
+
+\section{Effort Spent}
+
+
+\section{References}
+
+
+\end{document}
