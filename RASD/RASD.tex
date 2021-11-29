@@ -1617,13 +1617,24 @@ The system is designed to work on different operating systems like Windows, MacO
 All main browsers are supported.
 \newpage
 \section{Formal Analysis using Alloy}
+\subsection{Formal Analysis Purpose}
+The following analysis aims to formally prove the correctness of the system model by exploiting Alloy verification tool. To achieve so, we test the model by checking if some of the previous defined goals are met. 
 
+Specifically, we stress:
+\begin{itemize}
+    \item \textbf{(G3) Visualize the result of steering initiatives}: it is modelled as an assertion that checks the ability of the system to retrieve all the reports written by the agronomists and present them to each policy maker. %NOT TRUE ANYMORE: CREATE A PRED/ASSERT
+    \item \textbf{(G4) Visualize relevant data for the farmer business}: the goal is checked by asserting that if and only if there's a news concerning some crop type \textit{x} or a certain area \textit{y}, then the system will present it to all the farmers growing crop type \textit{x} or working in area \textit{y}.
+    \item \textbf{(G6) Request for help/suggestions}: 
+    \item \textbf{(G7) Create and participate in discussions concerning the agricolture field}: through two assertions. we make sure that every farmer can create a new topic in the Forum as long as he/she belong to the system and can also join discussions already started by anyone else.
+\end{itemize}
+
+\subsection{Alloy Code}
 
 \section{Effort Spent}
     \begin{tabular}{| c || c | c| c| c |}
         \hline
         Student & Time for S.1 & S.2 & S.3 & S.4 \\ \hline
-        Ottavia Belotti & 2.5h & 5h & 10.5h & 3h \\
+        Ottavia Belotti & 2.5h & 5h & 10.5h & 4h \\
         Alessio Braccini & 2h & 4h & 12h & ? \\
         Riccardo Izzo & 2h & 3h & 11h & ? \\
         \hline
