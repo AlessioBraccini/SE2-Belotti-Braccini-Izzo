@@ -186,18 +186,31 @@ fact senderOfHelpReplyIsAgronomist{
 }
 
 fact farmerSendMessageToAreaAgronomist{
-	all f: Farmer, m: Message | (m in f.helpRequests)
-							implies (m.sender).region = (m.receiver).district
+	all f: Farmer, m: Message |  (m in f.helpRequests) 
+			implies (m.sender).region = (m.receiver).district
+								
 }
 
 fact farmerReceiveMessageFromAreaAgronomist{
-	all f: Farmer, m: Message | (m in f.helpReplies) implies (m.sender).district = (m.receiver).region
-}						
+	all f: Farmer, m: Message | one a: Agronomist | (m in f.helpReplies) 
+		iff ((m.sender).district = (m.receiver).region
+				and m in a.helpReplies)	
+}
+
+fact{
+	all m: HelpReply | one a: Agronomist | m.sender=a iff m in a.helpReplies
+}
+
+fact{
+	all m: HelpRequest | one f: Farmer | m.sender=f iff m in f.helpRequests
+}	
+	
 
 fact agronomistMustRespond{
 	all m: HelpRequest,  a: Agronomist | one f: Farmer, m1: HelpReply | 
-		m in a.helpRequests implies (m1 in (a.helpReplies & f.helpReplies)
-			and m1.sender = m.receiver and m1.receiver = m.sender)
+		(m1 in (a.helpReplies & f.helpReplies) 
+		and m1.sender = m.receiver and m1.receiver = m.sender) 
+		implies m in a.helpRequests
 }
 
 fact visitOnlyInTheArea{
@@ -244,6 +257,11 @@ fact newsType{
 	all n: News | #n.cropType > 0 or #n.area > 0
 }
 
+fact ifNewsRelevantThenShow{
+	all n: News, f: Farmer | (f.userFarm.cropType in n.cropType or f.userFarm.region in n.area) 
+		iff n in f.relevantNews
+}
+
 //+ goal: ranking (precedences on harvested/sown)
 fact eachFarmerInRanking{
 	all r: FarmerRanking | all f: Farmer | f in r.entries.user
@@ -276,7 +294,7 @@ fact forumTopicNameUniqueness{
 //---------ASSERTIONS AND PREDICATES
 
 //G5. 
-assert allSteeringInitiativesAreReceivedByPC{
+fact allSteeringInitiativesAreReceivedByPC{
 	all pc: PolicyMaker | all a:Agronomist | a.reports in pc.reports 
 }
 
@@ -293,12 +311,12 @@ assert relevantNewsForFarmer{
 
 //G9. Create and participate in forum discussions
 assert createADiscussion{
-	all sys: AppSystem | all t: ForumTopic | t in sys.forum.topics iff (t.creator in sys.users)
+	all sys: AppSystem | all t: ForumTopic | t in sys.forum.topics implies (t.creator in sys.users)
 }
 
 assert joinADiscussion{
 	all sys: AppSystem | all t: ForumTopic, p: Post | (t in sys.forum.topics and p in t.posts)
-					iff (p.user in sys.users)
+					implies (p.user in sys.users)
 }
 
 //G8. Request for help/suggestions
@@ -327,7 +345,7 @@ pred show {
 #FarmerRanking > 0
 }
 
-check allSteeringInitiativesAreReceivedByPC for 10
+//check allSteeringInitiativesAreReceivedByPC for 10
 check relevantNewsForFarmer for 10
 check createADiscussion for 10
 check joinADiscussion for 10
