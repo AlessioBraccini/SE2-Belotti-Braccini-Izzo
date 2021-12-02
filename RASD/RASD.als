@@ -5,10 +5,11 @@ forum: one Forum
 }
 
 sig string{}
+sig Email{}
 
 abstract sig User{
 userDevice : some SmartDevice,
-email: one string,
+email: one Email,
 //password: one string,
 //name: one string,
 //surname: one string,
@@ -17,7 +18,8 @@ email: one string,
 }
 
 sig PolicyMaker extends User{
-reports: set Report
+reports: set Report,
+statisticData: set DataProvider
 }
 
 sig Farmer extends User{
@@ -27,7 +29,8 @@ productionData: disj set ProductionData,
 helpRequests: disj set HelpRequest,
 helpReplies: disj set HelpReply,
 forumDiscussions: disj set ForumTopic,
-relevantNews: disj set News
+relevantNews: disj set News,
+weatherForecast: set WeatherForecast
 }{
 #helpRequests >= #helpReplies
 }
@@ -43,7 +46,10 @@ reports: disj set Report
 #helpRequests >= #helpReplies
 }
 
-abstract sig DataProvider{}
+abstract sig DataProvider{
+dateOfMeasure: one Date,
+location: one Location
+}
 sig SoilSensor extends DataProvider{}
 sig IrrigationSystem extends DataProvider{}
 sig WeatherForecast extends DataProvider{}
@@ -54,8 +60,8 @@ harvestedQty: one Int,
 cropType: one Crop,
 date: one Date
 }{
-#sownQty >= 0
-#harvestedQty >= 0
+harvestedQty >= 0
+sownQty > 0
 }
 
 sig Crop{}
@@ -87,7 +93,7 @@ topics: set ForumTopic
 }
 sig ForumTopic{
 name: one string,
-creator: one User,
+creator: one Farmer,
 posts: disj some Post
 }
 sig Post{
@@ -121,11 +127,13 @@ score.leftPart >= 0
 sig Farm{
 owner: one Farmer,
 position : one Location,
-region: one District,
 cropType: one Crop
 }
-sig Location{}
-
+//geographical location
+sig Location{
+region: one District
+}
+//political location
 sig District{
 manager: one Agronomist
 }
@@ -152,11 +160,14 @@ fun isGreater[f1,f2: Float] : lone Float{
 }
 
 //------usefulPREDICATES---
-//pred isGoodFarmer[f: Farmer]{}
 
 //-------FACTS-------
 fact emailUniqueness{
 	no disj u1,u2: User | u1.email=u2.email
+}
+
+fact deviceUniqueness{
+	all disj u1,u2: User | all d: SmartDevice | d in u1.userDevice implies d not in u2.userDevice
 }
 
 fact allFarmerInAppSys{
@@ -247,7 +258,7 @@ fact forumCreatorisFarmer{
 
 //message: check agronomist.area=farmer.area & 
 
-//+ production cropType is the same of the farm
+//production cropType is the same of the farm
 fact prodCropTypeSameAsFarm{
 	all f: Farmer | all prodData: ProductionData | f.productionData=prodData 
 							implies prodData.cropType = f.farm.cropType
@@ -258,7 +269,8 @@ fact newsType{
 }
 
 fact ifNewsRelevantThenShow{
-	all n: News, f: Farmer | (f.userFarm.cropType in n.cropType or f.userFarm.region in n.area) 
+	all n: News, f: Farmer | (f.userFarm.cropType in n.cropType 
+			or f.userFarm.position.region in n.area) 
 		iff n in f.relevantNews
 }
 
@@ -274,10 +286,6 @@ fact ranking{
 			or (e2.score = max iff e1.rank > e2.rank)) 
 }
 
-//fact rankUniqueness{
-//	no e1, e2: RankEntry | all r: FarmerRanking | e1.rank = e2.rank and ({(e1), (e2)} in r
-//}
-
 
 //fact differentFarmerForRankEntries{
 //	all r:FarmerRanking | no disj e1,e2: RankingEntry | (e1 in r) and (e2 in r) and e1.user=e2.user
@@ -287,29 +295,57 @@ fact allForumTopicInForum{
 	all f: Forum, t: ForumTopic | t in f.topics
 }
 
+fact ifFarmerPostThenJoinDiscussion{
+	all p: Post, t: ForumTopic | p in t.posts iff t in p.user.forumDiscussions
+}
+
 fact forumTopicNameUniqueness{
 	no disj t1,t2: ForumTopic | t1.name = t2.name
 }
 
-//---------ASSERTIONS AND PREDICATES
+fact weatherRelevantToFarmer{
+	all f: Farmer | one w: WeatherForecast | w in f.weatherForecast iff w.location.region = f.region
+}
 
-//G5. 
+fact locationUniquenessForSoilData{
+	no disj d1, d2: SoilSensor | d1.location = d2.location and d1.dateOfMeasure = d2.dateOfMeasure 
+}
+
+fact locationUniquenessForWaterData{
+	no disj d1, d2: IrrigationSystem | d1.location = d2.location and d1.dateOfMeasure = d2.dateOfMeasure
+}
+
+fact locationUniquenessForWeatherForecast{
+	no disj d1,d2: WeatherForecast | d1.location = d2.location and d1.dateOfMeasure = d2.dateOfMeasure
+}
+
+fact weatherRelevantForFarmer{
+	all u: Farmer, w: WeatherForecast | w in u.weatherForecast iff w.location = u.userFarm.position
+}
+
+fact locationUniquenessOfFarms{
+	no disj f1, f2: Farm | f1.position = f2.position
+}
+
+//---------ASSERTIONS AND PREDICATES--------
+
+//G3. Visualize the results of steering initiatives
 fact allSteeringInitiativesAreReceivedByPC{
 	all pc: PolicyMaker | all a:Agronomist | a.reports in pc.reports 
 }
 
-//G6. Visualize relevant data for the farmer business
+//G4. Visualize relevant data for the farmer business
 assert relevantNewsForFarmer{
 	all f: Farmer, n: News | n in f.relevantNews iff ((f.userFarm.cropType in n.cropType)
-						or (f.userFarm.region in n.area))
+						or (f.userFarm.position.region in n.area))
 }
 
-//G7. Keep track of the production
+//G. Keep track of the production
 //pred farmerCanInsertProdEntry{
 //	all f: Farmer | 
 //}
 
-//G9. Create and participate in forum discussions
+//G7. Create and participate in forum discussions
 assert createADiscussion{
 	all sys: AppSystem | all t: ForumTopic | t in sys.forum.topics implies (t.creator in sys.users)
 }
@@ -319,7 +355,7 @@ assert joinADiscussion{
 					implies (p.user in sys.users)
 }
 
-//G8. Request for help/suggestions
+//G6. Request for help/suggestions
 pred requestHelpAndGetResponseP[f: Farmer, hm: HelpRequest, a: Agronomist, hp: HelpReply]{
 	(hm in f.helpRequests) implies (hm in a.helpRequests and hp in (f.helpReplies & a.helpReplies)
 			and hp.sender = a and hp.sender = hm.receiver 
@@ -333,7 +369,7 @@ assert requestHelpAndGetResponse{
 			and hp.receiver = f and hp.receiver = hm.sender and a.district=f.region)
 }
 
-//G10. Receive Requests of help all in one place
+//G8. Receive Requests of help all in one place
 
 //G11. Visualize area statistics
 
@@ -353,5 +389,11 @@ check requestHelpAndGetResponse for 5
 
 run requestHelpAndGetResponseP for 5
 run show for 3 but 1 AppSystem
+
+run show{
+#ForumTopic > 1
+#Farmer > 1
+#Post > 1
+}
 
 
