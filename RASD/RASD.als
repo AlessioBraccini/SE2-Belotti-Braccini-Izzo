@@ -1,7 +1,10 @@
 one sig AppSystem{
 users: some User,
 externalData: some DataProvider,
-forum: one Forum
+forum: one Forum,
+farmerRanking: one FarmerRanking
+}{
+	all r: FarmerRanking | r = farmerRanking
 }
 
 sig string{}
@@ -46,6 +49,12 @@ reports: disj set Report
 #helpRequests >= #helpReplies
 }
 
+sig Farm{
+owner: one Farmer,
+position : one Location,
+cropType: one Crop
+}
+
 abstract sig DataProvider{
 dateOfMeasure: one Date,
 location: one Location
@@ -55,6 +64,7 @@ sig IrrigationSystem extends DataProvider{}
 sig WeatherForecast extends DataProvider{}
 
 sig ProductionData{
+farm: one Farm,
 sownQty: one Int,
 harvestedQty: one Int,
 cropType: one Crop,
@@ -66,23 +76,22 @@ sownQty > 0
 
 sig Crop{}
 
-sig News{
-cropType: set Crop,
-area: set District
-}
-
+//set of farms that the Agronomist plan to visit for the date visitDate
 sig DailyPlan{
 farmsToVisit : disj some Farm,
 visitDate : one Date,
 insertionDate : one Date
 }{
 }
+
 sig Report{
 author: one Agronomist
 }{
 all a:Agronomist | this in a.reports iff author=a
 }
 
+//visits actually done by an Agronomist: can be the same foreseen by the dailyPlan or not
+//because an Agronomist can make deviations on his/her dailyPlan (new farms, skipping farm, etc.)
 sig Visit{
 date: one Date,
 farm: one Farm
@@ -99,6 +108,11 @@ posts: disj some Post
 sig Post{
 user: one Farmer,
 date: one Date
+}
+
+sig News{
+cropType: set Crop,
+area: set District
 }
 
 abstract sig Message{}
@@ -120,27 +134,22 @@ score: one Float,
 rank: one Int
 }{
 rank > 0
-//is ranking daily or annual? 
 score.leftPart >= 0
 }
 
-sig Farm{
-owner: one Farmer,
-position : one Location,
-cropType: one Crop
-}
-//geographical location
+//Geographical location (coordinates)
 sig Location{
 region: one District
 }
-//political location
+//Political location
 sig District{
 manager: one Agronomist
 }
+
 sig Date{}
 
 sig SmartDevice{
-localizationActive : lone GPS
+//localizationActive : lone GPS
 }
 sig GPS{}
 
@@ -159,19 +168,20 @@ fun isGreater[f1,f2: Float] : lone Float{
 				or (f1.leftPart = f2.leftPart and f1.rightPart < f2.rightPart)))}
 }
 
-//------usefulPREDICATES---
-
 //-------FACTS-------
+
+//Since email will be the username to access the profile, email must be unique
 fact emailUniqueness{
 	no disj u1,u2: User | u1.email=u2.email
 }
 
+//A device cannot be owned by different users
 fact deviceUniqueness{
 	all disj u1,u2: User | all d: SmartDevice | d in u1.userDevice implies d not in u2.userDevice
 }
 
-fact allFarmerInAppSys{
-	all f: Farmer, sys: AppSystem | f in sys.users
+fact allUserInAppSys{
+	all u: User, sys: AppSystem | u in sys.users
 }
 
 fact oneAgronomistOneDistrict{
@@ -184,6 +194,11 @@ fact oneFarmOneFarmer{
 
 fact ownerFarm{
 	no disj f1, f2: Farmer | all farm: Farm | farm.owner = f1 and f2.userFarm = farm
+}
+
+fact ownerOfProductionData{
+	all p: ProductionData | one f: Farm, u: Farmer | 
+		p.farm = f and f.owner = u iff p in u.productionData
 }
 
 fact senderOfHelpRequestIsTheFarmer{
@@ -224,39 +239,55 @@ fact agronomistMustRespond{
 		implies m in a.helpRequests
 }
 
-fact visitOnlyInTheArea{
+fact planToVisitOnlyInTheArea{
 	all a: Agronomist | no dP: DailyPlan, f: Farm | a.dailyPlan=dP and (f in dP.farmsToVisit)
 							and f.region!=a.district
+}
+
+fact allVisitedFarmsAreInAgroDistrict{
+	all v: Visit | one a: Agronomist | v in a.dailyVisits and v.farm.position.region = a.district
+}
+
+fact allDailyPlansAreFromAgronomist{
+	all d: DailyPlan | one a:Agronomist | d in a.dailyPlan 
+}
+
+//An Agronomist cannot plan two different daily plan for the same day
+fact noDifferentDailyPlansWithSameVisitDate{
+	all a: Agronomist | no disj dp1, dp2: DailyPlan | (dp1 + dp2) in a.dailyPlan
+		and dp1.visitDate = dp2.visitDate
 }
 
 
 fact allVisitOfAgroAreInSameArea{
 	no disj v1,v2: Visit | all a: Agronomist | v1 in a.dailyVisits and v2 in a.dailyVisits 
-					and v1.farm.region!=v2.farm.region and v1.farm.region!=a.district
+					and v1.farm.location.region!=v2.farm.location.region 
+					and v1.farm.location.region!=a.district
 }
 
+//All the farms planned by an Agronomist in his/her daily plan must be 
+//in the area of competence of Agronomist
+fact allPlannedFarmInAgroArea{
+	all f: Farm | all dP: DailyPlan, a: Agronomist | dP in a.dailyPlan and f in dP.farmsToVisit
+		implies f.position.region = a.district
+}
+
+//An agronomist cannot visit the same farm more than once a day
 fact noMoreThanOneVisitToTheSameFarmADay{
-	all a: Agronomist, disj v1, v2: Visit | no f1,f2: Farm | v1 in a.dailyVisits and v2 in a.dailyVisits
-					and f1=v1.farm and f2=v2.farm and f1=f2
+	all a: Agronomist, disj v1, v2: Visit | no f: Farm | v1 in a.dailyVisits and v2 in a.dailyVisits
+					and f=v1.farm and f=v2.farm
 }
 
-fact allFarmsInDPSameArea{
+//All the farms planned in a dailyPlan must be in the same Telangana's district
+fact allFarmsInDpSameArea{
 	no disj f1, f2: Farm | all dP: DailyPlan | f1 in dP.farmsToVisit and f2 in dP.farmsToVisit 
 								and f1.region!=f2.region
 }
 
-fact forumCreatorisFarmer{
-	no t: ForumTopic | t.creator not in Farmer
+//Interaction between external data and the application
+fact allExternalDataInSys{
+	all d: DataProvider | one s: AppSystem | d in s.externalData
 }
-
-//a user can't be registered as different
-//fact userCanHaveJustOneRole{
-//	all sys: AppSystem | none = ...
-//}
-
-// + interaction external data with application
-
-//message: check agronomist.area=farmer.area & 
 
 //production cropType is the same of the farm
 fact prodCropTypeSameAsFarm{
@@ -264,17 +295,19 @@ fact prodCropTypeSameAsFarm{
 							implies prodData.cropType = f.farm.cropType
 }
 
+//a news must have at least one of the two: a concerned cropType or a concerned area
 fact newsType{
 	all n: News | #n.cropType > 0 or #n.area > 0
 }
 
+//all relevant news to the farmer (same CropType or same Area) must be shown to him/her
 fact ifNewsRelevantThenShow{
 	all n: News, f: Farmer | (f.userFarm.cropType in n.cropType 
 			or f.userFarm.position.region in n.area) 
 		iff n in f.relevantNews
 }
 
-//+ goal: ranking (precedences on harvested/sown)
+//Ranking (precedences on harvested/sown)
 fact eachFarmerInRanking{
 	all r: FarmerRanking | all f: Farmer | f in r.entries.user
 }
@@ -287,22 +320,27 @@ fact ranking{
 }
 
 
-//fact differentFarmerForRankEntries{
-//	all r:FarmerRanking | no disj e1,e2: RankingEntry | (e1 in r) and (e2 in r) and e1.user=e2.user
-//}
-
+//Topics in Forum and discussions
 fact allForumTopicInForum{
 	all f: Forum, t: ForumTopic | t in f.topics
 }
 
+
+//If a farmer is posting on a discussion, then he/she's joining it
 fact ifFarmerPostThenJoinDiscussion{
 	all p: Post, t: ForumTopic | p in t.posts iff t in p.user.forumDiscussions
+}
+
+fact topicCreatorsAlsoJoinDiscussion{
+	all t: ForumTopic | t in t.creator.forumDiscussions
 }
 
 fact forumTopicNameUniqueness{
 	no disj t1,t2: ForumTopic | t1.name = t2.name
 }
 
+
+//External data facts
 fact weatherRelevantToFarmer{
 	all f: Farmer | one w: WeatherForecast | w in f.weatherForecast iff w.location.region = f.region
 }
@@ -327,11 +365,15 @@ fact locationUniquenessOfFarms{
 	no disj f1, f2: Farm | f1.position = f2.position
 }
 
-//---------ASSERTIONS AND PREDICATES--------
+fact justOneAgronomistRelatedToDistrict{
+	all d: District | no disj a1,a2: Agronomist | a1.district = d and a2.district = d
+}
+
+//---------ASSERTIONS & PREDICATES--------
 
 //G3. Visualize the results of steering initiatives
 fact allSteeringInitiativesAreReceivedByPC{
-	all pc: PolicyMaker | all a:Agronomist | a.reports in pc.reports 
+	all pc: PolicyMaker, r: Report | r in pc.reports
 }
 
 //G4. Visualize relevant data for the farmer business
@@ -340,10 +382,14 @@ assert relevantNewsForFarmer{
 						or (f.userFarm.position.region in n.area))
 }
 
-//G. Keep track of the production
-//pred farmerCanInsertProdEntry{
-//	all f: Farmer | 
-//}
+//G5. Keep track of the production
+pred farmerProdEntryInsertion[f: Farmer, p1,p2: ProductionData]{
+	p1.cropType = f.userFarm.cropType and p2.cropType = f.userFarm.cropType
+	and p1.farm = f.userFarm and p2.farm = f.userFarm
+	and (p1.sownQty >= 0 or p1.harvestedQty >= 0) 
+	and (p2.harvestedQty >0 or p2.sownQty > 0) and p1!=p2 and p1.date!=p2.date
+	and (p1 + p2) in f.productionData
+}
 
 //G7. Create and participate in forum discussions
 assert createADiscussion{
@@ -370,15 +416,27 @@ assert requestHelpAndGetResponse{
 }
 
 //G8. Receive Requests of help all in one place
+assert eachHelpRequestDoneIsInAgronomistInbox{
+	all hr: HelpRequest | one a: Agronomist | hr in a.helpRequests and hr.sender.region=a.district
+}
 
-//G11. Visualize area statistics
+//G10. Easy daily planning procedure
+pred insertDailyPlans[a: Agronomist, dp1,dp2: DailyPlan]{
+	(dp1 + dp2) in a.dailyPlan and dp1!=dp2 and #dp1.farmsToVisit > 0 
+	and #dp2.farmsToVisit > 0 	
+}
+
+assert allFarmsInDailyPlanAreVisitableByAgro{
+	all a: Agronomist | all f: Farm, dp: DailyPlan |
+		(dp in a.dailyPlan and f in dp.farmsToVisit) implies f.position.region = a.district
+}
 
 
+//-----------RUN & CHECK -------
 pred show {
-#User > 0
 #Agronomist > 0
 #Farmer > 1
-#FarmerRanking > 0
+#RankingEntry > 2
 }
 
 //check allSteeringInitiativesAreReceivedByPC for 10
@@ -386,14 +444,21 @@ check relevantNewsForFarmer for 10
 check createADiscussion for 10
 check joinADiscussion for 10
 check requestHelpAndGetResponse for 5
+check eachHelpRequestDoneIsInAgronomistInbox for 10
+check allFarmsInDailyPlanAreVisitableByAgro for 10
 
 run requestHelpAndGetResponseP for 5
+run farmerProdEntryInsertion for 5
 run show for 3 but 1 AppSystem
 
 run show{
 #ForumTopic > 1
 #Farmer > 1
 #Post > 1
+}
+
+run show{
+#Report > 2
 }
 
 
