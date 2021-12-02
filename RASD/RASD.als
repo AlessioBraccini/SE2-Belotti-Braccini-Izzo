@@ -203,12 +203,12 @@ fact ownerOfProductionData{
 
 fact senderOfHelpRequestIsTheFarmer{
 	all m: Message | one f: Farmer | (m in f.helpRequests implies m.sender=f)
-							and (m in f.helpReplies implies m.receiver=f)
+			and (m in f.helpReplies implies m.receiver=f)
 }
 
 fact senderOfHelpReplyIsAgronomist{
 	all m: Message | one a: Agronomist | (m in a.helpRequests implies m.receiver=a)
-							and (m in a.helpReplies implies m.sender=a)
+			and (m in a.helpReplies implies m.sender=a)
 }
 
 fact farmerSendMessageToAreaAgronomist{
@@ -220,7 +220,7 @@ fact farmerSendMessageToAreaAgronomist{
 fact farmerReceiveMessageFromAreaAgronomist{
 	all f: Farmer, m: Message | one a: Agronomist | (m in f.helpReplies) 
 		iff ((m.sender).district = (m.receiver).region
-				and m in a.helpReplies)	
+			and m in a.helpReplies)	
 }
 
 fact{
@@ -261,8 +261,8 @@ fact noDifferentDailyPlansWithSameVisitDate{
 
 fact allVisitOfAgroAreInSameArea{
 	no disj v1,v2: Visit | all a: Agronomist | v1 in a.dailyVisits and v2 in a.dailyVisits 
-					and v1.farm.location.region!=v2.farm.location.region 
-					and v1.farm.location.region!=a.district
+			and v1.farm.location.region!=v2.farm.location.region 
+			and v1.farm.location.region!=a.district
 }
 
 //All the farms planned by an Agronomist in his/her daily plan must be 
@@ -275,13 +275,13 @@ fact allPlannedFarmInAgroArea{
 //An agronomist cannot visit the same farm more than once a day
 fact noMoreThanOneVisitToTheSameFarmADay{
 	all a: Agronomist, disj v1, v2: Visit | no f: Farm | v1 in a.dailyVisits and v2 in a.dailyVisits
-					and f=v1.farm and f=v2.farm
+		and f=v1.farm and f=v2.farm
 }
 
 //All the farms planned in a dailyPlan must be in the same Telangana's district
 fact allFarmsInDpSameArea{
 	no disj f1, f2: Farm | all dP: DailyPlan | f1 in dP.farmsToVisit and f2 in dP.farmsToVisit 
-								and f1.region!=f2.region
+		and f1.region!=f2.region
 }
 
 //Interaction between external data and the application
@@ -292,7 +292,7 @@ fact allExternalDataInSys{
 //production cropType is the same of the farm
 fact prodCropTypeSameAsFarm{
 	all f: Farmer | all prodData: ProductionData | f.productionData=prodData 
-							implies prodData.cropType = f.farm.cropType
+		implies prodData.cropType = f.farm.cropType
 }
 
 //a news must have at least one of the two: a concerned cropType or a concerned area
@@ -379,7 +379,7 @@ fact allSteeringInitiativesAreReceivedByPC{
 //G4. Visualize relevant data for the farmer business
 assert relevantNewsForFarmer{
 	all f: Farmer, n: News | n in f.relevantNews iff ((f.userFarm.cropType in n.cropType)
-						or (f.userFarm.position.region in n.area))
+			or (f.userFarm.position.region in n.area))
 }
 
 //G5. Keep track of the production
