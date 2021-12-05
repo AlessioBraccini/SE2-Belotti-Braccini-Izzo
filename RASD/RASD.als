@@ -13,9 +13,9 @@ sig Email{}
 abstract sig User{
 userDevice : some SmartDevice,
 email: one Email,
-//password: one string,
-//name: one string,
-//surname: one string,
+password: one string,
+name: one string,
+surname: one string,
 }{
 #userDevice > 0
 }
@@ -31,9 +31,9 @@ userFarm : one Farm,
 productionData: disj set ProductionData,
 helpRequests: disj set HelpRequest,
 helpReplies: disj set HelpReply,
-forumDiscussions: disj set ForumTopic,
+forumDiscussions: set ForumTopic,
 relevantNews: disj set News,
-weatherForecast: set WeatherForecast
+weatherForecast: disj set WeatherForecast
 }{
 #helpRequests >= #helpReplies
 }
@@ -192,8 +192,14 @@ fact oneFarmOneFarmer{
 	no disj f1, f2: Farmer | f1.userFarm=f2.userFarm
 }
 
-fact ownerFarm{
-	no disj f1, f2: Farmer | all farm: Farm | farm.owner = f1 and f2.userFarm = farm
+fact ownerFarm1{
+	 all farm: Farm | no disj f1, f2: Farmer | 
+		farm.owner = f1 and f2.userFarm = farm
+}
+
+fact ownerFarm2{
+	all u: Farmer | no disj f1,f2: Farm |
+		f1.owner = u and f2.owner = u
 }
 
 fact ownerOfProductionData{
@@ -284,11 +290,6 @@ fact allFarmsInDpSameArea{
 		and f1.region!=f2.region
 }
 
-//Interaction between external data and the application
-fact allExternalDataInSys{
-	all d: DataProvider | one s: AppSystem | d in s.externalData
-}
-
 //production cropType is the same of the farm
 fact prodCropTypeSameAsFarm{
 	all f: Farmer | all prodData: ProductionData | f.productionData=prodData 
@@ -319,28 +320,54 @@ fact ranking{
 			or (e2.score = max iff e1.rank > e2.rank)) 
 }
 
+fact oneRankOneFarmer{
+	no disj r1, r2: RankingEntry | r1.user = r2.user
+}
+
 
 //Topics in Forum and discussions
 fact allForumTopicInForum{
 	all f: Forum, t: ForumTopic | t in f.topics
 }
 
-
-//If a farmer is posting on a discussion, then he/she's joining it
-fact ifFarmerPostThenJoinDiscussion{
-	all p: Post, t: ForumTopic | p in t.posts iff t in p.user.forumDiscussions
+fact allPostsInForum{
+	all p: Post | one ft: ForumTopic | p in ft.posts
 }
 
+//If a farmer is posting on a discussion, then he/she is joining it
+fact ifFarmerPostThenJoinDiscussion{
+	all u: Farmer, t: ForumTopic | some p: Post | 
+		(p.user=u and p in t.posts) iff t in u.forumDiscussions
+}
+
+fact {
+	all u: Farmer | no disj t1, t2: ForumTopic, p1,p2: Post |
+		p1.user = u and p2.user = u and p1 in t1.posts and p2 in t2.posts
+		and t1 in u.forumDiscussions and t2 not in u.forumDiscussions
+}
+
+fact{
+	all p: Post | no t: ForumTopic | p in t.posts and t not in p.user.forumDiscussions 
+}
+
+
 fact topicCreatorsAlsoJoinDiscussion{
-	all t: ForumTopic | t in t.creator.forumDiscussions
+	all t: ForumTopic |  t in t.creator.forumDiscussions 
 }
 
 fact forumTopicNameUniqueness{
 	no disj t1,t2: ForumTopic | t1.name = t2.name
 }
 
+fact allSteeringInitiativesAreReceivedByPC{
+	all pc: PolicyMaker | all r: Report | r in pc.reports
+}
 
 //External data facts
+//Interaction between external data and the application
+fact allExternalDataInSys{
+	all d: DataProvider | one s: AppSystem | d in s.externalData
+}
 fact weatherRelevantToFarmer{
 	all f: Farmer | one w: WeatherForecast | w in f.weatherForecast iff w.location.region = f.region
 }
@@ -357,6 +384,10 @@ fact locationUniquenessForWeatherForecast{
 	no disj d1,d2: WeatherForecast | d1.location = d2.location and d1.dateOfMeasure = d2.dateOfMeasure
 }
 
+fact statisticDataForPc{
+	all d: DataProvider | all pc: PolicyMaker | d in pc.statisticData
+}
+
 fact weatherRelevantForFarmer{
 	all u: Farmer, w: WeatherForecast | w in u.weatherForecast iff w.location = u.userFarm.position
 }
@@ -369,11 +400,12 @@ fact justOneAgronomistRelatedToDistrict{
 	all d: District | no disj a1,a2: Agronomist | a1.district = d and a2.district = d
 }
 
+
 //---------ASSERTIONS & PREDICATES--------
 
 //G3. Visualize the results of steering initiatives
-fact allSteeringInitiativesAreReceivedByPC{
-	all pc: PolicyMaker, r: Report | r in pc.reports
+assert allSteeringInitiativesAreReceivedByPC{
+	all r: Report, pc: PolicyMaker | #PolicyMaker > 0 implies r in pc.reports
 }
 
 //G4. Visualize relevant data for the farmer business
@@ -401,6 +433,16 @@ assert joinADiscussion{
 					implies (p.user in sys.users)
 }
 
+pred ForumDynamics[p1, p2: Post, ft: ForumTopic]{
+	(p1 + p2) in ft.posts and p1.user != p2.user and p1.user.forumDiscussions = ft
+	 and p2.user.forumDiscussions = ft
+}
+
+assert farmersLinkedToTopicIfPosted{
+	all u: Farmer, t: ForumTopic | some p: Post | (p.user=u and p in t.posts)
+		iff t in u.forumDiscussions
+}
+
 //G6. Request for help/suggestions
 pred requestHelpAndGetResponseP[f: Farmer, hm: HelpRequest, a: Agronomist, hp: HelpReply]{
 	(hm in f.helpRequests) implies (hm in a.helpRequests and hp in (f.helpReplies & a.helpReplies)
@@ -413,6 +455,10 @@ assert requestHelpAndGetResponse{
 		hm in f.helpRequests iff (hm in a.helpRequests and hp in (f.helpReplies & a.helpReplies)
 			and hp.sender = a and hp.sender = hm.receiver 
 			and hp.receiver = f and hp.receiver = hm.sender and a.district=f.region)
+}
+
+pred interestingNews[n1,n2: News, u: Farmer]{
+	n1!=n2 and u.userFarm.cropType in n1.cropType and u.userFarm.position.region in n2.area
 }
 
 //G8. Receive Requests of help all in one place
@@ -431,34 +477,45 @@ assert allFarmsInDailyPlanAreVisitableByAgro{
 		(dp in a.dailyPlan and f in dp.farmsToVisit) implies f.position.region = a.district
 }
 
+pred show {}
+
 
 //-----------RUN & CHECK -------
-pred show {
-#Agronomist > 0
-#Farmer > 1
-#RankingEntry > 2
-}
 
-//check allSteeringInitiativesAreReceivedByPC for 10
+check allSteeringInitiativesAreReceivedByPC for 10
 check relevantNewsForFarmer for 10
 check createADiscussion for 10
 check joinADiscussion for 10
 check requestHelpAndGetResponse for 5
 check eachHelpRequestDoneIsInAgronomistInbox for 10
 check allFarmsInDailyPlanAreVisitableByAgro for 10
+check farmersLinkedToTopicIfPosted for 10
 
 run requestHelpAndGetResponseP for 5
 run farmerProdEntryInsertion for 5
-run show for 3 but 1 AppSystem
+run interestingNews for 3
+run ForumDynamics for 5
 
 run show{
-#ForumTopic > 1
+#ForumTopic = 2
+#Farmer > 3
+#Post > 3
+#Farmer.forumDiscussions > 1
+} for 5
+
+run show{
+#PolicyMaker > 1
+#Report > 1
+#Agronomist > 0
+}
+
+
+run show{
+#WeatherForecast > 1
 #Farmer > 1
-#Post > 1
-}
-
-run show{
-#Report > 2
-}
+#PolicyMaker > 0
+#SoilSensor > 1
+#IrrigationSystem > 1
+} for 6
 
 
