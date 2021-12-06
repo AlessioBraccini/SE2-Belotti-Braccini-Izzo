@@ -149,7 +149,7 @@ manager: one Agronomist
 sig Date{}
 
 sig SmartDevice{
-//localizationActive : lone GPS
+localizationActive : lone GPS
 }
 sig GPS{}
 
@@ -246,12 +246,14 @@ fact agronomistMustRespond{
 }
 
 fact planToVisitOnlyInTheArea{
-	all a: Agronomist | no dP: DailyPlan, f: Farm | a.dailyPlan=dP and (f in dP.farmsToVisit)
-							and f.region!=a.district
+	all a: Agronomist | no dP: DailyPlan, f: Farm | a.dailyPlan=dP 
+		and (f in dP.farmsToVisit)
+		and f.region!=a.district
 }
 
 fact allVisitedFarmsAreInAgroDistrict{
-	all v: Visit | one a: Agronomist | v in a.dailyVisits and v.farm.position.region = a.district
+	all v: Visit | one a: Agronomist | v in a.dailyVisits 
+		and v.farm.position.region = a.district
 }
 
 fact allDailyPlansAreFromAgronomist{
@@ -260,33 +262,38 @@ fact allDailyPlansAreFromAgronomist{
 
 //An Agronomist cannot plan two different daily plan for the same day
 fact noDifferentDailyPlansWithSameVisitDate{
-	all a: Agronomist | no disj dp1, dp2: DailyPlan | (dp1 + dp2) in a.dailyPlan
-		and dp1.visitDate = dp2.visitDate
+	all a: Agronomist | no disj dp1, dp2: DailyPlan | 
+		(dp1 + dp2) in a.dailyPlan
+			and dp1.visitDate = dp2.visitDate
 }
 
 
 fact allVisitOfAgroAreInSameArea{
-	no disj v1,v2: Visit | all a: Agronomist | v1 in a.dailyVisits and v2 in a.dailyVisits 
-			and v1.farm.location.region!=v2.farm.location.region 
-			and v1.farm.location.region!=a.district
+	no disj v1,v2: Visit | all a: Agronomist | v1 in a.dailyVisits 
+		and v2 in a.dailyVisits 
+		and v1.farm.location.region!=v2.farm.location.region 
+		and v1.farm.location.region!=a.district
 }
 
 //All the farms planned by an Agronomist in his/her daily plan must be 
 //in the area of competence of Agronomist
 fact allPlannedFarmInAgroArea{
-	all f: Farm | all dP: DailyPlan, a: Agronomist | dP in a.dailyPlan and f in dP.farmsToVisit
+	all f: Farm | all dP: DailyPlan, a: Agronomist | dP in a.dailyPlan 
+		and f in dP.farmsToVisit
 		implies f.position.region = a.district
 }
 
 //An agronomist cannot visit the same farm more than once a day
 fact noMoreThanOneVisitToTheSameFarmADay{
-	all a: Agronomist, disj v1, v2: Visit | no f: Farm | v1 in a.dailyVisits and v2 in a.dailyVisits
+	all a: Agronomist, disj v1, v2: Visit | no f: Farm | v1 in a.dailyVisits 
+		and v2 in a.dailyVisits
 		and f=v1.farm and f=v2.farm
 }
 
 //All the farms planned in a dailyPlan must be in the same Telangana's district
 fact allFarmsInDpSameArea{
-	no disj f1, f2: Farm | all dP: DailyPlan | f1 in dP.farmsToVisit and f2 in dP.farmsToVisit 
+	no disj f1, f2: Farm | all dP: DailyPlan | f1 in dP.farmsToVisit 
+		and f2 in dP.farmsToVisit 
 		and f1.region!=f2.region
 }
 
@@ -314,9 +321,10 @@ fact eachFarmerInRanking{
 }
 
 fact ranking{
-	all disj r: FarmerRanking, e1,e2: RankingEntry |  let max = isGreater[e1.score, e2.score] | 
-		e1 in r.entries and e2 in r.entries 
-		and ((e1.score = max iff e1.rank < e2.rank)
+	all disj r: FarmerRanking, e1,e2: RankingEntry |  
+		let max = isGreater[e1.score, e2.score] | 
+			e1 in r.entries and e2 in r.entries 
+			and ((e1.score = max iff e1.rank < e2.rank)
 			or (e2.score = max iff e1.rank > e2.rank)) 
 }
 
@@ -340,14 +348,17 @@ fact ifFarmerPostThenJoinDiscussion{
 		(p.user=u and p in t.posts) iff t in u.forumDiscussions
 }
 
-fact {
+fact{
 	all u: Farmer | no disj t1, t2: ForumTopic, p1,p2: Post |
-		p1.user = u and p2.user = u and p1 in t1.posts and p2 in t2.posts
-		and t1 in u.forumDiscussions and t2 not in u.forumDiscussions
+		p1.user = u and p2.user = u and p1 in t1.posts 
+		and p2 in t2.posts
+		and t1 in u.forumDiscussions 
+		and t2 not in u.forumDiscussions
 }
 
 fact{
-	all p: Post | no t: ForumTopic | p in t.posts and t not in p.user.forumDiscussions 
+	all p: Post | no t: ForumTopic | p in t.posts 
+		and t not in p.user.forumDiscussions 
 }
 
 
@@ -369,19 +380,23 @@ fact allExternalDataInSys{
 	all d: DataProvider | one s: AppSystem | d in s.externalData
 }
 fact weatherRelevantToFarmer{
-	all f: Farmer | one w: WeatherForecast | w in f.weatherForecast iff w.location.region = f.region
+	all f: Farmer | one w: WeatherForecast | 
+		w in f.weatherForecast iff w.location.region = f.region
 }
 
 fact locationUniquenessForSoilData{
-	no disj d1, d2: SoilSensor | d1.location = d2.location and d1.dateOfMeasure = d2.dateOfMeasure 
+	no disj d1, d2: SoilSensor | d1.location = d2.location 
+		and d1.dateOfMeasure = d2.dateOfMeasure 
 }
 
 fact locationUniquenessForWaterData{
-	no disj d1, d2: IrrigationSystem | d1.location = d2.location and d1.dateOfMeasure = d2.dateOfMeasure
+	no disj d1, d2: IrrigationSystem | d1.location = d2.location 
+		and d1.dateOfMeasure = d2.dateOfMeasure
 }
 
 fact locationUniquenessForWeatherForecast{
-	no disj d1,d2: WeatherForecast | d1.location = d2.location and d1.dateOfMeasure = d2.dateOfMeasure
+	no disj d1,d2: WeatherForecast | d1.location = d2.location 
+		and d1.dateOfMeasure = d2.dateOfMeasure
 }
 
 fact statisticDataForPc{
@@ -389,7 +404,8 @@ fact statisticDataForPc{
 }
 
 fact weatherRelevantForFarmer{
-	all u: Farmer, w: WeatherForecast | w in u.weatherForecast iff w.location = u.userFarm.position
+	all u: Farmer, w: WeatherForecast | 
+		w in u.weatherForecast iff w.location = u.userFarm.position
 }
 
 fact locationUniquenessOfFarms{
@@ -397,7 +413,8 @@ fact locationUniquenessOfFarms{
 }
 
 fact justOneAgronomistRelatedToDistrict{
-	all d: District | no disj a1,a2: Agronomist | a1.district = d and a2.district = d
+	all d: District | no disj a1,a2: Agronomist | 
+		a1.district = d and a2.district = d
 }
 
 
@@ -405,37 +422,70 @@ fact justOneAgronomistRelatedToDistrict{
 
 //G3. Visualize the results of steering initiatives
 assert allSteeringInitiativesAreReceivedByPC{
-	all r: Report, pc: PolicyMaker | #PolicyMaker > 0 implies r in pc.reports
+	all r: Report, pc: PolicyMaker | #PolicyMaker > 0 
+		implies r in pc.reports
 }
 
 //G4. Visualize relevant data for the farmer business
 assert relevantNewsForFarmer{
-	all f: Farmer, n: News | n in f.relevantNews iff ((f.userFarm.cropType in n.cropType)
+	all f: Farmer, n: News | n in f.relevantNews 
+		iff ((f.userFarm.cropType in n.cropType)
 			or (f.userFarm.position.region in n.area))
 }
 
 //G5. Keep track of the production
 pred farmerProdEntryInsertion[f: Farmer, p1,p2: ProductionData]{
-	p1.cropType = f.userFarm.cropType and p2.cropType = f.userFarm.cropType
+	p1.cropType = f.userFarm.cropType 
+	and p2.cropType = f.userFarm.cropType
 	and p1.farm = f.userFarm and p2.farm = f.userFarm
 	and (p1.sownQty >= 0 or p1.harvestedQty >= 0) 
-	and (p2.harvestedQty >0 or p2.sownQty > 0) and p1!=p2 and p1.date!=p2.date
+	//p2 > 0 to show at least one interesting production entry
+	and (p2.harvestedQty > 0 or p2.sownQty > 0)
+	and p1!=p2 and p1.date!=p2.date
 	and (p1 + p2) in f.productionData
+}
+
+//G6. Request for help/suggestions
+pred requestHelpAndGetResponseP[f: Farmer, hm: HelpRequest, a: Agronomist, hp: HelpReply]{
+	(hm in f.helpRequests) implies 
+		(hm in a.helpRequests 
+		and hp in (f.helpReplies & a.helpReplies)
+		and hp.sender = a and hp.sender = hm.receiver 
+		and hp.receiver = f and hp.receiver = hm.sender 
+		and a.district=f.region)
+}
+
+assert requestHelpAndGetResponse{
+	all f:Farmer, hm: HelpRequest | one a: Agronomist, hp: HelpReply |
+		hm in f.helpRequests iff 
+			(hm in a.helpRequests 
+			and hp in (f.helpReplies & a.helpReplies)
+			and hp.sender = a and hp.sender = hm.receiver 
+			and hp.receiver = f and hp.receiver = hm.sender 
+			and a.district=f.region)
+}
+
+pred interestingNews[n1,n2: News, u: Farmer]{
+	n1!=n2 and u.userFarm.cropType in n1.cropType 
+	and u.userFarm.position.region in n2.area
 }
 
 //G7. Create and participate in forum discussions
 assert createADiscussion{
-	all sys: AppSystem | all t: ForumTopic | t in sys.forum.topics implies (t.creator in sys.users)
+	all sys: AppSystem | all t: ForumTopic | t in sys.forum.topics 
+		implies (t.creator in sys.users)
 }
 
 assert joinADiscussion{
-	all sys: AppSystem | all t: ForumTopic, p: Post | (t in sys.forum.topics and p in t.posts)
-					implies (p.user in sys.users)
+	all sys: AppSystem | all t: ForumTopic, p: Post | 
+		(t in sys.forum.topics and p in t.posts)
+		implies (p.user in sys.users)
 }
 
 pred ForumDynamics[p1, p2: Post, ft: ForumTopic]{
-	(p1 + p2) in ft.posts and p1.user != p2.user and p1.user.forumDiscussions = ft
-	 and p2.user.forumDiscussions = ft
+	(p1 + p2) in ft.posts and p1.user != p2.user 
+	and p1.user.forumDiscussions = ft
+	and p2.user.forumDiscussions = ft
 }
 
 assert farmersLinkedToTopicIfPosted{
@@ -443,38 +493,23 @@ assert farmersLinkedToTopicIfPosted{
 		iff t in u.forumDiscussions
 }
 
-//G6. Request for help/suggestions
-pred requestHelpAndGetResponseP[f: Farmer, hm: HelpRequest, a: Agronomist, hp: HelpReply]{
-	(hm in f.helpRequests) implies (hm in a.helpRequests and hp in (f.helpReplies & a.helpReplies)
-			and hp.sender = a and hp.sender = hm.receiver 
-			and hp.receiver = f and hp.receiver = hm.sender and a.district=f.region)
-}
-
-assert requestHelpAndGetResponse{
-	all f:Farmer, hm: HelpRequest | one a: Agronomist, hp: HelpReply |
-		hm in f.helpRequests iff (hm in a.helpRequests and hp in (f.helpReplies & a.helpReplies)
-			and hp.sender = a and hp.sender = hm.receiver 
-			and hp.receiver = f and hp.receiver = hm.sender and a.district=f.region)
-}
-
-pred interestingNews[n1,n2: News, u: Farmer]{
-	n1!=n2 and u.userFarm.cropType in n1.cropType and u.userFarm.position.region in n2.area
-}
-
 //G8. Receive Requests of help all in one place
 assert eachHelpRequestDoneIsInAgronomistInbox{
-	all hr: HelpRequest | one a: Agronomist | hr in a.helpRequests and hr.sender.region=a.district
+	all hr: HelpRequest | one a: Agronomist | hr in a.helpRequests 
+		and hr.sender.region=a.district
 }
 
 //G10. Easy daily planning procedure
 pred insertDailyPlans[a: Agronomist, dp1,dp2: DailyPlan]{
-	(dp1 + dp2) in a.dailyPlan and dp1!=dp2 and #dp1.farmsToVisit > 0 
+	(dp1 + dp2) in a.dailyPlan and dp1!=dp2 
+	and #dp1.farmsToVisit > 0 
 	and #dp2.farmsToVisit > 0 	
 }
 
 assert allFarmsInDailyPlanAreVisitableByAgro{
 	all a: Agronomist | all f: Farm, dp: DailyPlan |
-		(dp in a.dailyPlan and f in dp.farmsToVisit) implies f.position.region = a.district
+		(dp in a.dailyPlan and f in dp.farmsToVisit) 
+		implies f.position.region = a.district
 }
 
 pred show {}

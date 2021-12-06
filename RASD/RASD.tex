@@ -1621,11 +1621,16 @@ The following analysis aims to formally prove the correctness of the system mode
 
 Specifically, we stress:
 \begin{itemize}
-    \item \textbf{(G3) Visualize the result of steering initiatives}: it is modelled as an assertion that checks the ability of the system to retrieve all the reports written by the agronomists and present them to each policy maker. %NOT TRUE ANYMORE: CREATE A PRED/ASSERT
+    \item \textbf{(G3) Visualize the result of steering initiatives}: it is modelled as an assertion that checks the ability of the system to retrieve all the reports written by the agronomists and present them to each policy maker.
     \item \textbf{(G4) Visualize relevant data for the farmer business}: the goal is checked by asserting that if and only if there's a news concerning some crop type \textit{x} or a certain area \textit{y}, then the system will present it to all the farmers growing crop type \textit{x} or working in area \textit{y}.
-    \item \textbf{(G6) Request for help/suggestions}: 
-    \item \textbf{(G7) Create and participate in discussions concerning the agricolture field}: through two assertions. we make sure that every farmer can create a new topic in the Forum as long as he/she belong to the system and can also join discussions already started by anyone else.
+    \item \textbf{(G5) Keep track of the production}: thanks to the predicate, we can formally illustrate the scenario in which a farmer two entries of production are succesfully registered in his/her history production in app (refer to fig. \ref{fig: productionInsertion}).
+    \item \textbf{(G6) Request for help/suggestions}: the aim here is to make sure that every farmer that files an help request, there will always be an agronomist (in particular, the one related to the same district where the farm is) that will reply. We show this through an assertion and a predicate that illustarte an instance of this messages' exchange (see fig. \ref{fig: helpRequestAlloy}). Furthermore, we display that some news that are deemed as interesting for a farmer, are actually presented to him/her (refer to fig. \ref{fig: interestingNews}).
+    \item \textbf{(G7) Create and participate in discussions concerning the agricolture field}: through two assertions, we make sure that every farmer can create a new topic in the Forum as long as he/she belong to the system and can also join discussions already started by anyone else. Moreover, we make sure thanks to another assertion that each farmer posting something in a dicussion gets automatically linked to the same forum topic. Finally, we show an example of the dynamics that could happen in a forum topic, as shown in fig. \ref{fig: forumDynamics}.
+    \item \textbf{(G8) Receive requests of help all in one place}: we check that all the help requests filed by farmers end up in exactly one agronomist's inbox, that is the agronomist whose area of competence matches with the region to which the farmer belongs.
+    \item \textbf{(G10) Easy daily planning procedure}: we show an instance of an agronomist's daily plan and we make sure that every farm planned to visit is in the same region of competence of the agronomist.
 \end{itemize}
+
+Plus, we runned some empty predicates \texttt{show} to generate some more general instances of the app system.
 
 \subsection{Alloy Code}
 \lstinputlisting[language=alloy]{RASD.als}

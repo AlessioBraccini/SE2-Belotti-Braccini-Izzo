@@ -79,3 +79,6 @@ acs-*.bib
 
 # fixme
 *.lox
+
+# macOS
+.DS_Store
