@@ -57,11 +57,11 @@
 \subsection{Purpose}
 The purpose of this document is to provide a full technical description of the system described in the RASD document.
 In this design document we discuss about both hardware and software architectures in terms of interaction among the components that represent the system.
-Moreover there are mentions about the implementation, testing and integration process.
-This document will include technical language so is primarily addressed to programmers but stakeholders are also invited to read it in order to understand the characteristics of the project.
+Moreover, there are mentions about the implementation, testing and integration process.
+This document will include technical language so it is primarily addressed to programmers, but stakeholders are also invited to read it in order to understand the characteristics of the project.
 
 \subsection{Scope}
-The scope of this design document is to define the behavior of the system in both general and critical cases, and to design the architecture of the system by describing
+The scope of this design document lays in the definition of the system behavior, in both general and critical cases, and in the design of the system architecture by describing the
 logical allocation of the components and the interaction between them.
 This document also extends in part to the implementation and testing plan, where one possible course of action is explained, user interface design of user applications and requirements traceability relating to the RASD.
 \subsection{Definitions, acronyms, abbreviations}
@@ -76,6 +76,7 @@ This document also extends in part to the implementation and testing plan, where
     \item \textbf{GPS}: Global Positioning System
     \item \textbf{IT}: Information Technology
     \item \textbf{GUI}: Graphic User Interface
+    \item \textbf{UI}: User Interface
 \end{itemize}
 \subsection{Revision history}
 
@@ -91,10 +92,10 @@ This document also extends in part to the implementation and testing plan, where
 \begin{itemize}
     \item \textbf{Section 1} gives a brief description of the design document, it describes the purpose and the scope of it including all the definitions, acronyms and abbreviations used. 
     \item \textbf{Section 2} delves deeply into the system architecture by providing a detailed description of the components, the interfaces and all the technical choices made for the development of the application.
-    It also includes detailed sequence, component and ArchiMate diagrams that describes in depth the system.
-    \item \textbf{Section 3} contains a complete description of the user interface, it includes all the client-side mockups with some graphs useful to understand the correct execution flow.
-    \item \textbf{Section 4} links the RASD and the DD, it maps the goals and the requirements described in the RASD to the actual functionalities presented in this DD.
-    \item \textbf{Section 5} presents a description of the implementation, testing and integration phases of the system components.
+    It also includes detailed sequence, component and ArchiMate diagrams that describe the system in depth .
+    \item \textbf{Section 3} contains a complete description of the user interface (UI), it includes all the client-side mockups with some graphs useful to understand the correct execution flow.
+    \item \textbf{Section 4} links the RASD to the DD, it maps the goals and the requirements described in the RASD to the actual functionalities presented in this DD.
+    \item \textbf{Section 5} presents a description of the implementation, testing and integration phases of the system components that are going to be carried out during the technical development of the application.
 \end{itemize}
 \section{Architectural Design}
 
@@ -108,14 +109,14 @@ This document also extends in part to the implementation and testing plan, where
     \end{figure}
 \end{center}
 
-The system is a distributed application that follow the common client-server paradigm.
+The system is a distributed application that follows the common client-server paradigm.
 The architecture of the application is structured in three logic layers:
 \begin{itemize}
     \item \textbf{Presentation Layer (P)}: it manages the presentation logic and handles the user actions.
-    It is characterized by a GUI (Graphic User Interface) that allow the user to interact with the application in a simple and effective way.
+    It is characterized by a GUI (Graphic User Interface) that allows the user to interact with the application in a simple and effective way.
     \item \textbf{Logic or Application Layer (A)}: it manages all the functionalities that has to be provided to the users, it is also responsible of data exchange between the client and the data sources.
-    \item \textbf{Data Layer (D)}: it manages the access to data sources, it gets data from the database and move them through the other layers.
-    It is essential to guarantee a high level of abstraction from the database in order to provide a model easy to use.
+    \item \textbf{Data Layer (D)}: it manages the access to data sources, it gets data from the database and moves it through the other layers.
+    It is essential to guarantee a high level of abstraction from the database in order to provide an easy to use model.
 \end{itemize}
 
 \begin{center}
@@ -127,15 +128,16 @@ The architecture of the application is structured in three logic layers:
 \end{center}
 
 The system, as shown in \textit{Figure (\ref{fig: four-tier-architecture-scheme})}, is based on a four-tier architecture (Client, Web Server, Application Server and Database Server), this ensures more flexibility and high scalability.
-The tiers are separated by firewalls in order to guarantee a higher level of security of the whole system.
-A thin client is used to prevent heavy computation load client side, all the heavy operations are executed at the server side.
-The client's devices can be a personal computer or a mobile device, both communicate directly with the Web Server through a web browser.
-The Application Server communicates with the Database Server and transform data with business logic.
+The tiers are separated by firewalls in order to guarantee a higher level of security to the whole system.
+A thin client is used to prevent heavy computation load client side, in this way all the heavy operations are executed at server side.
+The client's devices can be a personal computer, a mobile device or any kind of IT device able to connect to the Web Server through a web browser. In fact, the four-tiers architecture has been specifically chosen to allow the widest variety of commercial devices to access the application, without the need of developing an OS-specific one for each of them.
+
+The Application Server communicates with the Database Server and transform data following its business logic.
 It also manages the news and the weather forecast services.
-This allow to retrieve data like the weather directly from it in order to show them to the user.
+This allows to retrieve data like weather information directly from it in order to show them to the user.
 Finally, to enable the geolocalization, the Application Server uses the API provided by Google Maps.
-For what concern the other components, such as the water irrigation system and the humidity sensors, they are connected to the Database Server that exchange data with the Application Server.
-The Web Server also manages the data coming from the irrigation system and the humidity sensors.
+For what concern the other components, such as the water irrigation system and the humidity sensors, they are connected to the Database Server that exchanges data with the Application Server.
+%The Web Server also manages the data coming from the irrigation system and the humidity sensors.
 All the components will be described in depth in the following sections.
 
 \subsection{Component view}
@@ -148,12 +150,11 @@ All the components will be described in depth in the following sections.
     \end{figure}
 \end{center}
 
-This image gives an high level representation of the components of the system.
-On the left are shown the provided interfaces between the Web Server and the Application Server that in this scheme is represented as a "black box", a complete description of it is provided in the next section.
-All the interfaces basically represents the main functionalities requested by the client application.
-On the right there are the requested interfaces, one of this is responsible of the geolocalization and is provided by the Google Maps API.
-Moreover there are two interfaces that manage the weather forecast and the news services.
-Finally, the DBMS interface manages the DBMS service and is responsible of the communication between the Application Server and the Database Server.
+This image gives a high level representation of the components of the system.
+On the left are shown the provided interfaces between the Web Server and the Application Server that in this scheme is represented as a "black box"; a complete description of it is provided in the next section.
+All the interfaces basically represent the main functionalities requested by the client application.
+On the right there are the requested interfaces. Among these, one is responsible of the geolocalization and is provided by the Google Maps API, the others manage the weather forecast and the news services.
+Finally, the DBMS interface manages the DBMS service and it's responsible of the communication between the Application Server and the Database Server.
 
 \subsubsection*{Application Server Component View}
 \begin{center}
@@ -169,21 +170,21 @@ External elements in the diagram are represented in a simplified way.
 \begin{itemize}
     \item \textbf{AccountManager}: this component handles all the basic requests made by the client.
     This includes the authentication process that is composed by the log in, the log out and the sign up services. 
-    It also includes the edit profile process responsible of the editing of the user account.
+    It also includes the edit profile routine invoked by an user editing the personal account.
     Once a user is logged in, all the specific functionalities are provided by the component that manages this type of user.
     Finally it communicates with the \textit{LocationModule} that provides the geolocalization service.
-    \item \textbf{LocationModule}: this module provides the interface that allow the geolocalization of the farm based on the GPS and on the address provided by the farmer.
-    In order to provide this service it communicates with the map service manager.
-    \item \textbf{MapServiceManager}: this component communicates directly with the external API provided by Google Maps, it provides informations regarding the region and allow the user to visualize the map of a specific location.
+    \item \textbf{LocationModule}: this module provides the interface that allows the geolocalization of the farm based on the GPS and on the address provided by the farmer.
+    In order to provide this service, it communicates with the map service manager.
+    \item \textbf{MapServiceManager}: this component communicates directly with the external API provided by Google Maps, it provides information regarding the region and allows the user to visualize the map of a specific location.
     Mainly it adapts the data received by the API in a comprehensible way for the other components, it also manages the API requests.
-    \item \textbf{PolicyMakerManager}: it manages the policy maker services, these include: steering initiative, ranking, water irrigation and humidity sensors.
-    The steering initiative service and the ranking service are mapped through an interface to the internal database, on the other side the water irrigation service and the humidity sensor service are considered external services and for this reason are linked to the external database.
-    \item \textbf{AgronomistManager}: it manages the agronomist services, these include: answer help request, daily plan and ranking.
+    \item \textbf{PolicyMakerManager}: it manages the policy maker services, these include: steering initiatives, ranking, water irrigation system and humidity sensors.
+    The steering initiative service and the ranking service are mapped through an interface to the internal database, on the other side the water irrigation service and the humidity sensor service are considered external services and for this reason are linked to an external database.
+    \item \textbf{AgronomistManager}: it manages the agronomist services, these include: answer help requests, daily plan and ranking.
     It includes the weather external interface, it communicates with the weather component in order to provide the weather forecast service to the agronomist.
     The daily plan service and the ranking service are linked to the internal database, instead the answer request service communicates directly with the \textit{HelpRequestManager} component.
-    \item \textbf{FarmerManager}: it manages the farmer services, these include: ask help request, production and forum.
+    \item \textbf{FarmerManager}: it manages the farmer services, these include: ask a help request, production and forum.
     It includes two external interfaces: the first one communicates with the \textit{WeatherManager} component in order to provide the weather forecast service to the farmer, the other one communicates with the \textit{NewsManager} component.
-    In this case only the production service is linked directly to the internal database, the ask request service is linked to the \textit{HelpRequestManager} component while the forum service expose an interface to connect to the \textit{ForumManager} component.
+    In this case, only the production service is linked directly to the internal database, instead the ask request service is linked to the \textit{HelpRequestManager} component, while the forum service exposes an interface to connect to the \textit{ForumManager} component.
     \item \textbf{ForumManager}: this component manages the forum section, in particular it is responsible of the management of all the topics with the related messages between farmers.
     \item \textbf{DataManager}: it provides access to the external interface of the database, it manages queries and interacts with both the internal and the external databases.
     It includes two components: one is responsible of the operations with the external database, the other of the internal database.
@@ -203,9 +204,9 @@ External elements in the diagram are represented in a simplified way.
 \newpage
 \subsection{Runtime view}
 
-Here are represented the runtime view of some relevant uses case of the system through some sequence diagram. 
-In the diagrams is omitted the part regarding the user because it has been considered superfluous to the understanding of the interaction.
-In successive diagrams some part like the login phase or the come back to home page were omitted for the above motivations.
+Here are represented the runtime view of some relevant uses case of the system through some sequence diagrams. 
+In the diagrams, the part regarding the user is omitted because it has been considered superfluous to the understanding of the interaction.
+In later diagrams some parts, like the login phase or the come back to home page, were omitted for the above motivations.
 
 \newpage
 \textbf{Sign Up}
@@ -216,11 +217,11 @@ In successive diagrams some part like the login phase or the come back to home p
         \label{fig:signup}
     \end{figure}
 \end{center}
-Sign up is the usual, user register itself by putting username, email, password job role and area. If the user is a farmer he put also the crop type.
-Location module and Map service are used in this phase in order to allow the users to select their location using the GPS. 
-However user can also choose to select manually its location without the use of GPS.
+Sign up is pretty standard: user registers himself/herself by inserting first name, last name, email, password, job role and area. If the user is a farmer, he/she chooses also the crop type the farm deals with.
+The Location module and Map service are used in this phase in order to ease the users in the selection of their location using the GPS. 
+However users can also select manually their location without the use of GPS.
 
-At the end of the process, if every checks were ok the user is saved into the database by the Data Manager component.
+At the end of the process, if every check results succesful, the user is registered into the database by the Data Manager component.
 
 \newpage
 \textbf{Log In}
@@ -232,9 +233,8 @@ At the end of the process, if every checks were ok the user is saved into the da
     \end{figure}
 \end{center}
 
-Login phase is very simple, users put their email (primary and unique key of the database) and password and the sistem check if they're correct.
-In case of success the user can log in the system and use its functionalities.
-Every user will login the system accordingly the role that they had choosen in the Sign Up phase.
+The Log In phase simply consits in the user action of inserting their email (primary and unique key of the database) and password in the login fields, then the system checks if the pair corresponds to an entry in the database.
+In case of success, the user can log in the system and use its functionalities available for that particular type of account chosen during the Sign Up phase.
 
 \newpage
 \textbf{View Steering Initiative Reports}
@@ -245,7 +245,7 @@ Every user will login the system accordingly the role that they had choosen in t
         \label{fig: report}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between components in order to display to the policy maker the steering initiative that are stored in the database.
+This sequence diagram represents the interactions between components that occur when displaying the steering initiatives (previously stored in the database) to a policy maker user.
 
 \newpage
 \textbf{Check Soil Humidity Data}
@@ -256,8 +256,8 @@ This sequence diagram represents the interactions between components in order to
         \label{fig: humidity}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between components in order to display to the policy maker the sensors data regarding the soil humidity.
-These data are taken, by a """""""method"""""" in the application server, from an external source and they're put in the system database in order to manage them in a easiesr way.   
+This sequence diagram represents the interactions between components that occur when displaying the sensors data regarding soil humidity to a policy maker user.
+The business logic running on the Application Server retrieves these data from an external source, furthermore it handles them just temporarely since they are not modified by our system and they're fetched on user demand.   
 
 \newpage
 \textbf{Check Water Irrigation Data} 
@@ -268,8 +268,8 @@ These data are taken, by a """""""method"""""" in the application server, from a
         \label{fig: irrigation}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between components in order to display to the policy maker the sensors data regarding the water irrigation.
-The function is the same that the case above.
+This sequence diagram represents the interactions between components that occur when displaying the sensors data regarding the water irrigation to a policy maker user.
+The function is the same of the above mentioned case.
 
 \newpage
 \textbf{View Farmers Ranking}
@@ -280,12 +280,12 @@ The function is the same that the case above.
         \label{fig: ranking}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between components in order to display to policy makers and agronomists the ranking farmers ranking.
-It will be explained better later in the document.
-The function includes a parameter called 'area' in order to specify which area the user wants the rank.
-In order to have code reusability this function can be used by either policy makers or agronomists. 
-When a policy maker wants to see the rank the parameter 'area' will be set to 'all' in order to obtain the entire farmers rank.
-Instead, when an agronomist wants to use it 'area' will be automatically taken from its responsibility area.  
+This sequence diagram represents the interactions between components that occur when displaying the farmers ranking to policy maker and agronomist users.
+It will be explained better later in the document. %add \ref{}
+The function includes an area parameter to specify which area the user wants the rank.
+In order to achieve code reusability, this function is invoked by either policy makers or agronomists. 
+When a policy maker wants to see the rank the parameter \texttt{area} will be set to \texttt{all} in order to obtain the ranking comprehensive of all Telangana's farmer registered in the app.
+Instead, when an agronomist wants to use this functionality, \texttt{area} will be automatically taken to his/her respective responsibility area. Thanks to this, the function becomes more modular.
 
 \newpage
 \textbf{View Specific Farmers Informations}
@@ -296,7 +296,7 @@ Instead, when an agronomist wants to use it 'area' will be automatically taken f
         \label{fig: specificFarmerInfo}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between components to search for the informations of specific farmer information.
+This sequence diagram represents the interactions between components caused by a search for a specific farmer information summary.
 
 \newpage
 \textbf{Profile Edit}
@@ -307,7 +307,7 @@ This sequence diagram represents the interactions between components to search f
         \label{fig: profileEdit}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between components to change users profile settings like username, password, area or crop type if it's a farmer.
+This sequence diagram represents the interactions between components that occur when users make changes in the profile settings: edit username, password, area or crop type (if they're farmer users).
 
 \newpage
 \textbf{Insert Production Data}
@@ -318,8 +318,8 @@ This sequence diagram represents the interactions between components to change u
         \label{fig: production}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between components in order to insert farmers production data.
-During this phase the rank is calculated in order to store it as an attribute of the farmer that insert the data.
+This sequence diagram represents the interactions between components caused by an insertion of production data from a farmer user.
+Each new production entry cause the score associated to the farmer to be calculated again and updated. So the score shall be an attribute of each farmer profile. Since a farmer's rank is directly proportionated to the his/her score, the recomputation can lead to a shifting in the general ranking too.
 
 \newpage
 \textbf{Check News}
@@ -330,8 +330,8 @@ During this phase the rank is calculated in order to store it as an attribute of
         \label{fig: news}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between components in order to displays to the farmers the news regarding their interests, such as area or crop type.
-It uses the NewsService component in order to get always up to date news and all it's managed by the NewsManager component.
+This sequence diagram represents the interactions between components that occur when displaying the news regarding farmers' interests to them, such as news concering the same area or crop type of the farmer.
+It uses the NewsService component in order to get always up-to-date news and all it's managed by the NewsManager component.
 
 \newpage
 \textbf{Forum}
@@ -342,8 +342,8 @@ It uses the NewsService component in order to get always up to date news and all
         \label{fig: forum}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between the components composing the forum. 
-It is split into two part the one that allows the user to make a post in an already existing thread and the one that allows the user to create a new thread.
+This sequence diagram represents the interactions between the components of the forum. 
+It is split into two part: the one that allows the user to make a post in an already existing thread and the one that allows the user to create a new thread.
 
 \newpage
 \textbf{Check Weathar Forecast}
@@ -354,8 +354,8 @@ It is split into two part the one that allows the user to make a post in an alre
         \label{fig: forecast}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between components in order to displays to the users the weather forecast in relation to their area.
-It uses the WeatherForecastService component in order to get always up to date forecast and all it's managed by the WeatherManager component.
+This sequence diagram represents the interactions between components that occur when displaying the weather forecast to the users. The weather report is tailored to the user area.
+It uses the WeatherForecastService component in order to get always up-to-date forecast and all it's managed by the WeatherManager component.
 
 \newpage
 \textbf{Help Request Interaction}
@@ -366,12 +366,12 @@ It uses the WeatherForecastService component in order to get always up to date f
         \label{fig: helpRequest}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between the components needed to manage the help request that the farmers send to the agronomists.
-When a farmer send an help request the system save it in the database.
+This sequence diagram represents the interactions between the components needed to manage the help requests that the farmers send to the agronomists.
+When a farmer sends a help request the system saves it in the database.
 When the agronomist is online an automatic script checks if there are some unread messages in the database and sends them to the agronomist.
-The agronomist replys to the request and saves it into the database. 
-When the faremer is online another automatic script checks if there are some unread reply in the database and displays them to the farmer.
-This method works also if one of the two actor is offline because the saving of the messages in the database.   
+The agronomist replies to the request and saves it into the database. 
+When the farmer is online another automatic script checks if there are some unread replies in the database and displays them to the farmer.
+Since the exchange is necessarly asyncronous because of the fact that the receiver of the message might be offline in the moment of the delivery, the messages have to be stored on the database and the unread ones have to be fetched each time the user is back online.   
 
 \newpage
 \textbf{Daily Plan Management}
@@ -382,8 +382,8 @@ This method works also if one of the two actor is offline because the saving of 
         \label{fig: dailyPlan}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between components in order to manage the daily plan.
-In the diagram are present either the creation and the updating of the plan.
+This sequence diagram represents the interactions between components in managing the daily plan.
+In the diagram, there are both the creation and the update of the plan.
 
 
 
