@@ -14,6 +14,7 @@
 \hyphenation{an-a-lys-ing}
 \hyphenation{a-gron-o-mists}
 \hyphenation{a-gron-o-mist}
+\hyphenation{da-ta-base}
 \titleformat{\paragraph}
 {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}
@@ -258,6 +259,7 @@ This sequence diagram represents the interactions between components that occur 
 \end{center}
 This sequence diagram represents the interactions between components that occur when displaying the sensors data regarding soil humidity to a policy maker user.
 The business logic running on the Application Server retrieves these data from an external source, furthermore it handles them just temporarely since they are not modified by our system and they're fetched on user demand.   
+The user can also specify the area of the region by using the parameter 'area', so it's simpler to check a specific area instead of the whole region.
 
 \newpage
 \textbf{Check Water Irrigation Data} 
@@ -394,10 +396,40 @@ In the diagram, there are both the creation and the update of the plan.
 \subsection{Selected architectural styles and patterns}
 
 \subsection{Other design decisions}
-
+\newpage
 \section{User Interface Design}
+\begin{center}
+    \begin{figure}[H]
+        \includegraphics[scale=0.74, center]{assets/MockUp/SignUpandLogin.png}
+        \caption{Sign Up and Log In}
+        \label{fig: signMockup}
+    \end{figure}
+\end{center}
 
-
+\begin{center}
+    \begin{figure}[H]
+        \vspace{-50px}
+        \includegraphics[scale=0.8, center]{assets/MockUp/AgroInteractions.png}
+        \caption{Agronomists Interactions}
+        \label{fig: agroMockup}
+    \end{figure}
+\end{center}
+\begin{center}
+    \begin{figure}[H]
+        \vspace{-120px}
+        \includegraphics[scale=0.6, center]{assets/MockUp/FarmerInteraction.png}
+        \caption{Farmers Interactions}
+        \label{fig: farmerInter}
+    \end{figure}
+\end{center}
+\begin{center}
+    \begin{figure}[H]
+        \vspace{-100px}
+        \includegraphics[scale=0.7, center]{assets/MockUp/PMInteractoins.png}
+        \caption{Policy Maker Interactions}
+        \label{fig: PMInter}
+    \end{figure}
+\end{center}
 \section{Requirements Traceability}
 
 
