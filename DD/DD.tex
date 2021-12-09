@@ -123,7 +123,7 @@ The architecture of the application is structured in three logic layers:
 
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.70, center]{assets/4-tier-architecture-scheme.jpg}
+        \includegraphics[scale=0.70, center]{assets/4-tier-architecture-scheme.png}
         \caption{High Level Architecture}
         \label{fig: high_level_architecture}
     \end{figure}
@@ -133,20 +133,19 @@ The system, as shown in \textit{Figure (\ref{fig: four-tier-architecture-scheme}
 The tiers are separated by firewalls in order to guarantee a higher level of security to the whole system.
 A thin client is used to prevent heavy computation load client side, in this way all the heavy operations are executed at server side.
 The client's devices can be a personal computer, a mobile device or any kind of IT device able to connect to the Web Server through a web browser. In fact, the four-tiers architecture has been specifically chosen to allow the widest variety of commercial devices to access the application, without the need of developing an OS-specific one for each of them.
-
+The Web Server manages the HTTP requests by the users and forwards them to the Application Server.
 The Application Server communicates with the Database Server and transform data following its business logic.
-It also manages the news and the weather forecast services.
+It also manages all the external APIs including: Google Maps API, the news, the weather forecast, the water irrigation system and the humidity sensors.
 This allows to retrieve data like weather information directly from it in order to show them to the user.
-Finally, to enable the geolocalization, the Application Server uses the API provided by Google Maps.
-For what concern the other components, such as the water irrigation system and the humidity sensors, they are connected to the Database Server that exchanges data with the Application Server.
-%The Web Server also manages the data coming from the irrigation system and the humidity sensors.
+To enable the geolocalization, the Application Server uses the API provided by Google Maps.
+The Database Server manages all the internal data sources and communicates directly with the Application Server.
 All the components will be described in depth in the following sections.
 
 \subsection{Component view}
 \subsubsection*{General Component View}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.50, center]{assets/general-component-view.jpg}
+        \includegraphics[scale=0.45, center]{assets/general-component-view.png}
         \caption{General Component Diagram}
         \label{fig: general_component_view}
     \end{figure}
@@ -155,7 +154,7 @@ All the components will be described in depth in the following sections.
 This image gives a high level representation of the components of the system.
 On the left are shown the provided interfaces between the Web Server and the Application Server that in this scheme is represented as a "black box"; a complete description of it is provided in the next section.
 All the interfaces basically represent the main functionalities requested by the client application.
-On the right there are the requested interfaces. Among these, one is responsible of the geolocalization and is provided by the Google Maps API, the others manage the weather forecast and the news services.
+On the right there are the requested interfaces. Among these, one is responsible of the geolocalization and is provided by the Google Maps API, the others manage the remaining external services such as the weather forecast, the news, the water irrigation system and the humidity sensors.
 Finally, the DBMS interface manages the DBMS service and it's responsible of the communication between the Application Server and the Database Server.
 
 \subsubsection*{Application Server Component View}
@@ -176,11 +175,11 @@ External elements in the diagram are represented in a simplified way.
     Once a user is logged in, all the specific functionalities are provided by the component that manages this type of user.
     Finally it communicates with the \textit{LocationModule} that provides the geolocalization service.
     \item \textbf{LocationModule}: this module provides the interface that allows the geolocalization of the farm based on the GPS and on the address provided by the farmer.
-    In order to provide this service, it communicates with the map service manager.
+    In order to provide this service, it communicates with the \textit{MapServiceManager}.
     \item \textbf{MapServiceManager}: this component communicates directly with the external API provided by Google Maps, it provides information regarding the region and allows the user to visualize the map of a specific location.
     Mainly it adapts the data received by the API in a comprehensible way for the other components, it also manages the API requests.
     \item \textbf{PolicyMakerManager}: it manages the policy maker services, these include: steering initiatives, ranking, water irrigation system and humidity sensors.
-    The steering initiative service and the ranking service are mapped through an interface to the internal database, on the other side the water irrigation service and the humidity sensor service are considered external services and for this reason are linked to an external database.
+    The steering initiative service and the ranking service are mapped through an interface to the internal database, on the other side the water irrigation service and the humidity sensor service are considered external services and are managed by the \textit{SensorsDataManager}.
     \item \textbf{AgronomistManager}: it manages the agronomist services, these include: answer help requests, daily plan and ranking.
     It includes the weather external interface, it communicates with the weather component in order to provide the weather forecast service to the agronomist.
     The daily plan service and the ranking service are linked to the internal database, instead the answer request service communicates directly with the \textit{HelpRequestManager} component.
@@ -188,9 +187,8 @@ External elements in the diagram are represented in a simplified way.
     It includes two external interfaces: the first one communicates with the \textit{WeatherManager} component in order to provide the weather forecast service to the farmer, the other one communicates with the \textit{NewsManager} component.
     In this case, only the production service is linked directly to the internal database, instead the ask request service is linked to the \textit{HelpRequestManager} component, while the forum service exposes an interface to connect to the \textit{ForumManager} component.
     \item \textbf{ForumManager}: this component manages the forum section, in particular it is responsible of the management of all the topics with the related messages between farmers.
-    \item \textbf{DataManager}: it provides access to the external interface of the database, it manages queries and interacts with both the internal and the external databases.
-    It includes two components: one is responsible of the operations with the external database, the other of the internal database.
-    Both these components expose the related interface in order to use the service.
+    \item \textbf{DataManager}: it provides access to the external interface of the database, it manages queries and interacts with the DBMS.
+    It includes one component that expose an interface that allow other internal components to communicate with the database.
     This component is connected to the \textit{DBMSService} external component, this establishes the connection between the Application Server and the Database Server.
     \item \textbf{HelpRequestManager}: it manages the help requests between farmers and agronomists.
     It communicates with the \textit{FarmerManager} component for the help requests to ask, on the other way it communicates with the \textit{AgronomistManager} component for the ones to answer.
@@ -199,6 +197,8 @@ External elements in the diagram are represented in a simplified way.
     To do this it interacts with the external component \textit{NewsService}.
     \item \textbf{WeatherManager}: this component manages the service related to the weather forecast.
     It interacts with the external component \textit{WeatherForecastService} in order to get the weather data.
+    \item \textbf{SensorsDataManager}: this component handles two external APIs, the first one provided by the water irrigation system and the other one provided by the humidity sensors.
+    Both services are used by the \textit{PolicyMakerManager}.
 \end{itemize}
 
 \subsection{Deployment view}
