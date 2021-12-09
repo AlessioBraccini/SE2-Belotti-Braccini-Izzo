@@ -15,6 +15,7 @@
 \hyphenation{a-gron-o-mists}
 \hyphenation{a-gron-o-mist}
 \hyphenation{da-ta-base}
+\hyphenation{ca-u-sed}
 \titleformat{\paragraph}
 {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}
@@ -213,7 +214,7 @@ In later diagrams some parts, like the login phase or the come back to home page
 \textbf{Sign Up}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.38, center]{assets/SequenceDiagram/SignUp.jpg}
+        \includegraphics[scale=0.25, center]{assets/SequenceDiagram/SignUp.png}
         \caption{Sign Up phase}
         \label{fig:signup}
     \end{figure}
@@ -228,7 +229,7 @@ At the end of the process, if every check results succesful, the user is registe
 \textbf{Log In}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/Login.jpg}
+        \includegraphics[scale=0.8, center]{assets/SequenceDiagram/Login.png}
         \caption{Login Phase}
         \label{fig: login}
     \end{figure}
@@ -241,7 +242,7 @@ In case of success, the user can log in the system and use its functionalities a
 \textbf{View Steering Initiative Reports}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/Report.jpg}
+        \includegraphics[scale=0.4, center]{assets/SequenceDiagram/Report.png}
         \caption{View Initiative reports}
         \label{fig: report}
     \end{figure}
@@ -252,7 +253,7 @@ This sequence diagram represents the interactions between components that occur 
 \textbf{Check Soil Humidity Data}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/Soil.jpg}
+        \includegraphics[scale=0.7, center]{assets/SequenceDiagram/Soil.png}
         \caption{Check Soil Humidity Sensors Data}
         \label{fig: humidity}
     \end{figure}
@@ -265,7 +266,7 @@ The user can also specify the area of the region by using the parameter 'area', 
 \textbf{Check Water Irrigation Data} 
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/Irrigation.jpg}
+        \includegraphics[scale=0.7, center]{assets/SequenceDiagram/Irrigation.png}
         \caption{Check Water Irrigation Sensors Data}
         \label{fig: irrigation}
     \end{figure}
@@ -277,7 +278,7 @@ The function is the same of the above mentioned case.
 \textbf{View Farmers Ranking}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/Ranking.jpg}
+        \includegraphics[scale=0.8, center]{assets/SequenceDiagram/Ranking.png}
         \caption{View Farmers Ranking}
         \label{fig: ranking}
     \end{figure}
@@ -293,7 +294,7 @@ Instead, when an agronomist wants to use this functionality, \texttt{area} will 
 \textbf{View Specific Farmers Informations}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/SpecificFarmerInfo.jpg}
+        \includegraphics[scale=0.8, center]{assets/SequenceDiagram/SpecificFarmerInfo.png}
         \caption{View Specific Farmer Informations}
         \label{fig: specificFarmerInfo}
     \end{figure}
@@ -304,7 +305,7 @@ This sequence diagram represents the interactions between components caused by a
 \textbf{Profile Edit}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/ProfileEdit.jpg}
+        \includegraphics[scale=0.75, center]{assets/SequenceDiagram/ProfileEdit.png}
         \caption{Edit Profile}
         \label{fig: profileEdit}
     \end{figure}
@@ -315,7 +316,7 @@ This sequence diagram represents the interactions between components that occur 
 \textbf{Insert Production Data}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/InsertProduction.jpg}
+        \includegraphics[scale=0.75, center]{assets/SequenceDiagram/InsertProduction.png}
         \caption{Insert Production Data}
         \label{fig: production}
     \end{figure}
@@ -327,19 +328,19 @@ Each new production entry cause the score associated to the farmer to be calcula
 \textbf{Check News}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/CheckNews.jpg}
+        \includegraphics[scale=0.4, center]{assets/SequenceDiagram/CheckNews.png}
         \caption{Check News}
         \label{fig: news}
     \end{figure}
 \end{center}
 This sequence diagram represents the interactions between components that occur when displaying the news regarding farmers' interests to them, such as news concering the same area or crop type of the farmer.
-It uses the NewsService component in order to get always up-to-date news and all it's managed by the NewsManager component.
+The NewsManager uses the NewsService component in order to get always up-to-date news.
 
 \newpage
 \textbf{Forum}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.55, center]{assets/SequenceDiagram/Forum.jpg}
+        \includegraphics[scale=0.4, center]{assets/SequenceDiagram/Forum.png}
         \caption{Interact with Forum}
         \label{fig: forum}
     \end{figure}
@@ -351,19 +352,19 @@ It is split into two part: the one that allows the user to make a post in an alr
 \textbf{Check Weathar Forecast}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/Forecast.jpg}
+        \includegraphics[scale=0.3, center]{assets/SequenceDiagram/Forecast.png}
         \caption{Check the Weather Forecasat}
         \label{fig: forecast}
     \end{figure}
 \end{center}
 This sequence diagram represents the interactions between components that occur when displaying the weather forecast to the users. The weather report is tailored to the user area.
-It uses the WeatherForecastService component in order to get always up-to-date forecast and all it's managed by the WeatherManager component.
+The WeatherManager component uses the WeatherForecastService component in order to get always up-to-date forecast.
 
 \newpage
 \textbf{Help Request Interaction}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.45, center]{assets/SequenceDiagram/HelpRequest.jpg}
+        \includegraphics[scale=0.3, center]{assets/SequenceDiagram/HelpRequest.png}
         \caption{Help Request Interactions}
         \label{fig: helpRequest}
     \end{figure}
@@ -379,7 +380,8 @@ Since the exchange is necessarly asyncronous because of the fact that the receiv
 \textbf{Daily Plan Management}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.47, center]{assets/SequenceDiagram/DailyPlan.jpg}
+        
+        \includegraphics[scale=0.45, center]{assets/SequenceDiagram/DailyPlan.png}
         \caption{Daily Plan Interactions}
         \label{fig: dailyPlan}
     \end{figure}
