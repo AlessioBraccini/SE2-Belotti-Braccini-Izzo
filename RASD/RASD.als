@@ -52,7 +52,7 @@ reports: disj set Report
 sig Farm{
 owner: one Farmer,
 position : one Location,
-cropType: one Crop
+cropType: some Crop
 }
 
 abstract sig DataProvider{
@@ -300,7 +300,7 @@ fact allFarmsInDpSameArea{
 //production cropType is the same of the farm
 fact prodCropTypeSameAsFarm{
 	all f: Farmer | all prodData: ProductionData | f.productionData=prodData 
-		implies prodData.cropType = f.farm.cropType
+		implies prodData.cropType in f.userFarm.cropType
 }
 
 //a news must have at least one of the two: a concerned cropType or a concerned area
@@ -310,7 +310,8 @@ fact newsType{
 
 //all relevant news to the farmer (same CropType or same Area) must be shown to him/her
 fact ifNewsRelevantThenShow{
-	all n: News, f: Farmer | (f.userFarm.cropType in n.cropType 
+	all n: News, f: Farmer | 
+		((f.userFarm.cropType & n.cropType)!= none 
 			or f.userFarm.position.region in n.area) 
 		iff n in f.relevantNews
 }
@@ -429,14 +430,14 @@ assert allSteeringInitiativesAreReceivedByPC{
 //G4. Visualize relevant data for the farmer business
 assert relevantNewsForFarmer{
 	all f: Farmer, n: News | n in f.relevantNews 
-		iff ((f.userFarm.cropType in n.cropType)
+		iff ((f.userFarm.cropType & n.cropType) != none
 			or (f.userFarm.position.region in n.area))
 }
 
 //G5. Keep track of the production
 pred farmerProdEntryInsertion[f: Farmer, p1,p2: ProductionData]{
-	p1.cropType = f.userFarm.cropType 
-	and p2.cropType = f.userFarm.cropType
+	p1.cropType in f.userFarm.cropType 
+	and p2.cropType in f.userFarm.cropType
 	and p1.farm = f.userFarm and p2.farm = f.userFarm
 	and (p1.sownQty >= 0 or p1.harvestedQty >= 0) 
 	//p2 > 0 to show at least one interesting production entry
