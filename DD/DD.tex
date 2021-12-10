@@ -99,8 +99,9 @@ This document also extends in part to the implementation and testing plan, where
     \item \textbf{Section 4} links the RASD to the DD, it maps the goals and the requirements described in the RASD to the actual functionalities presented in this DD.
     \item \textbf{Section 5} presents a description of the implementation, testing and integration phases of the system components that are going to be carried out during the technical development of the application.
 \end{itemize}
-\section{Architectural Design}
 
+\newpage
+\section{Architectural Design}
 
 \subsection{Overview}
 \begin{center}
@@ -201,8 +202,38 @@ External elements in the diagram are represented in a simplified way.
     Both services are used by the \textit{PolicyMakerManager}.
 \end{itemize}
 
+\newpage
 \subsection{Deployment view}
+\begin{center}
+    \begin{figure}[H]
+        \includegraphics[scale=0.45, center]{assets/deployment_diagram.png}
+        \caption{Deployment Diagram}
+        \label{fig: deployment_diagram}
+    \end{figure}
+\end{center}
 
+The deployment diagram in \textit{Figure (\ref{fig: deployment_diagram})} shows the most important components necessary for the correct behaviour of the system.
+The devices shown in the diagram are:
+\begin{itemize}
+    \item \textbf{PC/Smartphone}: they are the client machines, can be used by all the type of users.
+    It allows the user to connect to the Web Server through a web browser as long as the HTTPS protocol is used.
+    \item \textbf{Firewall}: first level of security, it guarantees safety access to the internal network of the system.
+    \item \textbf{Load balancer}: the main goal is to prevent the overload of a server, this device distributes the incoming requests equally across multiple servers.
+    This increase availability and reliability of the application.
+    The one selected is the \textit{jetNEXUS ALB-X}.
+    \item \textbf{Web Server}: it manages the HTTPS requests from the clients and route them to the \textit{Application Server} for processing.
+    On the other way it is responsible of the incoming requests from the application server, they are managed by serving an HTML file to the client in addition to CSS and JS sheets.
+    The result page is built with a client-side scripting.
+    Finally web servers are duplicated to ensure high scalability and to guarantee good performance in case of a single point of failure.
+    \item \textbf{Application Server}: it runs the core functionalities of the system, here there is the application logic.
+    It also manages all the external APIs such as the Google Maps API and the weather forecast API.
+    Just like the \textit{Web Server}, for the same reasons, it is duplicated.
+    The \textit{Application Server} and the \textit{Database Server} are connected through an internal LAN, there are no firewalls between them in order to increase the average connection speed.
+    Finally, it establishes the connection with the data tier through the DBMS interface.
+    \item \textbf{Database Server}: it represents the data tier, it receives the requests from the \textit{Application Server} and manages them.
+    MySQL has been selected as the main database infrastructure, this allow to manage easily and in a secure way all the data sources.
+    
+\end{itemize}
 \newpage
 \subsection{Runtime view}
 
