@@ -421,9 +421,6 @@ This sequence diagram represents the interactions between components in managing
 In the diagram, there are both the creation and the updating of the daily plan.
 
 
-
-
-
 \subsection{Component interfaces}
 
 \begin{center}
@@ -440,7 +437,34 @@ Please note that the methods described in \textit{Figure (\ref{fig: component_in
 
 \subsection{Selected architectural styles and patterns}
 
+    \begin{itemize}
+        \item \textbf{Four tier architecture} \newline
+              This kind of architecture divides the system in four different modules: client, presentation, applications and data tier.
+              As descibed in the previous sections, the architecture is based on this architectural style.
+        \item \textbf{Thin client} \newline
+              The thin client approach increases performance and security since that every piece of data are not stored locally but in a centralized server.
+        \item \textbf{Scalability} \newline
+              A four tiers application guarantee that the scaling approach architecture is adopted only for the most critial components.
+              The result obtained maximize the performances but also minimize the costs.
+        \item \textbf{Model View Controller} \newline
+              Model View Controller \cite{mvc} (MVC) is a software design pattern used for developing user interfaces that divides the program logic into three interconnected elements.
+              This separate internal information representations from the ways they're presented to and accepted from the user.
+              These three components are:
+              \begin{itemize}
+                  \item Model: the central component of the pattern. It is the application's dynamic data structure, independent of the user interface. It directly manages the data, logic and rules of the application.
+                  \item View: The view defines how the app's data should be displayed.
+                  \item Controller: it contains logic that updates the model and/or view in response to input from the users of the app. 
+              \end{itemize}
+    \end{itemize}
+
+\newpage
+
 \subsection{Other design decisions}
+    %\subsubsection{Servers availability and response time} moltiplicare i server and load balancer
+    %\subsubsection{Farmers ranking creation} Only the ratio harvested/plant?
+    %\subsubsection{Farmers location} GPS coordinates?
+    %\subsubsection{Agronomist daily plan}  maybe the 23:59 stuff?
+
 \newpage
 \section{User Interface Design}
 \begin{center}
@@ -480,11 +504,26 @@ Please note that the methods described in \textit{Figure (\ref{fig: component_in
 
 \section{Implementation, Integration and Test Plan}
 
-
+\newpage
 \section{Effort Spent}
+    \begin{tabular}{| c || c | c| c| c |c|}
+        \hline
+        Student & Time for S.1 & S.2 & S.3 & S.4 & S.5\\ \hline
+        Ottavia Belotti & 1h & 2h & 2h & ? & ? \\
+        Alessio Braccini & 2h & 8h & 8h & ?  & ? \\
+        Riccardo Izzo & 2h & 11h & 1h & ?  & ? \\
+        \hline
+    \end{tabular}
 
 
 \section{References}
 
+
+\begin{thebibliography}{9}
+    \bibitem{mvc}
+    MDN Web Docs Glossary: Definitions of Web-related terms -> MVC
+    \url{https://developer.mozilla.org/en-US/docs/Glossary/MVC}
+    
+\end{thebibliography}
 
 \end{document}
