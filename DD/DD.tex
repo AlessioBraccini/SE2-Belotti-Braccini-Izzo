@@ -237,7 +237,7 @@ The devices shown in the diagram are:
 \newpage
 \subsection{Runtime view}
 
-Here are represented the runtime view of some relevant uses case of the system through some sequence diagrams. 
+Here are represented the runtime view of some relevant use cases of the system through some sequence diagrams. 
 In the diagrams, the part regarding the user is omitted because it has been considered superfluous to the understanding of the interaction.
 In later diagrams some parts, like the login phase or the come back to home page, were omitted for the above motivations.
 
@@ -245,36 +245,36 @@ In later diagrams some parts, like the login phase or the come back to home page
 \textbf{Sign Up}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.25, center]{assets/SequenceDiagram/SignUp.png}
-        \caption{Sign Up phase}
+        \includegraphics[scale=0.4, center]{assets/SequenceDiagram/SignUp.png}
+        \caption{Sign Up}
         \label{fig:signup}
     \end{figure}
 \end{center}
 Sign up is pretty standard: user registers himself/herself by inserting first name, last name, email, password, job role and area. If the user is a farmer, he/she chooses also the crop type the farm deals with.
-The Location module and Map service are used in this phase in order to ease the users in the selection of their location using the GPS. 
+The \textit{LocationModule} and the \textit{MapServiceManager} are used in this phase in order to ease the users in the selection of their location using the GPS. 
 However users can also select manually their location without the use of GPS.
 
-At the end of the process, if every check results succesful, the user is registered into the database by the Data Manager component.
+At the end of the process, if every check results succesfull, the user is registered into the database by the \textit{DataManager} component.
 
 \newpage
 \textbf{Log In}
 \begin{center}
     \begin{figure}[H]
         \includegraphics[scale=0.8, center]{assets/SequenceDiagram/Login.png}
-        \caption{Login Phase}
+        \caption{Log In}
         \label{fig: login}
     \end{figure}
 \end{center}
 
-The Log In phase simply consits in the user action of inserting their email (primary and unique key of the database) and password in the login fields, then the system checks if the pair corresponds to an entry in the database.
+The Log In phase simply consists in the user action of inserting their email (primary and unique key of the database) and password in the login fields, then the system checks if the pair corresponds to an entry in the database.
 In case of success, the user can log in the system and use its functionalities available for that particular type of account chosen during the Sign Up phase.
 
 \newpage
 \textbf{View Steering Initiative Reports}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.4, center]{assets/SequenceDiagram/Report.png}
-        \caption{View Initiative reports}
+        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/ViewInitiativeReport.png}
+        \caption{View Initiative Report}
         \label{fig: report}
     \end{figure}
 \end{center}
@@ -284,8 +284,8 @@ This sequence diagram represents the interactions between components that occur 
 \textbf{Check Soil Humidity Data}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.7, center]{assets/SequenceDiagram/Soil.png}
-        \caption{Check Soil Humidity Sensors Data}
+        \includegraphics[scale=0.7, center]{assets/SequenceDiagram/CheckSoilHumidityData.png}
+        \caption{Check Soil Humidity Data}
         \label{fig: humidity}
     \end{figure}
 \end{center}
@@ -297,8 +297,8 @@ The user can also specify the area of the region by using the parameter 'area', 
 \textbf{Check Water Irrigation Data} 
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.7, center]{assets/SequenceDiagram/Irrigation.png}
-        \caption{Check Water Irrigation Sensors Data}
+        \includegraphics[scale=0.7, center]{assets/SequenceDiagram/CheckWaterIrrigationData.png}
+        \caption{Check Water Irrigation Data}
         \label{fig: irrigation}
     \end{figure}
 \end{center}
@@ -309,23 +309,23 @@ The function is the same of the above mentioned case.
 \textbf{View Farmers Ranking}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.8, center]{assets/SequenceDiagram/Ranking.png}
+        \includegraphics[scale=0.8, center]{assets/SequenceDiagram/ViewFarmersRanking.png}
         \caption{View Farmers Ranking}
         \label{fig: ranking}
     \end{figure}
 \end{center}
 This sequence diagram represents the interactions between components that occur when displaying the farmers ranking to policy maker and agronomist users.
 It will be explained better later in the document. %add \ref{}
-The function includes an area parameter to specify which area the user wants the rank.
+The function includes an area parameter to specify which area the user wants the ranking.
 In order to achieve code reusability, this function is invoked by either policy makers or agronomists. 
-When a policy maker wants to see the rank the parameter \texttt{area} will be set to \texttt{all} in order to obtain the ranking comprehensive of all Telangana's farmer registered in the app.
-Instead, when an agronomist wants to use this functionality, \texttt{area} will be automatically taken to his/her respective responsibility area. Thanks to this, the function becomes more modular.
+When a policy maker wants to see the ranking the parameter \texttt{area} will be set to \texttt{all} in order to obtain the ranking comprehensive of all Telangana's farmer registered in the app.
+Instead, when an agronomist wants to use this functionality, \texttt{area} will be automatically taken to his/her respective responsibility area. By doing this, the function becomes more modular.
 
 \newpage
 \textbf{View Specific Farmers Informations}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.8, center]{assets/SequenceDiagram/SpecificFarmerInfo.png}
+        \includegraphics[scale=0.8, center]{assets/SequenceDiagram/ViewSpecificFarmerInformations.png}
         \caption{View Specific Farmer Informations}
         \label{fig: specificFarmerInfo}
     \end{figure}
@@ -337,7 +337,7 @@ This sequence diagram represents the interactions between components caused by a
 \begin{center}
     \begin{figure}[H]
         \includegraphics[scale=0.75, center]{assets/SequenceDiagram/ProfileEdit.png}
-        \caption{Edit Profile}
+        \caption{Profile Edit}
         \label{fig: profileEdit}
     \end{figure}
 \end{center}
@@ -347,7 +347,7 @@ This sequence diagram represents the interactions between components that occur 
 \textbf{Insert Production Data}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.75, center]{assets/SequenceDiagram/InsertProduction.png}
+        \includegraphics[scale=0.75, center]{assets/SequenceDiagram/InsertProductionData.png}
         \caption{Insert Production Data}
         \label{fig: production}
     \end{figure}
@@ -359,49 +359,49 @@ Each new production entry cause the score associated to the farmer to be calcula
 \textbf{Check News}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.4, center]{assets/SequenceDiagram/CheckNews.png}
+        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/CheckNews.png}
         \caption{Check News}
         \label{fig: news}
     \end{figure}
 \end{center}
 This sequence diagram represents the interactions between components that occur when displaying the news regarding farmers' interests to them, such as news concering the same area or crop type of the farmer.
-The NewsManager uses the NewsService component in order to get always up-to-date news.
+The \textit{NewsManager} uses the \textit{NewsAPI} component in order to get always up-to-date news.
 
 \newpage
 \textbf{Forum}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.4, center]{assets/SequenceDiagram/Forum.png}
-        \caption{Interact with Forum}
+        \includegraphics[scale=0.5, center]{assets/SequenceDiagram/PostInTheForum.png}
+        \caption{Forum}
         \label{fig: forum}
     \end{figure}
 \end{center}
 This sequence diagram represents the interactions between the components of the forum. 
-It is split into two part: the one that allows the user to make a post in an already existing thread and the one that allows the user to create a new thread.
+It is split into two part: the one that allows the user to make a post in an already existing topic and the one that allows the user to create a new topic.
 
 \newpage
-\textbf{Check Weathar Forecast}
+\textbf{Check Weather Forecast}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.3, center]{assets/SequenceDiagram/Forecast.png}
-        \caption{Check the Weather Forecasat}
+        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/CheckWeatherForecast.png}
+        \caption{Check Weather Forecast}
         \label{fig: forecast}
     \end{figure}
 \end{center}
 This sequence diagram represents the interactions between components that occur when displaying the weather forecast to the users. The weather report is tailored to the user area.
-The WeatherManager component uses the WeatherForecastService component in order to get always up-to-date forecast.
+The \textit{WeatherManager} component uses the \textit{WeatherForecastAPI} component in order to get always up-to-date forecast.
 
 \newpage
-\textbf{Help Request Interaction}
+\textbf{Help Request}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.3, center]{assets/SequenceDiagram/HelpRequest.png}
-        \caption{Help Request Interactions}
+        \includegraphics[scale=0.5, center]{assets/SequenceDiagram/HelpRequestManager.png}
+        \caption{Help Request}
         \label{fig: helpRequest}
     \end{figure}
 \end{center}
 This sequence diagram represents the interactions between the components needed to manage the help requests that the farmers send to the agronomists.
-When a farmer sends a help request the system saves it in the database.
+When a farmer sends an help request the system saves it in the database.
 When the agronomist is online an automatic script checks if there are some unread messages in the database and sends them to the agronomist.
 The agronomist replies to the request and saves it into the database. 
 When the farmer is online another automatic script checks if there are some unread replies in the database and displays them to the farmer.
@@ -412,13 +412,13 @@ Since the exchange is necessarly asyncronous because of the fact that the receiv
 \begin{center}
     \begin{figure}[H]
         
-        \includegraphics[scale=0.45, center]{assets/SequenceDiagram/DailyPlan.png}
-        \caption{Daily Plan Interactions}
+        \includegraphics[scale=0.55, center]{assets/SequenceDiagram/ManageDailyPlan.png}
+        \caption{Daily Plan}
         \label{fig: dailyPlan}
     \end{figure}
 \end{center}
 This sequence diagram represents the interactions between components in managing the daily plan.
-In the diagram, there are both the creation and the update of the plan.
+In the diagram, there are both the creation and the updating of the daily plan.
 
 
 
