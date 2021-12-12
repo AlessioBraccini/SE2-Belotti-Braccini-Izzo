@@ -89,7 +89,9 @@ The user base is expected to include a large part of Telangana's population, bri
 
     Identify farmers that are performing badly in order to seek the help for them to get back on track. In fact, they are the ones that need to be helped by the agronomists and by regulation promoted by policy makers promoting better practices.
     \item \textbf{(\stepcounter{goalCtr}G\arabic{goalCtr}) Visualize the results of steering initiatives}\\
-    Visualize and evaluate the results produced by the steering initiatives from agronomists and good farmers in order to assess which are resulting useful and actually improving the food production system, so that those practices can be applied on a larger scale.
+    Visualize and evaluate the results produced by the steering initiatives from agronomists and good farmers in order to assess which are resulting useful and actually improving the food production system, so that those practices can be applied on a larger scale. 
+    
+    In order to check the general productivity and health of Telangana's lands, policy makers can base their evaluations by also monitoring the data sent by humidity sensors and the smart water irrigation systems installed across the territory.
 \end{enumerate}
 \underline{Farmers}
 \begin{enumerate}
@@ -211,6 +213,10 @@ The user base is expected to include a large part of Telangana's population, bri
     \item \textbf{UML}: Unified Modeling Language
 \end{itemize}
 \subsection{Revision history}
+\begin{itemize}
+    \item Version 1.0: first version published
+    \item Version 1.1: removed some technical aspects that should have been discussed more in detail in the associated DD document
+\end{itemize}
 \subsection{Reference documents}
 \begin{itemize}
     \item Specification document: "Assignment RDD AY 2021-2022"
@@ -410,14 +416,15 @@ There are four types of data:
 \end{itemize}
 \subsubsection{Policy makers functions}
 \begin{itemize}                                 
-    \item \textbf{Visualize relevant data and initiatives:} let the policy makers know a variety of data like the performances of the farmers by grouping them in a rank to know who are the farmers that are performing well and who are the worst one mainly based upon the production data provided by them.
+    \item \textbf{Visualize relevant data and initiatives:} let the policy makers know a variety of data like the performances of the farmers by grouping them in a rank to know who are the farmers that are performing well and who are the worst one mainly based upon the production data provided by them\footnotemark.
     Policy makers can also visualize the steering iniziatives presented by the agronomists' reports that are collected into a specific subsection of their application.
 \end{itemize}
+\footnotetext{The actual function computing the score is defined in the DD document.}
 \subsubsection{Farmers functions}
 \begin{itemize}
-    \item \textbf{Getting information about the agricolture field:} allow farmers to visualize news relevant to their business interests such as: wheather forecast for the day or for the next few days, articles posted on major online farming magazines that are related to their own crop type and specific fertilizers for their needs.
+    \item \textbf{Getting information about the agricolture field:} allow farmers to visualize news relevant to their business interests such as: wheather forecast for the day or for the next few days, articles posted on major online farming magazines that are related to their own crop type or area and specific fertilizers for their needs.
     \item \textbf{Agronomists Interactions:} allow farmers to send messages to the agronomist.
-    \item \textbf{Building a useful community on the forum:} allow farmers to create a new topic or reply to a message in the dedicated forum.
+    \item \textbf{Building a useful community on the forum:} allow farmers to create a new topic or join in a discussion in the dedicated forum.
 \end{itemize}
 \begin{center}
     \begin{figure}[H]
@@ -465,6 +472,7 @@ The application has been thought for the three different user categories that fo
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Users own an IT device to connect to the application
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Devices external to the system (e.g. humidity sensors, water irrigation systems, weather stations) are active and working properly for 99.9\% of the year
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Each Telangana's district has one and only one Agronomist\footnotemark[\value{footnote}]
+    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Sensor data, irrigation system data, weather forecast reports and news source can be accessed by the app through API
 \end{itemize}
 \footnotetext{This constraint is purposely stronger than what it could be in order to simplify a future implementation of the prototype (e.g. it won't allow local storaging of data while the device is not connected to internet, just one agronomist per district, etc.). It could be relaxed in a further release of the application.}
 \newpage
@@ -474,29 +482,30 @@ The application has been thought for the three different user categories that fo
 
 \subsubsection{User Interfaces}
 The system should interface with users through devices which must be connected to the Internet.
-Everyone that needs to use this service would connect to it through a web broswer from an existing domain, for example: dream.com.
-It must be easy to use as it will have to be used from different kind of people, sometimes with a not great affinity with technologies.
+Everyone that needs to use this service would connect to it through a web broswer from its existing domain (e.g. \textit{dream.com}).
+It has to be easy to interact with as it is going to be used from different kinds of people, may be without an extensive technological background.
 
 \subsubsection{Hardware Interfaces}
-The system "as it is" does not provide specific hardware equipment in order to access to web site. To use all functionalities it's required to have an IT devices connected to the internet, eventually a user can decide to use GPS to insert his own location and only proper devices with GPS equipment can do this. 
+\label{hardware_interfaces}
+The system "as it is" does not provide specific hardware equipment in order to access to web site. To use all functionalities it's required to have an IT device connected to the internet; potentially a user can decide to use GPS to insert his/her own location and only proper devices equipped with GPS can do this. 
 
-Soil data, obtained from sensors, are collect by someone else and will be added by the policy makers, also this not requires any special kind of hardware.
+Soil data and water irrigation data, obtained from sensors, are collected by other organizations (not by DREAM) that manage to let external services (like DREAM app) access them through their API. So these sensors are required by DREAM app but they're not handled by it.
 
 \subsubsection{Software Interfaces}
 \label{software_interfaces}
-In order to use the system, web broswer is required to run the application.
+In order to use the system, a web broswer is required to run the application.
 
-The system will also take advantage of some interfaces in order to accomplish its functionalities.
+Main application aside, whose functionalities are described in this document, the system will also take advantage of some interfaces in order to accomplish its requirements.
 
 Firstly, an external API is necessary to visualize on maps a farm's position or to let farmers locate their farm in registration phase.
 
 Then, another API service will be the one of the DBMS system which will be adopted in order to query the internal database.
 
-Finally, an API will be use to access the external database containing data regarding the sensors data and the other external systems data that the application needs.
+As already mentioned in section \ref{hardware_interfaces}, an API will be used to retrieve the data regarding the humidity sensors, the water irrigation systems, as well as weather forecast reports and news about agricolture, which all come from external data sources but are needed by DREAM system.
 
 \subsubsection{Communication Interfaces}
-Internet connection is mandatory in order to access to every formation that the system will display.
-Users that want full functionalities have to have a GPS system on their device in order to guarantee a certain level of precision in the localization phase.
+Internet connection is essential in order to access every information that the system will display. Without connection, the app won't work.
+Users that wish to experience the app's full functionalities should have a device equipped with GPS, in order to guarantee a certain level of precision in the localization phase, but this is not mandatory.
 
 \subsection{Functional Requirements}
 
@@ -513,7 +522,7 @@ Users that want full functionalities have to have a GPS system on their device i
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must suggest to the users the area in which they are during the registration phase if the IT device is equipped with GPS technology. In any case, the final decision will be up to the registering user.\\\hline  
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must inform the user to try later if they are experimenting connectivity issues .\\\hline
+    R\arabic{RequirementCtr}    & The system must inform the user to try later if they are experimenting connectivity issues.\\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation systems and soil humidity sensors.\\\hline
     \stepcounter{RequirementCtr}
@@ -602,7 +611,7 @@ Users that want full functionalities have to have a GPS system on their device i
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
              \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Visualize the results of steering initiatives\\\hline
-            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
+            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
             \cellcolor{pink!50}D4 & The internet connection works properly when the application is being used\\\hline
             \cellcolor{pink!50}D5 & The sensors measuring humidity level of the soil work properly\\\hline
             \cellcolor{pink!50}D7 & Water irrigation system sends the information accurately, with an error of at most 1\% \\\hline
@@ -612,9 +621,10 @@ Users that want full functionalities have to have a GPS system on their device i
             \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
             \cellcolor{pink!50}D13 & Devices external to the system (e.g. humidity sensors, water irrigation systems, weather stations) are active and working properly for 99.9\% of the year\\\hline
             \cellcolor{pink!50}D14 & Each Telangana's district has one and only one Agronomist\\\hline
+            \cellcolor{pink!50}D15 & Sensor data, irrigation system data, weather forecast reports and news sources can be accessed by the app through \\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R2 & The system shall allow users to be identified by an email of their choosing\\\hline
-            \cellcolor{SpringGreen!50}R4 & The system must inform the user to try later if they are experimenting connectivity issues .\\\hline
+            \cellcolor{SpringGreen!50}R4 & The system must inform the user to try later if they are experimenting connectivity issues\\\hline
             \cellcolor{SpringGreen!50}R6 & The system must allow Policy Makers to retrieve all agronomists' steering initiative reports uploaded to the database.\\\hline
         \end{tabular}
     \end{center}
@@ -1533,7 +1543,7 @@ Users that want full functionalities have to have a GPS system on their device i
 
 
 \subsection{Performance Requirements}
-The majority of the user base will be represented by the farmers that cover the 58\% \cite{specification} of the entire population of Telengana, while the number of policy-maker and agronomist users is irrelevant.
+The majority of the user base will be represented by the farmers that cover the 58\% \cite{specification} of the entire population of Telengana, while the number of policy-maker and agronomist users is fairly irrelevant.
 According to Unique Identification Aadhar India, Telangana population in 2021 is estimated to be 39.9 million\cite{population}.
 This means that the system is expected to be widely adopted with the registration of millions of users just in the first year.
 Also the average workload of the system is expected to be high, the goal is to guarantee the simultaneous connection of at least 2 millions of individuals.
@@ -1544,8 +1554,8 @@ Finally the system should have a good response time, less than 3 seconds is reas
 \subsubsection{Standards compliance}
 DREAM's user data must be treated respecting the law according to the PDPA\cite{pdpa}.
 \subsubsection{Hardware limitations}
-The software is designed to enhance the portability, in fact it is enough to have a device with a stable internet connection.
-In order to use the application correctly it is required to have a device equipped with GPS.
+The software is designed to enhance the portability, in fact it is enough to have a device with a stable internet connection. But this might be a challenge given the context in which the system has to integrate in, so it represents also the system's limitation.
+In order to fully use the application, it is required to have a device equipped with GPS.
 %\subsubsection{Any other constraint}
 
 \subsection{Software System Attributes}
@@ -1556,7 +1566,7 @@ Finally all the components of the system must be characterized by the highest MT
 
 \subsubsection{Availability}
 The system should be up almost 24/7 in order to allow users to use the application's services at any time.
-The peak of use is expected during the working hours, it means that it is better to do all the maintainance activities during the night hours.
+The peak of usage is expected to be during the working hours, so it means that it is better to do all the maintainance activities during the night hours.
 
 \begin{center}
     \begin{figure}[!h]
@@ -1602,8 +1612,8 @@ The code must be extensively tested.
 The system must be extendible in order to support future updates.
 User's application will be regularly updated.
 \subsubsection{Portability}
-The system is designed to work on different operating systems like Windows, MacOS and Linux.
-All main browsers are supported.
+The system is designed to work on different operating systems like Windows, MacOS, Linux, iOS and Android since it depends on a web browser.
+All main browsers are going to be supported: Google Chrome, Safari, Mozilla Firefox, Microsoft Edge.
 \newpage
 \section{Formal Analysis using Alloy}
 \subsection{Formal Analysis Purpose}

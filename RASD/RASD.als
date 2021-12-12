@@ -371,8 +371,8 @@ fact forumTopicNameUniqueness{
 	no disj t1,t2: ForumTopic | t1.name = t2.name
 }
 
-fact allSteeringInitiativesAreReceivedByPC{
-	all pc: PolicyMaker | all r: Report | r in pc.reports
+fact allSteeringInitiativesAreReceivedByPM{
+	all pm: PolicyMaker | all r: Report | r in pm.reports
 }
 
 //External data facts
@@ -400,8 +400,8 @@ fact locationUniquenessForWeatherForecast{
 		and d1.dateOfMeasure = d2.dateOfMeasure
 }
 
-fact statisticDataForPc{
-	all d: DataProvider | all pc: PolicyMaker | d in pc.statisticData
+fact statisticDataForPM{
+	all d: DataProvider | all pm: PolicyMaker | d in pm.statisticData
 }
 
 fact weatherRelevantForFarmer{
@@ -422,9 +422,9 @@ fact justOneAgronomistRelatedToDistrict{
 //---------ASSERTIONS & PREDICATES--------
 
 //G3. Visualize the results of steering initiatives
-assert allSteeringInitiativesAreReceivedByPC{
-	all r: Report, pc: PolicyMaker | #PolicyMaker > 0 
-		implies r in pc.reports
+assert allSteeringInitiativesAreReceivedByPM{
+	all r: Report, pm: PolicyMaker | #PolicyMaker > 0 
+		implies r in pm.reports
 }
 
 //G4. Visualize relevant data for the farmer business
@@ -518,7 +518,7 @@ pred show {}
 
 //-----------RUN & CHECK -------
 
-check allSteeringInitiativesAreReceivedByPC for 10
+check allSteeringInitiativesAreReceivedByPM for 10
 check relevantNewsForFarmer for 10
 check createADiscussion for 10
 check joinADiscussion for 10
