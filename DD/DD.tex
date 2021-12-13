@@ -464,10 +464,29 @@ Please note that the methods described in \textit{Figure (\ref{fig: component_in
 
 \subsection{Other design decisions}
 \label{other_design_decisions}
-    %\subsubsection{Servers availability and response time} moltiplicare i server and load balancer
-    %\subsubsection{Farmers ranking creation} Only the ratio harvested/plant?
-    %\subsubsection{Farmers location} GPS coordinates?
-    %\subsubsection{Agronomist daily plan}  maybe the 23:59 stuff?
+\subsubsection{Servers availability and response time} 
+In order to guarantee the availability of 99.998\% promised in the RASD, replicas of the web servers and the application servers are needed, this prevents the system to crash in case of a point failure.
+The response time described in the RASD is 0.5 seconds, the load balancer will allow to reach this goal by distributing the incoming requests from users among the replicas.
+The database server is replicated as well for the same reasons.
+So that, in case of failure the system can continue to work, thanks to the distributed nature of the system. 
+
+Furthermore, in case of failure of the whole system, the status can be restored thanks to backups. 
+So a backup routine has to be planned.
+Periodically, in an automated way, the system shall performs a backup of the system and replaces the older copy with it.
+\subsubsection{Farmers ranking} 
+
+\begin{equation}
+    score = {harvested\ qty\over sown\ qty}\cdot {(1 + {hostile\ weather\ days\over 365})}
+\end{equation}
+
+\subsubsection{Farmers location} In order to locate a farm the user has two options:
+    \begin{itemize}
+        \item Address: farm can be located through the address inserted by the user at the beginning.
+        The address is verified by the \textit{LocationModule}.
+        \item GPS coordinates: if the address hasn't been inserted by the user or, if the \textit{LocationModule} don't find the address, the user can msnuslly specify the coordinates with the help of the map service.
+    \end{itemize}
+\subsubsection{Agronomist daily plan} Everyday the agronomist has to fills out the daily plan.
+This can be manually updated and confirmed until the end of the day, otherwise the system automatically confirms the plan at 23:59 of the same day.
 
 \newpage
 \section{User Interface Design}
