@@ -499,8 +499,217 @@ Please note that the methods described in \textit{Figure (\ref{fig: component_in
         \label{fig: PMInter}
     \end{figure}
 \end{center}
+
 \section{Requirements Traceability}
 
+\begin{longtable}{|p{0.47\textwidth}|p{0.45\textwidth}|}
+    \hline
+    \textbf{Requirements} & \textbf{Components} \\\hline\hline
+    \begin{itemize}
+        \item[R1)] The system must allow only registered and logged-in users to use the app
+        \item[R2)] The system shall allow users to be identified by an email of their choosing
+        \item[R3)] The system must suggest to the users the area in which they are during the registration phase, if the IT device is equipped with GPS technology. In any case, the final decision will be up to the registering user
+    \end{itemize}
+    & 
+    \begin{itemize}
+        \item AccountManager
+        \item LocationModule
+        \item MapServiceManager
+    \end{itemize}
+    \\\hline
+
+    \begin{itemize}
+        \item[R4)] The system must inform the user to try later if they are experimenting connectivity issues
+    \end{itemize}
+    & 
+    \begin{itemize}
+        \item AccountManager
+    \end{itemize}
+    \\\hline
+
+    \begin{itemize}
+        \item[R5)] The system must allow Policy Makers to see up-to-date statistic data about water irrigation systems and soil humidty sensors
+        \item[R6)] The system must allow Policy Makers to retrieve all agronomists' steering initiative reports uploaded to the database
+        \item[R7)] The system must give Policy Makers up-to-date ranking of the best and worst performing farmers  
+    \end{itemize}
+    & 
+    \begin{itemize}
+        \item PolicyMakerManager
+        \begin{itemize}
+            \item WaterIrrigationService
+            \item HumiditySensorService
+            \item SteeringInitiativeService
+            \item RankingService
+        \end{itemize}
+        \item DataManager
+        \item SensorsDataManager
+        \item RankingManager
+    \end{itemize}
+    \\\hline
+
+    \begin{itemize}
+        \item[R8)] The system must use a fair and scientific score to rank the Farmers in order to represent the real situation 
+    \end{itemize}
+    & 
+    \begin{itemize}
+        \item RankingManager
+    \end{itemize}
+    \\\hline
+
+    \begin{itemize}
+        \item[R9)] The system must let Farmers insert their production information every day 
+    \end{itemize}
+    &
+    \begin{itemize}
+        \item FarmerManager
+        \begin{itemize}
+            \item ProductionService
+        \end{itemize}
+        \item DataManager
+    \end{itemize}
+    \\\hline
+
+    \begin{itemize}
+        \item[R10)] The system must provide the contact of the agronomist appointed to the area of the farmer requesting professional help
+    \end{itemize}
+    &
+    \begin{itemize}
+        \item FarmerManager
+        \begin{itemize}
+            \item AskRequestService
+        \end{itemize}
+        \item AgronomistManager
+        \item DataManager
+        \item HelpRequestManager
+    \end{itemize}
+    \\\hline
+
+    \begin{itemize}
+        \item[R11)] The system must allow every user registered as Farmer to access the forum, to create new discussions and to post replies to already existing ones
+    \end{itemize}
+    &
+    \begin{itemize}
+        \item FarmerManager
+        \begin{itemize}
+            \item ForumService
+        \end{itemize}
+        \item ForumManager
+        \item DataManager
+    \end{itemize}
+    \\\hline
+
+    \begin{itemize}
+        \item[R12)] The system must notify agronomists of unresolved requests of help from Farmers 
+    \end{itemize}
+    &
+    \begin{itemize}
+        \item AgronomistManager
+        \begin{itemize}
+            \item AnswerRequestService
+        \end{itemize}
+        \item HelpRequestManager
+    \end{itemize}
+    \\\hline
+
+    \begin{itemize}
+        \item[R13)] The system must allow the agronomists to add a new schedule for the day each day
+        \item[R14)] The system must suggest to the agronomists which farms to visit while planning the daily plan based upon the last visit day following a FIFO policy
+        \item[R15)] The system must suggest to the agronomists only the farms among the ones in their competence area  
+        \item[R16)] The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day
+        \item[R17)] The system must register the already uploaded schedule as definitive if the user doesn't confirm the daily plan for day \textit{x} before 23:59 of the day \textit{x}  
+    \end{itemize}
+
+    &
+    \begin{itemize}
+        \item AgronomistManager \begin{itemize}
+            \item DailyPlanService
+        \end{itemize}
+    \end{itemize}
+    \\\hline
+
+    \begin{itemize}
+        \item[R18)] The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area 
+    \end{itemize}
+    &
+    \begin{itemize}
+        \item RankingManager 
+        \item AgronomistManager
+        \begin{itemize}
+            \item RankingService
+        \end{itemize}
+    \end{itemize}
+    \\\hline
+
+    \begin{itemize}
+        \item[R19)] The system must show weather forecasts relevant to the area concerning the Farmer or the agronomist
+    \end{itemize}
+    &
+    \begin{itemize}
+        \item WeatherManager
+        \item FarmerManager
+        \item AgronomistManager
+    \end{itemize}
+    \\\hline
+
+    \begin{itemize}
+        \item[R20)] The system must present news concerning crop only if relevant to the Farmer's own crop type 
+    \end{itemize}
+    &
+    \begin{itemize}
+        \item FarmerManager
+        \item NewsManager
+    \end{itemize}
+    \\\hline
+\end{longtable}
+Here, we present a summary of the table above for a more immediate visualization.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l l|}
+        \hline
+        AccountManager:& AcM\\
+        LocationModule:& LM\\
+        MapServiceManager:& MSM\\
+        PolicyMakerManager:& PMM\\
+        AgronomistManager:& AgM\\
+        FarmerManager:& FaM\\
+        ForumManager:& FoM\\
+        DataManager:& DM\\
+        HelpRequestManager:& HRM\\
+        RankingManager & RM\\
+        NewsManager:& NM\\
+        WeatherManager:& WM\\
+        SensorsDataManager:& SDM\\\hline
+        
+    \end{tabular}
+\end{table}
+\newpage
+\setlength\LTleft{-1.94cm}
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+
+    \hline
+    & \cellcolor{blue!30}AcM & \cellcolor{blue!30}LM & \cellcolor{blue!30}MSM & \cellcolor{blue!30}PMM & \cellcolor{blue!30}AgM & \cellcolor{blue!30}FaM & \cellcolor{blue!30}FoM & \cellcolor{blue!30}DM & \cellcolor{blue!30}HRM & \cellcolor{blue!30}RM & \cellcolor{blue!30}NM & \cellcolor{blue!30}WM & \cellcolor{blue!30}SDM\\\hline
+    \cellcolor{SpringGreen!50}R1 & x & x & x &    &       &       &   &       &  &&    &   &\\\hline
+    \cellcolor{SpringGreen!50}R2 & x & x & x &    &       &       &   &       &  &&    &   &\\\hline
+    \cellcolor{SpringGreen!50}R3 & x & x & x &    &       &       &   &       &  &&    &   &\\\hline
+    \cellcolor{SpringGreen!50}R4 & x &  &  &    &       &       &   &       &  &&    &   &\\\hline
+    \cellcolor{SpringGreen!50}R5 &    & & & x & & && x && & &&x\\\hline
+    \cellcolor{SpringGreen!50}R6 &    & & & x & & && x && & &&x\\\hline
+    \cellcolor{SpringGreen!50}R7 &    & & & x & & && x && & &&x\\\hline
+    \cellcolor{SpringGreen!50}R8 &    & & & & & && x && & &&\\\hline
+    \cellcolor{SpringGreen!50}R9 &    & & & & & x && x && & &&\\\hline
+    \cellcolor{SpringGreen!50}R10 &    & & & & x & x && x & x & & &&\\\hline
+    \cellcolor{SpringGreen!50}R11 &    & & & & & x & x & x && & &&\\\hline
+    \cellcolor{SpringGreen!50}R12 &    & & & & x &  &&  & x & & &&\\\hline
+    \cellcolor{SpringGreen!50}R13 &    & & & & x &  &&  &  & & &&\\\hline
+    \cellcolor{SpringGreen!50}R14 &    & & & & x &  &&  &  & & &&\\\hline
+    \cellcolor{SpringGreen!50}R15 &    & & & & x &  &&  &  & & &&\\\hline
+    \cellcolor{SpringGreen!50}R16 &    & & & & x &  &&  &  & & &&\\\hline
+    \cellcolor{SpringGreen!50}R17 &    & & & & x &  &&  &  & & &&\\\hline
+    \cellcolor{SpringGreen!50}R18 &    & & & & x &  &&  &  & x & &&\\\hline
+    \cellcolor{SpringGreen!50}R19 &    & & & & x & x &&  &  & & & x &\\\hline
+    \cellcolor{SpringGreen!50}R20 &    & & & & & x &&  &  & & x &&\\\hline
+    \caption{Component and requirement mapping}\\
+\end{longtable}
 
 \section{Implementation, Integration and Test Plan}
 
@@ -509,7 +718,7 @@ Please note that the methods described in \textit{Figure (\ref{fig: component_in
     \begin{tabular}{| c || c | c| c| c |c|}
         \hline
         Student & Time for S.1 & S.2 & S.3 & S.4 & S.5\\ \hline
-        Ottavia Belotti & 1h & 2h & 2h & ? & ? \\
+        Ottavia Belotti & 1h & 2h & 2h & 2h & ? \\
         Alessio Braccini & 2h & 8h & 8h & ?  & ? \\
         Riccardo Izzo & 2h & 11h & 1h & ?  & ? \\
         \hline
