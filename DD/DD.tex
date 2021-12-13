@@ -194,6 +194,9 @@ External elements in the diagram are represented in a simplified way.
     \item \textbf{HelpRequestManager}: it manages the help requests between farmers and agronomists.
     It communicates with the \textit{FarmerManager} component for the help requests to ask, on the other way it communicates with the \textit{AgronomistManager} component for the ones to answer.
     Finally it provides an interface that communicate with the internal database in order to store the requests.
+    \item \textbf{RankingManager}: it manages the ranking system for both the policy maker and the agronomist.
+    It is responsible for calculating the final score used to compare the farmers in the ranking.
+    More details on how to calculate it can be found in \textit{Section (\ref{other_design_decisions})}.
     \item \textbf{NewsManager}: this component manages the service related to the news, it provides updated suggestions about crops and fertilizers for the farmers.
     To do this it interacts with the external component \textit{NewsService}.
     \item \textbf{WeatherManager}: this component manages the service related to the weather forecast.
@@ -460,6 +463,7 @@ Please note that the methods described in \textit{Figure (\ref{fig: component_in
 \newpage
 
 \subsection{Other design decisions}
+\label{other_design_decisions}
     %\subsubsection{Servers availability and response time} moltiplicare i server and load balancer
     %\subsubsection{Farmers ranking creation} Only the ratio harvested/plant?
     %\subsubsection{Farmers location} GPS coordinates?
