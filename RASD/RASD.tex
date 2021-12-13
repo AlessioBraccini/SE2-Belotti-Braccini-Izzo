@@ -542,7 +542,7 @@ Users that wish to experience the app's full functionalities should have a devic
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must allow the Agronomists to add a new schedule for the day each day.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must suggest to the Agronomists which farms to visit while planning the Daily Plan based upon the last visit day following a FIFO policy. Exceptions to the FIFO policy are the farms under-performing, which shall have higher priority.\\\hline
+    R\arabic{RequirementCtr}    & The system must suggest to the Agronomists which farms to visit while planning the Daily Plan based upon the last visit day following a FIFO policy.\\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must suggest to the Agronomists only the farms among the ones in their competence area.\\\hline
     \stepcounter{RequirementCtr}
@@ -578,7 +578,7 @@ Users that wish to experience the app's full functionalities should have a devic
             \cellcolor{SpringGreen!50}R7 & The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
             \cellcolor{SpringGreen!50}R10 & The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
             \cellcolor{SpringGreen!50}R12 & The system must notify Agronomists of unresolved requests of help from Farmers\\\hline      
-            \cellcolor{SpringGreen!50}R14 & The system must suggest to the Agronomists which farms to visit (among the ones in their area of competence) while planning the Daly Plan based upon the last visit day following a FIFO policy. Exceptions to the FIFO policy are the farms under-perfoming, which shall have higher priority.\\\hline
+            \cellcolor{SpringGreen!50}R14 & The system must suggest to the Agronomists which farms to visit while planning the Daily Plan based up on the last visit day following a FIFO policy.\\\hline
             \cellcolor{SpringGreen!50}R15 & The system must suggest to the Agronomists only the farms among the ones in their competence area.\\\hline
             \cellcolor{SpringGreen!50}R18 & The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area\\\hline
         \end{tabular}
@@ -742,7 +742,7 @@ Users that wish to experience the app's full functionalities should have a devic
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R4 & If users are experimenting connectivity issues,the system must inform them to try later.\\\hline
             \cellcolor{SpringGreen!50}R13 & The system must allow the Agronomists to add a new schedule for the day each day.\\\hline
-            \cellcolor{SpringGreen!50}R14 & The system must suggest to the Agronomists which farms to visit while planning the Daily Plan based upon the last visit day following a FIFO policy. Exceptions to the FIFO policy are the farms under-performing, which shall have higher priority.\\\hline
+            \cellcolor{SpringGreen!50}R14 & The system must suggest to the Agronomists which farms to visit while planning the Daily Plan based upon the last visit day following a FIFO policy.\\\hline
             \cellcolor{SpringGreen!50}R15 & The system must suggest to the Agronomists only the farms among the ones in their competence area.\\\hline
             \cellcolor{SpringGreen!50}R16 & The system must allow the Agronomists to update their schedule during he day and to confirm the execution before the end of the day.\\\hline
             \cellcolor{SpringGreen!50}R17 & The system must register the already uploaded schedule as definitive if the user doesn't confirm the daily plan for day \textit{x} before 23:59 of the day \textit{x}.\\\hline
@@ -786,6 +786,8 @@ Users that wish to experience the app's full functionalities should have a devic
 \end{itemize}
 
     \paragraph{Use Cases Description}
+
+    For more details regarding specifics interactions between DREAM app and user see the sequence diagrams in section \ref{sequencediagram}.
     
         \begin{itemize}
             \item \textbf {Shared Use Cases}
@@ -1275,7 +1277,7 @@ Users that wish to experience the app's full functionalities should have a devic
                     \cellcolor{SpringGreen!50}\textbf{1)Sign Up}\centering & R3) If the IT device is equipped with GPS technology, then the system must suggest the users the area in which they are during the registration phase. In any case, the final decision will be up to the registering user.
                                                                      
                                                                      R2) The system shall allow users to be identified by a username of their choosing.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{2)Log In}\centering & R18) The system shall allow users to be identified by a username of their choosing. \\\hline
+                    \cellcolor{SpringGreen!50}\textbf{2)Log In}\centering & R2) The system shall allow users to be identified by a username of their choosing. \\\hline
                     \cellcolor{SpringGreen!50}\textbf{3)View Initiative Reports}\centering &  R1) The system must allow only registered and logged-in users to use the app.
 
                                                                                               R6) The system must allow Policy Makers to retrieve all agronomists' steering initiative rep orts uploaded to the database.\\\hline
@@ -1284,7 +1286,7 @@ Users that wish to experience the app's full functionalities should have a devic
                                                                                                R5) The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation systems and soil humidity sensors.\\\hline
                     \cellcolor{SpringGreen!50}\textbf{5)Check Water Irrigation Data}\centering &  R1) The system must allow only registered and logged-in users to use the app.
 
-                                                                                                  R7) The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation systems and soil humidity sensors.\\\hline
+                                                                                                  R5) The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation systems and soil humidity sensors.\\\hline
                     
                     \cellcolor{SpringGreen!50}\textbf{6)View Farmers Ranking}\centering &  R1) The system must allow only registered and logged-in users to use the app.
 
@@ -1313,17 +1315,20 @@ Users that wish to experience the app's full functionalities should have a devic
                     
                                                                                     R19) The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
                     \cellcolor{SpringGreen!50}\textbf{13)Send an Help Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
-                    
-                                                                                  R10) The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.
+
+                                                                                            R4) The system must inform the user to try later if they are experimenting connectivity issues.
+
+                                                                                            R10) The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
                                                                                   
-                                                                                  R4) The system must inform the user to try later if they are experimenting connectivity issues .\\\hline
                     \cellcolor{SpringGreen!50}\textbf{14)Confirm Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
-                                                                                          R14) The system must suggest to the Agronomists which farms to visit (among the ones in their area of competence) while planning the Daily Plan based up on the last visit day following a FIFO policy. Exceptions to the FIFO policy are the farms under-performing, which shall have higher priority.
+                                                                                          R13) The system must allow the Agronomists to add a new schedule for the day each day.
+
+                                                                                          R14) The system must suggest to the Agronomists which
+                                                                                          farms to visit while planning the Daily Plan based
+                                                                                          up on the last visit day following a FIFO policy.
 
                                                                                           R15) The system must suggest to the Agronomists only the farms among the ones in their competence area.
-
-                                                                                          R13) The system must allow the Agronomists to add a new schedule for the day each day.
                                                                                         
                                                                                           R16) The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day.
                                                                                           
@@ -1356,7 +1361,7 @@ Users that wish to experience the app's full functionalities should have a devic
     \end{itemize}
 
         \newpage
-        \subsubsection{Sequence Diagrams}
+        \subsubsection{Sequence Diagrams} \label{sequencediagram} 
         \begin{itemize}
             \item \textbf{Shared Sequence Diagrams}\\
             
@@ -1548,7 +1553,7 @@ According to Unique Identification Aadhar India, Telangana population in 2021 is
 This means that the system is expected to be widely adopted with the registration of millions of users just in the first year.
 Also the average workload of the system is expected to be high, the goal is to guarantee the simultaneous connection of at least 2 millions of individuals.
 A mid-term goal could be to improve the scalability of the system in order to guarantee an efficient service to all users.
-Finally the system should have a good response time, less than 3 seconds is reasonable.
+Finally the system should have a good response time, less than 0.5 seconds is reasonable.
 \subsection{Design Constraints}
 
 \subsubsection{Standards compliance}
@@ -1561,7 +1566,7 @@ In order to fully use the application, it is required to have a device equipped 
 \subsection{Software System Attributes}
 \subsubsection{Reliability}
 To ensure data consistency the system must have a fully backup infrastructure, this allows to recover from general failures in the main system.
-The four components shown in the \textit{Figure(\ref{fig: availability})} operate in parallel, this guarantees high reliability and the correct functioning of the overall system in the case of a single component failure.
+The five components shown in the \textit{Figure(\ref{fig: availability})} operate in parallel, this guarantees high reliability and the correct functioning of the overall system in the case of a single component failure.
 Finally all the components of the system must be characterized by the highest MTTF and by the lowest MTTR possible.
 
 \subsubsection{Availability}
