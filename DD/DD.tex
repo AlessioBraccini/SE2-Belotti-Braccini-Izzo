@@ -9,6 +9,7 @@
 \usepackage{float}
 \usepackage[export]{adjustbox}
 \usepackage{longtable}
+\usepackage{mathtools}
 
 \hyphenation{Te-lan-ga-na}
 \hyphenation{an-a-lys-ing}
@@ -474,10 +475,26 @@ Furthermore, in case of failure of the whole system, the status can be restored 
 So a backup routine has to be planned.
 Periodically, in an automated way, the system shall performs a backup of the system and replaces the older copy with it.
 \subsubsection{Farmers ranking} 
+How to compute the score on which the farmer ranking will be based is a complex choice to make. In fact, the ranking system has been thought as an aid for policy makers and agronomists to understand how the farmers are performing. However, there are multiple factors that play a role in a farmer's performance, some of them not even immediately recognisable. Plus DREAM should highlight the climate resiliance aspects, which is not a trivial task.
 
+For the first version of the app, the following formula is proposed in order to achieve a fair and scientific way to compute the score associated to each farmer.
 \begin{equation}
-    score = {harvested\ qty\over sown\ qty}\cdot {(1 + {hostile\ weather\ days\over 365})}
+    score = {harvested\ qty\over sown\ qty}\cdot \left( 1 + {hostile\ weather\ days\over 365}\right)
 \end{equation}
+
+The formula can be broken down into two factors, $\eta$ and $\delta$:
+
+\begin{align}  
+    \eta &= {harvested\ qty\over sown\ qty}\\
+    \delta &= 1 + {hostile\ weather\ days\over 365}
+\end{align}
+$\eta$ is the main term that represents the productivity of a farmer, that is how efficient he/she has been given the quantity of sown seeds (in kilograms) and the return in harvested crop (in kilograms). 
+
+Whereas $\delta$ weighs up the harshness of the climate conditions endured by the farmer in the last year. The variable $hostile\ weather\ days$ is a counter of the days in which the climate has not been very lenient in the farm's region and could have ruined the plantation. Days are considered "hostile weather days" in case the amount of rain fallen during that day has been greater than 115.60 mm/hour (so in condition of very heavy rainfall or worse), particularly expected during monsoon seasons; as well as strong heat waves and prolonged periods of drought. Also specific crop disease that might have afflicted the region for a certain time during the year may be considered as challenging days to take in consideration. However, at the time of this document, just rainfalls data are available for the DREAM app, so only heavy rain days will be taken into account in computing the $\delta$ parameter.
+
+The role of $\delta$ is to favor farmers that have been particularly hitten by climatic problems but still have managed to produce, since this demonstrate that they've been able to carry out usefull practices that helped them staying productive despite the natural adversities. 
+
+The data used to calculate the score is all the one collected in the 12 months prior the computation. The score is worked out at the end of each week, and the ranking is directly proportional to it. If farmers obtain the same score, they are going to be ranked in the same position as well.
 
 \subsubsection{Farmers location} In order to locate a farm the user has two options:
     \begin{itemize}
@@ -684,6 +701,7 @@ This can be manually updated and confirmed until the end of the day, otherwise t
     \end{itemize}
     \\\hline
 \end{longtable}
+
 Here, we present a summary of the table above for a more immediate visualization.
 \begin{table}[H]
     \centering
@@ -704,6 +722,7 @@ Here, we present a summary of the table above for a more immediate visualization
         SensorsDataManager:& SDM\\\hline
         
     \end{tabular}
+    \caption{Components' legend}
 \end{table}
 \newpage
 \setlength\LTleft{-1.94cm}
