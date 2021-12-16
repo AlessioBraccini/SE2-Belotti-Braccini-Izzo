@@ -10,6 +10,9 @@
 \usepackage[export]{adjustbox}
 \usepackage{longtable}
 \usepackage{mathtools}
+\usepackage[most]{tcolorbox}
+\newcounter{testexample}
+\usepackage{xparse}
 
 \hyphenation{Te-lan-ga-na}
 \hyphenation{an-a-lys-ing}
@@ -23,6 +26,37 @@
 {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}
 {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+
+\def\exampletext{Example}
+
+\NewDocumentEnvironment{testexample}{ O{} }
+{
+\colorlet{colexam}{red!55!black} % Global example color
+\newtcolorbox[use counter=testexample]{testexamplebox}{%
+    % Example Frame Start
+    empty,% Empty previously set parameters
+    title={\exampletext: #1},% use \thetcbcounter to access the testexample counter text
+    % Attaching a box requires an overlay
+    attach boxed title to top left,
+       % Ensures proper line breaking in longer titles
+       minipage boxed title,
+    % (boxed title style requires an overlay)
+    boxed title style={empty,size=minimal,toprule=0pt,top=4pt,left=3mm,overlay={}},
+    coltitle=colexam,fonttitle=\bfseries,
+    before=\par\medskip\noindent,parbox=false,boxsep=0pt,left=3mm,right=0mm,top=2pt,breakable,pad at break=0mm,
+       before upper=\csname @totalleftmargin\endcsname0pt, % Use instead of parbox=true. This ensures parskip is inherited by box.
+    % Handles box when it exists on one page only
+    overlay unbroken={\draw[colexam,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: first page
+    overlay first={\draw[colexam,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: middle page
+    overlay middle={\draw[colexam,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: last page
+    overlay last={\draw[colexam,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },%
+    }
+\begin{testexamplebox}}
+{\end{testexamplebox}\endlist}
 
 
 \begin{document}
@@ -70,6 +104,11 @@ The scope of this design document lays in the definition of the system behavior,
 logical allocation of the components and the interaction between them.
 This document also extends in part to the implementation and testing plan, where one possible course of action is explained, user interface design of user applications and requirements traceability relating to the RASD.
 \subsection{Definitions, acronyms, abbreviations}
+\subsubsection*{Definitions}
+\begin{itemize}
+    \item \textbf{Production entry}: the pair sown quantity and harvested quantity of a certain crop that the farmer inserts as his/her production.
+    \item \textbf{Full production entry}: a production entry that carries both sown quantity and harvested quantity, even if inserted in different times of the year, as it normally should, since it is expected that the farmer will insert the sown quantity of crop during the sowing season and the harvested quantity during harvest. Every basic production entry should become a valid production entry.
+\end{itemize}
 \subsubsection*{Acronyms}
 \begin{itemize}
     \item \textbf{DREAM}: \emph{Data-driven predictive farming}
@@ -82,6 +121,10 @@ This document also extends in part to the implementation and testing plan, where
     \item \textbf{IT}: Information Technology
     \item \textbf{GUI}: Graphic User Interface
     \item \textbf{UI}: User Interface
+    \item \textbf{HTTPS}:HyperText Transfer Protocol Security
+    \item \textbf{HTML}: HyperText Markup Language
+    \item \textbf{CSS}: Cascade Style Sheet
+    \item \textbf{JS}: JavaScript
 \end{itemize}
 \subsection{Revision history}
 
@@ -138,7 +181,7 @@ The tiers are separated by firewalls in order to guarantee a higher level of sec
 A thin client is used to prevent heavy computation load client side, in this way all the heavy operations are executed at server side.
 The client's devices can be a personal computer, a mobile device or any kind of IT device able to connect to the Web Server through a web browser. In fact, the four-tiers architecture has been specifically chosen to allow the widest variety of commercial devices to access the application, without the need of developing an OS-specific one for each of them.
 The Web Server manages the HTTP requests by the users and forwards them to the Application Server.
-The Application Server communicates with the Database Server and transform data following its business logic.
+The Application Server communicates with the Database Server and manipulates data following its business logic.
 It also manages all the external APIs including: Google Maps API, the news, the weather forecast, the water irrigation system and the humidity sensors.
 This allows to retrieve data like weather information directly from it in order to show them to the user.
 To enable the geolocalization, the Application Server uses the API provided by Google Maps.
@@ -158,7 +201,7 @@ All the components will be described in depth in the following sections.
 This image gives a high level representation of the components of the system.
 On the left are shown the provided interfaces between the Web Server and the Application Server that in this scheme is represented as a "black box"; a complete description of it is provided in the next section.
 All the interfaces basically represent the main functionalities requested by the client application.
-On the right there are the requested interfaces. Among these, one is responsible of the geolocalization and is provided by the Google Maps API, the others manage the remaining external services such as the weather forecast, the news, the water irrigation system and the humidity sensors.
+On the right-hand side, there are the requested interfaces. Among these, one is responsible of the geolocalization and is provided by the Google Maps API, the others manage the remaining external services such as the weather forecast, the news, the water irrigation system and the humidity sensors.
 Finally, the DBMS interface manages the DBMS service and it's responsible of the communication between the Application Server and the Database Server.
 
 \subsubsection*{Application Server Component View}
@@ -177,8 +220,8 @@ External elements in the diagram are represented in a simplified way.
     This includes the authentication process that is composed by the log in, the log out and the sign up services. 
     It also includes the edit profile routine invoked by an user editing the personal account.
     Once a user is logged in, all the specific functionalities are provided by the component that manages this type of user.
-    Finally it communicates with the \textit{LocationModule} that provides the geolocalization service.
-    \item \textbf{LocationModule}: this module provides the interface that allows the geolocalization of the farm based on the GPS and on the address provided by the farmer.
+    It also communicates with the \textit{LocationModule} that provides the geolocalization service.
+    \item \textbf{LocationModule}: this module provides the interface that allows the geolocalization of the farm based on the GPS or on the address provided by the farmer.
     In order to provide this service, it communicates with the \textit{MapServiceManager}.
     \item \textbf{MapServiceManager}: this component communicates directly with the external API provided by Google Maps, it provides information regarding the region and allows the user to visualize the map of a specific location.
     Mainly it adapts the data received by the API in a comprehensible way for the other components, it also manages the API requests.
@@ -226,7 +269,7 @@ The devices shown in the diagram are:
     \item \textbf{Firewall}: first level of security, it guarantees safety access to the internal network of the system.
     \item \textbf{Load balancer}: the main goal is to prevent the overload of a server, this device distributes the incoming requests equally across multiple servers.
     This increase availability and reliability of the application.
-    The one selected is the \textit{jetNEXUS ALB-X}.
+    The one selected is the \textit{jetNEXUS ALB-X}. More details in section \ref{server_availability}.
     \item \textbf{Web Server}: it manages the HTTPS requests from the clients and route them to the \textit{Application Server} for processing.
     On the other way it is responsible of the incoming requests from the application server, they are managed by serving an HTML file to the client in addition to CSS and JS sheets.
     The result page is built with a client-side scripting.
@@ -243,9 +286,9 @@ The devices shown in the diagram are:
 \newpage
 \subsection{Runtime view}
 
-Here are represented the runtime view of some relevant use cases of the system through some sequence diagrams. 
-In the diagrams, the part regarding the user is omitted because it has been considered superfluous to the understanding of the interaction.
-In later diagrams some parts, like the login phase or the come back to home page, were omitted for the above motivations.
+Here the runtime views of some relevant use cases of the system are represented through sequence diagrams. 
+In the diagrams, the part regarding the user is omitted because it has been considered redundant to the understanding of the interaction.
+In later diagrams some parts, like the login phase or returning to home page, were omitted for the the same motivations.
 
 \newpage
 \textbf{Sign Up}
@@ -468,6 +511,7 @@ Please note that the methods described in \textit{Figure (\ref{fig: component_in
 \subsection{Other design decisions}
 \label{other_design_decisions}
 \subsubsection{Servers availability and response time} 
+\label{server_availability}
 In order to guarantee the availability of 99.998\% promised in the RASD, replicas of the web servers and the application servers are needed, this prevents the system to crash in case of a point failure.
 The response time described in the RASD is 0.5 seconds, the load balancer will allow to reach this goal by distributing the incoming requests from users among the replicas.
 The database server is replicated as well for the same reasons.
@@ -490,13 +534,28 @@ The formula can be broken down into two parameters, $\eta$ and $\delta$:
     \eta &= {harvested\ qty\over sown\ qty}\\
     \delta &= {hostile\ weather\ days\over 365}
 \end{align}
-$\eta$ is the main term that represents the productivity of a farmer, that is how efficient he/she has been given the quantity of sown seeds (in kilograms) and the return in harvested crop (in kilograms). 
+$\eta$ is the main term that represents the productivity of a farmer, that is how efficient he/she has been given the quantity of sown seeds (in kilograms) and the return in harvested crop (in kilograms). The data taken into consideration for $\eta$'s computation is the one collected in 12 months, from March to March of the previous year year\footnotemark, resetting the score to 0 every March.
+In the computation, only full production entries (with an harvested quantity of the crop) are taken into consideration.
+
+\footnotetext{March has been chosen as the reset month after comparing the sowing to harvesting period of all the most popular crop grown in India. In a solar year, the first to be sown are cucumbers and pumpkin, to the last to be harvested are wheat and mustard, all of these in March.} 
 
 Whereas $\delta$ weighs up the harshness of the climate conditions endured by the farmer in the last year. The variable $hostile\ weather\ days$ is a counter of the days in which the climate has not been very lenient in the farm's region and could have ruined the plantation. Days are considered "hostile weather days" in case the amount of rain fallen during that day has been greater than 115.60 mm/hour (so in condition of very heavy rainfall or worse)\cite{rainfallsData}, particularly expected during monsoon seasons; as well as strong heat waves and prolonged periods of drought. Also specific crop disease that might have afflicted the region for a certain time during the year may be considered as challenging days to take in consideration. However, at the time of this document, just rainfalls data are available for the DREAM app, so only heavy rain days will be taken into account in computing the $\delta$ parameter.
 
 The role of $\delta$ is to favor farmers that have been particularly hitten by climatic problems but still have managed to produce, since this demonstrate that they've been able to carry out usefull practices that helped them staying productive despite the natural adversities. 
 
-The data used to calculate the score is all the one collected in the 12 months prior the computation. The score is worked out every time that $\eta$ of the farmer mutate (as a result of a new production entry), and the ranking is directly proportional to it. If farmers obtain the same score, they are going to be ranked in the same position as well.
+A new $\delta$ parameter is computed everyday, for each one of the 10 Telangana's district. The $\delta$ is valid for just that day and is computed collecting all the data from today till the 12 months prior, creating a sliding window of a solar year. 
+
+An upgrade of a farmer's production entry into a full one triggers the recomputation of their score, since their $\eta$ parameter changed. The new score will be affected by their district's $\delta$ computed that particular day in which the score has been triggered.
+
+\begin{testexample}
+Let's suppose it's the 15th of June and farmer Pajeet (in Medak district) has been using DREAM for 3 months. He inserts just one production entry stating that he has sown 10kg of rice the 15th of June in his land. His score is 0 since no full production entry has been inserted, that is the entry of Pajeet is still missing the harvested amount since the crop has not been harvested yet. From January to May, there have been several days of heavy rain, 23 days to be specific.
+
+After five months, Pajeet harvests his rice field that has produced 10000kg of rice, so he upgrade the rice production entry (begun the 15/06) on his profile the 15th of November. This insertion cause his score to be recomputed because now the status of his rice prodcution entry has become "full". Since June, there have been 8 days of very heavy rainfalls in Medak: 7 days in Septemper and 1 day the 20th of October. Up to the 15th of November the $\delta$ parameter for Medak district is $\delta_{year}=\frac{23+8}{365}=0.085$. His score is updated the 15th Nov as follow: $score_{year}=\frac{10000}{10}(1+0.085)=1085$.
+
+The 27-28th of November, it rains heavily in Medak again. The 29th of November, the policy maker Chaytanya queries the farmer ranking. There is Pajeet in the ranking, his score is still 1085.
+\end{testexample}
+
+ The rank is directly proportional to the farmer's current score. If farmers obtain the same score, they are going to be ranked in the same position as well.
 
 \subsubsection{Farmers location} In order to locate a farm the user has two options:
     \begin{itemize}
