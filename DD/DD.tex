@@ -217,7 +217,7 @@ The following component diagram gives a detailed view of the Application Server,
 External elements in the diagram are represented in a simplified way.
 \begin{itemize}
     \item \textbf{AccountManager}: this component handles all the basic requests made by the client.
-    This includes the authentication process that is composed by the log in, the log out and the sign up services. 
+    The \textit{AuthenticationService} manages the authentication process that is composed by the log in, the log out and the sign up services. 
     It also includes the edit profile routine invoked by an user editing the personal account.
     Once a user is logged in, all the specific functionalities are provided by the component that manages this type of user.
     It also communicates with the \textit{LocationModule} that provides the geolocalization service.
