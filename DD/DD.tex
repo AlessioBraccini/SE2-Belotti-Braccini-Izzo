@@ -13,6 +13,7 @@
 \usepackage[most]{tcolorbox}
 \newcounter{testexample}
 \usepackage{xparse}
+\usepackage{subcaption}
 
 \hyphenation{Te-lan-ga-na}
 \hyphenation{an-a-lys-ing}
@@ -22,6 +23,7 @@
 \hyphenation{ca-u-sed}
 \hyphenation{Sen-sor-Da-ta-Ma-na-ger}
 \hyphenation{Ac-count-Ma-na-ger}
+\hyphenation{Lo-ca-tion-Mo-dule}
 \titleformat{\paragraph}
 {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}
@@ -32,11 +34,11 @@
 
 \NewDocumentEnvironment{testexample}{ O{} }
 {
-\colorlet{colexam}{red!55!black} % Global example color
+\colorlet{colexam}{teal!60!black} % Global example color
 \newtcolorbox[use counter=testexample]{testexamplebox}{%
     % Example Frame Start
     empty,% Empty previously set parameters
-    title={\exampletext: #1},% use \thetcbcounter to access the testexample counter text
+    title={\exampletext #1},% use \thetcbcounter to access the testexample counter text
     % Attaching a box requires an overlay
     attach boxed title to top left,
        % Ensures proper line breaking in longer titles
@@ -820,18 +822,18 @@ Multiple components will be implemented at the same time, in order to paralleliz
 
 The implementation's order of the component will be as follow:
 \begin{enumerate}
-    \item DataManager, LocationModule, WeatherManager, SensorDataManager, NewsManager
-    \item RankingManager, HelpRequestsManager, ForumManager, AccountManager
-    \item PolicyMakerManager, AgronomistManager, FarmerManager
+    \item DataManager, MapServiceManager, WeatherManager, SensorDataManager, NewsManager
+    \item RankingManager, HelpRequestsManager, ForumManager, LocationModule
+    \item PolicyMakerManager, AgronomistManager, FarmerManager, Accountmanager
 \end{enumerate}
 Each group is composed by independent modules so they can be easily developed in parallel.
-Furthermore, it is expected that external services (i.e. GoogleMapsAPI, WeatherForecastAPI, WaterIrrigationAPI, HumiditySensorsAPI, NewsAPI and DBMS Service) work properly since they're not a responsibility of the DREAM app.
+Furthermore, it is expected that external services (e.g. GoogleMapsAPI, WeatherForecastAPI, WaterIrrigationAPI, HumiditySensorsAPI, NewsAPI and DBMS Service) work properly since they're not a responsibility of the DREAM app.
 
-The \emph{DataManager} component should be implemented first since all the remaining components of the application server depend directly or indirectly on it for handling the communication with the database to store and retrieve data. \emph{LocationModule}, \emph{WeatherManager}, \emph{SensorDataManager} and \emph{NewsManager} components are independent from all the other ones because the former just communicates with the external services, by modifying the API's information so that it can be comprehensible by the Application server, and adapting the requests to the API's protocol.
+The \emph{DataManager} component should be implemented first since all the remaining components of the application server depend directly or indirectly on it for handling the communication with the database to store and retrieve data. \emph{MapServiceManager}, \emph{WeatherManager}, \emph{SensorDataManager} and \emph{NewsManager} components are independent from all the other ones because the former just communicates with the external services, by modifying the API's information so that it can be comprehensible by the Application server, and adapting the requests to the API's protocol.
 
-The second group depends on the first one but at the same time incapsulates building blocks for the third one.  \emph{RankingManager}, \emph{HelpRequestsManager}, \emph{ForumManager}, \emph{AccountManager} directly exploit the \emph{DataManager} module to retrieve information, store data or carry out consistency and security checks. Moreover, \emph{AccountManager} also use the \emph{LocationModule} to access the map service that ease the registration to the farmers in localizing their farm. 
+The second group depends on the first one but at the same time incapsulates building blocks for the third one.  \emph{RankingManager}, \emph{HelpRequestsManager} and \emph{ForumManager} directly exploit the \emph{DataManager} module to retrieve information, store data or carry out consistency and security checks. Moreover, \emph{LocationModule} also use the \emph{MapServiceManager} to access the map service that ease the registration to the farmers in localizing their farm. 
 
-Finally, \emph{PolicyMakerManager}, \emph{AgronomistManager} and \emph{FarmerManager} are the component that mostly depend on all the lower level ones.
+Finally, \emph{PolicyMakerManager}, \emph{AgronomistManager}, \emph{FarmerManager} and \emph{AccountManager} are the component that mostly depend on all the lower level ones, as can be seen in figure \ref{fig: application_server_component_view}.
 \subsection{Integration Strategy}
 Considering both the overall system's architecture and the implementation
 plan, the chosen integration strategy is the bottom-up approach. System
@@ -852,13 +854,90 @@ the process.
 Each integration in the same level (defined by the groups of the previous
 section) is independent and there is no specific order in which to complete them.
 In this way, the integration process and its testing are more flexible.
-\subsection{Integration and Testing}
+
+\subsubsection{Integration and Testing}
+In this section it is defined the order of the integration between components. Test drivers will be used to simulate higher components not yet implemented.
+As already said, bottom-up approach is going to be followed in implementing the components. So firstly, \emph{DataManager} (fig. \ref{fig: integration_DataManager}), \emph{MapServiceManager} and \emph{WeatherManager} (fig. \ref{fig: integration_MapServiceManager_WeatherManager}), \emph{SensorDataManager} and \emph{NewsManager} (fig. \ref{fig: integration_SensorDataManager_NewsManager}) are implemented using drivers for higher-up components yet to be built.
+
+\begin{figure}[H]
+    \includegraphics[scale=0.5, center]{assets/Test/generalTest.png}
+    \caption{Integration of DataManager component}
+    \label{fig: integration_DataManager}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering MapServiceManager]{{\includegraphics[scale=0.5]{assets/Test/farmLocationTest.png} }}%
+    \qquad\qquad
+    \subfloat[\centering WeatherManager]{{\includegraphics[scale=0.5]{assets/Test/weatherTest.png} }}%
+    \caption{Integration of MapServiceManager and Weather Manager components}%
+    \label{fig: integration_MapServiceManager_WeatherManager}%
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering SensorDataManager]{{\includegraphics[scale=0.5]{assets/Test/sensorsTest.png}}}%
+    \qquad\qquad
+    \subfloat[\centering NewsManager]{{\includegraphics[scale=0.5]{assets/Test/newsTest.png}}}%
+    \caption{Integration of SensorDataManager and NewsManager components}%
+    \label{fig: integration_SensorDataManager_NewsManager}%
+\end{figure}
+
+After the first group implementation and testing, it's time for the implementation of the middle tier: \emph{RankingManager} and \emph{HelpRequestManager} (fig. \ref{fig: integration_RankingManager_HelpRequestManager}), \emph{ForumManager}
+ and \emph{LocationModule} (fig. \ref{fig: integration_ForumManager_LocationModule}).
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering RankingManager]{{\includegraphics[scale=0.5]{assets/Test/rankingTest.png}}}%
+    \qquad\qquad
+    \subfloat[\centering HelpRequestManager]{{\includegraphics[scale=0.5]{assets/Test/helpTest.png}}}%
+    \caption{Integration of RankingManager and HelpRequestManager components}%
+    \label{fig: integration_RankingManager_HelpRequestManager}%
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering ForumManager]{{\includegraphics[scale=0.5]{assets/Test/forumTest.png}}}%
+    \qquad\qquad
+    \subfloat[\centering LocationModule]{{\includegraphics[scale=0.5]{assets/Test/locationModuleTest.png}}}%
+    \caption{Integration of ForumManager and LocationModule components}%
+    \label{fig: integration_ForumManager_LocationModule}%
+\end{figure}
+
+Finally, the last group, composed by the components with most dependencies, doesn't require drivers to do integration testing, they just rely on the already built modules underneath. The integration testing to carry out for \emph{PolicyMakerManager}, \emph{AgronomistManager}, \emph{FarmerManager} and \emph{AccountManager} are presented in the following figure respectively: \ref{fig: integration_PolicyMakerManager}, \ref{fig: integration_AgronomistManager}, \ref{fig: integration_FarmerManager}, \ref{fig: integration_AccountManager}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5, center]{assets/Test/pmTest.png}
+    \caption{Integration of PolicyMakerManager components}
+    \label{fig: integration_PolicyMakerManager}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5, center]{assets/Test/agroTest.png}
+    \caption{Integration of AgronomistManager components}
+    \label{fig: integration_AgronomistManager}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5, center]{assets/Test/farmerTest.png}
+    \caption{Integration of FarmerManager components}
+    \label{fig: integration_FarmerManager}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5, center]{assets/Test/accountTest.png}
+    \caption{Integration of AccountManager components}
+    \label{fig: integration_AccountManager}
+\end{figure}
+
+\subsection{System testing}
+Once the whole application has been implemented and tested, the application server can be integrated in the whole distributed system. This brings new testing phases to carry out: stress and load testing. The purpose of these is to achieve data regarding availability. Load testing is especially important because of the high expect demand of users that will use the system. On the same note, performance testing would allow us to know the response time of the most frequent operations and requests such as retrieving sensors' data, ranking visualization, posting on the forum, weather forecast and news visualization, sending an help request and replying to one, retrieving of agronomists' reports, etc. Performance testing is a key aspect to fulfilling the RASD non-functional requirement of needing a response time of 0.5s. Moreover, the testing should consider important algorithms such as the retrieval of data from the database (queries and insertions) or response time from external APIs.
+
 \newpage
 \section{Effort Spent}
-    \begin{tabular}{| c || c | c| c| c |c|}
+    \begin{tabular}{|c||c|c|c|c|c|}
         \hline
         Student & Time for S.1 & S.2 & S.3 & S.4 & S.5\\ \hline
-        Ottavia Belotti & 1h & 8h & 2h & 4h & 4h \\
+        Ottavia Belotti & 1h & 8h & 2h & 4h & 7h \\
         Alessio Braccini & 2h & 8h & 8h & ?  & ? \\
         Riccardo Izzo & 2h & 11h & 1h & ?  & ? \\
         \hline
