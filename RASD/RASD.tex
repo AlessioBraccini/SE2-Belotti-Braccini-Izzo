@@ -39,7 +39,7 @@
     {\large Professor\par
         Elisabetta \textsc{Di Nitto}}
     \vfill
-    {\large \textbf{Version 1.1}\\ \today \par}
+    {\large \textbf{Version 1.2}\\ \today \par}
 \end{titlepage}
 
 \hypersetup{%
@@ -117,6 +117,32 @@ The user base is expected to include a large part of Telangana's population, bri
     The daily plan consists in a list of farms to be visited during the day.
     Since, by regulations, every farm must be visited at least twice a year, with particular attention to the under-performing ones that should be visited more often, agronomists wish to be suggested of which are the farms that are due to be visited or the ones that have not been visited yet during the year.
 \end{enumerate}
+
+\subsubsection{Key Performance Indexes}
+%mettere dopo i goals?
+To assess if the application is well integrating within the context for which it has been developed and it is actually serving its purpose, it is important to lay out some \textit{key performance indexes} (KPI) in order to deem the application as successful. Monitoring KPIs after the application has been deployed gives the opportunity to check if the the system is having a positive impact and working towards goals or, in the worst case scenario, identifies in which aspects it is lacking, so that it can be reworked tackling its defects.
+\begin{itemize}  
+    \item \textbf{(K1) Yield per plant/acre}: production quantity over the field area in which the crop has been grown.
+    \item \textbf{(K2) Water per output}: by comparing the liters of water used by the irrigation system and the overall production quantity, region by region, we create a dataset on which it's possibile to weigh the performance's increment.
+    \item \textbf{(K3) Farm visits}: number of visited farms in a month per agronomist, since the daily plan function aims to provide a more organised way of planning the vists to the farms, if the number of visits increases then it means it's also easier to schedule the visit.
+    \item \textbf{(K4) Farmers' production entries}: number of the production entries in a year.
+    \item \textbf{(K5) Users' interactivity}: number of messages exchanged by farmers with agronomists in a year or messages posted in the forum.
+\end{itemize}
+
+The previous KPIs are thought as indexes to understand if the application is reaching the expected goals, especially:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{KPI} & \textbf{Goals}\\\hline
+        K1 & G1, G2, G3, G4, G9\\\hline
+        K2 & G1, G2, G3  \\\hline
+        K3 & G10\\\hline   
+        K4 & G5 \\\hline
+        K5 & G6, G7, G8\\\hline
+    \end{tabular}
+\end{table}
 
 \subsection{Scope} %analysis of the world and shared phenomena
 %ADD: basic service and advanced functionalities
@@ -205,6 +231,7 @@ The user base is expected to include a large part of Telangana's population, bri
     \item \textbf{DREAM}: \emph{Data-driven predictive farming} project
     \item \textbf{GPS}: Global Positioning System
     \item \textbf{IT}: Information Technology
+    \item \textbf{KPI}: Key Performance Indicator
     \item \textbf{MTTF}: Mean Time To Failure
     \item \textbf{MTTR}: Mean Time To Repair
     \item \textbf{PDPA}: Personal Data Protection Act 
@@ -216,6 +243,7 @@ The user base is expected to include a large part of Telangana's population, bri
 \begin{itemize}
     \item Version 1.0: first version published
     \item Version 1.1: removed some technical aspects that should have been discussed more in detail in the associated DD document
+    \item Version 1.2: after the meeting with the industrial tutor, we added a KPI section. Then we added in some Scenarios how things worked before the application, then how the application solves the procedures required.
 \end{itemize}
 \subsection{Reference documents}
 \begin{itemize}
@@ -253,6 +281,7 @@ In the following subsections we can see a list of the most common scenarios \tex
     \end{itemize}
 
     \item Apu is an expert policy maker, he wants to know what are the latest data regarding soil humidity and water irrigation.
+    Without DREAM app, Apu should have gone through raw data found on Telangana's government website, logging in the portal, and manually created graphs to easily analyse the data. Now, with DREAM:
     \begin{itemize}
         \item He takes his phone and logs in DREAM app 
         \item He presses the "Visualize Data" button
@@ -265,7 +294,7 @@ In the following subsections we can see a list of the most common scenarios \tex
 
     \item Pajeet is one of the main policy makers in the state of Telangana.
     He wants to distribute special incentives to the best farmers and to do this he decides
-    to open the app and visualize the data.
+    to open the app and visualize the data. Before the introduction of DREAM, Pajeet didn't have a way of identify well-performing farmers, instead now:
     \begin{itemize}
         \item He opens the app on his device. Since he's already registered, he logs in
         \item The system shows the homepage for a policy maker user
@@ -284,7 +313,7 @@ In the following subsections we can see a list of the most common scenarios \tex
         \item He confirms by pressing the "Confirm" button
     \end{itemize}
 
-    \item Sahil is a farmer that would like to share some best-practices about a particular product that he has cultivated during the last year.
+    \item Sahil is a farmer that would like to share some best-practices about a particular product that he has cultivated during the last year. Before using DREAM, Sahil should have achieved this by word of mouth, restricted to only his closer friends, while now he can share them with all the app's users.
     He decides to open a new discussion on the forum.
     \begin{itemize}
         \item He opens the app on his device. Since he's already registered, he logs in
@@ -318,8 +347,9 @@ In the following subsections we can see a list of the most common scenarios \tex
         \item The system sends her back to the home page
     \end{itemize}
 
-    \item Shaleena is an agronomist responsible of Mahbubnagar, one of the biggest region in Telangana.
-    She wants to compose the daily plan to decides which farms to visit today and for this reason she decides to open the app.
+    \item Shaleena is an agronomist responsible of Mahbubnagar, one of the biggest region in Telangana. She wants to compose the daily plan to decides which farms to visit today.
+    In order to do so, Shaleena had to go through all the farms' district register and find out which she had already visited that year by comparing her previous reports, then choose some that have not been visited yet and scribble their addresses in her notes.
+    Now, with DREAM app, it's easier since all she has to do is:
     \begin{itemize}
         \item She opens the app on his device, if she is already registered she logs in
         \item The system shows the homepage for an agronomist user
