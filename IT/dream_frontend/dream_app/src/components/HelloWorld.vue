@@ -28,11 +28,14 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
   </div>
+  <Test1 name="Alessio" age="22"/>
 </template>
 
 <script>
+import Test1 from "@/components/Test1";
 export default {
   name: 'HelloWorld',
+  components: {Test1},
   props: {
     msg: String
   }
