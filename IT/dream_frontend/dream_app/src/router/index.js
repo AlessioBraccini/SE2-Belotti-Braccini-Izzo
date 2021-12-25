@@ -3,6 +3,8 @@ import About from "../views/About.vue"
 import NotFound from "@/views/NotFound";
 import SignUpForm from "@/components/SignUpForm";
 import LoginPage from "@/views/LoginPage";
+import PolicyMakerHomepage from "@/views/PolicyMakerHomepage";
+import AgronomistHomepage from "@/views/AgronomistHomepage";
 
 const routes = [
     {
@@ -22,6 +24,18 @@ const routes = [
         // component: () => import('../views/About.vue')
         component: SignUpForm
     },
+    {
+        path: '/agronomistHome',
+        name: 'AgroHome',
+        // component: () => import('../views/About.vue')
+        component: AgronomistHomepage
+    },
+    {
+        path: '/policymakerHome',
+        name: 'PMHome',
+        // component: () => import('../views/About.vue')
+        component: PolicyMakerHomepage
+    },
     // Catch 404
     {
         path: '/:catchAll(.*)',
@@ -29,6 +43,9 @@ const routes = [
         component: NotFound
     }
 ]
+
+// To cycle between farmers specification see this video for the links with the ':'
+// https://www.youtube.com/watch?v=juocv4AtrHo&list=PL4cUxeGkcC9hYYGbV60Vq3IXYNfDk8At1&index=9
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),

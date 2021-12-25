@@ -6,7 +6,8 @@
 
     <input type="text" required v-model="lastName" placeholder="Last Name" class="textInput">
 
-    <input type="email" required v-model="email" placeholder="Email" class="textInput">
+    <!-- TODO: make this type email -->
+    <input type="text" required v-model="email" placeholder="Email" class="textInput">
 
     <input type="password" required v-model="password" placeholder="Password" class="textInput">
     <div v-if="passwordError" class="error">
@@ -28,30 +29,57 @@
 </template>
 
 <script>
+import {ref} from "vue";
+// import axios from "axios";
+import router from "@/router";
+// import toast from "vue-toast-notification"
+
 export default {
   name: "LoginForm",
 
-  data(){
-    return{
-      firstName:'',
-      lastName:'',
-      email:'',
-      password:'',
-      role:'policyMaker',
-      passwordError:''
-    }
-  },
+  setup(){
 
-  methods:{
-    handleSubmit(){
-      this.passwordError = this.password.length > 8 ? '' : 'Password must be at least 8 characters long'
+    const firstName = ref('');
+    const lastName = ref('');
+    const email = ref('');
+    const password = ref('');
+    const role = ref('policyMaker');
+    const passwordError = ref('');
+
+    const handleSubmit = () => {
+
+      passwordError.value = password.value.length > 8 ? '' : 'Password must be at least 8 characters long'
 
       //call backend function
-    },
+      // axios.post('http://localhost:8000/auth/', {
+      //   firsName: firstName,
+      //   lastName: lastName,
+      //   email: email,
+      //   password: password,
+      //   role: role,
+      // })
+      // .then(resp => {
+      //   toast({
+      //     message: 'Account created, please log in',
+      //     type:'is-success',
+      //     dismissible: true,
+      //     pauseOnHover: true,
+      //     duration: 2000,
+      //     position: 'center'
+      //   })
+      //
+      //   router.push({ name: 'Login' })
+      //
+      // })
+      // .catch(err =>  console.log('error' + err))
 
-    returnLogin() {
-      this.$router.push({ name: 'Login' })
     }
+
+    const returnLogin = () => {
+      router.push({ name: 'Login' })
+    }
+
+    return{ firstName, lastName, email, password, role, passwordError, handleSubmit, returnLogin }
   }
 }
 </script>

@@ -1,9 +1,5 @@
 <template>
-  <div v-if="$route.name === 'Login' || $route.name === 'SignUp'"></div>
-  <div id="nav" v-else>
-    <router-link :to="{ name: 'Login' }">Home</router-link>
-    <router-link :to="{ name: 'About' }">About</router-link>
-  </div>
+
   <router-view/>
 
 </template>
@@ -25,7 +21,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 body {

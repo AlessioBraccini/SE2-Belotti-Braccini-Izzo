@@ -2,9 +2,9 @@
 
   <img src="../assets/dramLogo.png" alt="DREAM" class="image">
 
-  <form @submit.prevent="handleSubmit">
+  <form @submit.prevent="handleSubmittemp">
 
-    <input type="email" required v-model="email" placeholder="Email" class="textInput">
+    <input type="text" required v-model="email" placeholder="Email" class="textInput">
 
     <input type="password" required v-model="password" placeholder="Password" class="textInput">
 
@@ -16,13 +16,66 @@
 </template>
 
 <script>
+import {ref} from "vue";
+// import axios from "axios";
+import router from "@/router"
+
 export default {
   name: "LoginPage",
-  methods:{
-    redirectSignUp() {
-      this.$router.push({ name: 'SignUp'})   //use if to redirect under certain conditions
+
+  setup(){
+
+    const email = ref('');
+    const password = ref('');
+
+    // const load = async () => {
+    //   try {
+    //     let data = await fetch('url dell\' api del server backend')    // serve per trovare la home per l'user
+    //     if (!data.ok) {
+    //       throw Error('error data fetching user')
+    //     }
+    //
+    //     // farmerList.value = await data   retrieve data from data
+    //     // use these data
+    //   }
+    //   catch (err){
+    //     error.value = err.message
+    //     // can put the error in the template with the v-if
+    //   }
+    // }
+
+    const handleSubmit = () => {
+    //   axios.post('http://localhost:8000/auth/', {
+    //     email: email,
+    //     password: password,
+    //   })
+    //       .then(resp => {
+    //         // let data = load()
+    //         //
+    //         // if (user === agronomist)
+    //         //   router.push(name: 'AgronomistHome')
+    //         // else if (user === PM)
+    //         //   router.push(name: 'PolicyMakerHome')
+    //
+    //       })
+    //       .catch(err =>  console.log('error' + err))
+    }
+
+    const handleSubmittemp = () => {
+
+      if (email.value === 'agro')
+        router.push({name: 'AgroHome'})
+      else
+        router.push({name: 'PMHome'})
 
     }
+
+    const redirectSignUp = () => {
+      router.push({ name: 'SignUp'})   //use if to redirect under certain conditions
+
+    }
+
+    return { email, password, handleSubmit, redirectSignUp, handleSubmittemp }
   }
 }
 </script>
