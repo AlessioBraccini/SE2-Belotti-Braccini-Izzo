@@ -1,9 +1,11 @@
 <template>
-  <div v-if="error">{{ error }}</div>
-  <div v-if="farmerList.length">
-    <!--display ranking component-->
+  <div class="square">
+    <div v-if="error">{{ error }}</div>
+    <div v-if="farmerList.length">
+      <!--display ranking component-->
+    </div>
+    <div v-else class="rawText">Loading...</div>
   </div>
-  <div v-else>Loading...</div>
 </template>
 
 <script>
@@ -44,5 +46,22 @@ export default {
 </script>
 
 <style scoped>
+  .square{
+    position: relative;
+    display: block;
+    background-color: #E9C197;
+    width: 90%;
+    height: 290px;
+    left: 5%;
+    top: 5%;
+    border-radius: 22px;
+    margin-top: 20px;
+  }
 
+  .rawText{
+    position: relative;
+    top: 45%;
+    left: 39%;
+    width: 100px;
+  }
 </style>

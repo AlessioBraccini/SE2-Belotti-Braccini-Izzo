@@ -1,6 +1,6 @@
 <template>
 
-  <img src="../assets/dramLogo.png" alt="DREAM" class="image">
+  <img :src="logo" alt="DREAM" class="image">
 
   <form @submit.prevent="handleSubmittemp">
 
@@ -17,8 +17,8 @@
 
 <script>
 import {ref} from "vue";
-// import axios from "axios";
 import router from "@/router"
+import image from '../assets/dreamLogo.png'
 
 export default {
   name: "LoginPage",
@@ -27,6 +27,7 @@ export default {
 
     const email = ref('');
     const password = ref('');
+    const logo = image;
 
     // const load = async () => {
     //   try {
@@ -75,7 +76,7 @@ export default {
 
     }
 
-    return { email, password, handleSubmit, redirectSignUp, handleSubmittemp }
+    return { logo, email, password, handleSubmit, redirectSignUp, handleSubmittemp }
   }
 }
 </script>
@@ -113,5 +114,6 @@ export default {
     width: 80%;
     left: 8%;
     margin-bottom: 100px;
+    margin-top: 150px;
   }
 </style>

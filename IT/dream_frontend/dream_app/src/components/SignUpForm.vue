@@ -1,5 +1,5 @@
 <template>
-  <img src="../assets/dramLogo.png" alt="DREAM" class="image">
+  <img :src="logo" alt="DREAM" class="image">
 
   <form @submit.prevent="handleSubmit">
     <input type="text" required v-model="firstName" placeholder="First Name" class="textInput">
@@ -33,6 +33,7 @@ import {ref} from "vue";
 // import axios from "axios";
 import router from "@/router";
 // import toast from "vue-toast-notification"
+import image from '../assets/dreamLogo.png'
 
 export default {
   name: "LoginForm",
@@ -45,6 +46,7 @@ export default {
     const password = ref('');
     const role = ref('policyMaker');
     const passwordError = ref('');
+    const logo = image;
 
     const handleSubmit = () => {
 
@@ -79,7 +81,7 @@ export default {
       router.push({ name: 'Login' })
     }
 
-    return{ firstName, lastName, email, password, role, passwordError, handleSubmit, returnLogin }
+    return{ logo, firstName, lastName, email, password, role, passwordError, handleSubmit, returnLogin }
   }
 }
 </script>
@@ -124,6 +126,7 @@ select{
   width: 80%;
   left: 10%;
   margin-bottom: 100px;
+  margin-top: 50px;
 }
 
 .error{

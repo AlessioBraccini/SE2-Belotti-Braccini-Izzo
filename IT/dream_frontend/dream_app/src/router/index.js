@@ -4,7 +4,10 @@ import NotFound from "@/views/NotFound";
 import SignUpForm from "@/components/SignUpForm";
 import LoginPage from "@/views/LoginPage";
 import PolicyMakerHomepage from "@/views/PolicyMakerHomepage";
-import AgronomistHomepage from "@/views/AgronomistHomepage";
+import AgronomistHomepage from "@/views/Agronomist/AgronomistHomepage";
+import HelpRequests from "@/views/Agronomist/HelpRequests";
+import DailyPlan from "@/views/Agronomist/DailyPlan";
+import WriteReport from "@/components/WriteReport";
 
 const routes = [
     {
@@ -36,6 +39,26 @@ const routes = [
         // component: () => import('../views/About.vue')
         component: PolicyMakerHomepage
     },
+    {
+        path: '/agronomistHome/helpRequests',
+        name: 'HelpRequests',
+        // component: () => import('../views/About.vue')
+        component: HelpRequests
+    },
+    {
+        path: '/agronomistHome/dailyPlan',
+        name: 'DailyPlan',
+        // component: () => import('../views/About.vue')
+        component: DailyPlan
+    },
+    {
+        path: '/agronomistHome/writeReport',
+        name: 'WriteReport',
+        // component: () => import('../views/About.vue')
+        component: WriteReport
+    },
+
+
     // Catch 404
     {
         path: '/:catchAll(.*)',
