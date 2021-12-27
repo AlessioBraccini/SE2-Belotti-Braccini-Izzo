@@ -99,6 +99,12 @@ class User(AbstractBaseUser):
         # The user is identified by their email address
         return self.email
 
+    def get_job_role(self):
+        return self.job_role
+
+    def get_district(self):
+        return self.district
+
     def __str__(self):
         return self.email
 
