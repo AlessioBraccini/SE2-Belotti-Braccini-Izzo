@@ -30,9 +30,9 @@
 
 <script>
 import {ref} from "vue";
-// import axios from "axios";
+import axios from "axios";
 import router from "@/router";
-// import toast from "vue-toast-notification"
+import toast from "vue-toast-notification"
 import image from '../assets/dreamLogo.png'
 
 export default {
@@ -50,32 +50,45 @@ export default {
 
     const handleSubmit = () => {
 
-      passwordError.value = password.value.length > 8 ? '' : 'Password must be at least 8 characters long'
+      // passwordError.value = password.value.length > 8 ? '' : 'Password must be at least 8 characters long'
+      passwordError.value = password.value.length > 8
 
-      //call backend function
-      // axios.post('http://localhost:8000/auth/', {
-      //   firsName: firstName,
-      //   lastName: lastName,
-      //   email: email,
-      //   password: password,
-      //   role: role,
-      // })
-      // .then(resp => {
-      //   toast({
-      //     message: 'Account created, please log in',
-      //     type:'is-success',
-      //     dismissible: true,
-      //     pauseOnHover: true,
-      //     duration: 2000,
-      //     position: 'center'
-      //   })
-      //
-      //   router.push({ name: 'Login' })
-      //
-      // })
-      // .catch(err =>  console.log('error' + err))
+      if (password.value.length > 8){
+        passwordError.value = ''
+        sendServer()
+      }
+      else
+        passwordError.value = 'Password must be at least 8 characters long'
 
     }
+
+    const sendServer = () => {
+      axios.post('http://localhost:8000/api/v1', {
+        firsName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+        role: role,
+      })
+      .then(resp => {
+
+        console.log(resp + ' risposta')
+
+        toast({
+          message: 'Account created, please log in',
+          type:'is-success',
+          dismissible: true,
+          pauseOnHover: true,
+          duration: 2000,
+          position: 'center'
+        })
+
+        // router.push({ name: 'Login' })
+
+      })
+      .catch(err =>  console.log('error ' + err))
+
+  }
 
     const returnLogin = () => {
       router.push({ name: 'Login' })

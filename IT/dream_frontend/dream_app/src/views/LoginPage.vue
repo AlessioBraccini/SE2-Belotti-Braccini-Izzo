@@ -2,7 +2,7 @@
 
   <img :src="logo" alt="DREAM" class="image">
 
-  <form @submit.prevent="handleSubmittemp">
+  <form @submit.prevent="handleSubmit">
 
     <input type="text" required v-model="email" placeholder="Email" class="textInput">
 
@@ -18,6 +18,7 @@
 <script>
 import {ref} from "vue";
 import router from "@/router"
+import axios from "axios";
 import image from '../assets/dreamLogo.png'
 
 export default {
@@ -46,20 +47,21 @@ export default {
     // }
 
     const handleSubmit = () => {
-    //   axios.post('http://localhost:8000/auth/', {
-    //     email: email,
-    //     password: password,
-    //   })
-    //       .then(resp => {
-    //         // let data = load()
-    //         //
-    //         // if (user === agronomist)
-    //         //   router.push(name: 'AgronomistHome')
-    //         // else if (user === PM)
-    //         //   router.push(name: 'PolicyMakerHome')
-    //
-    //       })
-    //       .catch(err =>  console.log('error' + err))
+      axios.post('http://localhost:8000/api/v1', {
+        email: email,
+        password: password,
+      })
+          .then(resp => {
+            console.log(resp + 'risposta')
+            // let data = load()
+            //
+            // if (user === agronomist)
+            //   router.push(name: 'AgronomistHome')
+            // else if (user === PM)
+            //   router.push(name: 'PolicyMakerHome')
+
+          })
+          .catch(err =>  console.log('error' + err))
     }
 
     const handleSubmittemp = () => {
