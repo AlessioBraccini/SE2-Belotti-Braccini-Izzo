@@ -19,6 +19,14 @@ pip install -r requirements.txt
     - Owner: "dream_admin"
     - Password: "dream_pwd"
 >Note: These settings are also specified in the [settings.py](https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo/blob/main/IT/dream_backend/settings.py) file
+To do this, from terminal:
+```shell
+psql
+postgres=\# CREATE USER dream_admin SUPERUSER WITH PASSWORD 'dream_pwd';
+postgres=\# \du; #shows all the database users
+postgres=\# quit; #to quit psql
+```
+Then from _pgAdming4_ (PostgreSQL GUI) create the "dream_db" database with "dream_admin" as owner. Alternatively, you can do this in terminal as well.
 2) Add that DB to PyCharm
 3) To apply changes to the tables:
 ```shell
