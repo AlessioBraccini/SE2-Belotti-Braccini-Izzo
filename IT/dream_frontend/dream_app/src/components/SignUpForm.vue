@@ -2,9 +2,9 @@
   <img :src="logo" alt="DREAM" class="image">
 
   <form @submit.prevent="handleSubmit">
-    <input type="text" required v-model="firstName" placeholder="First Name" class="textInput">
+    <input type="text" required v-model="first_name" placeholder="First Name" class="textInput">
 
-    <input type="text" required v-model="lastName" placeholder="Last Name" class="textInput">
+    <input type="text" required v-model="last_name" placeholder="Last Name" class="textInput">
 
     <!-- TODO: make this type email -->
     <input type="text" required v-model="email" placeholder="Email" class="textInput">
@@ -14,10 +14,12 @@
       {{ passwordError }}
     </div>
 
-    <select v-model="role">
+    <select v-model="job_role">
       <option value="policyMaker">Policy Maker</option>
       <option value="agronomist">Agronomist</option>
     </select>
+
+    <input type="text" required v-model="district" placeholder="District" class="textInput">
 
     <div class="submit">
       <button class="actionButton localButton">Confirm</button>
@@ -40,18 +42,19 @@ export default {
 
   setup(){
 
-    const firstName = ref('');
-    const lastName = ref('');
+    const first_name = ref('');
+    const last_name = ref('');
     const email = ref('');
     const password = ref('');
-    const role = ref('policyMaker');
+    const job_role = ref('policyMaker');
     const passwordError = ref('');
+    const district = ref('');
     const logo = image;
 
     const handleSubmit = () => {
 
       // passwordError.value = password.value.length > 8 ? '' : 'Password must be at least 8 characters long'
-      passwordError.value = password.value.length > 8
+      //passwordError.value = password.value.length > 8
 
       if (password.value.length > 8){
         passwordError.value = ''
@@ -63,12 +66,16 @@ export default {
     }
 
     const sendServer = () => {
-      axios.post('http://localhost:8000/api/v1', {
-        firsName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-        role: role,
+      if(job_role.value === 'policyMaker') job_role.value = "P";
+      else if(job_role.value === "agronomist") job_role.value = "A";
+
+      axios.post('http://127.0.0.1:8000/api/v1/users/', {
+        email: email.value,
+        password: password.value,
+        first_name: first_name.value,
+        last_name: last_name.value,
+        job_role: job_role.value,
+        district: district.value,
       })
       .then(resp => {
 
@@ -83,7 +90,7 @@ export default {
           position: 'center'
         })
 
-        // router.push({ name: 'Login' })
+        router.push({ name: 'Login' })
 
       })
       .catch(err =>  console.log('error ' + err))
@@ -94,7 +101,7 @@ export default {
       router.push({ name: 'Login' })
     }
 
-    return{ logo, firstName, lastName, email, password, role, passwordError, handleSubmit, returnLogin }
+    return{ logo, first_name, last_name, email, password, job_role, district, passwordError, handleSubmit, returnLogin }
   }
 }
 </script>

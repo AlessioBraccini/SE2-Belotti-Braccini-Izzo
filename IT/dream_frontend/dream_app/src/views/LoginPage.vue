@@ -29,27 +29,28 @@ export default {
     const email = ref('');
     const password = ref('');
     const logo = image;
+/*
+     const load = async () => {
+       try {
+         let data = await fetch('url dell\' api del server backend')    // serve per trovare la home per l'user
+         if (!data.ok) {
+           throw Error('error data fetching user')
+         }
 
-    // const load = async () => {
-    //   try {
-    //     let data = await fetch('url dell\' api del server backend')    // serve per trovare la home per l'user
-    //     if (!data.ok) {
-    //       throw Error('error data fetching user')
-    //     }
-    //
-    //     // farmerList.value = await data   retrieve data from data
-    //     // use these data
-    //   }
-    //   catch (err){
-    //     error.value = err.message
-    //     // can put the error in the template with the v-if
-    //   }
-    // }
+         // farmerList.value = await data   retrieve data from data
+         // use these data
+       }
+       catch (err){
+         error.value = err.message
+         // can put the error in the template with the v-if
+       }
+     }
+     */
 
     const handleSubmit = () => {
-      axios.post('http://localhost:8000/api/v1', {
-        email: email,
-        password: password,
+      axios.post('http://127.0.0.1:8000/api/v1/token/login/', {
+        email: email.value,
+        password: password.value,
       })
           .then(resp => {
             console.log(resp + 'risposta')
