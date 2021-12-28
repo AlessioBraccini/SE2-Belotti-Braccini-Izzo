@@ -9,7 +9,7 @@
     <div>
       <button class="actionButton localButton" @click="handlePlan">Daily Plan</button>
       <button class="actionButton localButton" @click="handleMessage">Help Requests</button>
-      <button class="actionButton localButton" @click="handleReports">Write Report</button>
+      <button class="actionButton localButton" @click="handleReports">Send Report</button>
     </div>
   </div>
 </template>

@@ -7,7 +7,7 @@ import PolicyMakerHomepage from "@/views/PolicyMakerHomepage";
 import AgronomistHomepage from "@/views/Agronomist/AgronomistHomepage";
 import HelpRequests from "@/views/Agronomist/HelpRequests";
 import DailyPlan from "@/views/Agronomist/DailyPlan";
-import WriteReport from "@/components/WriteReport";
+import WriteReport from "@/views/Agronomist/WriteReport";
 
 const routes = [
     {
@@ -56,6 +56,7 @@ const routes = [
         name: 'WriteReport',
         // component: () => import('../views/About.vue')
         component: WriteReport
+
     },
 
 
