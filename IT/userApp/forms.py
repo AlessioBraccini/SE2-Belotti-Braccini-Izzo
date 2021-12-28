@@ -38,10 +38,6 @@ class RegisterForm(forms.ModelForm):
         Verify both passwords match.
         '''
         cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        password_2 = cleaned_data.get("password_2")
-        if password is not None and password != password_2:
-            self.add_error("password_2", "Your passwords must match")
         return cleaned_data
 
 
@@ -51,7 +47,6 @@ class UserAdminCreationForm(forms.ModelForm):
     fields, plus a repeated password.
     """
     password = forms.CharField(widget=forms.PasswordInput)
-    password_2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -62,10 +57,6 @@ class UserAdminCreationForm(forms.ModelForm):
         Verify both passwords match.
         '''
         cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        password_2 = cleaned_data.get("password_2")
-        if password is not None and password != password_2:
-            self.add_error("password_2", "Your passwords must match")
         return cleaned_data
 
     def save(self, commit=True):
@@ -86,7 +77,7 @@ class UserAdminChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['email', 'password', 'admin', 'first_name', 'last_name', 'job_role', 'district']
+        fields = ['email', 'password', 'first_name', 'last_name', 'job_role', 'district', 'admin', 'staff']
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.

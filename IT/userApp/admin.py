@@ -32,10 +32,10 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2')}
+            'fields': ('email', 'password', 'first_name', 'last_name', 'job_role', 'district', 'staff', 'admin')}
         ),
     )
-    search_fields = ['email']
+    search_fields = ['email', 'first_name', 'last_name']
     ordering = ['email']
     filter_horizontal = ()
 

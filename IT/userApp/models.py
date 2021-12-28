@@ -73,6 +73,42 @@ class User(AbstractBaseUser):
         ('P', 'PolicyMaker'),
     )
 
+    DISTRICTS = (
+        ('Adilabad', 'Adilabad'),
+        ('Bhadradri Kothagudem', 'Bhadradri Kothagudem'),
+        ('Hanumakonda', 'Hanumakonda'),
+        ('Hyderabad', 'Hyderabad'),
+        ('Jagtial', 'Jagtial'),
+        ('Jangaon', 'Jangaon'),
+        ('Jayashankar Bhupalpally', 'Jayashankar Bhupalpally'),
+        ('Jogulamba Gadwal', 'Jogulamba Gadwal'),
+        ('Kamareddy', 'Kamareddy'),
+        ('Karimnagar', 'Karimnagar'),
+        ('Khammam', 'Khammam'),
+        ('kumuram Bheem', 'Kumuram Bheem'),
+        ('Mahabubabad', 'Mahabubabad'),
+        ('Mahabubnagar', 'Mahabubnagar'),
+        ('Mancherial', 'Mancherial'),
+        ('Medak', 'Medak'),
+        ('Medchal-Malkajgiri', 'Medchal-Malkajgiri'),
+        ('Mulugu', 'Mulugu'),
+        ('Nagarkurnool', 'Nagarkurnool'),
+        ('Nalgonda', 'Nalgonda'),
+        ('Narayanpet', 'Narayanpet'),
+        ('Nirmal', 'Nirmal'),
+        ('Nizamabad', 'Nizamabad'),
+        ('Peddapalli', 'Peddapalli'),
+        ('Rajanna Sircilla', 'Rajanna Sircilla'),
+        ('Rangareddy', 'Rangareddy'),
+        ('Sangareddy', 'Sangareddy'),
+        ('Siddipet', 'Siddipet'),
+        ('Suryapet', 'Suryapet'),
+        ('Vikarabad', 'Vikarabad'),
+        ('Wanaparthy', 'Wanaparthy'),
+        ('Warangal', 'Warangal'),
+        ('Yadadri Bhuvanagiri', 'Yadadri Bhuvanagiri'),
+    )
+
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -83,7 +119,7 @@ class User(AbstractBaseUser):
     staff = models.BooleanField(default=False)  # an admin user; non super-user
     admin = models.BooleanField(default=False)  # a superuser
     job_role = models.CharField(max_length=1, choices=JOB_ROLES)
-    district = models.CharField(max_length=100)
+    district = models.CharField(max_length=100, choices=DISTRICTS)
     objects = UserManager()
     # password field inherited by superclass
 
