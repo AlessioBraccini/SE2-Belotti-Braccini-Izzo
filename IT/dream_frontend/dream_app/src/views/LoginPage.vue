@@ -44,7 +44,7 @@ export default {
           }
         }
 
-        return await axios.get('http://192.168.1.60:8000/api/v1/users/me', axiosConfig)
+        return await axios.get('http://localhost:8000/api/v1/users/me', axiosConfig)
 
       }
       catch (err){
@@ -58,7 +58,7 @@ export default {
 
       passwordError.value = ''
 
-      await axios.post('http://192.168.1.60:8000/api/v1/token/login/', {
+      await axios.post('http://localhost:8000/api/v1/token/login/', {
         email: email.value,
         password: password.value,
       })
