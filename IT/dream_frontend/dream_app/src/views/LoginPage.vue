@@ -37,16 +37,15 @@ export default {
 
     const load = async () => {
       try {
-        let data = await fetch('http://localhost:8000/api/v1/account_type/')
-        // let data = await fetch('http://localhost:8000/api/v1/users/me/')    // va ma da errore tipo 'credentials not provided'
 
-        if (!data.ok) {
-           throw Error('error data fetching user')
+        let axiosConfig = {
+          headers:{
+            'Authorization': 'Token ' + localStorage.getItem('token')
+          }
         }
-        console.log('load ' + data)
 
-        // farmerList.value = await data   retrieve data from data
-        // use these data
+        return await axios.get('http://192.168.1.60:8000/api/v1/users/me', axiosConfig)
+
       }
       catch (err){
         console.log('err load ' + err)
@@ -59,23 +58,23 @@ export default {
 
       passwordError.value = ''
 
-      await axios.post('http://localhost:8000/api/v1/token/login/', {
+      await axios.post('http://192.168.1.60:8000/api/v1/token/login/', {
         email: email.value,
         password: password.value,
       })
           .then(async resp => {
-            console.log(resp + ' risposta')
+
+            localStorage.setItem('token', resp.data.auth_token)
 
             let data = await load()
-            console.log('fine load ' + data)
+            let role = data.data['job_role']
+            localStorage.setItem('name', data.data['first_name'] + ' ' + data.data['last_name'] )
 
-            //
-            // if (user === agronomist)
-            //   router.push(name: 'AgronomistHome')
-            // else if (user === PM)
-            //   router.push(name: 'PolicyMakerHome')
+            if (role === 'A')
+              router.push({name: 'AgroHome'})
+            else if (role === 'P')
+              router.push({name: 'PMHome'})
 
-            // router.push({name: 'AgroHome'})
 
           })
           .catch(err => {

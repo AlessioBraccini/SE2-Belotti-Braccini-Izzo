@@ -26,7 +26,7 @@ export default {
   components: {RankingList, WeatherAgro, NavbarAgro},
   setup(){
 
-    const name = ref('Karun Patel')
+    const name = ref(localStorage.getItem('name'))
     const area = ref('Medak')
 
     const handleMessage = () => {
