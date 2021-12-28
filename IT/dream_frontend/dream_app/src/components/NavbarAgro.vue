@@ -105,7 +105,7 @@ export default {
     position: absolute;
     background-color: #faf4d3;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
     right: 0;
     border: solid 1px #919191;
