@@ -2,7 +2,7 @@
   <div class="square">
     <div v-if="error">{{ error }}</div>
     <div v-if="farmerList.length">
-      <!--display ranking component-->
+      <!--display rankingApp component-->
     </div>
     <div v-else class="rawText">Loading...</div>
   </div>
@@ -23,7 +23,7 @@ export default {
       try {
         let data = await fetch('url dell\' api del server backend')
         if (!data.ok) {
-          throw Error('error data fetching ranking list')
+          throw Error('error data fetching rankingApp list')
         }
 
         // farmerList.value = await data   retrieve data from data

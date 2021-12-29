@@ -135,6 +135,9 @@ class User(AbstractBaseUser):
         # The user is identified by their email address
         return self.email
 
+    def complete_name(self):
+        return self.first_name + ' ' + self.last_name
+
     def get_job_role(self):
         return self.job_role
 
