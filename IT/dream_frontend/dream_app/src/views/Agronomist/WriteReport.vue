@@ -1,6 +1,6 @@
 <template>
 
-  <NavbarAgro :name="name" class="agroNav"/>
+  <NavbarAgro :name="name"/>
 
   <div class="background">
     <h2 class="text1">Upload File</h2>
@@ -10,8 +10,8 @@
     </div>
 
     <div class="text">
-      <p class="text1" style="margin-right: 5px">Uploaded File:</p>
-      <p v-if="fileName" class="text1"> {{ fileName }}</p>
+      <p class="text2" style="margin-right: 5px">Uploaded File:</p>
+      <p v-if="fileName" class="text2"> {{ fileName }}</p>
     </div>
 
     <button @click="submitFile" class="submitBtn actionButton">Submit</button>
@@ -33,7 +33,7 @@ export default {
 
   setup(){
 
-    const name = ref('Karun')
+    const name = ref(localStorage.getItem('name'))
     const file = ref('')
     const fileName = ref('')
 
@@ -92,17 +92,12 @@ export default {
     top: 15px;
   }
 
-  .agroNav{
-    position: relative;
-    display: block;
-    top: 0;
-  }
-
   .text1{
     position: relative;
     left: 9%;
     max-width: 80%;
     margin-top: 15px;
+    display: inline-block;
   }
 
   .text{
@@ -111,7 +106,10 @@ export default {
     max-width: 80%;
   }
 
-  .text1{
+  .text2{
+    position: relative;
+    left: 0;
+    max-width: 80%;
     display: inline-block;
   }
 

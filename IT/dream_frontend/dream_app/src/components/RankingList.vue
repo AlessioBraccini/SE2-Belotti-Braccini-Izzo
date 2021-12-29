@@ -1,8 +1,10 @@
 <template>
-  <div class="square">
-    <div v-if="error">{{ error }}</div>
-    <div v-if="farmerList.length">
-      <!--display rankingApp component-->
+  <div class="square" @click="openBig">
+    <div v-if="error" style="text-align: center">{{ error }}</div>
+    <div v-else-if="farmerList.length">
+      <ul>
+<!--        <li v-for="farmer in farmerList" :key="farmerList.name"> {{ farmer }} </li>-->
+      </ul>
     </div>
     <div v-else class="rawText">Loading...</div>
   </div>
@@ -10,6 +12,7 @@
 
 <script>
 import {ref} from "vue";
+import axios from "axios";
 
 export default {
   name: "RankingList",
@@ -19,24 +22,20 @@ export default {
     const farmerList = ref([])
     const error = ref(null)
 
-    const load = async () => {
+    const loadRankData = async () => {
       try {
-        let data = await fetch('url dell\' api del server backend')
-        if (!data.ok) {
-          throw Error('error data fetching rankingApp list')
-        }
-
-        // farmerList.value = await data   retrieve data from data
-        // use these data
+        await axios.get('http://localhost:8000/api/v1/rank_farmers').then(resp => {
+          console.log(resp)
+        })
       }
       catch (err){
         error.value = err.message
         console.log(err.message)
-        // can put the error in the template with the v-if
       }
     }
 
-    load()
+    if (farmerList.value.length)
+      loadRankData()
 
     return{ farmerList, error }
 

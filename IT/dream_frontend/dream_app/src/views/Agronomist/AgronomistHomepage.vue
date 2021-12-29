@@ -4,7 +4,7 @@
   <div class="mainBody">
     <div>
       <WeatherAgro :area="area"/>
-      <RankingList/>
+      <RankingList @click="bigRanking"/>
     </div>
     <div>
       <button class="actionButton localButton" @click="handlePlan">Daily Plan</button>
@@ -41,10 +41,14 @@ export default {
       router.push({ name: 'WriteReport' })
     }
 
+    const bigRanking = () => {
+      router.push({ name: 'RankPage' })
+    }
+
 
     // load user data from api
 
-    return{ name, area, handleMessage, handlePlan, handleReports }
+    return{ name, area, handleMessage, handlePlan, handleReports, bigRanking }
   }
 }
 </script>

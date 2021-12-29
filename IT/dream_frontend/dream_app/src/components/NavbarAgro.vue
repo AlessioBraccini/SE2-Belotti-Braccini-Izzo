@@ -9,14 +9,9 @@
       <button class="menuButton">⋮</button>
       <div class="dropdown-content">
         <router-link :to="{ name: 'AgroHome' }">Home</router-link>
-        <router-link :to="{ name: 'About' }">About</router-link>
         <a href="#" @click="logout">Logout</a>
       </div>
     </div>
-
-
-
-
   </header>
 </template>
 
@@ -31,6 +26,8 @@ export default {
 
   setup(){
     const profileimg = profileimg1;
+
+    axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
     const logout = () => {
 
@@ -58,8 +55,10 @@ export default {
     height: 60px;
     font-size: calc(10px + 2vmin);
     width: 100%;
-    position: fixed;
     z-index: 1;
+    position: relative;
+    display: block;
+    top: 0;
   }
 
   .divProfileImg{
