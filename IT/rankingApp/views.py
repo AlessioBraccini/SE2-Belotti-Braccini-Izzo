@@ -22,7 +22,7 @@ def get_ranking(district, flag):
     else:
         sorted_list = sorted(mydict.items(), key=lambda x: (x[1]))  # ascending order (worst farmers)
 
-    sorted_list = sorted_list[0:10]  # top 10
+    # sorted_list = sorted_list[0:10]  # top/worst 10
     json_string = json.dumps(sorted_list)
     return json_string
 
