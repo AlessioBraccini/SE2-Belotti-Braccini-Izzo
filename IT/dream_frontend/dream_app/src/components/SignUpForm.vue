@@ -25,9 +25,10 @@
     <select v-model="job_role">
       <option value="policyMaker">Policy Maker</option>
       <option value="agronomist">Agronomist</option>
+      <option value="farmer">Farmer</option>
     </select>
 
-    <select v-model="selectedDistrict">
+    <select v-model="selectedDistrict" v-if="job_role!=='policyMaker'">
       <option  v-for="district in district" :key="district"> {{ district }}</option>
     </select>
 
@@ -106,8 +107,10 @@ export default {
 
           if (job_role.value === 'policyMaker')
             job_role.value = 'P'
-          else
+          else if(job_role.value === 'agronomist')
             job_role.value = 'A'
+          else
+            job_role.value = 'F'
 
           sendServer()
 

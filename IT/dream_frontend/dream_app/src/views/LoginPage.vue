@@ -74,7 +74,8 @@ export default {
               router.push({name: 'AgroHome'})
             else if (role === 'P')
               router.push({name: 'PMHome'})
-
+            else
+              router.push({name: 'FarmerHome'})
 
           })
           .catch(err => {

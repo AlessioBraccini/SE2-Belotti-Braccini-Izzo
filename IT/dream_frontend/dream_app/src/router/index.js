@@ -3,11 +3,12 @@ import About from "../views/About.vue"
 import NotFound from "@/views/NotFound";
 import SignUpForm from "@/components/SignUpForm";
 import LoginPage from "@/views/LoginPage";
-import PolicyMakerHomepage from "@/views/PolicyMakerHomepage";
+import PolicyMakerHomepage from "@/views/PolicyMaker/PolicyMakerHomepage";
 import AgronomistHomepage from "@/views/Agronomist/AgronomistHomepage";
 import HelpRequests from "@/views/Agronomist/HelpRequests";
 import DailyPlan from "@/views/Agronomist/DailyPlan";
 import WriteReport from "@/views/Agronomist/WriteReport";
+import FarmerHome from "@/views/Farmer/FarmerHome";
 
 const routes = [
     {
@@ -24,31 +25,31 @@ const routes = [
     {
         path: '/signUp',
         name: 'SignUp',
-        // component: () => import('../views/About.vue')
         component: SignUpForm
     },
     {
         path: '/agronomistHome',
         name: 'AgroHome',
-        // component: () => import('../views/About.vue')
         component: AgronomistHomepage
     },
     {
         path: '/policymakerHome',
         name: 'PMHome',
-        // component: () => import('../views/About.vue')
         component: PolicyMakerHomepage
+    },
+    {
+        path: '/farmerHome',
+        name: 'FarmerHome',
+        component: FarmerHome
     },
     {
         path: '/agronomistHome/helpRequests',
         name: 'HelpRequests',
-        // component: () => import('../views/About.vue')
         component: HelpRequests
     },
     {
         path: '/agronomistHome/dailyPlan',
         name: 'DailyPlan',
-        // component: () => import('../views/About.vue')
         component: DailyPlan
     },
     {
