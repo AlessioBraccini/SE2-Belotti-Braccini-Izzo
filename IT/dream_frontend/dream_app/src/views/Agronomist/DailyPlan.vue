@@ -19,7 +19,7 @@ export default {
           }
         }
 
-        await axios.get('http://localhost:8000/api/v1/users/me', axiosConfig).then(resp => {
+        await axios.get('http://localhost:8000/api/v1/rank_farmers?ordering=ascending', axiosConfig).then(resp => {
           console.log(resp)
         })
 

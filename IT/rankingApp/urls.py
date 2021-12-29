@@ -4,6 +4,5 @@ from . import views
 
 app_name = 'rankingApp'
 urlpatterns = [
-    path('top_farmers', views.top_farmers, name='top_farmers'),
-    path('worst_farmers', views.worst_farmers, name='worst_farmers'),
+    path('rank_farmers', views.RankFarmers.as_view(), name='rank_farmers'),
 ]

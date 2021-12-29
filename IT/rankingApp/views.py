@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseBadRequest, JsonResponse
+from rest_framework.views import APIView
+from rest_framework import authentication, permissions
 from django.contrib.auth import get_user_model
 from app.models import Farm
-import json
 
 User = get_user_model()
 
@@ -10,46 +11,39 @@ User = get_user_model()
 # Create your views here.
 
 
-def get_ranking(district, flag):
+def get_ranking(district, ordering):
     mydict = {}
-    users = User.objects.filter(district).distinct()
-    farms = Farm.objects.filter(district)
-    for u in users:
-        if farms.filter(id=u.id).exists():
-            mydict[u.complete_name()] = farms.get(id=u.id).get_score()
-    if flag:
-        sorted_list = sorted(mydict.items(), key=lambda x: (-x[1]))  # descending order (top farmers)
+    if ordering == 'descending':
+        farms = Farm.objects.filter(user_id__district=district).order_by('-score')
     else:
-        sorted_list = sorted(mydict.items(), key=lambda x: (x[1]))  # ascending order (worst farmers)
-
+        farms = Farm.objects.filter(user_id__district=district).order_by('score')
+    if farms.count() > 0:
+        for f in farms:
+            mydict[f.user_id.complete_name()] = f.score
     # sorted_list = sorted_list[0:10]  # top/worst 10
-    json_string = json.dumps(sorted_list)
-    return json_string
+    return mydict
 
 
-def top_farmers(request):
-    if request.user.is_authenticated:
-        user = User.objects.get(pk=request.user.email)
+class RankFarmers(APIView):
+    """
+    View to list rank of farmers.
+
+    * Requires token authentication.
+    * Only authenticated users are able to access this view.
+    """
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        """
+        Return a list of all users.
+        """
+        user = User.objects.get(email=request.user.email)
         if user is None:
             raise Http404("User not found")
-        district = User.objects.get(user.district)
-        if district is None:
-            raise Http404("District not found")
-
-        json_string = get_ranking(district, True)
+        print(user.district)
+        ordering = request.GET.get('ordering')
+        json_string = get_ranking(user.district, ordering)
         return JsonResponse(json_string)
-    return HttpResponseBadRequest("User is not authenticated")
 
 
-def worst_farmers(request):
-    if request.user.is_authenticated:
-        user = User.objects.get(pk=request.user.email)
-        if user is None:
-            raise Http404("User not found")
-        district = User.objects.get(user.district)
-        if district is None:
-            raise Http404("District not found")
-
-        json_string = get_ranking(district, False)
-        return JsonResponse(json_string)
-    return HttpResponseBadRequest("User is not authenticated")

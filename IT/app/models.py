@@ -13,12 +13,9 @@ User = get_user_model()  # gets custom user from settings AUTH_USER_MODEL
 
 class Farm(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    district = models.CharField(max_length=100, default='')
     address = models.CharField(max_length=100)
     score = models.IntegerField()
 
-    def get_score(self):
-        return self.score
 
 
 class Crop(models.Model):
