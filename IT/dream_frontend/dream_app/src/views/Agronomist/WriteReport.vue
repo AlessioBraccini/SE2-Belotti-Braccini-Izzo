@@ -2,8 +2,8 @@
 
   <NavbarAgro :name="name" class="agroNav"/>
 
-  <div>
-    <h2 class="text">Upload File</h2>
+  <div class="background">
+    <h2 class="text1">Upload File</h2>
     <div class="fileInput">
       <p class="innerText">Select your file</p>
       <input type="file" @change="handleFileUpload( $event )" required />
@@ -15,10 +15,9 @@
     </div>
 
     <button @click="submitFile" class="submitBtn actionButton">Submit</button>
+
+    <button @click="back" class="actionButton backBtn">Back</button>
   </div>
-
-  <button @click="back" class="actionButton submitBtn">Back</button>
-
 </template>
 
 <script>
@@ -83,10 +82,27 @@ export default {
     position: relative;
   }
 
+  .background{
+    background-color: #E9C197;
+    position: relative;
+    border-radius: 10px;
+    width: 90%;
+    left: 6%;
+    height: auto;
+    top: 15px;
+  }
+
   .agroNav{
     position: relative;
     display: block;
     top: 0;
+  }
+
+  .text1{
+    position: relative;
+    left: 9%;
+    max-width: 80%;
+    margin-top: 15px;
   }
 
   .text{
@@ -117,6 +133,11 @@ export default {
 
   .submitBtn{
     left: 9%;
+  }
+
+  .backBtn{
+    left: 9%;
+    margin-bottom: 15px;
   }
 
 </style>

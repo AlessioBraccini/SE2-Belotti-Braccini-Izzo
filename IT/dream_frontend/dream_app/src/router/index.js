@@ -9,6 +9,7 @@ import HelpRequests from "@/views/Agronomist/HelpRequests";
 import DailyPlan from "@/views/Agronomist/DailyPlan";
 import WriteReport from "@/views/Agronomist/WriteReport";
 import FarmerHome from "@/views/Farmer/FarmerHome";
+import RankingView from "@/views/RankingView";
 
 const routes = [
     {
@@ -55,9 +56,12 @@ const routes = [
     {
         path: '/agronomistHome/writeReport',
         name: 'WriteReport',
-        // component: () => import('../views/About.vue')
         component: WriteReport
-
+    },
+    {
+        path: '/ranking',
+        name: 'RankPage',
+        component: RankingView
     },
 
 
