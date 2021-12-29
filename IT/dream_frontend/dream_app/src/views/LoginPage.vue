@@ -40,16 +40,9 @@ export default {
       location.reload()
     }
 
-    const load = async () => {
+    const loadUserData = async () => {
       try {
-
-        // let axiosConfig = {
-        //   headers:{
-        //     'Authorization': 'Token ' + localStorage.getItem('token')
-        //   }
-        // }
         return await axios.get('http://localhost:8000/api/v1/users/me/')
-
       }
       catch (err){
         console.log('err load ' + err)
@@ -72,7 +65,7 @@ export default {
 
             axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
-            let data = await load()
+            let data = await loadUserData()
             let role = data.data['job_role']
             localStorage.setItem('name', data.data['first_name'] + ' ' + data.data['last_name'] )
 
@@ -88,7 +81,6 @@ export default {
             console.log('error' + err)
             if (err.response.status === 400)
               passwordError.value = 'Email or Password is incorrect'
-            load(err)
           }
           )
 
