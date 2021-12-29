@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import {ref} from "vue";
+import { ref } from "vue";
 import router from "@/router"
 import axios from "axios";
 import image from '../assets/dreamLogo.png'
@@ -35,16 +35,21 @@ export default {
     const passwordError = ref('');
     const logo = image;
 
+    if (localStorage.key(0) === 'reload') {
+      localStorage.clear()
+      location.reload()
+    }
+
     const load = async () => {
       try {
 
-        let axiosConfig = {
-          headers:{
-            'Authorization': 'Token ' + localStorage.getItem('token')
-          }
-        }
+        // let axiosConfig = {
+        //   headers:{
+        //     'Authorization': 'Token ' + localStorage.getItem('token')
+        //   }
+        // }
 
-        return await axios.get('http://localhost:8000/api/v1/users/me', axiosConfig)
+        return await axios.get('http://localhost:8000/api/v1/users/me')
 
       }
       catch (err){
@@ -65,6 +70,8 @@ export default {
           .then(async resp => {
 
             localStorage.setItem('token', resp.data.auth_token)
+
+            axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
             let data = await load()
             let role = data.data['job_role']

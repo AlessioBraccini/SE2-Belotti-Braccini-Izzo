@@ -10,6 +10,7 @@
       <div class="dropdown-content">
         <router-link :to="{ name: 'AgroHome' }">Home</router-link>
         <router-link :to="{ name: 'About' }">About</router-link>
+        <a href="#" @click="logout">Logout</a>
       </div>
     </div>
 
@@ -21,6 +22,8 @@
 
 <script>
 import profileimg1 from '../assets/profile.png'
+import axios from "axios";
+import router from "@/router";
 
 export default {
   name: "NavbarAgro",
@@ -29,7 +32,21 @@ export default {
   setup(){
     const profileimg = profileimg1;
 
-    return{ profileimg }
+    const logout = () => {
+
+      axios.post('http://localhost:8000/api/v1/token/logout/')
+      .then(() => {
+        localStorage.clear()
+
+        localStorage.setItem('reload', null)
+
+        router.push({name: 'Login'})
+
+      })
+
+
+    }
+    return{ profileimg, logout }
   }
 }
 </script>
