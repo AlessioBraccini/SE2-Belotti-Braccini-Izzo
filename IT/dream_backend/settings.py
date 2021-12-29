@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'userApp.apps.UserappConfig',
     'app.apps.AppConfig',
+    'planningApp.apps.PlanningappConfig',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',

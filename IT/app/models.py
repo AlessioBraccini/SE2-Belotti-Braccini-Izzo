@@ -31,13 +31,6 @@ class Production(models.Model):
     harvested_date = models.DateField()
 
 
-class DailyPlan(models.Model):
-    agronomist_user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField()
-    farmer_user_id = models.IntegerField()
-    annotation = models.TextField()
-
-
 class HelpRequest(models.Model):
     sender_id = models.ForeignKey(User, on_delete=models.CASCADE)
     receiver_id = models.IntegerField()
