@@ -53,5 +53,9 @@ class RankFarmers(APIView):
             raise Http404("User not found")
         ordering = request.GET.get('ordering')
         mylist = get_ranking(user.district, ordering)
-        json_string = json.dumps(mylist, default=lambda x: x.__dict__)
-        return JsonResponse(json_string, safe=False)
+        json_string = json.dumps([el.__dict__ for el in mylist])
+        return HttpResponse(json_string)
+
+        # return HttpResponse(json_string, content_type="application/json")
+        # return JsonResponse(json_string, safe=False)
+
