@@ -12,19 +12,19 @@ User = get_user_model()  # gets custom user from settings AUTH_USER_MODEL
 
 
 class Farm(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.CharField(max_length=100)
     score = models.IntegerField()
-
+    visit_ctr = models.IntegerField(default=0)
 
 
 class Crop(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    farm = models.ForeignKey(Farm, on_delete=models.CASCADE, null=True)
     crop_type = models.CharField(max_length=100)
 
 
 class Production(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     crop_type = models.CharField(max_length=100)
     qty_sown = models.IntegerField()
     sown_date = models.DateField()
@@ -33,8 +33,8 @@ class Production(models.Model):
 
 
 class HelpRequest(models.Model):
-    sender_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    receiver_id = models.IntegerField()
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender', null=True)
+    receiver = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='receiver', null=True)
     date = models.DateTimeField(auto_now_add=True)
     subject = models.CharField(max_length=100)
     message = models.TextField()
