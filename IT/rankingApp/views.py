@@ -12,10 +12,12 @@ User = get_user_model()
 # Create your views here.
 
 class Ranking(object):
+    user_id = None
     name = None
     score = None
 
-    def __init__(self, name, score):
+    def __init__(self, user_id, name, score):
+        self.user_id = user_id
         self.name = name
         self.score = score
 
@@ -38,7 +40,7 @@ def get_ranking(ordering, district=''):
 
     if farms.count() > 0:
         for f in farms:
-            rank = Ranking(f.user_id.complete_name(), f.score)
+            rank = Ranking(f.user.id, f.user.complete_name(), f.score)
             mylist.append(rank)
     return mylist
 
