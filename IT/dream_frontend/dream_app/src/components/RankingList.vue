@@ -1,10 +1,23 @@
 <template>
   <div class="square" @click="openBig">
+
+    <h3>Farmers Ranking</h3>
+
     <div v-if="error" style="text-align: center">{{ error }}</div>
-    <div v-else-if="farmerList.length">
-      <ul>
-<!--        <li v-for="farmer in farmerList" :key="farmerList.name"> {{ farmer }} </li>-->
-      </ul>
+    <div v-else-if="farmerList.length" style="height: 70%">
+
+      <div class="farmerName">
+        <ul>
+          <li v-for="farmer in farmerList.length" :key="farmer"> {{ farmerList[farmer-1]['name'] }} </li>
+        </ul>
+      </div>
+
+      <div class="farmerScore">
+        <ul>
+          <li v-for="farmer in farmerList.length" :key="farmer"> {{ farmerList[farmer-1]['score'] }} </li>
+        </ul>
+      </div>
+
     </div>
     <div v-else class="rawText">Loading...</div>
   </div>
@@ -24,8 +37,11 @@ export default {
 
     const loadRankData = async () => {
       try {
-        await axios.get('http://localhost:8000/api/v1/rank_farmers').then(resp => {
-          console.log(resp)
+        await axios.get('http://localhost:8000/api/v1/rank_farmers', {params: {ordering: 'descending'}}).then(resp => {
+          farmerList.value = resp.data
+
+          if(farmerList.value.length >= 7)
+            farmerList.value = farmerList.value.slice(0,7)
         })
       }
       catch (err){
@@ -34,7 +50,7 @@ export default {
       }
     }
 
-    if (farmerList.value.length)
+    if (!farmerList.value.length)
       loadRankData()
 
     return{ farmerList, error }
@@ -45,6 +61,25 @@ export default {
 </script>
 
 <style scoped>
+
+  h3{
+    margin: 0;
+    padding: 10px 0 0 0;
+    height: 10%;
+    text-align: center;
+  }
+
+  ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li{
+    margin-bottom: 10px;
+    border-bottom: solid #919191 1px;
+  }
+
   .square{
     position: relative;
     display: block;
@@ -55,6 +90,7 @@ export default {
     top: 5%;
     border-radius: 22px;
     margin-top: 20px;
+    cursor: pointer;
   }
 
   .rawText{
@@ -63,4 +99,25 @@ export default {
     left: 39%;
     width: 100px;
   }
+
+  .farmerName{
+    position: relative;
+    display: inline-block;
+    width: 70%;
+    left: 7%;
+    top: 5%;
+    font-weight: bold;
+
+  }
+
+  .farmerScore{
+    position: relative;
+    display: inline-block;
+    width: 16%;
+    right: -7%;
+    top: 5%;
+    text-align: right;
+    font-weight: bold;
+  }
+
 </style>
