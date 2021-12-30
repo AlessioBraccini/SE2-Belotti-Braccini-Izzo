@@ -55,7 +55,7 @@ def get_ranking(ordering, district=''):
 
     if farms.count() > 0:
         for f in farms:
-            rank = Ranking(f.user.id, f.user.complete_name(), f.score)
+            rank = Ranking(f.id, f.user.complete_name(), f.score)
             mylist.append(rank)
     return mylist
 
@@ -126,10 +126,9 @@ class ProfileFarmers(APIView):
         if farmer_id is None:
             raise Http404("Invalid farmer id")
 
-        farm = Farm.objects.get(pk=farmer_id)
-        user = User.objects.get(pk=farmer_id)
+        f = Farm.objects.get(pk=farmer_id)
         crops = list(Crop.objects.filter(farm_id=farmer_id).values('crop_type'))
 
-        profile_info = FarmerProfile(user.complete_name(), user.email, user.district, farm.score, crops)
+        profile_info = FarmerProfile(f.user.complete_name(), f.user.email, f.user.district, f.score, crops)
         json_string = json.dumps(profile_info.__dict__)
         return HttpResponse(json_string)

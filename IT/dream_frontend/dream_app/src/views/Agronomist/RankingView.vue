@@ -46,9 +46,11 @@ export default {
     const farmerList = ref([])
     const error = ref(null)
 
+    axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
+
     const loadRankData = async () => {
       try {
-        await axios.get('http://localhost:8000/api/v1/rank_farmers?ordering=descending').then(resp => {
+        await axios.get('http://localhost:8000/api/v1/rank_farmers', {params: {ordering: 'descending'}}).then(resp => {
           farmerList.value = resp.data
         })
       }
@@ -65,10 +67,10 @@ export default {
 
       const id = farmer['user_id']
 
-      console.log(id)
-
-      await axios.get('http://localhost:8000/api/v1/rank_farmers/' + id, ).then(resp => {
+      await axios.get('http://localhost:8000/api/v1/profile_info', {params: {farmer_id: id}} ).then(resp => {
         console.log(resp.data)
+      }).catch(err => {
+        console.log(err)
       })
 
     }
