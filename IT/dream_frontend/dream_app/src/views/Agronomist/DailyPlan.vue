@@ -20,8 +20,8 @@ export default {
     const load = async () => {
       try {
 
-
-        await axios.get('http://localhost:8000/api/v1/rank_farmers?ordering=descending').then(resp => {
+        // {params: {ordering: 'descending', district: 'name of the selected district'}}) for the policy maker
+        await axios.get('http://localhost:8000/api/v1/rank_farmers', {params: {ordering: 'descending'}}).then(resp => {
           console.log(resp.data.valueOf())
         })
         // await axios.get('http://localhost:8000/api/v1/users/me').then(resp => {console.log(resp)})
