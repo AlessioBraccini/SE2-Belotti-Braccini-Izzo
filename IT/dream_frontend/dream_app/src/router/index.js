@@ -10,6 +10,7 @@ import DailyPlan from "@/views/Agronomist/DailyPlan";
 import WriteReport from "@/views/Agronomist/WriteReport";
 import FarmerHome from "@/views/Farmer/FarmerHome";
 import RankingView from "@/views/Agronomist/RankingView";
+import WeatherPage from "@/views/Agronomist/WeatherPage";
 
 const routes = [
     {
@@ -57,6 +58,11 @@ const routes = [
         path: '/agronomistHome/writeReport',
         name: 'WriteReport',
         component: WriteReport
+    },
+    {
+        path: '/agronomistHome/weatherForecast',
+        name: 'WeatherAgro',
+        component: WeatherPage
     },
     {
         path: '/ranking',

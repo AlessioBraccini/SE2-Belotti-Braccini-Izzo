@@ -9,46 +9,42 @@
     </div>
 
     <div class="temperature">
-      <img src="@/assets/profile.png"/>
       <p>{{temperatureValue}}°C</p>
     </div>
 
-    <div class="tempMax">
-      <img src="@/assets/profile.png"/>
-      <p>{{temperatureHigh}}°C</p>
+    <div class="icon">
+      <img :src="icon" class="icoImg"/>
     </div>
 
-    <div class="wind">
-      <img src="@/assets/profile.png"/>
-      <p>{{windSpeed}} Kph</p>
+    <div class="description">
+      <p>{{description}}</p>
     </div>
 
-    <div class="humidity">
-      <img src="@/assets/profile.png"/>
-      <p>{{humidity}}%</p>
-    </div>
-
-    <div class="tempMin">
-      <img src="@/assets/profile.png"/>
-      <p>{{temperatureLow}}°C</p>
-    </div>
-
-    <div class="cloud">
-      <img src="@/assets/profile.png"/>
-      <p>{{cloudiness}}</p>
-    </div>
-
-<!--    <div class="description">-->
-<!--      <p>{{description}}</p>-->
-<!--    </div>-->
   </div>
 
 </template>
 
 <script>
 
-// import axios from "axios";
 import {ref} from "vue";
+import x01d from "@/assets/weather/x01d.png"
+import x01n from "@/assets/weather/x01n.png"
+import x02d from "@/assets/weather/x02d.png"
+import x02n from "@/assets/weather/x02n.png"
+import x03d from "@/assets/weather/x03d.png"
+import x03n from "@/assets/weather/x03n.png"
+import x04d from "@/assets/weather/x04d.png"
+import x04n from "@/assets/weather/x04n.png"
+import x09d from "@/assets/weather/x09d.png"
+import x09n from "@/assets/weather/x09n.png"
+import x10d from "@/assets/weather/x10d.png"
+import x10n from "@/assets/weather/x10n.png"
+import x11d from "@/assets/weather/x11d.png"
+import x11n from "@/assets/weather/x11n.png"
+import x13d from "@/assets/weather/x13d.png"
+import x13n from "@/assets/weather/x13n.png"
+import x50d from "@/assets/weather/x50d.png"
+import x50n from "@/assets/weather/x50n.png"
 
 export default {
   name: "WeatherAgro",
@@ -59,15 +55,11 @@ export default {
     // 547eaf1664e44666701371efa7605159
     // api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
 
-    const cloudiness =ref(0);
-    const windSpeed =ref(0);
-    const humidity =ref(0);
-
     const temperatureValue =ref(0);
-    const temperatureHigh =ref(0);
-    const temperatureLow =ref(0);
-
     const description = ref('');
+
+    const icon = ref('');
+
 
 
 
@@ -77,21 +69,37 @@ export default {
           .then( resp => resp.json())
           .then( data => {
 
-            cloudiness.value = data.clouds.all
-            windSpeed.value = data.wind.speed
-            humidity.value = data.main.humidity
             temperatureValue.value = Math.round(data.main.temp)
-            temperatureHigh.value = Math.round(data.main.temp_max)
-            temperatureLow.value = Math.round(data.main.temp_min)
             description.value = data.weather[0].description
+            const image = data.weather[0].icon.toString()
 
+            switch (image){
+              case '01d': icon.value = x01d; break;
+              case '01n': icon.value = x01n; break;
+              case '02d': icon.value = x02d; break;
+              case '02n': icon.value = x02n; break;
+              case '03d': icon.value = x03d; break;
+              case '03n': icon.value = x03n; break;
+              case '04d': icon.value = x04d; break;
+              case '04n': icon.value = x04n; break;
+              case '09d': icon.value = x09d; break;
+              case '09n': icon.value = x09n; break;
+              case '10d': icon.value = x10d; break;
+              case '10n': icon.value = x10n; break;
+              case '11d': icon.value = x11d; break;
+              case '11n': icon.value = x11n; break;
+              case '13d': icon.value = x13d; break;
+              case '13n': icon.value = x13n; break;
+              case '50d': icon.value = x50d; break;
+              case '50n': icon.value = x50n; break;
+            }
           })
 
     }
 
     loadWeather()
 
-    return{ cloudiness, windSpeed, humidity, temperatureValue, temperatureHigh, temperatureLow, description }
+    return{ temperatureValue, description, icon }
 
   }
 }
@@ -100,7 +108,7 @@ export default {
 <style scoped>
 
   div{
-    width: 30%;
+    width: 40%;
     display: inline-block;
     left: 6%;
   }
@@ -116,6 +124,7 @@ export default {
 
   p{
     display: inline-block;
+    margin: 0;
   }
 
   h3{
@@ -125,7 +134,7 @@ export default {
   .areaText{
     display: inline-block;
     margin-top: 3%;
-    margin-bottom: 3%;
+    margin-bottom: 5%;
   }
 
   .square{
@@ -151,50 +160,35 @@ export default {
     width: 90%;
     top: 5%;
     left: 5%;
-    text-align: center;
-
-  }
-
-  .cloud{
-    position: relative;
-    /*top: 30%;*/
-    /*left: -60%;*/
-  }
-
-  .wind{
-    position: relative;
-    /*top: 55%;*/
-    /*left: -73%;*/
-  }
-
-  .humidity{
-    position: relative;
-    /*top: 0;*/
-    /*left: 28%;*/
+    text-align: left;
   }
 
   .temperature{
     position: relative;
+    font-size: 25px;
+    font-weight: bold;
+    bottom: 10%;
     /*top: 25%;*/
     /*left: 15%;*/
   }
 
-  .tempMax{
+  .icon{
     position: relative;
+    text-align: right;
     /*top: 1px;*/
     /*left: 25%;*/
   }
 
-  .tempMin{
-    position: relative;
-    /*top: 25%;*/
-    /*left: 12%;*/
+  .icoImg{
+    width: 60px;
+    height: 60px;
   }
 
   .description{
     position: relative;
-    /*top: 1%;*/
-    /*left: 1%;*/
+    text-transform: capitalize;
+    font-size: 20px;
+
   }
 
 
