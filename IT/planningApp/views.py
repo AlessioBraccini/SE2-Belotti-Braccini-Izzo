@@ -3,9 +3,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.exceptions import ValidationError
+from django.utils.datastructures import MultiValueDictKeyError
 from rest_framework import authentication, permissions
 from django.contrib.auth import get_user_model
-# from .serializers import *
 from .models import *
 import json
 
@@ -63,4 +63,46 @@ class DailyPlanView(APIView):
             'visit_farmers_list': farmers_list,
         }
         return Response(response_payload)
+
+
+class UpdateVisits(APIView):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    @staticmethod
+    # @api_view(['POST', 'PUT'])
+    def post(request):
+        agro = User.objects.get(id=request.user.id)
+        try:
+            farmer = User.objects.get(id=request.data['visit_farmer'])
+        except User.DoesNotExist:
+            return Response({"message": "Farmer not found"}, status=status.HTTP_404_NOT_FOUND)
+        date = request.data["date"]
+        try:
+            annotation = request.data["annotation"]
+        except MultiValueDictKeyError:
+            annotation = None
+
+        # either add, delete, add_annotation
+        action = request.GET.get('action')
+
+        if action == 'add':
+            plan_entry = DailyPlan(agronomist_user=agro, date=date, visit_farmer=farmer)
+            plan_entry.save()
+            return Response({"message": "New visit registered successfully"})
+        if action == 'add_annotation':
+            if annotation is not None:
+                plan_entry = DailyPlan.objects.get(agronomist_user=agro, date=date, visit_farmer=farmer)
+                plan_entry.annotation = annotation
+                plan_entry.save()
+            return Response({"message": "Daily plan entry updated successfully"})
+        if action == 'delete':
+            plan_entry = DailyPlan.objects.get(agronomist_user=agro, date=date, visit_farmer=farmer)
+            DailyPlan.delete(plan_entry)
+            return Response({"message" : "Visit deleted successfully"})
+        return Response({"message": "Action is not a valid one. Choose between add, add_annotation or delete"},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+
+
 
