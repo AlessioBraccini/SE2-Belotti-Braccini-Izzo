@@ -69,6 +69,9 @@ export default {
             let role = data.data['job_role']
             localStorage.setItem('name', data.data['first_name'] + ' ' + data.data['last_name'] )
 
+            if (data.data['district'] != null)
+              localStorage.setItem('district', data.data['district'])
+
             if (role === 'A')
               router.push({name: 'AgroHome'})
             else if (role === 'P')

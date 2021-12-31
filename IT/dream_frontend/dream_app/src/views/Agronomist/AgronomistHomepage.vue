@@ -27,7 +27,7 @@ export default {
   setup(){
 
     const name = ref(localStorage.getItem('name'))
-    const area = ref('Medak')
+    const area = ref(localStorage.getItem('district'))
 
     const handleMessage = () => {
       router.push({ name: 'HelpRequests' })

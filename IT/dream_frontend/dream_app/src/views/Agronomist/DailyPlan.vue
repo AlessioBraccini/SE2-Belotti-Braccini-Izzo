@@ -21,13 +21,15 @@ export default {
       try {
 
         // {params: {ordering: 'descending', district: 'name of the selected district'}}) for the policy maker
-        await axios.get('http://localhost:8000/api/v1/profile_info', {params: {farmer_id: 24}} ).then(resp => {
+        await axios.get('http://localhost:8000/api/v1/users/me').then(resp => {
           console.log(resp.data)
         }).catch(() => {
           console.log('s')
         })
         // await axios.get('http://localhost:8000/api/v1/users/me').then(resp => {console.log(resp)})
 
+        const data = localStorage.getItem('api')
+        console.log(data.valueOf())
 
 
       }
@@ -36,6 +38,8 @@ export default {
         // can put the error in the template with the v-if
       }
     }
+
+
 
     return{ name, load }
   }
