@@ -7,7 +7,7 @@ User = get_user_model()  # gets custom user from settings AUTH_USER_MODEL
 
 
 class DailyPlan(models.Model):
-    agronomist_user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    agronomist_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='agronomist_user', null=True)
     date = models.DateField()
-    farmer_user_id = models.IntegerField()
+    visit_farmer = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='visit_farmer', null=True)
     annotation = models.TextField()
