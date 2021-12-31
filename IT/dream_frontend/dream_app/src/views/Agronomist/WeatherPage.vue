@@ -4,7 +4,7 @@
     <div class="square">
 
       <div class="area">
-        <img src="@/assets/profile.png"/>
+        <img src="@/assets/icon/positionIcon.png"/>
         <h3 class="areaText">{{ area }}</h3>
       </div>
 
@@ -14,43 +14,39 @@
       </div>
 
       <div class="humidity">
-        <img src="@/assets/profile.png"/>
+        <img src="@/assets/icon/humidityIcon.png"/>
         <p>Humidity: {{humidity}}%</p>
       </div>
 
       <div class="humidity">
-        <img src="@/assets/profile.png"/>
+        <img src="@/assets/icon/pressureIcon.png"/>
         <p>Pressure: {{pressure}} mbar</p>
       </div>
 
       <div class="tempMax">
-        <img src="@/assets/profile.png"/>
+        <img src="@/assets/icon/maxIcon.png"/>
         <p>Max temperature: {{temperatureHigh}}°C</p>
       </div>
 
       <div class="tempMin">
-        <img src="@/assets/profile.png"/>
+        <img src="@/assets/icon/minIcon.png"/>
         <p>Min temperature: {{temperatureLow}}°C</p>
       </div>
 
       <div class="wind">
-        <img src="@/assets/profile.png"/>
+        <img src="@/assets/icon/windIcon.png"/>
         <p>Wind speed: {{windSpeed}} Kph</p>
       </div>
 
       <div class="wind">
-        <img src="@/assets/profile.png"/>
+        <img src="@/assets/icon/directionIcon.png"/>
         <p>Wind direction: {{windDeg}}°</p>
       </div>
 
       <div class="cloud">
-        <img src="@/assets/profile.png"/>
+        <img src="@/assets/icon/cloudIcon.png"/>
         <p>Cloudiness: {{cloudiness}}</p>
       </div>
-
-      <div>{{icon}}</div>
-
-
     </div>
 
     <button @click="back" class="actionButton backBtn">Back</button>
@@ -165,6 +161,7 @@ export default {
     top: 5%;
     border-radius: 22px;
     margin-top: 20px;
+    margin-bottom: 15px;
   }
 
   .area{
@@ -178,7 +175,7 @@ export default {
 
   .cloud{
     position: relative;
-    padding-bottom: 30px;
+    padding-bottom: 18px;
     /*top: 30%;*/
     /*left: -60%;*/
   }
@@ -227,7 +224,6 @@ export default {
     left: 5%;
     width: 90%;
     margin: 0;
-    bottom: 18px;
   }
 
 

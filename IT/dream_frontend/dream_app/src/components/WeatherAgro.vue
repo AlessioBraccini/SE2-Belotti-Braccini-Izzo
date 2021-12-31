@@ -4,7 +4,7 @@
     <h3 class="title">Weather</h3>
 
     <div class="area">
-      <img src="@/assets/profile.png"/>
+      <img src="@/assets/icon/positionIcon.png"/>
       <h3 class="areaText">{{ area }}</h3>
     </div>
 
@@ -110,7 +110,7 @@ export default {
   div{
     width: 40%;
     display: inline-block;
-    left: 6%;
+    left: 9%;
   }
 
   img{
@@ -159,7 +159,6 @@ export default {
     position: relative;
     width: 90%;
     top: 5%;
-    left: 5%;
     text-align: left;
   }
 
