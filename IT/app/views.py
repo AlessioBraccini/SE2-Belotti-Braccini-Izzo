@@ -43,6 +43,7 @@ class FarmView(APIView):
         farmers_list = []
         for farm in farms:
             context = {
+                'farmer_id': farm.user.id,
                 'farmer_name': farm.user.complete_name(),
                 'visit_ctr': farm.visit_ctr,
             }
