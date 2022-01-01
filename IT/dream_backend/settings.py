@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'planningApp.apps.PlanningappConfig',
     'rankingApp.apps.RankingappConfig',
+    'reportApp.apps.ReportappConfig',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',

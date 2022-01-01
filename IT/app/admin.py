@@ -9,4 +9,4 @@ admin.site.register(Farm)
 admin.site.register(Crop)
 admin.site.register(Production)
 admin.site.register(HelpRequest)
-admin.site.register(SteeringInitiative)
+

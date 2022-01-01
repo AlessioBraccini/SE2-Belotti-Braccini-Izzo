@@ -40,7 +40,4 @@ class HelpRequest(models.Model):
     message = models.TextField()
 
 
-class SteeringInitiative(models.Model):
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    pub_date = models.DateField(auto_now_add=True)
-    report = models.FileField(upload_to='files/')
+
