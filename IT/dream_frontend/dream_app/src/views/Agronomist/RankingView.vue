@@ -63,16 +63,11 @@ export default {
     if (!farmerList.value.length)
       loadRankData()
 
-    const viewSpecificInfo = async (farmer) => {
+    const viewSpecificInfo = (farmer) => {
 
-      const id = farmer['user_id']
+      localStorage.setItem('id', farmer['user_id'])
 
-      await axios.get('http://localhost:8000/api/v1/profile_info', {params: {farmer_id: id}} ).then(resp => {
-        console.log(resp.data)
-      }).catch(err => {
-        console.log(err)
-      })
-
+      router.push({name: 'SpecificInfo'})
     }
 
     const back = () => {

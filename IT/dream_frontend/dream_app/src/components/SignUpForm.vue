@@ -133,14 +133,6 @@ export default {
       .then(resp => {
         console.log(resp.data)
 
-        // toast({
-        //   message: '<h3 class="confirmMsg">Ciao</h3>',
-        //   duration: 1300,
-        //   closeOnClick: true,
-        //   animate: { in: 'fadeIn', out: 'fadeOut' },
-        //   position: 'top-left'
-        // })
-
         confirmationMessage.value = 'Account created, please log in'
 
         setTimeout(function() {

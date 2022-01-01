@@ -79,7 +79,7 @@ export default {
   .spanText{
     display: inline-block;
     position: relative;
-    width: 200px;
+    width: auto;
     left: 10%;
     top: 10px;
   }
@@ -97,7 +97,6 @@ export default {
 
   .usernameStyle{
     position: relative;
-    width: 200px;
     color: black;
     margin: 0;
   }

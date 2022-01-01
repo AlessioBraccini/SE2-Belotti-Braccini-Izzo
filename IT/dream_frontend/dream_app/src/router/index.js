@@ -11,6 +11,7 @@ import WriteReport from "@/views/Agronomist/WriteReport";
 import FarmerHome from "@/views/Farmer/FarmerHome";
 import RankingView from "@/views/Agronomist/RankingView";
 import WeatherPage from "@/views/Agronomist/WeatherPage";
+import SpecificInfo from "@/views/SpecificInfo";
 
 const routes = [
     {
@@ -68,6 +69,11 @@ const routes = [
         path: '/ranking',
         name: 'RankPage',
         component: RankingView
+    },
+    {
+        path: '/ranking/specificInfo',
+        name: 'SpecificInfo',
+        component: SpecificInfo
     },
 
 
