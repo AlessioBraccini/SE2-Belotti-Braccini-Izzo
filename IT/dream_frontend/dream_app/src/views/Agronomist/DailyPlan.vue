@@ -6,6 +6,7 @@
     <h3>Day of the visits</h3>
     <div>
       <input type="date" v-model="date" class="date"/>
+      <div v-if="dateErr" class="dateError">{{dateErr}}</div>
     </div>
 
     <h3>Farmers</h3>
@@ -17,38 +18,36 @@
 
         <div class="farmerName">
           <ul>
-            <li v-for="farmer in farmerList.length" :key="farmer" @click="addFarmer(farmer-1)"> {{ farmerList[farmer-1]['name'] }} </li>
+            <li v-for="farmer in farmerList.length" :key="farmer" @click="addFarmer(farmer-1)"> {{ farmerList[farmer-1]['farmer_name'] }} </li>
           </ul>
         </div>
 
         <div class="farmerScore">
           <ul>
-            <li v-for="farmer in farmerList.length" :key="farmer" @click="addFarmer(farmerList[farmer-1])"> {{ farmerList[farmer-1]['score'] }} </li>
+            <li v-for="farmer in farmerList.length" :key="farmer" @click="addFarmer(farmerList[farmer-1])"> {{ farmerList[farmer-1]['visit_ctr'] }} </li>
           </ul>
         </div>
 
       </div>
       <div v-else class="rawText">Loading...</div>
     </div>
-
-    <h3>el Plan</h3>
+    <div>
+      <h3 style="display: inline-block">Plan</h3>
+      <div v-if="listErr" class="listError">{{listErr}}</div>
+    </div>
 
     <div class="takenFarmerArea">
       <div v-if="takenFarmerList.length" style="height: 70%">
 
         <div class="takenFarmerName">
           <ul>
-            <li v-for="farmer in takenFarmerList.length" :key="farmer" @click="removeFarmer(farmerList[farmer-1])"> {{ takenFarmerList[farmer-1]['name'] }} </li>
+            <li v-for="farmer in takenFarmerList.length" :key="farmer" @click="removeFarmer(farmerList[farmer-1])"> {{ takenFarmerList[farmer-1]['farmer_name'] }} </li>
           </ul>
         </div>
       </div>
       <div v-else class="rawText">No farmer selected</div>
     </div>
-
-    <h3>Annotation</h3>
-    <div class="divTextArea">
-      <textarea class="textArea" v-model="annotations"/>
-    </div>
+    <div style="height: 20px"/>
 
   </div>
 
@@ -56,6 +55,12 @@
   <button @click="updateDailyPlan" class="actionButton confirmBtn">Update Today Plan</button>
   <button @click="showDailyPlan" class="actionButton confirmBtn">Show Created Plan</button>
   <button @click="back" class="actionButton backBtn">Back</button>
+
+  <div v-if="confirmationMessage" class="opacityBack">
+    <div  class="confirmMsg">
+      <h4 class="confirmText"> {{ confirmationMessage }} </h4>
+    </div>
+  </div>
 
 </template>
 
@@ -74,40 +79,68 @@ export default {
     const name = localStorage.getItem('name')
     const farmerList = ref([])
     const takenFarmerList = ref([])
+    const takenFarmerListId = ref([])
     const date = ref(null)
     const annotations = ref('')
     const error = ref(null)
+    const dateErr = ref('')
+    const listErr = ref('')
+    const confirmationMessage = ref('')
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
-    const uploadDailyPlan =  () => {
-      // try {
-      //   await axios.post('http://localhost:8000/api/v1/daily_plan', {
-      //
-      //     farmer_list: takenFarmerList.value,
-      //     annotations: annotations.value
-      //
-      //   }).then(resp => {
-      //       console.log(resp.data)
-      //     }).catch(err => {
-      //       console.log(err)
-      //     })
-      // }
-      // catch (err){
-      //   console.log('err load ' + err)
-      //   // can put the error in the template with the v-if
+    const uploadDailyPlan =  async () => {
+      try {
+        dateErr.value = ''
+        listErr.value = ''
+
+        if (date.value) {
+          if (takenFarmerList.value.length){
+            await axios.post('http://localhost:8000/api/v1/daily_plan', {
+              visit_farmers_list: takenFarmerListId.value.toString(),   // lista di id dei farmers
+              date: date.value
+            }).then(() => {
+              scroll(0,0)
+              confirmationMessage.value = 'Plan send successfully'
+
+              setTimeout(function() {
+                router.push({name: 'AgroHome'})
+              }, 1250);
+
+            }).catch(err => {
+              console.log(err)
+            })
+          }
+          else {
+            listErr.value = '! List cannot be empty'
+          }
+        } else {
+          if (!takenFarmerList.value.length)
+            listErr.value = '! List cannot be empty'
+          dateErr.value = "! Date is required"
+        }
+      }
+      catch(err) {
+          console.log('err load ' + err)
+          // can put the error in the template with the v-if
+      }
+
+      // get 'http://localhost:8000/api/v1/daily_plan', {params: {date: date.value}}
+
+      // post 'http://localhost:8000/api/v1/update_daily_plan', {
+      //    action: '',    // string con add o delete
+      //    visit_farmer: //single faremer
+      //    date: date.value
       // }
 
-      localStorage.setItem('dailyPlan', 'true')
 
-      router.push({ name: 'AgroHome' })
 
 
     }
 
-    const loadRankData = async () => {
+    const loadFarmerData = async () => {
       try {
-        await axios.get('http://localhost:8000/api/v1/rank_farmers', {params: {ordering: 'descending'}}).then(resp => {
+        await axios.get('http://localhost:8000/api/v1/farms_list').then(resp => {
           farmerList.value = resp.data
         })
       }
@@ -118,15 +151,18 @@ export default {
     }
 
     if (!farmerList.value.length)
-      loadRankData()
+      loadFarmerData()
 
     const addFarmer = (farmer) => {
-      takenFarmerList.value.push(farmerList.value[farmer])
-      farmerList.value.splice(farmer, 1)
+      if(takenFarmerListId.value.indexOf(farmerList.value[farmer]['farmer_id']) === -1) {
+        takenFarmerList.value.push(farmerList.value[farmer])
+        takenFarmerListId.value.push(farmerList.value[farmer]['farmer_id'])
+      }
     }
 
     const removeFarmer = (farmer) => {
       takenFarmerList.value.splice(farmer, 1)
+      takenFarmerListId.value.splice(farmer, 1)
     }
 
     const back = () => {
@@ -141,7 +177,7 @@ export default {
       router.push({name: 'ShowPlan'})
     }
 
-    return{ name, farmerList, error, takenFarmerList, annotations, date, uploadDailyPlan, addFarmer, removeFarmer, updateDailyPlan, showDailyPlan, back }
+    return{ name, farmerList, error, takenFarmerList, annotations, date, dateErr, listErr, confirmationMessage, uploadDailyPlan, addFarmer, removeFarmer, updateDailyPlan, showDailyPlan, back }
   }
 }
 </script>
@@ -190,6 +226,7 @@ export default {
     position: relative;
     left: 5%;
     border-radius: 10px;
+    height: 30px;
   }
 
   .farmerArea{
@@ -200,7 +237,7 @@ export default {
     height: 300px;
     left: 5%;
     border-radius: 22px;
-    overflow: scroll;
+    overflow-y: scroll;
   }
 
   .takenFarmerArea{
@@ -211,23 +248,7 @@ export default {
     height: 130px;
     left: 5%;
     border-radius: 22px;
-    overflow: scroll;
-  }
-
-  .divTextArea{
-    position: relative;
-    display: block;
-    width: 88%;
-    height: 125px;
-    left: 5%;
-  }
-
-  .textArea{
-    width: 100%;
-    height: 100px;
-    left: 5%;
-    border-radius: 12px;
-    resize: none;
+    overflow-y: scroll;
   }
 
   .rawText{
@@ -274,6 +295,55 @@ export default {
   .confirmBtn{
     width: 90%;
     left: 5%;
+  }
+
+  .dateError{
+    position: relative;
+    display: inline-block;
+    width: 180px;
+    left: 24px;
+    color: red;
+  }
+
+  .listError{
+    position: relative;
+    display: inline-block;
+    width: 180px;
+    left: 10px;
+    color: red;
+  }
+
+  .confirmMsg{
+    position: absolute;
+    z-index: 999;
+    width: 80%;
+    height: 100px;
+    background-color: #E9C197;
+    text-align: center;
+    border: #919191 2px solid;
+    border-radius: 10px;
+    left: 8%;
+    top: 40%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    color: black;
+  ;
+
+  }
+
+  .confirmText{
+    position: relative;
+    top: 35px;
+    margin: 0;
+  }
+
+  .opacityBack{
+    z-index: 99;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(40, 70, 70, 0.8);
+    top: 0;
+    display: block;
   }
 
 </style>

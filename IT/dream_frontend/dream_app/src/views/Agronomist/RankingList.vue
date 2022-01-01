@@ -1,57 +1,47 @@
 <template>
-  <NavbarAgro :name="name"/>
-
   <div class="square" @click="openBig">
 
     <h3>Farmers Ranking</h3>
 
     <div v-if="error" style="text-align: center">{{ error }}</div>
-    <div v-else-if="farmerList.length" class="scrollDiv">
-      <div>
-        <div class="farmerName">
-          <ul>
-            <li v-for="farmer in farmerList.length" :key="farmer" @click="viewSpecificInfo(farmerList[farmer-1])"> {{ farmerList[farmer-1]['name'] }} </li>
-          </ul>
-        </div>
+    <div v-else-if="farmerList.length" style="height: 70%">
 
-        <div class="farmerScore">
-          <ul>
-            <li v-for="farmer in farmerList.length" :key="farmer" @click="viewSpecificInfo(farmerList[farmer-1])"> {{ farmerList[farmer-1]['score'] }} </li>
-          </ul>
-        </div>
+      <div class="farmerName">
+        <ul>
+          <li v-for="farmer in farmerList.length" :key="farmer"> {{ farmerList[farmer-1]['name'] }} </li>
+        </ul>
+      </div>
+
+      <div class="farmerScore">
+        <ul>
+          <li v-for="farmer in farmerList.length" :key="farmer"> {{ farmerList[farmer-1]['score'] }} </li>
+        </ul>
       </div>
 
     </div>
     <div v-else class="rawText">Loading...</div>
   </div>
-
-  <button @click="back" class="actionButton backBtn">Back</button>
-
-
-
 </template>
 
 <script>
-import NavbarAgro from "@/views/Agronomist/NavbarAgro";
 import {ref} from "vue";
 import axios from "axios";
-import router from "@/router";
+
 export default {
-  name: "RankingView",
-  components: {NavbarAgro},
+  name: "RankingList",
 
   setup(){
 
-    const name = ref(localStorage.getItem('name'))
     const farmerList = ref([])
     const error = ref(null)
-
-    axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
     const loadRankData = async () => {
       try {
         await axios.get('http://localhost:8000/api/v1/rank_farmers', {params: {ordering: 'descending'}}).then(resp => {
           farmerList.value = resp.data
+
+          if(farmerList.value.length >= 7)
+            farmerList.value = farmerList.value.slice(0,7)
         })
       }
       catch (err){
@@ -63,20 +53,10 @@ export default {
     if (!farmerList.value.length)
       loadRankData()
 
-    const viewSpecificInfo = (farmer) => {
-
-      localStorage.setItem('id', farmer['user_id'])
-
-      router.push({name: 'SpecificInfo'})
-    }
-
-    const back = () => {
-      router.push({name: 'AgroHome'})
-    }
-
-    return{ name, farmerList, error, back, viewSpecificInfo }
+    return{ farmerList, error }
 
   }
+
 }
 </script>
 
@@ -85,7 +65,7 @@ export default {
   h3{
     margin: 0;
     padding: 10px 0 0 0;
-    height: 5%;
+    height: 10%;
     text-align: center;
   }
 
@@ -98,14 +78,6 @@ export default {
   li{
     margin-bottom: 10px;
     border-bottom: solid #919191 1px;
-    cursor: pointer;
-  }
-
-  li:hover{
-    background-color: #004643;
-    color: #ffffff;
-    border-radius: 5px;
-    padding-left: 10px;
   }
 
   .square{
@@ -113,11 +85,12 @@ export default {
     display: block;
     background-color: #E9C197;
     width: 90%;
-    height: 600px;
+    height: 290px;
     left: 5%;
     top: 5%;
     border-radius: 22px;
     margin-top: 20px;
+    cursor: pointer;
   }
 
   .rawText{
@@ -125,12 +98,6 @@ export default {
     top: 45%;
     left: 39%;
     width: 100px;
-  }
-
-  .scrollDiv{
-    height: 90%;
-    max-height: 90%;
-    overflow-y: scroll;
   }
 
   .farmerName{
@@ -151,12 +118,6 @@ export default {
     top: 5%;
     text-align: right;
     font-weight: bold;
-  }
-
-  .backBtn{
-    width: 90%;
-    left: 5%;
-    margin-top: 20px;
   }
 
 </style>
