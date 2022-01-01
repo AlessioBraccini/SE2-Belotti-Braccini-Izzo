@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import NavbarAgro from "@/components/NavbarAgro";
+import NavbarAgro from "@/views/Agronomist/NavbarAgro";
 import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";
@@ -99,6 +99,13 @@ export default {
     margin-bottom: 10px;
     border-bottom: solid #919191 1px;
     cursor: pointer;
+  }
+
+  li:hover{
+    background-color: #004643;
+    color: #ffffff;
+    border-radius: 5px;
+    padding-left: 10px;
   }
 
   .square{

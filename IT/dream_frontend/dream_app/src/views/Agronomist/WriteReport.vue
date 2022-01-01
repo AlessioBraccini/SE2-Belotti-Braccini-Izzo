@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import NavbarAgro from "@/components/NavbarAgro";
+import NavbarAgro from "@/views/Agronomist/NavbarAgro";
 import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";

@@ -15,10 +15,10 @@
 </template>
 
 <script>
-import NavbarAgro from "@/components/NavbarAgro";
+import NavbarAgro from "@/views/Agronomist/NavbarAgro";
 import {ref} from "vue";
-import WeatherAgro from "@/components/WeatherAgro";
-import RankingList from "@/components/RankingList";
+import WeatherAgro from "@/views/Agronomist/WeatherAgro";
+import RankingList from "@/views/Agronomist/RankingList";
 import router from "@/router";
 
 export default {
@@ -34,7 +34,7 @@ export default {
     }
 
     const handlePlan = () => {
-      router.push({ name: 'DailyPlan' })
+        router.push({ name: 'DailyPlan' })
     }
 
     const handleReports = () => {

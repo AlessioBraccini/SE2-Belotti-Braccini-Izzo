@@ -4,7 +4,7 @@
 
 <script>
 
-import SignUpForm from "@/components/SignUpForm";
+import SignUpForm from "@/views/SignUpForm";
 
 export default {
   name: "Home",

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import profileimg1 from '../assets/profile.png'
+import profileimg1 from '../../assets/profile.png'
 import axios from "axios";
 import router from "@/router";
 

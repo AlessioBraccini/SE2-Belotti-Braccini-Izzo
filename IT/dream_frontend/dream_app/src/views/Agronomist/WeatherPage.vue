@@ -20,7 +20,7 @@
 
       <div class="humidity">
         <img src="@/assets/icon/pressureIcon.png"/>
-        <p>Pressure: {{pressure}} mbar</p>
+        <p>Pressure: {{pressure}} hPa</p>
       </div>
 
       <div class="tempMax">
@@ -35,7 +35,7 @@
 
       <div class="wind">
         <img src="@/assets/icon/windIcon.png"/>
-        <p>Wind speed: {{windSpeed}} Kph</p>
+        <p>Wind speed: {{windSpeed}} m/s</p>
       </div>
 
       <div class="wind">
@@ -58,7 +58,7 @@
 
 // import axios from "axios";
 import {ref} from "vue";
-import NavbarAgro from "@/components/NavbarAgro";
+import NavbarAgro from "@/views/Agronomist/NavbarAgro";
 import router from "@/router";
 
 export default {

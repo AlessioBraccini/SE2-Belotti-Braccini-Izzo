@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import About from "../views/About.vue"
 import NotFound from "@/views/NotFound";
-import SignUpForm from "@/components/SignUpForm";
+import SignUpForm from "@/views/SignUpForm";
 import LoginPage from "@/views/LoginPage";
 import PolicyMakerHomepage from "@/views/PolicyMaker/PolicyMakerHomepage";
 import AgronomistHomepage from "@/views/Agronomist/AgronomistHomepage";
@@ -9,9 +9,11 @@ import HelpRequests from "@/views/Agronomist/HelpRequests";
 import DailyPlan from "@/views/Agronomist/DailyPlan";
 import WriteReport from "@/views/Agronomist/WriteReport";
 import FarmerHome from "@/views/Farmer/FarmerHome";
-import RankingView from "@/views/Agronomist/RankingView";
+import RankingView from "@/views/RankingView";
 import WeatherPage from "@/views/Agronomist/WeatherPage";
 import SpecificInfo from "@/views/SpecificInfo";
+import UpdatePlan from "@/views/Agronomist/UpdatePlan";
+import ShowPlan from "@/views/Agronomist/showPlan";
 
 const routes = [
     {
@@ -54,6 +56,16 @@ const routes = [
         path: '/agronomistHome/dailyPlan',
         name: 'DailyPlan',
         component: DailyPlan
+    },
+    {
+        path: '/agronomistHome/updatePlan',
+        name: 'UpdatePlan',
+        component: UpdatePlan
+    },
+    {
+        path: '/agronomistHome/showPlan',
+        name: 'ShowPlan',
+        component: ShowPlan
     },
     {
         path: '/agronomistHome/writeReport',
