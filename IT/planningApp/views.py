@@ -7,6 +7,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from rest_framework import authentication, permissions
 from django.contrib.auth import get_user_model
 from .models import *
+from app.models import Farm
 import json
 
 User = get_user_model()
@@ -40,6 +41,9 @@ class DailyPlanView(APIView):
                 return Response({"message": "one or more farms don't exist"}, status=status.HTTP_400_BAD_REQUEST)
         # all farmers have been found so commit to db the new entries
         for plan in daily_plans:
+            farm = Farm.objects.get(user=plan.visit_farmer)
+            farm.visit_ctr += 1
+            farm.save()  # update visit counter farm
             plan.save()
         return Response({"message:" "New daily plan saved successfully."})
 
@@ -88,6 +92,9 @@ class UpdateVisits(APIView):
 
         if action == 'add':
             plan_entry = DailyPlan(agronomist_user=agro, date=date, visit_farmer=farmer)
+            farm = Farm.objects.get(user=plan_entry.visit_farmer)
+            farm.visit_ctr += 1
+            farm.save()  # update visit counter farm
             plan_entry.save()
             return Response({"message": "New visit registered successfully"})
         if action == 'add_annotation':
@@ -98,6 +105,9 @@ class UpdateVisits(APIView):
             return Response({"message": "Daily plan entry updated successfully"})
         if action == 'delete':
             plan_entry = DailyPlan.objects.get(agronomist_user=agro, date=date, visit_farmer=farmer)
+            farm = Farm.objects.get(user=plan_entry.visit_farmer)
+            farm.visit_ctr -= 1
+            farm.save()  # update visit counter farm
             DailyPlan.delete(plan_entry)
             return Response({"message" : "Visit deleted successfully"})
         return Response({"message": "Action is not a valid one. Choose between add, add_annotation or delete"},
