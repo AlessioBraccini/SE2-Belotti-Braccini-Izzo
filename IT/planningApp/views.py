@@ -10,6 +10,7 @@ from rest_framework import authentication, permissions
 from django.contrib.auth import get_user_model
 from .models import *
 from app.models import Farm
+import json
 
 User = get_user_model()
 
@@ -26,7 +27,7 @@ class DailyPlanView(APIView):
         agro = User.objects.get(id=request.user.id)
         if agro.job_role != "A":
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-        farmers_ids = request.POST.getlist('visit_farmers_list')
+        farmers_ids = request.data['visit_farmers_list']
         date = request.data['date']
         if DailyPlan.objects.filter(agronomist_user=agro, date=date).count() > 0:
             return Response({"message": "This user already have a plan for this date"}, status=status.HTTP_403_FORBIDDEN)
