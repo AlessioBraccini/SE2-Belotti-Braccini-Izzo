@@ -43,7 +43,7 @@ class DownloadReport(APIView):
 
     @staticmethod
     @action(methods=['get'], detail=True, renderer_classes=(PassthroughRenderer,))
-    def download(request):
+    def get(request):
         pm = User.objects.get(id=request.user.id)
         # todo: check if pm is a pm, if is agro then allow download just for own reports
         author_id = request.data['author_id']
