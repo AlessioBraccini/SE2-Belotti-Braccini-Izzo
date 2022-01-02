@@ -1,3 +1,5 @@
+import datetime
+
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -85,6 +87,8 @@ class UpdateVisits(APIView):
         except MultiValueDictKeyError:
             annotation = None
         '''
+        if date < datetime.date.today():
+            return Response({"message": "Cannot modify already confirmed plans"}, status=status.HTTP_403_FORBIDDEN)
 
         # either add, delete, add_annotation
         action = request.GET.get('action')
