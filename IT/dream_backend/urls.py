@@ -25,5 +25,6 @@ urlpatterns = [
     path('api/v1/', include('rankingApp.urls')),
     path('api/v1/', include('planningApp.urls')),
     path('api/v1/', include('app.urls')),
-    path('api/v1/', include('reportApp.urls'))
+    path('api/v1/', include('reportApp.urls')),
+    path('api/v1/', include('helpRequestApp.urls')),
 ]

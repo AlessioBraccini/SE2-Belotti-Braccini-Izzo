@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'userApp.apps.UserappConfig',
     'app.apps.AppConfig',
     'planningApp.apps.PlanningappConfig',
+    'helpRequestApp.apps.HelprequestappConfig',
     'rankingApp.apps.RankingappConfig',
     'reportApp.apps.ReportappConfig',
     'rest_framework',

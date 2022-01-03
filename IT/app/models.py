@@ -32,12 +32,4 @@ class Production(models.Model):
     harvested_date = models.DateField()
 
 
-class HelpRequest(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender', null=True)
-    receiver = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='receiver', null=True)
-    date = models.DateTimeField(auto_now_add=True)
-    subject = models.CharField(max_length=100)
-    message = models.TextField()
-
-
 
