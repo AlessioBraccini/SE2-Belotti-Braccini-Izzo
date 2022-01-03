@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'planningApp.apps.PlanningappConfig',
     'helpRequestApp.apps.HelprequestappConfig',
     'rankingApp.apps.RankingappConfig',
+    'sensorsApp.apps.SensorsappConfig',
     'reportApp.apps.ReportappConfig',
     'rest_framework',
     'rest_framework.authtoken',

@@ -27,4 +27,5 @@ urlpatterns = [
     path('api/v1/', include('app.urls')),
     path('api/v1/', include('reportApp.urls')),
     path('api/v1/', include('helpRequestApp.urls')),
+    path('api/v1/', include('sensorsApp.urls')),
 ]
