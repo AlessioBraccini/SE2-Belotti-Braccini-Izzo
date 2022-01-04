@@ -187,7 +187,7 @@ export default {
     position: relative;
     text-transform: capitalize;
     font-size: 20px;
-
+    width: 78%;
   }
 
 

@@ -13,11 +13,12 @@
       <p class="text2" style="margin-right: 5px">Uploaded File:</p>
       <p v-if="fileName" class="text2"> {{ fileName }}</p>
     </div>
-
+  </div>
+  <div>
     <button @click="submitFile" class="submitBtn actionButton">Submit</button>
-
     <button @click="back" class="actionButton backBtn">Back</button>
   </div>
+
 </template>
 
 <script>
@@ -130,12 +131,14 @@ export default {
   }
 
   .submitBtn{
-    left: 9%;
+    width: 90%;
+    left: 6%;
+    margin-top: 6%;
   }
 
   .backBtn{
-    left: 9%;
-    margin-bottom: 15px;
+    width: 90%;
+    left: 6%;
   }
 
 </style>

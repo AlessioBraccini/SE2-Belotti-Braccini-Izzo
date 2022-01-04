@@ -24,7 +24,7 @@
 
         <div class="farmerScore">
           <ul>
-            <li v-for="farmer in farmerList.length" :key="farmer" @click="addFarmer(farmerList[farmer-1])"> {{ farmerList[farmer-1]['visit_ctr'] }} </li>
+            <li v-for="farmer in farmerList.length" :key="farmer" @click="addFarmer(farmer-1)"> {{ farmerList[farmer-1]['visit_ctr'] }} </li>
           </ul>
         </div>
 
@@ -47,6 +47,9 @@
       </div>
       <div v-else class="rawText">No farmer selected</div>
     </div>
+
+    <div v-if="errorMsg" class="errorMsg">{{ errorMsg }}</div>
+
     <div style="height: 20px"/>
 
   </div>
@@ -86,6 +89,7 @@ export default {
     const dateErr = ref('')
     const listErr = ref('')
     const confirmationMessage = ref('')
+    const errorMsg = ref('')
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
@@ -93,11 +97,12 @@ export default {
       try {
         dateErr.value = ''
         listErr.value = ''
+        errorMsg.value = ''
 
         if (date.value) {
           if (takenFarmerList.value.length){
             await axios.post('http://localhost:8000/api/v1/daily_plan', {
-              visit_farmers_list: takenFarmerListId.value.toString(),   // lista di id dei farmers
+              visit_farmers_list: takenFarmerListId.value,   // lista di id dei farmers
               date: date.value
             }).then(() => {
               scroll(0,0)
@@ -107,8 +112,8 @@ export default {
                 router.push({name: 'AgroHome'})
               }, 1250);
 
-            }).catch(err => {
-              console.log(err)
+            }).catch(() => {
+              errorMsg.value = 'You have already make a plan for this day'
             })
           }
           else {
@@ -124,18 +129,6 @@ export default {
           console.log('err load ' + err)
           // can put the error in the template with the v-if
       }
-
-      // get 'http://localhost:8000/api/v1/daily_plan', {params: {date: date.value}}
-
-      // post 'http://localhost:8000/api/v1/update_daily_plan', {
-      //    action: '',    // string con add o delete
-      //    visit_farmer: //single faremer
-      //    date: date.value
-      // }
-
-
-
-
     }
 
     const loadFarmerData = async () => {
@@ -177,7 +170,7 @@ export default {
       router.push({name: 'ShowPlan'})
     }
 
-    return{ name, farmerList, error, takenFarmerList, annotations, date, dateErr, listErr, confirmationMessage, uploadDailyPlan, addFarmer, removeFarmer, updateDailyPlan, showDailyPlan, back }
+    return{ name, farmerList, error, takenFarmerList, annotations, date, dateErr, listErr, confirmationMessage, errorMsg,uploadDailyPlan, addFarmer, removeFarmer, updateDailyPlan, showDailyPlan, back }
   }
 }
 </script>
@@ -326,8 +319,6 @@ export default {
     top: 40%;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     color: black;
-  ;
-
   }
 
   .confirmText{
@@ -344,6 +335,12 @@ export default {
     background-color: rgba(40, 70, 70, 0.8);
     top: 0;
     display: block;
+  }
+
+  .errorMsg{
+    position: relative;
+    color: red;
+    left: 5%;
   }
 
 </style>

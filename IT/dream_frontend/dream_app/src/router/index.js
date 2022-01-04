@@ -14,6 +14,7 @@ import WeatherPage from "@/views/Agronomist/WeatherPage";
 import SpecificInfo from "@/views/SpecificInfo";
 import UpdatePlan from "@/views/Agronomist/UpdatePlan";
 import ShowPlan from "@/views/Agronomist/showPlan";
+import ReplyRequest from "@/views/Agronomist/ReplyRequest";
 
 const routes = [
     {
@@ -51,6 +52,11 @@ const routes = [
         path: '/agronomistHome/helpRequests',
         name: 'HelpRequests',
         component: HelpRequests
+    },
+    {
+        path: '/agronomistHome/helpRequests/replyRequest',
+        name: 'ReplyReq',
+        component: ReplyRequest
     },
     {
         path: '/agronomistHome/dailyPlan',
