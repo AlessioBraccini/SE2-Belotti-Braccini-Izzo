@@ -53,7 +53,7 @@ class DailyPlanView(APIView):
         agro = User.objects.get(id=request.user.id)
         farmers_list = []
         try:
-            plans = DailyPlan.objects.filter(agronomist_user__id=agro.id, date=request.data['date'])
+            plans = DailyPlan.objects.filter(agronomist_user__id=agro.id, date=request.GET.get('date'))
         except DailyPlan.DoesNotExist:
             return Response({"message": "daily plan not found"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -64,7 +64,7 @@ class DailyPlanView(APIView):
             farmers_list.append((plan.visit_farmer.id, plan.annotation))
 
         response_payload = {
-            'date': request.data['date'],
+            'date': request.GET.get('date'),
             'visit_farmers_list': farmers_list,
         }
         return Response(response_payload)
