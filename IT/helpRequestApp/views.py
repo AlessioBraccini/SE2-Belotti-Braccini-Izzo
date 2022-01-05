@@ -81,17 +81,13 @@ class HelpRequests(APIView):
             return Response({"message": "Reply message not found"}, status=status.HTTP_404_NOT_FOUND)
 
         try:
-            farmer_id = request.data['farmer_id']
-        except KeyError:
-            return Response({"message": "Sender id not found"}, status=status.HTTP_404_NOT_FOUND)
-
-        try:
             request_id = request.data['request_id']
             help_request = HelpRequest.objects.get(id=request_id)
         except (KeyError, HelpRequest.DoesNotExist) as e:
             return Response({"message": "Request not found"}, status=status.HTTP_404_NOT_FOUND)
 
         subject_msg = help_request.subject
+        farmer_id = help_request.sender_id
         help_request.delete()
 
         HelpRequest.objects.create(date=datetime.now(), subject=subject_msg, message=reply_msg, receiver_id=farmer_id, sender_id=user.id)
