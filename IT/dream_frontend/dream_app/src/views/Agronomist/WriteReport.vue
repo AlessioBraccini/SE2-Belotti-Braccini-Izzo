@@ -48,8 +48,7 @@ export default {
     const submitFile =  () => {
       let formData = new FormData();
       formData.append('file', file.value);
-      //formData.append('title', file.value.toString())
-      //console.log(file.value.valueOf())
+      formData.append('title', fileName.value)
 
       axios.post( 'http://localhost:8000/api/v1/steering_initiatives',
           formData,

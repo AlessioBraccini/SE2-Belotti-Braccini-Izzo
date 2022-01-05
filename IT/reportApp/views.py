@@ -36,7 +36,7 @@ class SteeringInitiativeView(APIView):
     def post(request):
         agro = User.objects.get(id=request.user.id)
         if agro.job_role == "A":
-            report = SteeringInitiative(author=agro, report=request.FILES['file'])
+            report = SteeringInitiative(author=agro, title=request.data['title'], report=request.FILES['file'])
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
         report.save()
@@ -76,18 +76,21 @@ class DownloadReport(APIView):
         if user.job_role == "P" or (user.job_role == "A" and agro == user):
             pub_date = request.data['pub_date']
             file_name = request.data['file_name']
-            report = SteeringInitiative.objects.get(author=agro, pub_date=pub_date, title=file_name).report
-            if report is not None:
+            try:
+                report = SteeringInitiative.objects.get(author=agro, pub_date=pub_date, title=file_name).report
+            except SteeringInitiative.DoesNotExist:
+                return Response({"message": "No report entry for this date, file_name and agronomist"}, status=status.HTTP_404_NOT_FOUND)
 
-                # get an open file handler:
-                file_handle = report.file.open()
+            # get an open file handler:
+            try:
+                file_handle = report.open()
+            except FileNotFoundError:
+                return Response({"message": "No file found"}, status=status.HTTP_404_NOT_FOUND)
 
-                # send file
-                response = FileResponse(file_handle, content_type='pdf')
-                response['Content-Length'] = report.file.size
-                response['Content-Disposition'] = 'attachment; filename="%s"' % report.file.name
-            else:
-                response = Response(status=status.HTTP_404_NOT_FOUND)
+            # send file
+            response = FileResponse(file_handle, content_type='pdf')
+            response['Content-Length'] = report.file.size
+            response['Content-Disposition'] = 'attachment; filename="%s"' % report.file.name
         else:
             response = Response(status=status.HTTP_403_FORBIDDEN)
 
