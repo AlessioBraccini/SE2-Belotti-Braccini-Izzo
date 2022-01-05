@@ -1,57 +1,50 @@
 <template>
-  <NavbarAgro :name="name"/>
+  <Navbar :name="name"/>
 
-  <div class="square" @click="openBig">
+  <div class="square">
 
-    <h3>Farmers Ranking</h3>
+    <h3>Steering Initiative</h3>
 
     <div v-if="error" style="text-align: center">{{ error }}</div>
-    <div v-else-if="farmerList.length" class="scrollDiv">
+    <div v-else-if="reportList.length" class="scrollDiv">
       <div>
         <div class="farmerName">
           <ul>
-            <li v-for="farmer in farmerList.length" :key="farmer" @click="viewSpecificInfo(farmerList[farmer-1])"> {{ farmerList[farmer-1]['name'] }} </li>
-          </ul>
-        </div>
-
-        <div class="farmerScore">
-          <ul>
-            <li v-for="farmer in farmerList.length" :key="farmer" @click="viewSpecificInfo(farmerList[farmer-1])"> {{ farmerList[farmer-1]['score'] }} </li>
+            <li v-for="farmer in reportList.length" :key="farmer" @click="viewSpecificReport(reportList[farmer-1])"> {{ reportList[farmer-1]['name'] }} </li>
           </ul>
         </div>
       </div>
-
     </div>
     <div v-else class="rawText">Loading...</div>
   </div>
 
   <button @click="back" class="actionButton backBtn">Back</button>
 
-
-
 </template>
 
 <script>
-import NavbarAgro from "@/views/Agronomist/NavbarAgro";
+import Navbar from "@/views/Navbar";
 import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";
+
 export default {
-  name: "RankingView",
-  components: {NavbarAgro},
+  name: "ViewReport",
+  components: {Navbar},
 
   setup(){
 
     const name = ref(localStorage.getItem('name'))
-    const farmerList = ref([])
+    const reportList = ref([])
     const error = ref(null)
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
-    const loadRankData = async () => {
+    const loadReport = async () => {
       try {
-        await axios.get('http://localhost:8000/api/v1/rank_farmers', {params: {ordering: 'descending'}}).then(resp => {
-          farmerList.value = resp.data
+        await axios.get('http://localhost:8000/api/v1/download_reports').then(resp => {
+          console.log(resp.data)
+          reportList.value = resp.data
         })
       }
       catch (err){
@@ -60,10 +53,9 @@ export default {
       }
     }
 
-    if (!farmerList.value.length)
-      loadRankData()
+    loadReport()
 
-    const viewSpecificInfo = (farmer) => {
+    const viewSpecificReport = (farmer) => {
 
       localStorage.setItem('id', farmer['user_id'])
 
@@ -71,17 +63,15 @@ export default {
     }
 
     const back = () => {
-      router.push({name: 'AgroHome'})
+      router.push({name: 'PMHome'})
     }
 
-    return{ name, farmerList, error, back, viewSpecificInfo }
-
+    return{ name, reportList, error, back, viewSpecificReport }
   }
 }
 </script>
 
 <style scoped>
-
   h3{
     margin: 0;
     padding: 10px 0 0 0;
@@ -113,23 +103,37 @@ export default {
     display: block;
     background-color: #E9C197;
     width: 90%;
-    height: 600px;
+    height: 620px;
     left: 5%;
     top: 5%;
     border-radius: 22px;
     margin-top: 20px;
   }
 
+  .district{
+    position: relative;
+    left: 6%;
+    padding-top: 15px;
+  }
+
+  .inputDist{
+    position: relative;
+    width: 69%;
+    height: 30px;
+    background-color: #E9C197;
+    border: solid #919191 2px;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+
   .rawText{
     position: relative;
-    top: 45%;
-    left: 39%;
-    width: 100px;
+    text-align: center;
   }
 
   .scrollDiv{
     height: 90%;
-    max-height: 90%;
+    max-height: 83%;
     overflow-y: scroll;
   }
 

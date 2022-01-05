@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import NavbarAgro from "@/views/Agronomist/NavbarAgro";
+import NavbarAgro from "@/views/Navbar";
 import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";
@@ -53,7 +53,7 @@ export default {
           formData,
           {
             headers: {
-              'Content-Type': 'multipart/form-data'
+              'Content-Type': 'multipart/pdf'
             }
           })
           .then(resp => {

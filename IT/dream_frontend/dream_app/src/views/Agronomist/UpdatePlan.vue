@@ -62,7 +62,7 @@
 <script>
 import {ref} from "vue";
 import axios from "axios";
-import NavbarAgro from "@/views/Agronomist/NavbarAgro";
+import NavbarAgro from "@/views/Navbar";
 import router from "@/router";
 
 

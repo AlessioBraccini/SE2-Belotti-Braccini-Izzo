@@ -9,12 +9,15 @@ import HelpRequests from "@/views/Agronomist/HelpRequests";
 import DailyPlan from "@/views/Agronomist/DailyPlan";
 import WriteReport from "@/views/Agronomist/WriteReport";
 import FarmerHome from "@/views/Farmer/FarmerHome";
-import RankingView from "@/views/RankingView";
+import RankingView from "@/views/Agronomist/RankingViewAgro";
 import WeatherPage from "@/views/Agronomist/WeatherPage";
 import SpecificInfo from "@/views/SpecificInfo";
 import UpdatePlan from "@/views/Agronomist/UpdatePlan";
 import ShowPlan from "@/views/Agronomist/showPlan";
 import ReplyRequest from "@/views/Agronomist/ReplyRequest";
+import RankingViewPM from "@/views/PolicyMaker/RankingViewPM";
+import SensorPage from "@/views/PolicyMaker/SensorPage";
+import ViewReport from "@/views/PolicyMaker/ViewReport";
 
 const routes = [
     {
@@ -92,6 +95,21 @@ const routes = [
         path: '/ranking/specificInfo',
         name: 'SpecificInfo',
         component: SpecificInfo
+    },
+    {
+        path: '/rankingPM',
+        name: 'RankingPM',
+        component: RankingViewPM
+    },
+    {
+        path: '/policymakerHome/steeringInitiative',
+        name: 'ViewReport',
+        component: ViewReport
+    },
+    {
+        path: '/policymakerHome/sensorsData',
+        name: 'Sensors',
+        component: SensorPage
     },
 
 

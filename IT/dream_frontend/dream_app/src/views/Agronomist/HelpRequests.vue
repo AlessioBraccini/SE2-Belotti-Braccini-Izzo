@@ -34,7 +34,7 @@
 import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";
-import NavbarAgro from "@/views/Agronomist/NavbarAgro";
+import NavbarAgro from "@/views/Navbar";
 
 
 export default {

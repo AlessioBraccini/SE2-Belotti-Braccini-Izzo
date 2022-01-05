@@ -8,6 +8,7 @@
       <li> <b>Email</b>: {{ email }}</li>
       <li> <b>Score</b>: {{ score }}</li>
       <li> <b>Address</b>: <a :href="'https://www.google.com/maps/search/?api=1&query='+ area" target="_blank"> {{ area }} </a> </li>
+      <li> <b>Address</b>: <a :href="'https://www.google.com/maps/search/?api=1&query='+ address" target="_blank"> {{ address }} </a> </li>
       <li> <b>Crop type:</b> </li>
       <ul>
         <li v-for="crop in cropType" :key="crop" class="crop">{{ crop }}</li>
@@ -20,7 +21,7 @@
 </template>
 
 <script>
-import NavbarAgro from "@/views/Agronomist/NavbarAgro";
+import NavbarAgro from "@/views/Navbar";
 import axios from "axios";
 import {ref} from "vue";
 import router from "@/router";
@@ -35,6 +36,7 @@ export default {
 
     const farmerName = ref('')
     const area = ref('')
+    const address = ref('')
     const cropType = ref([])
     const score = ref(0)
     const email = ref('')
@@ -42,11 +44,11 @@ export default {
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
     axios.get('http://localhost:8000/api/v1/profile_info', {params: {farmer_id: localStorage.getItem('id')}} ).then(resp => {
-      console.log(resp.data)
       farmerName.value = resp.data['full_name']
       email.value = resp.data['email']
       area.value = resp.data['area']
       score.value = resp.data['score']
+      address.value = resp.data['address']
 
       for (let i = 0; i < resp.data['crop_types'].length; i++) {
         cropType.value.push(resp.data['crop_types'][i]['crop_type'])
@@ -60,7 +62,7 @@ export default {
       router.go(-1)
     }
 
-    return{ name, farmerName, area, cropType, score, email, back }
+    return{ name, farmerName, area, address, cropType, score, email, back }
 
   }
 }

@@ -30,8 +30,11 @@ export default {
 
   setup(){
 
-    const email = ref('ale@b.it');
-    const password = ref('ale99magic');
+    // agro ale@b.it
+    // ale99magic
+
+    const email = ref('arick@ilbello.it');
+    const password = ref('Rb12345678');
     const passwordError = ref('');
     const logo = image;
 
@@ -72,12 +75,18 @@ export default {
             if (data.data['district'] != null)
               localStorage.setItem('district', data.data['district'])
 
-            if (role === 'A')
+            if (role === 'A') {
+              localStorage.setItem('role', 'A')
               router.push({name: 'AgroHome'})
-            else if (role === 'P')
+            }
+            else if (role === 'P') {
+              localStorage.setItem('role', 'P')
               router.push({name: 'PMHome'})
-            else
+            }
+            else {
+              localStorage.setItem('role', 'F')
               router.push({name: 'FarmerHome'})
+            }
 
           })
           .catch(err => {

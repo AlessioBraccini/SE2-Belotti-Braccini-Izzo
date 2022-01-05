@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import NavbarAgro from "@/views/Agronomist/NavbarAgro";
+import NavbarAgro from "@/views/Navbar";
 import {ref} from "vue";
 import WeatherAgro from "@/views/Agronomist/WeatherAgro";
 import RankingList from "@/views/Agronomist/RankingList";

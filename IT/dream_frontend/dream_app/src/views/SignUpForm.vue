@@ -173,7 +173,10 @@ export default {
     align-items: center;
     margin-bottom: 10px;
     left: 8%;
+    background-color: #faf4d3;
+    border: solid #919191 2px;
     border-radius: 10px;
+    font-size: 15px;
   }
 
   .textInput{

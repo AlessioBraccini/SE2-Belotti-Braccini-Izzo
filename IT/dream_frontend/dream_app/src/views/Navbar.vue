@@ -8,7 +8,7 @@
     <div class="dropdown">
       <button class="menuButton">⋮</button>
       <div class="dropdown-content">
-        <router-link :to="{ name: 'AgroHome' }">Home</router-link>
+        <a href="#" @click="returnHome">Home</a>
         <a href="#" @click="logout">Logout</a>
       </div>
     </div>
@@ -16,12 +16,12 @@
 </template>
 
 <script>
-import profileimg1 from '../../assets/profile.png'
+import profileimg1 from '../assets/profile.png'
 import axios from "axios";
 import router from "@/router";
 
 export default {
-  name: "NavbarAgro",
+  name: "Navbar",
   props: ['name'],
 
   setup(){
@@ -40,10 +40,16 @@ export default {
         router.push({name: 'Login'})
 
       })
-
-
     }
-    return{ profileimg, logout }
+
+    const returnHome = () => {
+      switch (localStorage.getItem('role')){
+        case 'A': router.push({name: 'AgroHome'}); break;
+        case 'P': router.push({name: 'PMHome'}); break;
+        case 'F': router.push({name: 'FarmerHome'}); break;
+      }
+    }
+    return{ profileimg, logout, returnHome }
   }
 }
 </script>
