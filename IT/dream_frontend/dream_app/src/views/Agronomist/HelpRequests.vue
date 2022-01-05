@@ -63,7 +63,7 @@ export default {
     loadRequests()
 
     const openMsg = (id) => {
-      localStorage.setItem('id', id['sender_id'])
+      localStorage.setItem('id', id['request_id'])
       router.push({name: 'ReplyReq'})
     }
 

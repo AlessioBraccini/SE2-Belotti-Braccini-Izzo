@@ -14,10 +14,10 @@
 
     <div class="line"/>
 
-    <div class="message" style="margin-top: 20px;">
-      Subject:
-      <input type="text" class="textInput" v-model="subject"/>
-    </div>
+<!--    <div class="message" style="margin-top: 20px;">-->
+<!--      Subject:-->
+<!--      <input type="text" class="textInput" v-model="subject"/>-->
+<!--    </div>-->
 
     <div class="reply">
       Reply:
@@ -63,11 +63,9 @@ export default {
 
     const loadRequests =  async () => {
       try {
-        await axios.get('http://localhost:8000/api/v1/help_request').then(resp => {
-          for (let i = 0; i < resp.data.length; i++) {
-            if (resp.data[i]['sender_id'].toString() === localStorage.getItem('id'))
-              request.value = resp.data[i]
-          }
+        await axios.get('http://localhost:8000/api/v1/help_request_by_id', {params:{request_id: localStorage.getItem('id')}})
+            .then(resp => {
+              request.value = resp.data
         }).catch(() => {
           error.value = 'No message for you'
         })
@@ -82,9 +80,8 @@ export default {
     const send =  async () => {
       try {
         await axios.post('http://localhost:8000/api/v1/help_request', {
-          subject: subject.value,
           reply: message.value,
-          farmer_id: localStorage.getItem('id')
+          request_id: localStorage.getItem('id')
         }).then(() => {
           scroll(0,0)
           confirmationMessage.value = 'Message send successfully'
@@ -174,16 +171,16 @@ export default {
     margin-top: 15px;
   }
 
-  .textInput{
-    position: relative;
-    width: 95%;
-    height: 30px;
-    display: block;
-    align-items: center;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    border: 1px solid #919191;
-  }
+  /*.textInput{*/
+  /*  position: relative;*/
+  /*  width: 95%;*/
+  /*  height: 30px;*/
+  /*  display: block;*/
+  /*  align-items: center;*/
+  /*  margin-bottom: 20px;*/
+  /*  border-radius: 10px;*/
+  /*  border: 1px solid #919191;*/
+  /*}*/
 
   .reply{
     position: relative;
