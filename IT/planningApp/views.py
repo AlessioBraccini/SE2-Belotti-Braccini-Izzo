@@ -74,6 +74,7 @@ class UpdateVisits(APIView):
     authentication_classes = [authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
+    '''
     @staticmethod
     def post(request):
         agro = User.objects.get(id=request.user.id)
@@ -82,12 +83,7 @@ class UpdateVisits(APIView):
         except User.DoesNotExist:
             return Response({"message": "Farmer not found"}, status=status.HTTP_404_NOT_FOUND)
         date = request.data["date"]
-        '''
-        try:
-            annotation = request.data["annotation"]
-        except MultiValueDictKeyError:
-            annotation = None
-        '''
+
         if date < datetime.date.today():
             return Response({"message": "Cannot modify already confirmed plans"}, status=status.HTTP_403_FORBIDDEN)
 
@@ -101,14 +97,6 @@ class UpdateVisits(APIView):
             farm.save()  # update visit counter farm
             plan_entry.save()
             return Response({"message": "New visit registered successfully"})
-        '''
-        if action == 'add_annotation':
-            if annotation is not None:
-                plan_entry = DailyPlan.objects.get(agronomist_user=agro, date=date, visit_farmer=farmer)
-                plan_entry.annotation = annotation
-                plan_entry.save()
-            return Response({"message": "Daily plan entry updated successfully"})
-        '''
         if action == 'delete':
             plan_entry = DailyPlan.objects.get(agronomist_user=agro, date=date, visit_farmer=farmer)
             farm = Farm.objects.get(user=plan_entry.visit_farmer)
@@ -118,3 +106,22 @@ class UpdateVisits(APIView):
             return Response({"message": "Visit deleted successfully"})
         return Response({"message": "Action is not a valid one. Choose between add, add_annotation or delete"},
                             status=status.HTTP_400_BAD_REQUEST)
+        '''
+
+    @staticmethod
+    def post(request):
+        agro = User.objects.get(id=request.user.id)
+        date = request.data["date"]
+
+        if date < datetime.date.today():
+            return Response({"message": "Cannot modify already confirmed plans"}, status=status.HTTP_403_FORBIDDEN)
+
+        old_plan_entries = DailyPlan.objects.filter(agronomist_user=agro, date=date)
+        old_plan_entries.delete()
+
+        # make the new insertion
+        response = DailyPlanView.post(request)
+
+        if response['message'] == 'New daily plan saved successfully.':
+            return Response({"message": "Daily plan for date " + date + " has been updated successfully."})
+        return response
