@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
@@ -55,12 +57,15 @@ class SteeringInitiativeView(APIView):
         data = []
         for report in reports:
             data.append({
-                'author': report.author.full_name,
+                'author_id': report.author.id,
+                'author': report.author.complete_name(),
                 'pub_date': report.pub_date,
                 'file_name': report.title,
             })
 
-        return Response(data)
+        formatted_data = {'reports_list': data}
+
+        return Response(formatted_data)
 
 
 class DownloadReport(APIView):

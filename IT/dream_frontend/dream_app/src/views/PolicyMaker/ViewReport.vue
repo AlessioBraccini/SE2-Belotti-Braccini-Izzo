@@ -42,7 +42,7 @@ export default {
 
     const loadReport = async () => {
       try {
-        await axios.get('http://localhost:8000/api/v1/download_reports').then(resp => {
+        await axios.get('http://localhost:8000/api/v1/steering_initiatives').then(resp => {
           console.log(resp.data)
           reportList.value = resp.data
         })
