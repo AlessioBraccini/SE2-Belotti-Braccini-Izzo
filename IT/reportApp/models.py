@@ -9,4 +9,5 @@ User = get_user_model()
 class SteeringInitiative(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateField(auto_now_add=True)
+    title = models.CharField(max_length=50, null=True)
     report = models.FileField(upload_to='reports/')
