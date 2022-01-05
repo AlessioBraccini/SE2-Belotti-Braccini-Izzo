@@ -15,13 +15,15 @@ User = get_user_model()
 # Create your views here.
 
 class Request(object):
+    request_id = None
     sender_name = None
     sender_id = None
     date = None
     subject = None
     message = None
 
-    def __init__(self, sender_name, sender_id, date, subject, message):
+    def __init__(self, request_id, sender_name, sender_id, date, subject, message):
+        self.request_id = request_id
         self.sender_name = sender_name
         self.sender_id = sender_id
         self.date = date
@@ -57,7 +59,7 @@ class HelpRequests(APIView):
             user = User.objects.get(id=h_request.sender_id)
             if user is not None:
                 date = h_request.date.strftime("%Y/%m/%d")
-                request = Request(user.complete_name(), h_request.sender_id, date, h_request.subject, h_request.message)
+                request = Request(h_request.id, user.complete_name(), h_request.sender_id, date, h_request.subject, h_request.message)
                 requests.append(request)
 
         json_string = json.dumps([el.__dict__ for el in requests], default=str)
@@ -74,11 +76,6 @@ class HelpRequests(APIView):
             return Response({"message": "User not found"}, status=status.HTTP_404_NOT_FOUND)
 
         try:
-            subject_msg = request.data['subject']
-        except KeyError:
-            return Response({"message": "Subject not found"}, status=status.HTTP_404_NOT_FOUND)
-
-        try:
             reply_msg = request.data['reply']
         except KeyError:
             return Response({"message": "Reply message not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -87,6 +84,15 @@ class HelpRequests(APIView):
             farmer_id = request.data['farmer_id']
         except KeyError:
             return Response({"message": "Sender id not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        try:
+            request_id = request.data['request_id']
+            help_request = HelpRequest.objects.get(id=request_id)
+        except (KeyError, HelpRequest.DoesNotExist) as e:
+            return Response({"message": "Request not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        subject_msg = help_request.subject
+        help_request.delete()
 
         HelpRequest.objects.create(date=datetime.now(), subject=subject_msg, message=reply_msg, receiver_id=farmer_id, sender_id=user.id)
 
