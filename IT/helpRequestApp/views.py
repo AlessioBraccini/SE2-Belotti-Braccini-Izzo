@@ -93,3 +93,41 @@ class HelpRequests(APIView):
         HelpRequest.objects.create(date=datetime.now(), subject=subject_msg, message=reply_msg, receiver_id=farmer_id, sender_id=user.id)
 
         return Response({"Help request reply saved successfully."})
+
+
+class HelpRequestByID(APIView):
+    """
+    View to manage a single help requests.
+
+    * Requires token authentication.
+    * Only authenticated users are able to access this view.
+    """
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    @staticmethod
+    def get(request):
+        """
+        Return the help request associated to the request_id.
+        """
+        try:
+            user = User.objects.get(email=request.user.email)
+        except User.DoesNotExist:
+            return Response({"message": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        try:
+            request_id = request.GET.get('request_id')
+            help_request = HelpRequest.objects.get(id=request_id)
+        except (KeyError, HelpRequest.DoesNotExist) as e:
+            return Response({"message": "Request not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        if help_request is None:
+            return Response({"message": "Help request not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        user = User.objects.get(id=help_request.sender_id)
+        date = help_request.date.strftime("%Y/%m/%d")
+        response = Request(help_request.id, user.complete_name(), help_request.sender_id, date, help_request.subject,
+                           help_request.message)
+
+        json_string = json.dumps(response.__dict__, default=str)
+        return HttpResponse(json_string)
