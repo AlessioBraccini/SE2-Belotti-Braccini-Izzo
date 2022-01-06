@@ -86,21 +86,22 @@ export default {
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
-    // const loadDailyPlan = async () => {
-    //   await axios.get('http://localhost:8000/api/v1/daily_plan', {params: {date: date}})
-    //       .then(resp => {
-    //         farmerList.value = resp.data
-    //       }).catch(err => {
-    //         console.log(err)
-    //         errorMsg.value = 'No plan for today'
-    //       })
-    // }
+    const loadDailyPlan = async () => {
+      await axios.get('http://localhost:8000/api/v1/daily_plan', {params: {date: date}})
+          .then(resp => {
+            console.log(resp.data)
+            farmerList.value = resp.data
+          }).catch(err => {
+            console.log(err)
+            errorMsg.value = 'No plan for today'
+          })
+    }
 
     const loadFarmerData = async () => {
       try {
         await axios.get('http://localhost:8000/api/v1/farms_list').then(resp => {
           completeFarmerList.value = resp.data
-          //loadDailyPlan()
+          loadDailyPlan()
         })
       }
       catch (err){
