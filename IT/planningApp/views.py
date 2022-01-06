@@ -61,7 +61,7 @@ class DailyPlanView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         for plan in plans:
-            farmers_list.append((plan.visit_farmer.id, plan.annotation))
+            farmers_list.append((plan.visit_farmer, plan.annotation))
 
         response_payload = {
             'date': request.GET.get('date'),
@@ -73,40 +73,6 @@ class DailyPlanView(APIView):
 class UpdateVisits(APIView):
     authentication_classes = [authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
-
-    '''
-    @staticmethod
-    def post(request):
-        agro = User.objects.get(id=request.user.id)
-        try:
-            farmer = User.objects.get(id=request.data['visit_farmer'])
-        except User.DoesNotExist:
-            return Response({"message": "Farmer not found"}, status=status.HTTP_404_NOT_FOUND)
-        date = request.data["date"]
-
-        if date < datetime.date.today():
-            return Response({"message": "Cannot modify already confirmed plans"}, status=status.HTTP_403_FORBIDDEN)
-
-        # either add, delete, add_annotation
-        action = request.GET.get('action')
-
-        if action == 'add':
-            plan_entry = DailyPlan(agronomist_user=agro, date=date, visit_farmer=farmer)
-            farm = Farm.objects.get(user=plan_entry.visit_farmer)
-            farm.visit_ctr += 1
-            farm.save()  # update visit counter farm
-            plan_entry.save()
-            return Response({"message": "New visit registered successfully"})
-        if action == 'delete':
-            plan_entry = DailyPlan.objects.get(agronomist_user=agro, date=date, visit_farmer=farmer)
-            farm = Farm.objects.get(user=plan_entry.visit_farmer)
-            farm.visit_ctr -= 1
-            farm.save()  # update visit counter farm
-            DailyPlan.delete(plan_entry)
-            return Response({"message": "Visit deleted successfully"})
-        return Response({"message": "Action is not a valid one. Choose between add, add_annotation or delete"},
-                            status=status.HTTP_400_BAD_REQUEST)
-        '''
 
     @staticmethod
     def post(request):
@@ -124,4 +90,5 @@ class UpdateVisits(APIView):
 
         if response['message'] == 'New daily plan saved successfully.':
             return Response({"message": "Daily plan for date " + date + " has been updated successfully."})
+        # todo: if error, reload the old_plan_entries
         return response
