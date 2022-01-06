@@ -76,11 +76,11 @@ class DownloadReport(APIView):
     @action(methods=['get'], detail=True, renderer_classes=(PassthroughRenderer,))
     def get(request):
         user = User.objects.get(id=request.user.id)
-        author_id = request.data['author_id']
+        author_id = request.GET.get('author_id')
         agro = User.objects.get(id=author_id)
         if user.job_role == "P" or (user.job_role == "A" and agro == user):
-            pub_date = request.data['pub_date']
-            file_name = request.data['file_name']
+            pub_date = request.GET.get('pub_date')
+            file_name = request.GET.get('file_name')
             try:
                 report = SteeringInitiative.objects.get(author=agro, pub_date=pub_date, title=file_name).report
             except SteeringInitiative.DoesNotExist:

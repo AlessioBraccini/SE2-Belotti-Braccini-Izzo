@@ -10,7 +10,11 @@
       <div>
         <div class="farmerName">
           <ul>
-            <li v-for="farmer in reportList.length" :key="farmer" @click="viewSpecificReport(reportList[farmer-1])"> {{ reportList[farmer-1]['name'] }} </li>
+            <li v-for="report in reportList.length" :key="report" @click="viewSpecificReport(reportList[report-1])">
+              <div>{{ reportList[report-1]['author'] }}</div>
+              <div>{{ reportList[report-1]['file_name'] }}</div>
+              <div>{{ reportList[report-1]['pub_date'] }}</div>
+            </li>
           </ul>
         </div>
       </div>
@@ -43,8 +47,7 @@ export default {
     const loadReport = async () => {
       try {
         await axios.get('http://localhost:8000/api/v1/steering_initiatives').then(resp => {
-          console.log(resp.data)
-          reportList.value = resp.data
+          reportList.value = resp.data['reports_list']
         })
       }
       catch (err){
@@ -55,11 +58,30 @@ export default {
 
     loadReport()
 
-    const viewSpecificReport = (farmer) => {
+    const viewSpecificReport = async (report) => {
+      console.log(report)
+      await axios.get('http://localhost:8000/api/v1/download_reports',
+          { responseType: "blob",
+            params: {
+              author_id: report['author_id'],
+              pub_date: report['pub_date'],
+              file_name: report['file_name']
+            } }
+      ).then(
+          resp => {
+            console.log('risposta ' + resp.data)
 
-      localStorage.setItem('id', farmer['user_id'])
+            const blob = new Blob([resp.data], { type: "application/pdf" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = report['file_name'];
+            link.click();
+            URL.revokeObjectURL(link.href);
+          }
+      ).catch(err => {
+        console.log(err)
+      })
 
-      router.push({name: 'SpecificInfo'})
     }
 
     const back = () => {
@@ -110,22 +132,6 @@ export default {
     margin-top: 20px;
   }
 
-  .district{
-    position: relative;
-    left: 6%;
-    padding-top: 15px;
-  }
-
-  .inputDist{
-    position: relative;
-    width: 69%;
-    height: 30px;
-    background-color: #E9C197;
-    border: solid #919191 2px;
-    border-radius: 10px;
-    font-size: 15px;
-  }
-
   .rawText{
     position: relative;
     text-align: center;
@@ -133,28 +139,17 @@ export default {
 
   .scrollDiv{
     height: 90%;
-    max-height: 83%;
     overflow-y: scroll;
   }
 
   .farmerName{
     position: relative;
     display: inline-block;
-    width: 70%;
+    width: 86%;
     left: 7%;
     top: 5%;
     font-weight: bold;
 
-  }
-
-  .farmerScore{
-    position: relative;
-    display: inline-block;
-    width: 16%;
-    right: -7%;
-    top: 5%;
-    text-align: right;
-    font-weight: bold;
   }
 
   .backBtn{

@@ -7,7 +7,7 @@
       <li> <b>Farmer name</b>: {{ farmerName }}</li>
       <li> <b>Email</b>: {{ email }}</li>
       <li> <b>Score</b>: {{ score }}</li>
-      <li> <b>Address</b>: <a :href="'https://www.google.com/maps/search/?api=1&query='+ area" target="_blank"> {{ area }} </a> </li>
+      <li> <b>District</b>: <a :href="'https://www.google.com/maps/search/?api=1&query='+ area" target="_blank"> {{ area }} </a> </li>
       <li> <b>Address</b>: <a :href="'https://www.google.com/maps/search/?api=1&query='+ address" target="_blank"> {{ address }} </a> </li>
       <li> <b>Crop type:</b> </li>
       <ul>

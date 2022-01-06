@@ -3,20 +3,31 @@
   <NavbarAgro :name="name"/>
 
   <div class="background">
-    <h2 class="text1">Upload File</h2>
+    <h2>Upload File</h2>
+    <div class="text1">You can upload 1 pdf file:</div>
     <div class="fileInput">
       <p class="innerText">Select your file</p>
       <input type="file" @change="handleFileUpload( $event )" required />
     </div>
 
+    <div v-if="errMsg.length" class="errorMsg">
+      {{errMsg}}
+    </div>
+
     <div class="text">
-      <p class="text2" style="margin-right: 5px">Uploaded File:</p>
-      <p v-if="fileName" class="text2"> {{ fileName }}</p>
+      <p class="text2" style="margin-right: 5px;">Uploaded File:</p>
+      <p v-if="fileName" class="text2" style="margin-top: 0"> {{ fileName }}</p>
     </div>
   </div>
   <div>
     <button @click="submitFile" class="submitBtn actionButton">Submit</button>
     <button @click="back" class="actionButton backBtn">Back</button>
+  </div>
+
+  <div v-if="confirmationMessage" class="opacityBack">
+    <div  class="confirmMsg">
+      <h4 class="confirmText"> {{ confirmationMessage }} </h4>
+    </div>
   </div>
 
 </template>
@@ -37,39 +48,58 @@ export default {
     const name = ref(localStorage.getItem('name'))
     const file = ref('')
     const fileName = ref('')
+    const confirmationMessage = ref('')
+    const errMsg = ref('')
 
 
     const handleFileUpload = (event) => {
       file.value = event.target.files[0]
       fileName.value = event.target.files[0].name
-      console.log(fileName.value)
+      if (fileName.value.length)
+        errMsg.value = ''
     }
 
     const submitFile =  () => {
-      let formData = new FormData();
-      formData.append('file', file.value);
-      formData.append('title', fileName.value)
 
-      axios.post( 'http://localhost:8000/api/v1/steering_initiatives',
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/pdf'
-            }
-          })
-          .then(resp => {
-            console.log('SUCCESS!! ' + resp);
-          })
-           .catch(err => {
+      if (fileName.value.length) {
+        const ext = fileName.value.slice(fileName.value.length-3,fileName.value.length)
+        if (ext === 'pdf'){
+          let formData = new FormData();
+          formData.append('file', file.value);
+          formData.append('title', fileName.value)
+
+          axios.post('http://localhost:8000/api/v1/steering_initiatives',
+              formData,
+              {
+                headers: {
+                  'Content-Type': 'multipart/pdf'
+                }
+              })
+              .then(() => {
+                scroll(0, 0)
+                confirmationMessage.value = 'Successful send'
+
+                setTimeout(function () {
+                  router.push({name: 'AgroHome'})
+                }, 1250);
+              })
+              .catch(err => {
                 console.log('FAILURE!! ' + err);
-           });
+              });
+        }
+        else
+          errMsg.value = '!You can upload only pdf file'
+      }
+      else
+        errMsg.value = '!No file selected'
+
     }
 
     const back = () => {
       router.push({name: 'AgroHome'})
     }
 
-    return{name, file, fileName, submitFile, handleFileUpload, back}
+    return{name, file, fileName, confirmationMessage, errMsg, submitFile, handleFileUpload, back}
   }
 }
 </script>
@@ -82,6 +112,14 @@ export default {
     opacity: 0;
     z-index: 99;
     position: relative;
+  }
+
+  h2{
+    position: relative;
+    left: 9%;
+    max-width: 80%;
+    padding-top: 15px;
+    margin: 0;
   }
 
   .background{
@@ -98,8 +136,9 @@ export default {
     position: relative;
     left: 9%;
     max-width: 80%;
-    margin-top: 15px;
-    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: #5a5a5a;
   }
 
   .text{
@@ -140,6 +179,44 @@ export default {
   .backBtn{
     width: 90%;
     left: 6%;
+  }
+
+  .confirmMsg{
+    position: absolute;
+    z-index: 999;
+    width: 80%;
+    height: 100px;
+    background-color: #E9C197;
+    text-align: center;
+    border: #919191 2px solid;
+    border-radius: 10px;
+    left: 8%;
+    top: 40%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    color: black;
+  }
+
+  .confirmText{
+    position: relative;
+    top: 35px;
+    margin: 0;
+  }
+
+  .opacityBack{
+    z-index: 99;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(40, 70, 70, 0.8);
+    top: 0;
+    display: block;
+  }
+
+  .errorMsg{
+    position: relative;
+    color: red;
+    left: 9%;
+    margin-top: 5px;
   }
 
 </style>
