@@ -84,7 +84,7 @@ class UpdateVisits(APIView):
         # make the new insertion
         response = DailyPlanView.post(request)
 
-        if response['message'] == 'New daily plan saved successfully.':
+        if response.data['message'] == 'New daily plan saved successfully.':
             return Response({"message": "Daily plan for date " + date + " has been updated successfully."})
         # todo: if error, reload the old_plan_entries
         return response
@@ -107,8 +107,11 @@ class UpdateVisits(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         for plan in plans:
-            visit_ctr = Farm.objects.get(user=plan.visit_farmer).first().visit_ctr
-            farmers_list.append((plan.visit_farmer.id, plan.visit_farmer.complete_name(), visit_ctr, plan.annotation))
+            context = {
+                'farmer_id': plan.visit_farmer.id,
+                'farmer_name': plan.visit_farmer.complete_name(),
+            }
+            farmers_list.append(context)
 
         response_payload = {
             'date': request.GET.get('date'),
