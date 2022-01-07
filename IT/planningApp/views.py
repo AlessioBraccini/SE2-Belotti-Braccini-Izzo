@@ -60,10 +60,11 @@ class DailyPlanView(APIView):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         plan_entries = DailyPlan.objects.filter(agronomist_user=agro).values('date').distinct()
-        print(str(plan_entries))
-        formatted_data = json.dumps(el.__dict__ for el in plan_entries)
+        dates = []
+        for entry in plan_entries:
+            dates.append(entry)
 
-        return Response(formatted_data)
+        return Response(dates)
 
 
 class UpdateVisits(APIView):
@@ -79,6 +80,10 @@ class UpdateVisits(APIView):
             return Response({"message": "Cannot modify already confirmed plans"}, status=status.HTTP_403_FORBIDDEN)
 
         old_plan_entries = DailyPlan.objects.filter(agronomist_user=agro, date=date)
+        for plan in old_plan_entries:
+            farm = Farm.objects.get(user=plan.visit_farmer)
+            farm.visit_ctr = 0 if farm.visit_ctr-1 < 0 else farm.visit_ctr-1
+            farm.save()
         old_plan_entries.delete()
 
         # make the new insertion
