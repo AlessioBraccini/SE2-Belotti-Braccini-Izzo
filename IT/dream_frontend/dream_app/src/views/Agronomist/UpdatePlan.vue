@@ -73,8 +73,8 @@ export default {
 
     const name = localStorage.getItem('name')
     const farmerList = ref([])
-    // const date = new Date().toJSON().slice(0,10)
-    const date = '2022-01-07'
+    const date = new Date().toJSON().slice(0,10)
+    // const date = '2022-01-07'
     const annotations = ref('')
     const error = ref(null)
     const dateErr = ref('')
@@ -88,7 +88,7 @@ export default {
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
     const loadDailyPlan = async () => {
-      await axios.get('http://localhost:8000/api/v1/daily_plan', {params: {date: date}})
+      await axios.get('http://localhost:8000/api/v1/update_daily_plan', {params: {date: date}})
           .then(resp => {
             farmerList.value = resp.data['visit_farmers_list']
 
