@@ -14,7 +14,7 @@ User = get_user_model()  # gets custom user from settings AUTH_USER_MODEL
 class Farm(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.CharField(max_length=100)
-    score = models.IntegerField()
+    score = models.IntegerField(default=0)
     visit_ctr = models.IntegerField(default=0)
 
 
