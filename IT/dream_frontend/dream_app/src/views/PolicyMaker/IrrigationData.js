@@ -48,28 +48,26 @@ export const irrigationData = {
             'Warangal',
             'Yadadri Bhuvanagiri'],
         datasets: [
-            {
-                label: "Number of Moons",
-                data: [0, 0, 1, 2, 79, 82, 27, 14, 0, 0, 1, 2, 79, 82, 27, 14, 0, 0, 1, 2, 79, 82, 27, 14, 0, 0, 1, 2, 79, 82, 27, 14],
+            {   type: 'bar',
+                label: "Used Water",
+                data: [0, 0, 1, 2, 79, 82, 27, 14, 45, 4, 0, 0, 1, 2, 79, 82, 27, 14, 45, 4, 0, 0, 1, 2, 79, 100, 27, 14, 45, 4],
                 backgroundColor: "rgba(54,73,93,.5)",
                 borderColor: "#36495d",
                 borderWidth: 3
-            }
+            },
         ]
     },
     options: {
         responsive: true,
-        lineTension: 1,
+        lineTension: 0,
         scales: {
-            yAxes: [
-                {
-                    ticks: {
-                        beginAtZero: true,
-                        padding: 25
-                    }
-                }
-            ]
-        }
+            y:{
+                type: 'linear',
+                position: 'left',
+                min: 0,
+                max: 100
+            },
+        },
     },
 };
 

@@ -16,7 +16,7 @@
           </ul>
         </div>
       </div>
-      <div v-else class="rawText">Loading...</div>
+      <div v-else class="rawText">No farmer in the plan</div>
     </div>
 
     <div v-if="errorMsg" class="errorMsg">{{ errorMsg }}</div>
@@ -49,7 +49,7 @@
   </div>
 
   <button @click="confirmUpdate" class="actionButton backBtn">Confirm Update</button>
-  <button @click="back" class="actionButton backBtn">Back</button>
+  <button @click="back" class="actionButton backBtn" style="margin-bottom: 20px;">Back</button>
 
   <div v-if="confirmationMessage" class="opacityBack">
     <div  class="confirmMsg">
@@ -73,7 +73,8 @@ export default {
 
     const name = localStorage.getItem('name')
     const farmerList = ref([])
-    const date = new Date().toJSON().slice(0,10)
+    // const date = new Date().toJSON().slice(0,10)
+    const date = '2022-01-07'
     const annotations = ref('')
     const error = ref(null)
     const dateErr = ref('')
@@ -89,8 +90,10 @@ export default {
     const loadDailyPlan = async () => {
       await axios.get('http://localhost:8000/api/v1/daily_plan', {params: {date: date}})
           .then(resp => {
-            console.log(resp.data)
-            farmerList.value = resp.data
+            farmerList.value = resp.data['visit_farmers_list']
+
+            for (let i = 0; i < farmerList.value.length; i++)
+              farmerListId.value.push(farmerList.value[i]['farmer_id'])
           }).catch(err => {
             console.log(err)
             errorMsg.value = 'No plan for today'
@@ -129,13 +132,22 @@ export default {
     }
 
     const confirmUpdate = async () => {
-      // for (let farmer in farmerList) {
-      //   await axios.post ('http://localhost:8000/api/v1/update_daily_plan', {
-      //      action: '',    // string con add o delete
-      //      visit_farmer: , //single faremer
-      //      date: date.value
-      //   })
-      // }
+        await axios.post ('http://localhost:8000/api/v1/update_daily_plan', {
+          visit_farmers_list: farmerListId.value,
+          date: date
+        }).then(() => {
+          scroll(0,0)
+          confirmationMessage.value = 'Plan Update Successfully'
+
+          setTimeout(function() {
+            router.push({name: 'AgroHome'})
+          }, 1250);
+
+
+        }).catch(() => {
+
+        })
+
     }
 
     return{ name, farmerList, error, completeFarmerList, annotations, date, dateErr, listErr, confirmationMessage, errorMsg, confirmUpdate, addFarmer, removeFarmer, back }
@@ -183,13 +195,6 @@ li:hover{
   margin-top: 20px;
 }
 
-.date{
-  position: relative;
-  left: 5%;
-  border-radius: 10px;
-  height: 30px;
-}
-
 .farmerArea{
   position: relative;
   display: block;
@@ -201,22 +206,11 @@ li:hover{
   overflow-y: scroll;
 }
 
-.takenFarmerArea{
-  position: relative;
-  display: block;
-  background-color: white;
-  width: 90%;
-  height: 130px;
-  left: 5%;
-  border-radius: 22px;
-  overflow-y: scroll;
-}
-
 .rawText{
   position: relative;
   top: 45%;
-  left: 36%;
-  width: 165px;
+  left: 23%;
+  width: 180px;
 }
 
 .farmerName{
@@ -250,28 +244,6 @@ li:hover{
 .backBtn{
   width: 90%;
   left: 5%;
-  margin-bottom: 20px;
-}
-
-.confirmBtn{
-  width: 90%;
-  left: 5%;
-}
-
-.dateError{
-  position: relative;
-  display: inline-block;
-  width: 180px;
-  left: 24px;
-  color: red;
-}
-
-.listError{
-  position: relative;
-  display: inline-block;
-  width: 180px;
-  left: 10px;
-  color: red;
 }
 
 .confirmMsg{

@@ -144,10 +144,14 @@ export default {
         console.log('error ' + err)
         if (err.response.data.email)
           userError.value = 'Username already exist'
-        else if (err.response.data.password)
+        else if (err.response.data.password) {
           userError.value = 'Password is too similar to email or name'
-        else
+          job_role.value = 'policyMaker'
+        }
+        else {
           userError.value = 'Unspecified error'
+          job_role.value = 'policyMaker'
+        }
       })
 
   }
@@ -237,6 +241,7 @@ export default {
     position: relative;
     top: 35px;
     margin: 0;
+    color: black;
   }
 
   .opacityBack{

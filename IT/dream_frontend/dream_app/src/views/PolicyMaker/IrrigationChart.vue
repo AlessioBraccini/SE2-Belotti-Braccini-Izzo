@@ -1,10 +1,9 @@
 <template>
-  <div style="width: 90%; overflow: scroll; left: 5%; position:relative;">
-    <div style="width: 830px; margin-bottom:20px">
+  <div class="container">
+    <div class="inner">
       <canvas id="irrigationChart"></canvas>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -25,3 +24,19 @@ export default {
 
 }
 </script>
+
+<style scoped>
+  .container{
+    position:relative;
+    width: 90%;
+    overflow: scroll;
+    left: 5%;
+    background-color: white;
+    border-radius: 22px;
+    margin-top: 20px;
+  }
+  .inner{
+    width: 840px;
+    margin-bottom:20px
+  }
+</style>

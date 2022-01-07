@@ -22,6 +22,9 @@ class DailyPlanView(APIView):
     authentication_classes = [authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
+
+
+
     @staticmethod
     def post(request):
         agro = User.objects.get(id=request.user.id)
@@ -51,7 +54,6 @@ class DailyPlanView(APIView):
     @staticmethod
     def get(request):
         agro = User.objects.get(id=request.user.id)
-        farmers_list = []
         try:
             plans = DailyPlan.objects.filter(agronomist_user__id=agro.id, date=request.GET.get('date'))
         except DailyPlan.DoesNotExist:
@@ -60,8 +62,13 @@ class DailyPlanView(APIView):
         except ValidationError:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+        farmers_list = []
         for plan in plans:
-            farmers_list.append((plan.visit_farmer, plan.annotation))
+            context = {
+                'farmer_id': plan.visit_farmer.id,
+                'farmer_name': plan.visit_farmer.complete_name(),
+            }
+            farmers_list.append(context)
 
         response_payload = {
             'date': request.GET.get('date'),
@@ -79,7 +86,7 @@ class UpdateVisits(APIView):
         agro = User.objects.get(id=request.user.id)
         date = request.data["date"]
 
-        if date < datetime.date.today():
+        if date < str(datetime.date.today()):
             return Response({"message": "Cannot modify already confirmed plans"}, status=status.HTTP_403_FORBIDDEN)
 
         old_plan_entries = DailyPlan.objects.filter(agronomist_user=agro, date=date)
@@ -88,7 +95,7 @@ class UpdateVisits(APIView):
         # make the new insertion
         response = DailyPlanView.post(request)
 
-        if response['message'] == 'New daily plan saved successfully.':
+        if response.data['message'] == 'New daily plan saved successfully.':
             return Response({"message": "Daily plan for date " + date + " has been updated successfully."})
         # todo: if error, reload the old_plan_entries
         return response
