@@ -59,8 +59,8 @@ class Humidity(APIView):
             except HumiditySensor.DoesNotExist:
                 # obj = HumidityData(district[0], 0, 0)
                 # mylist.append(obj)
-                humidity_list.append(0)
-                temperature_list.append(0)
+                humidity_list.append(20)
+                temperature_list.append(50)
             except HumiditySensor.MultipleObjectsReturned:
                 data = HumiditySensor.objects.filter(district=district[0])
                 humidity_list.append(data[0].humidity)

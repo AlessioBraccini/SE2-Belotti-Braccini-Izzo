@@ -19,6 +19,7 @@ import RankingViewPM from "@/views/PolicyMaker/RankingViewPM";
 import SensorPage from "@/views/PolicyMaker/SensorPage";
 import ViewReport from "@/views/PolicyMaker/ViewReport";
 import RawData from "@/views/PolicyMaker/RawData";
+import ViewSpecifiPlan from "@/views/PolicyMaker/ViewSpecifiPlan";
 
 const routes = [
     {
@@ -78,6 +79,11 @@ const routes = [
         component: ShowPlan
     },
     {
+        path: '/agronomistHome/showPlan/viewSpecificPlan',
+        name: 'ViewSpecPlan',
+        component: ViewSpecifiPlan
+    },
+    {
         path: '/agronomistHome/writeReport',
         name: 'WriteReport',
         component: WriteReport
@@ -112,7 +118,6 @@ const routes = [
         name: 'Sensors',
         component: SensorPage
     },
-
     {
         path: '/policymakerHome/sensorsData/rawData',
         name: 'RawData',

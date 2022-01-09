@@ -6,14 +6,12 @@
     <h3>Steering Initiative</h3>
 
     <div v-if="error" style="text-align: center">{{ error }}</div>
-    <div v-else-if="reportList.length" class="scrollDiv">
+    <div v-else-if="planList.length" class="scrollDiv">
       <div>
         <div class="farmerName">
           <ul>
-            <li v-for="report in planList.length" :key="report"> <!--@click="viewSpecificReport(reportList[report-1])">-->
-              <div>{{ planList[report-1]['author'] }}</div>
-              <div>{{ planList[report-1]['file_name'] }}</div>
-              <div>{{ planList[report-1]['pub_date'] }}</div>
+            <li v-for="report in planList.length" :key="report" @click="viewSpecificReport(planList[report-1]['date'])">
+              <div> <b> {{ planList[report-1]['date'] }} </b> </div>
             </li>
           </ul>
         </div>
@@ -48,9 +46,7 @@ export default {
     const loadPlans = async () => {
       await axios.get('http://localhost:8000/api/v1/daily_plan')
           .then(resp => {
-            planList.value = resp.data['visit_farmers_list']
-            console.log(resp.data)
-
+            planList.value = resp.data
           }).catch(err => {
             console.log(err)
             errorMsg.value = 'No plan for today'
@@ -60,11 +56,18 @@ export default {
 
     loadPlans()
 
+    const viewSpecificReport = (plan) => {
+
+      localStorage.setItem('id', plan.toString())
+
+      router.push({name: 'ViewSpecPlan'})
+    }
+
     const back = () => {
       router.go(-1)
     }
 
-    return{ name, planList, error, errorMsg, back }
+    return{ name, planList, error, errorMsg, back, viewSpecificReport }
   }
 }
 </script>
