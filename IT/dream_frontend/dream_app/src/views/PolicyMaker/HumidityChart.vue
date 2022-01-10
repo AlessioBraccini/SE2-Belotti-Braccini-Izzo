@@ -8,20 +8,112 @@
 
 <script>
 import Chart from 'chart.js/auto'
-import humidityData from './HumidityData.js'
+import axios from "axios";
 
 export default {
   name: 'HumidityChart',
-  data() {
-    return {
-      data: humidityData
-    }
-  },
-  mounted() {
-    const ctx = document.getElementById('humidityChart');
-    new Chart(ctx, this.data);
-  }
 
+  async mounted() {
+
+    let hum, temp
+
+    const getHumidity = async () => {
+      await axios.get('http://localhost:8000/api/v1/humidity').then(resp => {
+        hum = resp.data.humidity
+      })
+      return hum
+    }
+    const getTemp = async () => {
+      await axios.get('http://localhost:8000/api/v1/humidity').then(resp => {
+        temp = resp.data.temperature
+      })
+      return temp
+    }
+
+
+    const ctx = document.getElementById('humidityChart');
+    new Chart(ctx,{
+      type: "bar",
+      data: {
+        labels: [
+          'Adilabad',
+          'Bhadradri Kothagudem',
+          'Hanumakonda',
+          'Hyderabad',
+          'Jagtial',
+          'Jangaon',
+          'Jayashankar Bhupalpally',
+          'Jogulamba Gadwal',
+          'Kamareddy',
+          'Karimnagar',
+          'Khammam',
+          'Kumuram Bheem',
+          'Mahabubabad',
+          'Mahabubnagar',
+          'Mancherial',
+          'Medak',
+          'Medchal-Malkajgiri',
+          'Mulugu',
+          'Nagarkurnool',
+          'Nalgonda',
+          'Narayanpet',
+          'Nirmal',
+          'Nizamabad',
+          'Peddapalli',
+          'Rajanna Sircilla',
+          'Rangareddy',
+          'Sangareddy',
+          'Siddipet',
+          'Suryapet',
+          'Vikarabad',
+          'Wanaparthy',
+          'Warangal',
+          'Yadadri Bhuvanagiri'],
+        datasets: [
+          {   type: 'bar',
+            label: "Humidity",
+            data: await getHumidity(),
+            backgroundColor: "rgba(54,73,93,.5)",
+            borderColor: "#36495d",
+            borderWidth: 3
+          },
+          {
+            type: 'line',
+            label: "Temperature",
+            data: await getTemp(),
+            backgroundColor: "red",
+            borderColor: "red",
+            borderWidth: 3,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        lineTension: 0,
+        layout: {
+          padding: 20
+        },
+        scales: {
+          y:{
+            type: 'linear',
+            position: 'left',
+            min: 0,
+            max: 100
+          },
+
+          y1: {
+            type: 'linear',
+            position: 'right',
+            max: 60,
+            min: 0,
+            grid: {
+              drawOnChartArea: false,
+            },
+          }
+        },
+      },
+    });
+  }
 }
 </script>
 
@@ -36,7 +128,7 @@ export default {
     margin-top: 20px;
   }
   .inner{
-    width: 840px;
-    margin-bottom:20px
+    width: 855px;
+    margin-bottom:20px;
   }
 </style>

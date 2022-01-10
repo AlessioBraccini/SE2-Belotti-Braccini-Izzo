@@ -8,18 +8,86 @@
 
 <script>
 import Chart from 'chart.js/auto'
-import irrigationData from './IrrigationData.js'
+import axios from "axios";
 
 export default {
   name: 'IrrigationChart',
-  data() {
-    return {
-      data: irrigationData
+
+  async mounted() {
+
+    let irr
+
+    const getIrrigation = async () => {
+      await axios.get('http://localhost:8000/api/v1/water_irrigation').then(resp => {
+        irr = resp.data.water_qty
+      })
+      return irr
     }
-  },
-  mounted() {
+
     const ctx = document.getElementById('irrigationChart');
-    new Chart(ctx, this.data);
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: [
+          'Adilabad',
+          'Bhadradri Kothagudem',
+          'Hanumakonda',
+          'Hyderabad',
+          'Jagtial',
+          'Jangaon',
+          'Jayashankar Bhupalpally',
+          'Jogulamba Gadwal',
+          'Kamareddy',
+          'Karimnagar',
+          'Khammam',
+          'Kumuram Bheem',
+          'Mahabubabad',
+          'Mahabubnagar',
+          'Mancherial',
+          'Medak',
+          'Medchal-Malkajgiri',
+          'Mulugu',
+          'Nagarkurnool',
+          'Nalgonda',
+          'Narayanpet',
+          'Nirmal',
+          'Nizamabad',
+          'Peddapalli',
+          'Rajanna Sircilla',
+          'Rangareddy',
+          'Sangareddy',
+          'Siddipet',
+          'Suryapet',
+          'Vikarabad',
+          'Wanaparthy',
+          'Warangal',
+          'Yadadri Bhuvanagiri'],
+        datasets: [
+          { type: 'bar',
+            label: "Used Water",
+            data: await getIrrigation(),
+            backgroundColor: "rgba(54,73,93,.5)",
+            borderColor: "#36495d",
+            borderWidth: 3
+          },
+        ]
+      },
+      options: {
+        responsive: true,
+        lineTension: 0,
+        layout: {
+          padding: 20
+        },
+        scales: {
+          y:{
+            type: 'linear',
+            position: 'left',
+            min: 0,
+            max: 100
+          },
+        },
+      },
+    });
   }
 
 }
@@ -36,7 +104,7 @@ export default {
     margin-top: 20px;
   }
   .inner{
-    width: 840px;
+    width: 855px;
     margin-bottom:20px
   }
 </style>

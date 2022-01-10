@@ -2,7 +2,7 @@
   <NavbarAgro :name="name" />
 
   <RankingListPM @click="bigRanking" ordering="descending" title="Top Farmers"/>
-  <RankingListPM @click="bigRanking" ordering="ascending" title="Worst Farmers"/>
+  <RankingListPM @click="bigRankingAsc" ordering="ascending" title="Worst Farmers"/>
 
   <button @click="pushSensors" class="actionButton backBtn">View Sensors Data</button>
   <button @click="pushReport" class="actionButton backBtn">View Steering Initiative</button>
@@ -24,6 +24,12 @@ export default {
 
 
     const bigRanking = () => {
+      localStorage.setItem('order', 'descending')
+      router.push({ name: 'RankingPM' })
+    }
+
+    const bigRankingAsc = () => {
+      localStorage.setItem('order', 'ascending')
       router.push({ name: 'RankingPM' })
     }
 
@@ -37,7 +43,7 @@ export default {
 
 
 
-    return { name, bigRanking, pushReport, pushSensors }
+    return { name, bigRanking, bigRankingAsc, pushReport, pushSensors }
 
   }
 }

@@ -4,19 +4,11 @@
   <div class="square">
     <div style="overflow: scroll">
       <h3>Raw data</h3>
-      <p class="firstRow">District</p>
-      <p class="firstRow">Humidity</p>
-      <p class="firstRow">Temperature</p>
-      <p class="firstRow">Water Used</p>
+      <p class="firstRow">Data are ordered by district in alphabetical order</p>
       <ul class="ulExt">
-        <li>  {{ email }}</li>
-        <li>  {{ score }}</li>
-        <li>  {{ area }} </li>
-        <li>  {{ address }}  </li>
-        <ul>
-          <li v-for="crop in cropType" :key="crop" class="crop">{{ crop }}</li>
-          <li class="last"></li>
-        </ul>
+        <li> Humidity: <br> {{ hum }}</li>
+        <li> Temperature: <br> {{ temp }}</li>
+        <li> Water quantity: <br> {{ irr }} </li>
       </ul>
     </div>
   </div>
@@ -37,26 +29,21 @@ export default {
 
     const name = localStorage.getItem('name')
 
-    const farmerName = ref('')
-    const area = ref('')
-    const address = ref('')
-    const cropType = ref([])
-    const score = ref(0)
-    const email = ref('')
+    const hum = ref(null)
+    const temp = ref(null)
+    const irr = ref(null)
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
-    axios.get('http://localhost:8000/api/v1/profile_info', {params: {farmer_id: localStorage.getItem('id')}} ).then(resp => {
-      farmerName.value = resp.data['full_name']
-      email.value = resp.data['email']
-      area.value = resp.data['area']
-      score.value = resp.data['score']
-      address.value = resp.data['address']
+    axios.get('http://localhost:8000/api/v1/humidity' ).then(resp => {
+      hum.value = resp.data.humidity
+      temp.value = resp.data.temperature
+    }).catch(err => {
+      console.log(err)
+    })
 
-      for (let i = 0; i < resp.data['crop_types'].length; i++) {
-        cropType.value.push(resp.data['crop_types'][i]['crop_type'])
-      }
-
+    axios.get('http://localhost:8000/api/v1/water_irrigation' ).then(resp => {
+      irr.value = resp.data.water_qty
     }).catch(err => {
       console.log(err)
     })
@@ -65,7 +52,7 @@ export default {
       router.go(-1)
     }
 
-    return{ name, farmerName, area, address, cropType, score, email, back }
+    return{ name, hum, temp, irr, back }
 
   }
 }
@@ -75,12 +62,10 @@ export default {
 
   ul{
     list-style-type: none;
-    overflow: scroll;
   }
 
   li{
     margin: 20px 0 0 0;
-    display: inline-block;
   }
 
   h3{
@@ -99,23 +84,18 @@ export default {
     top: 5%;
     border-radius: 22px;
     margin-top: 20px;
-    overflow: scroll;
   }
 
   .ulExt{
     position: relative;
-    padding-left: 20px;
+    padding-left: 13px;
   }
 
   .firstRow{
     position: relative;
-    display: inline-block;
     left: 3.3%;
     margin-right: 5px;
-  }
-
-  .last{
-    padding-bottom: 10px;
+    width: 90%;
   }
 
   .backBtn{

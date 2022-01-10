@@ -7,7 +7,7 @@
     <IrrigationChart/>
   </div>
   <button @click="pushRaw" class="actionButton backBtn" style="margin-bottom: 0">Raw Data</button>
-  <button @click="back" class="actionButton backBtn">Back</button>
+  <button @click="back" class="actionButton backBtn1">Back</button>
 
 </template>
 
@@ -50,6 +50,11 @@ export default {
     width: 91%;
     left: 4%;
     margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .backBtn1{
+    width: 91%;
+    left: 4%;
     margin-bottom: 20px;
   }
 </style>
