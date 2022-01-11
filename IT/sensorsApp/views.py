@@ -12,18 +12,6 @@ User = get_user_model()
 
 # Create your views here.
 
-'''
-class HumidityData(object):
-    district = None
-    humidity = None
-    temperature = None
-
-    def __init__(self, district, humidity, temperature):
-        self.district = district
-        self.humidity = humidity
-        self.temperature = temperature
-'''
-
 
 class Humidity(APIView):
     """
@@ -45,7 +33,6 @@ class Humidity(APIView):
         except User.DoesNotExist:
             return Response({"message": "User not found"}, status=status.HTTP_404_NOT_FOUND)
 
-        # mylist = []
         humidity_list = []
         temperature_list = []
 
@@ -54,13 +41,9 @@ class Humidity(APIView):
                 data = HumiditySensor.objects.get(district=district[0])
                 humidity_list.append(data.humidity)
                 temperature_list.append(data.temperature)
-                # obj = HumidityData(district[0], data.humidity, data.temperature)
-                # mylist.append(obj)
             except HumiditySensor.DoesNotExist:
-                # obj = HumidityData(district[0], 0, 0)
-                # mylist.append(obj)
-                humidity_list.append(20)
-                temperature_list.append(50)
+                humidity_list.append(0)
+                temperature_list.append(0)
             except HumiditySensor.MultipleObjectsReturned:
                 data = HumiditySensor.objects.filter(district=district[0])
                 humidity_list.append(data[0].humidity)
@@ -72,7 +55,6 @@ class Humidity(APIView):
         }
 
         data = json.dumps(context)
-        # json_string = json.dumps([el.__dict__ for el in mylist])
         return HttpResponse(data)
 
 
@@ -103,7 +85,7 @@ class WaterIrrigation(APIView):
                 data = WaterIrrigationSensor.objects.get(district=district[0])
                 water_qty_list.append(data.water_qty)
             except WaterIrrigationSensor.DoesNotExist:
-                water_qty_list.append(50)
+                water_qty_list.append(0)
             except WaterIrrigationSensor.MultipleObjectsReturned:
                 data = HumiditySensor.objects.filter(district=district[0])
                 water_qty_list.append(data[0].water_qty)
