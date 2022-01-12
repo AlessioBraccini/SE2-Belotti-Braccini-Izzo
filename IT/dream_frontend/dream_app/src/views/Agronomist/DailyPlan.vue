@@ -342,7 +342,7 @@ export default {
     color: red;
     left: 5%;
   }
-  @media only screen and (min-width: 612px) and (max-width: 1700px) {
+  @media only screen and (min-width: 612px)  {
     .dateError{
       position: relative;
       display: inline-block;

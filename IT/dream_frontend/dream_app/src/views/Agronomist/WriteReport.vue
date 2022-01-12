@@ -219,7 +219,7 @@ export default {
     margin-top: 5px;
   }
 
-  @media only screen and (min-width: 612px) and (max-width: 1700px) {
+  @media only screen and (min-width: 612px) {
 
     .background{
       width: 70%;

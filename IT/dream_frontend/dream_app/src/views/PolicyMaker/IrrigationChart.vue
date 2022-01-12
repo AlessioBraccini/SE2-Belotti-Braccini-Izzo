@@ -114,7 +114,7 @@ export default {
     }
   }
 
-  @media only screen and (min-width: 1200px) and (max-width: 1700px) {
+  @media only screen and (min-width: 1200px){
     .container{
       overflow: hidden;
     }

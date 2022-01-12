@@ -254,7 +254,7 @@ export default {
     display: block;
   }
 
-  @media only screen and (min-width: 600px) and (max-width: 1700px){
+  @media only screen and (min-width: 600px){
 
     select{
       position: relative;

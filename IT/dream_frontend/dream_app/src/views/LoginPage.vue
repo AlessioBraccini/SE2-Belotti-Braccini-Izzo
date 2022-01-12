@@ -156,7 +156,7 @@ export default {
 
   /*VIEWPORT Responsive */
 
-  @media only screen and (min-width: 600px) and (max-width: 1550px){
+  @media only screen and (min-width: 600px) {
     .textInput{
       width: 40%;
       height: 30px;

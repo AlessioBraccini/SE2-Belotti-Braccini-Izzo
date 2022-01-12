@@ -123,7 +123,7 @@ li{
 
 /*VIEWPORT Responsive */
 
-@media only screen and (min-width: 1000px) and (max-width: 1700px) {
+@media only screen and (min-width: 1000px){
 
   .square{
     width: 40%;
