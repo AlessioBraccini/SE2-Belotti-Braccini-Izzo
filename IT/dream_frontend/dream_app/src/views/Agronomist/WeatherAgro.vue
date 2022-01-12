@@ -185,9 +185,31 @@ export default {
     font-size: 20px;
     width: 78%;
   }
+  @media only screen and (min-width: 612px) and (max-width: 1000px){
+    .areaText{
+      margin: 0;
+    }
+
+    .temperature{
+      margin-top: 4%;
+    }
+  }
+
+  @media only screen and (min-width: 1000px) and (max-width: 1550px){
+    .areaText{
+      margin: 0;
+    }
+
+    .temperature{
+      margin-top: 5%;
+    }
+
+    .square{
+      height: 250px;
+    }
+  }
 
   @media only screen and (min-width: 1550px){
-
     .areaText{
       margin: 0;
     }
@@ -199,8 +221,6 @@ export default {
     .square{
       height: 300px;
     }
-
-
   }
 
 
