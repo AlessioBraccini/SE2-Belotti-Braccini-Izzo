@@ -186,15 +186,21 @@ export default {
     width: 78%;
   }
 
-  @media only screen and (min-width: 612px) {
+  @media only screen and (min-width: 1550px){
 
     .areaText{
       margin: 0;
     }
 
     .temperature{
-      margin-top: 4%;
+      margin-top: 5%;
     }
+
+    .square{
+      height: 300px;
+    }
+
+
   }
 
 

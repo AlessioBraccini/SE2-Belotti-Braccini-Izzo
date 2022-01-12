@@ -114,12 +114,21 @@ export default {
     }
   }
 
-  @media only screen and (min-width: 1200px){
+  @media only screen and (min-width: 1200px) and (max-width: 1550px){
     .container{
       overflow: hidden;
     }
     .inner{
       margin-left: 18%;
+    }
+  }
+
+  @media only screen and (min-width: 1550px) {
+    .container{
+      overflow: hidden;
+    }
+    .inner{
+      margin-left: 24%;
     }
   }
 </style>
