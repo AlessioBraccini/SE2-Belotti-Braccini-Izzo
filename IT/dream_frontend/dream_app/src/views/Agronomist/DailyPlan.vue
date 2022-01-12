@@ -342,5 +342,22 @@ export default {
     color: red;
     left: 5%;
   }
+  @media only screen and (min-width: 612px) and (max-width: 1700px) {
+    .dateError{
+      position: relative;
+      display: inline-block;
+      width: 200px;
+      left: 7%;
+      color: red;
+    }
+
+    .backBtn, .confirmBtn {
+      width: 40%;
+      margin-right: 10%;
+      left: 5%;
+      display: inline-block;
+    }
+  }
+
 
 </style>

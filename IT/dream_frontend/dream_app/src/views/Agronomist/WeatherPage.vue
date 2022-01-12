@@ -226,5 +226,11 @@ export default {
     margin: 0;
   }
 
+  @media only screen and (min-width: 600px) and (max-width: 1700px) {
+    .backBtn{
+      margin-bottom: 2%;
+    }
+  }
+
 
 </style>

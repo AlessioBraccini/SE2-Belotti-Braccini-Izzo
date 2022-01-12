@@ -120,4 +120,22 @@ export default {
     font-weight: bold;
   }
 
+  @media only screen and (min-width: 620px) and (max-width: 1700px) {
+    .square{
+      width: 90%;
+      height: 32%;
+      left: 5%;
+      top: 5%;
+    }
+  }
+
+  @media only screen and (min-width: 530px) and (max-width: 620px) {
+    .square{
+      width: 90%;
+      height: 320px;
+      left: 5%;
+      top: 5%;
+    }
+  }
+
 </style>

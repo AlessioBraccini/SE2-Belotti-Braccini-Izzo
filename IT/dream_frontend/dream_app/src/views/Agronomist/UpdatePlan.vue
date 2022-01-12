@@ -283,4 +283,14 @@ li:hover{
   left: 5%;
 }
 
+@media only screen and (min-width: 612px) and (max-width: 1700px) {
+
+  .backBtn {
+    width: 40%;
+    margin-right: 10%;
+    left: 5%;
+    display: inline-block;
+  }
+}
+
 </style>

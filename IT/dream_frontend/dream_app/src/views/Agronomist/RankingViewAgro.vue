@@ -159,4 +159,10 @@ export default {
     margin-top: 20px;
   }
 
+  @media only screen and (min-width: 600px) and (max-width: 1700px) {
+    .backBtn{
+      margin-bottom: 2%;
+    }
+  }
+
 </style>

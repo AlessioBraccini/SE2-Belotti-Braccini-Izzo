@@ -167,15 +167,11 @@ export default {
     font-size: 25px;
     font-weight: bold;
     bottom: 10%;
-    /*top: 25%;*/
-    /*left: 15%;*/
   }
 
   .icon{
     position: relative;
     text-align: right;
-    /*top: 1px;*/
-    /*left: 25%;*/
   }
 
   .icoImg{
@@ -188,6 +184,17 @@ export default {
     text-transform: capitalize;
     font-size: 20px;
     width: 78%;
+  }
+
+  @media only screen and (min-width: 612px) and (max-width: 1700px) {
+
+    .areaText{
+      margin: 0;
+    }
+
+    .temperature{
+      margin-top: 4%;
+    }
   }
 
 

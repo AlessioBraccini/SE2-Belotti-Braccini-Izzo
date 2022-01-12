@@ -57,4 +57,17 @@ export default {
     left: 5%;
   }
 
+  /*VIEWPORT Responsive */
+
+  @media only screen and (min-width: 620px) and (max-width: 1700px) {
+
+    .backBtn {
+      width: 40%;
+      left: 5%;
+      margin-right: 10%;
+      margin-top: 2%;
+      margin-bottom: 2%;
+    }
+  }
+
 </style>

@@ -86,7 +86,7 @@ li{
   display: block;
   background-color: #E9C197;
   width: 90%;
-  height: 280px;
+  height: 30%;
   left: 5%;
   top: 5%;
   border-radius: 22px;
@@ -119,6 +119,33 @@ li{
   top: 5%;
   text-align: right;
   font-weight: bold;
+}
+
+/*VIEWPORT Responsive */
+
+@media only screen and (min-width: 1000px) and (max-width: 1700px) {
+
+  .square{
+    width: 40%;
+    height: 30%;
+    left: 5%;
+    top: 5%;
+    display: inline-block;
+    margin-right: 10%;
+    margin-top: 10%;
+  }
+
+}
+
+@media only screen and (min-width: 620px) and (max-width: 1000px) {
+
+  .square{
+    width: 90%;
+    height: 30%;
+    left: 5%;
+    top: 5%;
+  }
+
 }
 
 </style>

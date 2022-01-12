@@ -254,4 +254,41 @@ export default {
     display: block;
   }
 
+  @media only screen and (min-width: 600px) and (max-width: 1700px){
+
+    select{
+      position: relative;
+      width: 40%;
+      left: 33%;
+    }
+    .textInput{
+      width: 40%;
+      height: 30px;
+      align-items: center;
+      margin-bottom: 15px;
+      left: 33%;
+    }
+
+    .localButton{
+      width: 40%;
+      left: 33%;
+    }
+
+    .image{
+      width: 40%;
+      left: 32%;
+      margin-bottom: 70px;
+      margin-top: 50px;
+    }
+
+    .error{
+      width: 80%;
+      left: 8%;
+      font-size: 20px;
+      text-align: center;
+      margin: 10px 0 10px 0;
+    }
+  }
+
+
 </style>

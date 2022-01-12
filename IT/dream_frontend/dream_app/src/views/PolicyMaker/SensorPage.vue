@@ -57,4 +57,22 @@ export default {
     left: 4%;
     margin-bottom: 20px;
   }
+
+  @media only screen and (min-width: 620px) and (max-width: 1700px) {
+
+    .backBtn {
+      width: 40%;
+      left: 5%;
+      margin-right: 10%;
+      margin-top: 2%;
+      margin-bottom: 2%;
+    }
+    .backBtn1 {
+      width: 40%;
+      left: 5%;
+      margin-right: 10%;
+      margin-top: 2%;
+      margin-bottom: 2%;
+    }
+  }
 </style>

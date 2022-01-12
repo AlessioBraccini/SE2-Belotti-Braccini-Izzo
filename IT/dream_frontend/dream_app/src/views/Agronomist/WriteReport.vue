@@ -219,4 +219,22 @@ export default {
     margin-top: 5px;
   }
 
+  @media only screen and (min-width: 612px) and (max-width: 1700px) {
+
+    .background{
+      width: 70%;
+      left: 16%;
+      margin-top: 5%;
+    }
+
+    .backBtn, .submitBtn {
+      width: 30%;
+      margin-right: 10%;
+      left: 16%;
+      margin-top: 5%;
+      margin-bottom: 2%;
+
+    }
+  }
+
 </style>

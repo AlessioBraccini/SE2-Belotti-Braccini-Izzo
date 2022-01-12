@@ -98,21 +98,12 @@ export default {
 
     }
 
-    const handleSubmittemp = () => {
-
-      if (email.value === 'agro')
-        router.push({name: 'AgroHome'})
-      else
-        router.push({name: 'PMHome'})
-
-    }
-
     const redirectSignUp = () => {
       router.push({ name: 'SignUp'})   //use if to redirect under certain conditions
 
     }
 
-    return { logo, email, password, passwordError, handleSubmit, redirectSignUp, handleSubmittemp }
+    return { logo, email, password, passwordError, handleSubmit, redirectSignUp }
   }
 }
 </script>
@@ -161,6 +152,35 @@ export default {
     text-align: center;
     margin: 10px 0 10px 0;
     color: red;
+  }
+
+  /*VIEWPORT Responsive */
+
+  @media only screen and (min-width: 600px) and (max-width: 1550px){
+    .textInput{
+      width: 40%;
+      height: 30px;
+      align-items: center;
+      margin-bottom: 15px;
+      left: 33%;
+    }
+
+    .localButton{
+      width: 40%;
+      left: 33%;
+    }
+
+    .image{
+      width: 40%;
+      left: 32%;
+      margin-bottom: 100px;
+      margin-top: 100px;
+    }
+
+    .error{
+      left: 30%;
+      width: 48%;
+    }
   }
 
 </style>

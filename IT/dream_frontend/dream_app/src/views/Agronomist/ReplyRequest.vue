@@ -171,17 +171,6 @@ export default {
     margin-top: 15px;
   }
 
-  /*.textInput{*/
-  /*  position: relative;*/
-  /*  width: 95%;*/
-  /*  height: 30px;*/
-  /*  display: block;*/
-  /*  align-items: center;*/
-  /*  margin-bottom: 20px;*/
-  /*  border-radius: 10px;*/
-  /*  border: 1px solid #919191;*/
-  /*}*/
-
   .reply{
     position: relative;
     margin-top: 15px;
@@ -230,6 +219,17 @@ export default {
     background-color: rgba(40, 70, 70, 0.8);
     top: 0;
     display: block;
+  }
+
+  @media only screen and (min-width: 612px) and (max-width: 1700px) {
+
+    .backBtn {
+      width: 40%;
+      margin-right: 10%;
+      left: 5%;
+      margin-top: 2%;
+      margin-bottom: 2%;
+    }
   }
 
 </style>
