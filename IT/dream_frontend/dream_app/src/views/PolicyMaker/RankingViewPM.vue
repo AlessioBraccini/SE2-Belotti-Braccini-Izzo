@@ -4,7 +4,7 @@
   <div class="square">
 
     <div class="district">District:
-      <select v-model="district" class="inputDist">
+      <select v-model="district" class="inputDist" @change="changeDistrict">
         <option @click="changeDistrict"> All </option>
         <option  v-for="dist in districts" :key="dist" @click="changeDistrict"> {{ dist }}</option>
       </select>
@@ -39,10 +39,11 @@
 </template>
 
 <script>
-import NavbarAgro from "@/views/Navbar";
+import NavbarAgro from "../../views/Navbar";
 import {ref} from "vue";
 import axios from "axios";
-import router from "@/router";
+import router from "../../router";
+
 export default {
   name: "RankingViewPM",
   components: {NavbarAgro},
@@ -92,6 +93,7 @@ export default {
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
     const loadRankData = async () => {
+      console.log(district.value)
       try {
         if (district.value === 'All')
           district.value = ''
