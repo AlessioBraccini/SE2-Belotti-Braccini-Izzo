@@ -87,7 +87,7 @@ class WaterIrrigation(APIView):
             except WaterIrrigationSensor.DoesNotExist:
                 water_qty_list.append(0)
             except WaterIrrigationSensor.MultipleObjectsReturned:
-                data = HumiditySensor.objects.filter(district=district[0])
+                data = WaterIrrigationSensor.objects.filter(district=district[0])
                 water_qty_list.append(data[0].water_qty)
 
         context = {
