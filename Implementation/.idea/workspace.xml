@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="706c5bb2-0367-45c8-9dfc-3e35c52e8991" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../IT/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/migrations/0002_helprequest_date_steeringinitiative_pub_date.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/migrations/0003_delete_dailyplan.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/migrations/0004_rename_user_id_farm_user_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/migrations/0005_delete_steeringinitiative.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/migrations/0006_delete_helprequest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/migrations/0007_alter_farm_score.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/app/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_backend/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_backend/asgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_backend/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_backend/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_backend/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/babel.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/public/favicon1.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/dreamLogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/icon/cloudIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/icon/directionIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/icon/humidityIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/icon/maxIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/icon/minIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/icon/positionIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/icon/pressureIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/icon/tempIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/icon/windIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/profile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x01d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x01n.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x02d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x02n.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x03d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x03n.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x04d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x04n.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x09d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x09n.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x10d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x10n.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x11d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x11n.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x13d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x13n.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x50d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/assets/weather/x50n.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/router/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/About.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Agronomist/AgronomistHomepage.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Agronomist/DailyPlan.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Agronomist/FarmDisplayDailyPlan.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Agronomist/HelpRequests.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Agronomist/RankingList.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Agronomist/RankingViewAgro.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Agronomist/ReplyRequest.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Agronomist/UpdatePlan.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Agronomist/WeatherAgro.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Agronomist/WeatherPage.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Agronomist/WriteReport.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Agronomist/showPlan.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Farmer/FarmerHome.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Home.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/LoginPage.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/Navbar.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/NotFound.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/PolicyMaker/HumidityChart.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/PolicyMaker/IrrigationChart.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/PolicyMaker/PolicyMakerHomepage.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/PolicyMaker/RankingListPM.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/PolicyMaker/RankingViewPM.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/PolicyMaker/RawData.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/PolicyMaker/SensorPage.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/PolicyMaker/ViewReport.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/PolicyMaker/ViewSpecifiPlan.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/SignUpForm.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/dream_frontend/dream_app/src/views/SpecificInfo.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/helpRequestApp/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/helpRequestApp/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/helpRequestApp/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/helpRequestApp/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/helpRequestApp/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/helpRequestApp/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/helpRequestApp/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/helpRequestApp/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/helpRequestApp/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/manage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/planningApp/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/planningApp/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/planningApp/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/planningApp/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/planningApp/migrations/0002_remove_dailyplan_agronomist_user_id_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/planningApp/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/planningApp/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/planningApp/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/planningApp/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/planningApp/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/rankingApp/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/rankingApp/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/rankingApp/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/rankingApp/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/rankingApp/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/rankingApp/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/rankingApp/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/rankingApp/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/reportApp/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/reportApp/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/reportApp/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/reportApp/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/reportApp/migrations/0002_steeringinitiative_title.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/reportApp/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/reportApp/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/reportApp/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/reportApp/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/reportApp/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/sensorsApp/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/sensorsApp/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/sensorsApp/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/sensorsApp/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/sensorsApp/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/sensorsApp/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/sensorsApp/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/sensorsApp/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/userApp/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/userApp/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/userApp/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/userApp/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/userApp/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/userApp/migrations/0002_alter_user_district.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/userApp/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/userApp/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/userApp/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/userApp/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IT/userApp/views.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="23dr4YdaQJEx6JCkQui0yRxZqhn" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="706c5bb2-0367-45c8-9dfc-3e35c52e8991" name="Changes" comment="" />
+      <created>1642074618006</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1642074618006</updated>
+      <workItem from="1642074620048" duration="21000" />
+    </task>
+    <servers />
+  </component>
+</project>
