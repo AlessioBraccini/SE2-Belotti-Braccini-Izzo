@@ -12,11 +12,7 @@ User = get_user_model()
 
 # Test case for the class RankFarmers
 class TestRankFarmers(TestCase):
-    agronomist, agro_client = None, None
-    policymaker, pm_client = None, None
-    farmer1, farmer2, farmer3 = None, None, None
-
-    # It populates the database and log in two users
+    # Set up the database and log in two users
     def setUp(self):
         # create an agronomist
         self.agronomist = User.objects.create(email="shaleenakumari@gmail.com", first_name="Shaleena",
@@ -149,11 +145,7 @@ class TestRankFarmers(TestCase):
 
 # Test case for the class ProfileFarmers
 class TestProfileFarmers(TestCase):
-    user = None
-    client = None
-    farm_id = None
-
-    # It populates the database and log in the user
+    # Set up the database and log in the user
     def setUp(self):
         self.user = User.objects.create(email="shaleenakumari@gmail.com", first_name="Shaleena", last_name="Kumari",
                                         job_role="A",
@@ -169,7 +161,7 @@ class TestProfileFarmers(TestCase):
         user_token, created = Token.objects.get_or_create(user=self.user)
         self.client = Client(HTTP_AUTHORIZATION='Token ' + user_token.key)
 
-    # test the get profile function
+    # test the GET request on 'profile_info' endpoint that allow the user to get all the info about a farmer
     def test_get_farmer_profile(self):
         response = self.client.get('/api/v1/profile_info', {'ordering': 'descending', 'farmer_id': self.farm_id})
         self.assertEqual(response.status_code, 200)
@@ -182,7 +174,7 @@ class TestProfileFarmers(TestCase):
         self.assertEqual(json_response['score'], 5881)
         self.assertEqual(json_response['crop_types'][0]['crop_type'], "['Wheat', 'Rice']")
 
-    # test the get profile function in case of an invalid user, verify the correct generation of the 404 error
+    # test the GET request on 'profile_info' endpoint in case of an invalid user, verify the correct generation of the 404 error
     def test_get_farmer_profile_error(self):
         response = self.client.get('/api/v1/profile_info', {'ordering': 'descending', 'farmer_id': 10})
         self.assertEqual(response.status_code, 404)
