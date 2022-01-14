@@ -1,0 +1,125 @@
+\documentclass[table, 12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{float}
+\usepackage[export]{adjustbox}
+\usepackage{longtable}
+\usepackage{mathtools}
+\usepackage[most]{tcolorbox}
+\usepackage{xparse}
+\usepackage{subcaption}
+
+\hyphenation{Te-lan-ga-na}
+\hyphenation{an-a-lys-ing}
+\hyphenation{a-gron-o-mists}
+\hyphenation{a-gron-o-mist}
+\hyphenation{da-ta-base}
+\hyphenation{ca-u-sed}
+\hyphenation{Sen-sor-Da-ta-Ma-na-ger}
+\hyphenation{Ac-count-Ma-na-ger}
+\hyphenation{Lo-ca-tion-Mo-dule}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+
+\def\exampletext{Example}
+
+\NewDocumentEnvironment{testexample}{ O{} }
+{
+\colorlet{colexam}{teal!60!black} % Global example color
+\newtcolorbox[use counter=testexample]{testexamplebox}{%
+    % Example Frame Start
+    empty,% Empty previously set parameters
+    title={\exampletext #1},% use \thetcbcounter to access the testexample counter text
+    % Attaching a box requires an overlay
+    attach boxed title to top left,
+       % Ensures proper line breaking in longer titles
+       minipage boxed title,
+    % (boxed title style requires an overlay)
+    boxed title style={empty,size=minimal,toprule=0pt,top=4pt,left=3mm,overlay={}},
+    coltitle=colexam,fonttitle=\bfseries,
+    before=\par\medskip\noindent,parbox=false,boxsep=0pt,left=3mm,right=0mm,top=2pt,breakable,pad at break=0mm,
+       before upper=\csname @totalleftmargin\endcsname0pt, % Use instead of parbox=true. This ensures parskip is inherited by box.
+    % Handles box when it exists on one page only
+    overlay unbroken={\draw[colexam,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: first page
+    overlay first={\draw[colexam,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: middle page
+    overlay middle={\draw[colexam,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },
+    % Handles multipage box: last page
+    overlay last={\draw[colexam,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },%
+    }
+\begin{testexamplebox}}
+{\end{testexamplebox}\endlist}
+
+
+\begin{document}
+\begin{titlepage}
+    \centering
+    {\scshape\large AY 2021/2022 \par}
+    \vfill
+    \includegraphics[width=100pt]{assets/logo-polimi-new.pdf}\par\vspace{1cm}
+    {\scshape\LARGE Politecnico di Milano \par}
+    \vspace{1.5cm}
+    {\huge\bfseries Implementation Document \par}
+    \vspace{2cm}
+    {\Large {Ottavia Belotti\quad Alessio Braccini\quad Riccardo Izzo}\par}
+    \vfill
+    {\large Professor\par
+        Elisabetta \textsc{Di Nitto}}
+    \vfill
+    {\large \textbf{Version 1.0}\\ \today \par}
+\end{titlepage}
+
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+\thispagestyle{plain}
+\pagenumbering{gobble}
+\mbox{}
+\newpage
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+\section{Introduction}
+The code can be found in the official project repository on GitHub at the link: \url{https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo}.
+\subsection{Purpose}
+\subsection{Definitions, Acronyms, Abbreviations}
+\subsection{Revision History}
+\subsection{References}
+
+
+\section{Development}
+\subsection{Implemented Functionalities}
+\subsection{Adopted Development Frameworks}
+\subsection{API Integration}
+
+\section{Source Code}
+\subsection{Backend Structure}
+\subsection{Frontend Structure}
+
+\section{Testing}
+\subsection{Backend Testing}
+
+% \section{Build} %don't really have to build
+
+
+\section{Installation}
+\subsection{Requirements}
+\subsection{Backend Installation}
+\subsection{Frontend Installation}
+
+\section{Effort Spent}
+
+\end{document}
+
