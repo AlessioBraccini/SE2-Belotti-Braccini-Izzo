@@ -20,18 +20,9 @@ class MyTest(TestCase):
 
     def setUp(self):
         self.userPm = User.objects.create(email="chickenSlayer@shutUp.com", first_name="Alister", last_name="Kenobi",
-                                              job_role="P", district="Medak", password="svcsUvbiv8")
+                                          job_role="P", district="Medak", password="svcsUvbiv8")
         self.userA = User.objects.create(email="foo@email.com", first_name="Banana", last_name="Joe", job_role="A",
-                                             district="Sangareddy", password="bvFiebvbv9")
-        self.userF1 = User.objects.create(email="karun@itsme.com", first_name="Karun", last_name="Patel", job_role="F",
-                                         district="Sangareddy", password="fwiwbfbfi65")
-        self.userF2 = User.objects.create(email="karun@itsnotme.com", first_name="FakeKarun", last_name="Patel",
-                                         job_role="F", district="Rangareddy", password="fwiwbfbfi65")
-        self.userF3 = User.objects.create(email="mario.rossi@basic.guy.com", first_name="Mario", last_name="Rossi",
-                                         job_role="F", district="Sangareddy", password="fwiwbfbfi65")
-        self.farm1 = Farm.objects.create(user=self.userF1, address="Boh Street, 12")
-        self.farm2 = Farm.objects.create(user=self.userF2, address="Boh Street, 13")
-        self.farm3 = Farm.objects.create(user=self.userF3, address="Boh Street, 13")
+                                         district="Sangareddy", password="bvFiebvbv9")
 
         token1, created = Token.objects.get_or_create(user=self.userA)
         self.client_agro = Client(HTTP_AUTHORIZATION='Token ' + token1.key)
@@ -74,22 +65,29 @@ class MyTest(TestCase):
 
         url = "/api/v1/steering_initiatives"
         file = SimpleUploadedFile("/Users/Ottavia/Documents/bonus.pdf", b"pdf")
-        data = {
-            'title': "A day in a life of an agronomist2",
-            'file': file
-        }
         headers = {'content_type': 'multipart/form-data'}
+        data = {
+                'title': "A day in a life of an agronomist",
+                'file': file
+            }
+        self.client_agro.post(url, data, headers=headers)
+        data = {
+                'title': "A day in a life of an agronomist2",
+                'file': file
+            }
 
         self.client_agro.post(url, data, headers=headers)
 
         response2 = self.client_pm.get(url)
 
         print(response2.data)
-        reports_list= response2.data['reports_list']
+        reports_list = response2.data['reports_list']
 
         for report in reports_list:
             self.assertEqual(response2.status_code, status.HTTP_200_OK)
-            self.assertEqual(len(response2.data), 1)
+            self.assertEqual(len(response2.data['reports_list']), 2)
             self.assertEqual(report['author_id'], self.userA.id)
             self.assertEqual(report['author'], self.userA.complete_name())
             self.assertEqual(report['pub_date'], datetime.date.today())
+
+    # todo: two different agro uploading same title report, agro get the reports (only his)
