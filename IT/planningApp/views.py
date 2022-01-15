@@ -94,6 +94,9 @@ class UpdateVisits(APIView):
             return Response({"message": "Cannot modify already confirmed plans"}, status=status.HTTP_403_FORBIDDEN)
 
         old_plan_entries = DailyPlan.objects.filter(agronomist_user=agro, date=date)
+        if len(old_plan_entries) == 0:
+            return Response({'message': 'No plan with visit date ' + date + 'exists, so cannot modify.'},
+                            status=status.HTTP_400_BAD_REQUEST)
         for plan in old_plan_entries:
             farm = Farm.objects.get(user=plan.visit_farmer)
             farm.visit_ctr = 0 if farm.visit_ctr-1 < 0 else farm.visit_ctr-1
@@ -101,7 +104,10 @@ class UpdateVisits(APIView):
         old_plan_entries.delete()
 
         # make the new insertion
-        response = DailyPlanView.post(request)
+        if len(request.data['visit_farmers_list']) > 0:
+            response = DailyPlanView.post(request)
+        else:
+            return Response({'message': 'Daily plan for ' + date + ' removed successfully.'})
 
         if response.data['message'] == 'New daily plan saved successfully.':
             return Response({"message": "Daily plan for date " + date + " has been updated successfully."})

@@ -278,6 +278,36 @@ class DailyPlanTest(TestCase):
         self.assertEqual(Farm.objects.get(user=self.userF1).visit_ctr, 1)
         self.assertEqual(Farm.objects.get(user=self.userF3).visit_ctr, 1)
 
+    def testUpdateRemovePlan(self):
+        data = {
+            'date': datetime.date.today(),
+            'visit_farmers_list': [self.userF1.id]
+        }
+
+        response1 = self.client_agro.post(self.__class__.url, data, content_type='application/json')
+        self.assertEqual(response1.status_code, status.HTTP_200_OK)
+
+        data = {
+            'date': datetime.date.today(),
+            'visit_farmers_list': []
+        }
+
+        response2 = self.client_agro.post(self.__class__.url_update, data, content_type='application/json')
+
+        self.assertEqual(response2.status_code, status.HTTP_200_OK)
+        self.assertEqual(DailyPlan.objects.count(), 0)
+        self.assertEqual(Farm.objects.get(user=self.userF1).visit_ctr, 0)
+
+    def testUpdateWithoutPlanEntry(self):
+        data = {
+            'date': datetime.date.today(),
+            'visit_farmers_list': [self.userF1.id]
+        }
+
+        response = self.client_agro.post(self.__class__.url_update, data, content_type='application/json')
+        self.assertNotEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(DailyPlan.objects.count(), 0)
+        self.assertEqual(Farm.objects.get(user=self.userF1).visit_ctr, 0)
 
 
 
