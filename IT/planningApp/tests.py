@@ -206,5 +206,78 @@ class DailyPlanTest(TestCase):
         self.assertNotEqual(json2[0]['date'], json2[1]['date'])
         self.assertEqual(json3[0]['date'], str(datetime.date.today() + datetime.timedelta(days=1)))
 
+    def testUpdatePlan(self):
+        userF4 = User.objects.create(email="mario.rossi2@basic.guy.com", first_name="Mario2", last_name="Rossi2", job_role="F",
+                                        district="Sangareddy", password="fwiwbfbfi65")
+        farm4 = Farm.objects.create(user=userF4, address="Boh Street, 12")
+        data = {
+            'date': datetime.date.today(),
+            'visit_farmers_list': [self.userF1.id, self.userF3.id]
+        }
+
+        response1 = self.client_agro.post(self.__class__.url, data, content_type='application/json')
+
+        self.assertEqual(response1.status_code, status.HTTP_200_OK)
+        self.assertEqual(Farm.objects.get(user=self.userF1).visit_ctr, 1)
+        self.assertEqual(Farm.objects.get(user=self.userF3).visit_ctr, 1)
+
+        data = {
+            'date': datetime.date.today(),
+            'visit_farmers_list': [self.userF3.id, userF4.id]
+        }
+
+        response2 = self.client_agro.post(self.__class__.url_update, data, content_type='application/json')
+
+        self.assertEqual(response2.status_code, status.HTTP_200_OK)
+        self.assertEqual(Farm.objects.get(user=self.userF1).visit_ctr, 0)
+        self.assertEqual(Farm.objects.get(user=self.userF3).visit_ctr, 1)
+        self.assertEqual(Farm.objects.get(user=userF4).visit_ctr, 1)
+
+        get = self.client_agro.get(self.__class__.url_update, {'date': str(datetime.date.today())})
+        json_resp = json.loads(get.content)
+
+        self.assertEqual(get.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(json_resp), 2)
+        self.assertEqual(json_resp['date'], str(datetime.date.today()))
+        self.assertEqual(len(json_resp['visit_farmers_list']), 2)
+        self.assertTrue(json_resp['visit_farmers_list'][0]['farmer_id'] == self.userF3.id
+                        or json_resp['visit_farmers_list'][0]['farmer_id'] == userF4.id)
+        self.assertTrue(json_resp['visit_farmers_list'][1]['farmer_id'] == self.userF3.id
+                        or json_resp['visit_farmers_list'][1]['farmer_id'] == userF4.id)
+
+    def testUpdateOldPlan(self):
+        data = {
+            'date': datetime.date.today() + datetime.timedelta(days=-1),
+            'visit_farmers_list': [self.userF1.id, self.userF3.id]
+        }
+
+        response1 = self.client_agro.post(self.__class__.url, data, content_type='application/json')
+        self.assertEqual(response1.status_code, status.HTTP_200_OK)
+
+        data = {
+            'date': datetime.date.today() + datetime.timedelta(days=-1),
+            'visit_farmers_list': [self.userF3.id]
+        }
+
+        response2 = self.client_agro.post(self.__class__.url_update, data, content_type='application/json')
+
+        self.assertNotEqual(response2.status_code, status.HTTP_200_OK)
+
+        get = self.client_agro.get(self.__class__.url_update,
+                                   {'date': str(datetime.date.today() + datetime.timedelta(days=-1))})
+        json_resp = json.loads(get.content)
+
+        self.assertEqual(get.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(json_resp), 2)
+        self.assertEqual(json_resp['date'], str(datetime.date.today() + datetime.timedelta(days=-1)))
+        self.assertEqual(len(json_resp['visit_farmers_list']), 2)
+        self.assertTrue(json_resp['visit_farmers_list'][0]['farmer_id'] == self.userF3.id
+                        or json_resp['visit_farmers_list'][0]['farmer_id'] == self.userF1.id)
+        self.assertTrue(json_resp['visit_farmers_list'][1]['farmer_id'] == self.userF3.id
+                        or json_resp['visit_farmers_list'][1]['farmer_id'] == self.userF1.id)
+        self.assertEqual(Farm.objects.get(user=self.userF1).visit_ctr, 1)
+        self.assertEqual(Farm.objects.get(user=self.userF3).visit_ctr, 1)
+
+
 
 
