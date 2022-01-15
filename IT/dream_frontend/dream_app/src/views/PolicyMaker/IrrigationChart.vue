@@ -64,7 +64,7 @@ export default {
           'Yadadri Bhuvanagiri'],
         datasets: [
           { type: 'bar',
-            label: "Used Water",
+            label: "Used Water (l)",
             data: await getIrrigation(),
             backgroundColor: "rgba(54,73,93,.5)",
             borderColor: "#36495d",

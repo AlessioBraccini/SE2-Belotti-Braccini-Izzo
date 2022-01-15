@@ -71,7 +71,7 @@ export default {
           'Yadadri Bhuvanagiri'],
         datasets: [
           {   type: 'bar',
-            label: "Humidity",
+            label: "Humidity (%)",
             data: await getHumidity(),
             backgroundColor: "rgba(54,73,93,.5)",
             borderColor: "#36495d",
@@ -79,7 +79,7 @@ export default {
           },
           {
             type: 'line',
-            label: "Temperature",
+            label: "Temperature (°C)",
             data: await getTemp(),
             backgroundColor: "red",
             borderColor: "red",

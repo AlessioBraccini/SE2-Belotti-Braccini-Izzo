@@ -5,8 +5,8 @@
 
     <div class="district">District:
       <select v-model="district" class="inputDist" @change="changeDistrict">
-        <option @click="changeDistrict"> All </option>
-        <option  v-for="dist in districts" :key="dist" @click="changeDistrict"> {{ dist }}</option>
+        <option> All </option>
+        <option  v-for="dist in districts" :key="dist"> {{ dist }}</option>
       </select>
     </div>
 

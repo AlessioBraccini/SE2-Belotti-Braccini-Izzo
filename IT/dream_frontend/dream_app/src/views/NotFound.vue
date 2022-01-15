@@ -1,10 +1,10 @@
 <template>
-  <h1>not found</h1>
+  <h1 style="text-align: center; margin-top: 50px">Sorry, the page you search doesn't exist</h1>
 </template>
 
 <script>
 export default {
-  name: "NotFOund"
+  name: "NotFound"
 }
 </script>
 
