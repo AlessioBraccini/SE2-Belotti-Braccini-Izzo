@@ -1,5 +1,4 @@
 import datetime
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -8,15 +7,16 @@ from rest_framework import authentication, permissions
 from django.contrib.auth import get_user_model
 from .models import *
 from app.models import Farm
-import json
 
 User = get_user_model()
 
-# Create your views here.
-# todo: remove annotation from db and methods
-
 
 class DailyPlanView(APIView):
+    """
+    Manage the Daily Plan insertion and update requests, as well as retrieving information
+    about the already committed plans and the specific list of farmers for which an agronomist user
+    has planned to visit.
+    """
     authentication_classes = [authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
@@ -24,8 +24,9 @@ class DailyPlanView(APIView):
     def post(request):
         """
         Let an agronomist user upload a new daily plan.
+
         :param request: contains visit_farmers_list with farmers' IDs to visit and date of the planned visit
-        :return: HTTPResponse 200 if plan successfully loaded in DB; error-Responses otherwise
+        :return: HTTPResponse status 200 if plan successfully loaded in DB; error otherwise
         """
         agro = User.objects.get(id=request.user.id)
         if agro.job_role != "A":
@@ -65,8 +66,9 @@ class DailyPlanView(APIView):
     @staticmethod
     def get(request):
         """
+        It returns a list of dates, one for each of the daily plan the requesting agronomist has.
         :param request:
-        :return: list of date for which the agronomist has a daily plan
+        :return: HTTPResponse status 200 if user is an agronomist with payload; error otherwise
         """
         agro = User.objects.get(id=request.user.id)
 
@@ -87,6 +89,17 @@ class UpdateVisits(APIView):
 
     @staticmethod
     def post(request):
+        """
+        Perform the update of an already existing daily plan for the requesting agronomist user.
+        The request have to contain:
+
+            - 'date' field for specifying which plan to update,
+            - 'visit_farmers_list' field containing all the farmers IDs the plan should contain
+
+        To simplify the changes' information, the method replaces the old daily plan with the new one.
+        :param request:
+        :return: HTTPResponse status 200 if the plan's patch has been applied successfully; error otherwise
+        """
         agro = User.objects.get(id=request.user.id)
         date = request.data["date"]
 
@@ -117,8 +130,10 @@ class UpdateVisits(APIView):
     @staticmethod
     def get(request):
         """
-        Return a list of the farms in the current daily plan
-        :param request: request that specify the date of the daily plan the user wants to know of
+        Return a list of the farms in the current daily plan.
+        Specify the 'date' as parameter of request.
+
+        :param request: request that specify the date of the daily plan the user wants to know about
         :return: list of farms in the daily plan
         """
         agro = User.objects.get(id=request.user.id)

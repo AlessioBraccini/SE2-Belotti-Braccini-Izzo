@@ -1,8 +1,5 @@
 import datetime
-import json
-
 from django.test import TestCase, Client
-from app.models import Farm
 from .models import SteeringInitiative
 from rest_framework.authtoken.models import Token
 from rest_framework import status
@@ -13,10 +10,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-# Create your tests here.
-
-
-class MyTest(TestCase):
+class ReportsTest(TestCase):
 
     def setUp(self):
         self.userPm = User.objects.create(email="chickenSlayer@shutUp.com", first_name="Alister", last_name="Kenobi",
@@ -54,11 +48,26 @@ class MyTest(TestCase):
             'title': "A day in a life of a policy maker",
             'file': file
         }
+        headers = {'content_type': 'multipart/form-data'}
 
-        response = self.client_pm.post(url, data, content_type='multipart/form-data')
+        response = self.client_pm.post(url, data, headers=headers)
 
         self.assertNotEqual(response.status_code, status.HTTP_200_OK)
         # Not an agronomist
+
+    def testDuplicatedReports(self):
+        url = "/api/v1/steering_initiatives"
+        file = SimpleUploadedFile("../DD/DD.pdf", b"pdf")
+        data = {
+            'title': "A day in a life of a policy maker!!",
+            'file': file
+        }
+        headers = {'content_type': 'multipart/form-data'}
+
+        response1 = self.client_agro.post(url, data, headers=headers)
+        response2 = self.client_agro.post(url, data, headers=headers)
+        self.assertEqual(response1.status_code, status.HTTP_200_OK)
+        self.assertNotEqual(response2.status_code, status.HTTP_200_OK)
 
     def testGetReports(self):
         # todo: add another report from the same agro and one from another agro
@@ -80,7 +89,6 @@ class MyTest(TestCase):
 
         response2 = self.client_pm.get(url)
 
-        print(response2.data)
         reports_list = response2.data['reports_list']
 
         for report in reports_list:

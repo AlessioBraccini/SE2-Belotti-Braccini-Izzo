@@ -37,7 +37,6 @@ class DailyPlanTest(TestCase):
         token, created = Token.objects.get_or_create(user=self.userA)
         self.client_agro = Client(HTTP_AUTHORIZATION='Token ' + token.key)
 
-
     def testUploadNewPlan(self):
         data = {
             'date': datetime.date.today(),
