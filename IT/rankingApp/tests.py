@@ -47,7 +47,7 @@ class TestRankFarmers(TestCase):
         farm3 = Farm.objects.create(user=self.farmer3, address="Kphb Colony Phase 3, Kukatpally, Kukatpally Housing Board", score=822, visit_ctr=1)
         Crop.objects.create(farm=farm3, crop_type=["Rice"])
 
-        # log in two users and retrieve the token in order to do get/post requests as an authenticated user
+        # log in two users and retrieve the token in order to do GET/POST requests as an authenticated user
         agro_token, created = Token.objects.get_or_create(user=self.agronomist)
         self.agro_client = Client(HTTP_AUTHORIZATION='Token ' + agro_token.key)
         pm_token, created = Token.objects.get_or_create(user=self.policymaker)

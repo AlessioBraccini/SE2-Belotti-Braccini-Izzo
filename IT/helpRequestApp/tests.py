@@ -29,8 +29,8 @@ class TestHelpRequests(TestCase):
                                            district="Medak", password="farmer1pwd")
 
         self.farmer2 = User.objects.create(email="chandranprasad@gmail.com", first_name="Chandran", last_name="Prasad",
-                                      job_role="F",
-                                      district="Medak", password="farmer2pwd")
+                                           job_role="F",
+                                           district="Medak", password="farmer2pwd")
 
         self.help_request = HelpRequest.objects.create(date="2021/12/12", subject="First Subject",
                                                        message="First Message", receiver_id=self.user.id,
@@ -51,11 +51,13 @@ class TestHelpRequests(TestCase):
 
         json_response = json.loads(response.content)
 
+        # first help request
         self.assertEqual(json_response[0]['sender_name'], "Apu Patel")
         self.assertEqual(json_response[0]['date'], datetime.today().strftime('%Y/%m/%d'))
         self.assertEqual(json_response[0]['subject'], "First Subject")
         self.assertEqual(json_response[0]['message'], "First Message")
 
+        # second help request
         self.assertEqual(json_response[1]['sender_name'], "Chandran Prasad")
         self.assertEqual(json_response[1]['date'], datetime.today().strftime('%Y/%m/%d'))
         self.assertEqual(json_response[1]['subject'], "Second Subject")

@@ -1,12 +1,12 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework import authentication, permissions
-from django.contrib.auth import get_user_model
-from sensorsApp.models import HumiditySensor, WaterIrrigationSensor
 import json
+
+from django.contrib.auth import get_user_model
+from django.http import HttpResponse
+from rest_framework import authentication, permissions
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from sensorsApp.models import HumiditySensor, WaterIrrigationSensor
 
 User = get_user_model()
 
@@ -15,7 +15,7 @@ User = get_user_model()
 
 class Humidity(APIView):
     """
-    View to manage the humidity sensors data.
+    View to manage the data requests about humidity sensors on 'humidity' endpoint.
 
     * Requires token authentication.
     * Only authenticated users are able to access this view.
@@ -26,7 +26,7 @@ class Humidity(APIView):
     @staticmethod
     def get(request):
         """
-        Return an array with humidity and temperature data for every district.
+        It handles the GET request on this endpoint, return an array with humidity and temperature values for each district.
         """
         try:
             user = User.objects.get(email=request.user.email)
@@ -60,7 +60,7 @@ class Humidity(APIView):
 
 class WaterIrrigation(APIView):
     """
-    View to manage the water irrigation sensors data.
+    View to manage the data requests about water irrigation sensors on 'water_irrigation' endpoint.
 
     * Requires token authentication.
     * Only authenticated users are able to access this view.
@@ -71,7 +71,7 @@ class WaterIrrigation(APIView):
     @staticmethod
     def get(request):
         """
-        Return an array with water irrigation data for every district.
+        It handles the GET request on this endpoint, return an array with water quantity value for each district.
         """
         try:
             user = User.objects.get(email=request.user.email)

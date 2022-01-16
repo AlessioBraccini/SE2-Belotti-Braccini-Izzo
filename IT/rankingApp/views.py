@@ -1,12 +1,12 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework import authentication, permissions
-from django.contrib.auth import get_user_model
-from app.models import Farm, Crop
 import json
+
+from app.models import Farm, Crop
+from django.contrib.auth import get_user_model
+from django.http import HttpResponse
+from rest_framework import authentication, permissions
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 User = get_user_model()
 
@@ -42,6 +42,11 @@ class FarmerProfile(object):
 
 
 def get_ranking(ordering, district=''):
+    """
+    It computes the ranking based on the parameters provided.
+    If the user selected the district (policymaker case) it filters the scores based on this, otherwise it gets the global ranking.
+    In both cases it sorts the ranking in descending/ascending order depending on the 'ordering' parameter.
+    """
     mylist = []
 
     # no district selected
@@ -66,7 +71,7 @@ def get_ranking(ordering, district=''):
 
 class RankFarmers(APIView):
     """
-    View to manage the ranking.
+    View to manage the ranking on 'rank_farmers' endpoint.
 
     * Requires token authentication.
     * Only authenticated users are able to access this view.
@@ -77,17 +82,17 @@ class RankFarmers(APIView):
     @staticmethod
     def get(request):
         """
-        Return the ranking, a list of farmers.
+        It handles the GET request on this endpoint, return the ranking as a list of farmers.
         """
         try:
             user = User.objects.get(email=request.user.email)
         except User.DoesNotExist:
             return Response({"message": "User not found"}, status=status.HTTP_404_NOT_FOUND)
         ordering = request.GET.get('ordering')
-        # agronomist ranking
+        # agronomist user
         if user.job_role == 'A':
             mylist = get_ranking(ordering, user.district)
-        # policy maker ranking
+        # policymaker user
         elif user.job_role == 'P':
             # district selected
             if 'district' in request.GET:
@@ -96,6 +101,7 @@ class RankFarmers(APIView):
             # global ranking, district not selected
             else:
                 mylist = get_ranking(ordering)
+        # farmer user, not authorized
         else:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
@@ -105,7 +111,7 @@ class RankFarmers(APIView):
 
 class ProfileFarmers(APIView):
     """
-    View to get the profile of a farmer.
+    View to get the profile of a farmer on 'profile_info' endpoint.
 
     * Requires token authentication.
     * Only authenticated users are able to access this view.
@@ -116,7 +122,7 @@ class ProfileFarmers(APIView):
     @staticmethod
     def get(request):
         """
-        Return a farmer profile.
+        It handles the GET request on this endpoint, return a farmer profile.
         """
         try:
             User.objects.get(email=request.user.email)

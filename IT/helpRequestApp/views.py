@@ -1,13 +1,13 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework import authentication, permissions
-from django.contrib.auth import get_user_model
-from helpRequestApp.models import HelpRequest
-from datetime import datetime
 import json
+from datetime import datetime
+
+from django.contrib.auth import get_user_model
+from django.http import HttpResponse
+from helpRequestApp.models import HelpRequest
+from rest_framework import authentication, permissions
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 User = get_user_model()
 
@@ -33,7 +33,7 @@ class Request(object):
 
 class HelpRequests(APIView):
     """
-    View to manage the help requests.
+    View to manage the help requests on 'help_request' endpoint.
 
     * Requires token authentication.
     * Only authenticated users are able to access this view.
@@ -44,7 +44,7 @@ class HelpRequests(APIView):
     @staticmethod
     def get(request):
         """
-        Return a list of help requests.
+        It handles the GET request on this endpoint, return a list of help requests.
         """
         try:
             user = User.objects.get(email=request.user.email)
@@ -68,7 +68,7 @@ class HelpRequests(APIView):
     @staticmethod
     def post(request):
         """
-        Save the reply to a help request.
+        It handles the POST request on this endpoint, save the reply to an existing help request.
         """
         try:
             user = User.objects.get(email=request.user.email)
@@ -88,8 +88,10 @@ class HelpRequests(APIView):
 
         subject_msg = help_request.subject
         farmer_id = help_request.sender_id
+        # delete the old help request
         help_request.delete()
 
+        # add the new help request to the database with the same subject
         HelpRequest.objects.create(date=datetime.now(), subject=subject_msg, message=reply_msg, receiver_id=farmer_id, sender_id=user.id)
 
         return Response({"Help request reply saved successfully."})
@@ -97,7 +99,7 @@ class HelpRequests(APIView):
 
 class HelpRequestByID(APIView):
     """
-    View to manage a single help requests.
+    View to manage a single help request on 'help_request_by_id' endpoint.
 
     * Requires token authentication.
     * Only authenticated users are able to access this view.
@@ -108,7 +110,7 @@ class HelpRequestByID(APIView):
     @staticmethod
     def get(request):
         """
-        Return the help request associated to the request_id.
+        It handles the GET request on this endpoint, return the help request associated to the request_id.
         """
         try:
             user = User.objects.get(email=request.user.email)
