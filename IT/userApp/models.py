@@ -85,7 +85,7 @@ class User(AbstractBaseUser):
         ('Kamareddy', 'Kamareddy'),
         ('Karimnagar', 'Karimnagar'),
         ('Khammam', 'Khammam'),
-        ('kumuram Bheem', 'Kumuram Bheem'),
+        ('Kumuram Bheem', 'Kumuram Bheem'),
         ('Mahabubabad', 'Mahabubabad'),
         ('Mahabubnagar', 'Mahabubnagar'),
         ('Mancherial', 'Mancherial'),

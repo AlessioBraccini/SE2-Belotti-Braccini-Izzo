@@ -11,6 +11,8 @@ from .models import *
 
 User = get_user_model()
 
+# Create your views here.
+
 
 class FarmerProfile(object):
     full_name = None
@@ -25,8 +27,6 @@ class FarmerProfile(object):
         self.area = area
         self.visit_ctr = visit_ctr
         self.crop_types = crop_types
-
-# Create your views here.
 
 
 class FarmView(APIView):
