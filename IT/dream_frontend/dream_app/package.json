@@ -1,10 +1,15 @@
 {
+  "engines": {
+    "node": "16.13.1",
+    "npm": "8.1.2"
+  },
+
   "name": "dream_app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "start": "serve dist",
+    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
