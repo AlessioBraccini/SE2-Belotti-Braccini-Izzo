@@ -49,7 +49,7 @@ export default {
 
     const loadRequests =  async () => {
       try {
-        await axios.get('http://localhost:8000/api/v1/help_request').then(resp => {
+        await axios.get('https://appdream.herokuapp.com/api/v1/help_request').then(resp => {
           requests.value = resp.data
         }).catch(() => {
           error.value = 'No message for you'

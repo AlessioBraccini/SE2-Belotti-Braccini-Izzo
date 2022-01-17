@@ -88,7 +88,7 @@ export default {
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
     const loadDailyPlan = async () => {
-      await axios.get('http://localhost:8000/api/v1/update_daily_plan', {params: {date: date}})
+      await axios.get('https://appdream.herokuapp.com/api/v1/update_daily_plan', {params: {date: date}})
           .then(resp => {
             farmerList.value = resp.data['visit_farmers_list']
 
@@ -102,7 +102,7 @@ export default {
 
     const loadFarmerData = async () => {
       try {
-        await axios.get('http://localhost:8000/api/v1/farms_list').then(resp => {
+        await axios.get('https://appdream.herokuapp.com/api/v1/farms_list').then(resp => {
           completeFarmerList.value = resp.data
           loadDailyPlan()
         })
@@ -132,7 +132,7 @@ export default {
     }
 
     const confirmUpdate = async () => {
-        await axios.post ('http://localhost:8000/api/v1/update_daily_plan', {
+        await axios.post ('https://appdream.herokuapp.com/api/v1/update_daily_plan', {
           visit_farmers_list: farmerListId.value,
           date: date
         }).then(() => {

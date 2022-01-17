@@ -101,7 +101,7 @@ export default {
 
         if (date.value) {
           if (takenFarmerList.value.length){
-            await axios.post('http://localhost:8000/api/v1/daily_plan', {
+            await axios.post('https://appdream.herokuapp.com/api/v1/daily_plan', {
               visit_farmers_list: takenFarmerListId.value,   // lista di id dei farmers
               date: date.value
             }).then(() => {
@@ -133,7 +133,7 @@ export default {
 
     const loadFarmerData = async () => {
       try {
-        await axios.get('http://localhost:8000/api/v1/farms_list').then(resp => {
+        await axios.get('https://appdream.herokuapp.com/api/v1/farms_list').then(resp => {
           farmerList.value = resp.data
         })
       }

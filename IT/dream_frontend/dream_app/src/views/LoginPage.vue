@@ -33,8 +33,8 @@ export default {
     // agro ale@b.it
     // ale99magic
 
-    const email = ref('arick@ilbello.it');
-    const password = ref('Rb12345678');
+    const email = ref('');
+    const password = ref('');
     const passwordError = ref('');
     const logo = image;
 
@@ -45,7 +45,7 @@ export default {
 
     const loadUserData = async () => {
       try {
-        return await axios.get('http://localhost:8000/api/v1/users/me/')
+        return await axios.get('https://appdream.herokuapp.com/api/v1/users/me/')
       }
       catch (err){
         console.log('err load ' + err)
@@ -58,7 +58,7 @@ export default {
 
       passwordError.value = ''
 
-      await axios.post('http://localhost:8000/api/v1/token/login/', {
+      await axios.post('https://appdream.herokuapp.com/api/v1/token/login/', {
         email: email.value,
         password: password.value,
       })

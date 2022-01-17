@@ -68,7 +68,7 @@ export default {
           formData.append('file', file.value);
           formData.append('title', fileName.value)
 
-          axios.post('http://localhost:8000/api/v1/steering_initiatives',
+          axios.post('https://appdream.herokuapp.com/api/v1/steering_initiatives',
               formData,
               {
                 headers: {

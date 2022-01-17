@@ -31,7 +31,7 @@ export default {
 
     const logout = () => {
 
-      axios.post('http://localhost:8000/api/v1/token/logout/')
+      axios.post('https://appdream.herokuapp.com/api/v1/token/logout/')
       .then(() => {
         localStorage.clear()
 

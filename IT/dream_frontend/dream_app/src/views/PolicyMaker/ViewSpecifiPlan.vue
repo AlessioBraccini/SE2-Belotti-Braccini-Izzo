@@ -34,7 +34,7 @@ export default {
 
     const loadDailyPlan = async () => {
       console.log(date)
-      await axios.get('http://localhost:8000/api/v1/update_daily_plan', {params: {date: date}})
+      await axios.get('https://appdream.herokuapp.com/api/v1/update_daily_plan', {params: {date: date}})
           .then(resp => {
             farmerList.value = resp.data['visit_farmers_list']
           }).catch(err => {

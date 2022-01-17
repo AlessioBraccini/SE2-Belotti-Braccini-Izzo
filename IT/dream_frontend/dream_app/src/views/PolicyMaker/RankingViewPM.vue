@@ -98,7 +98,7 @@ export default {
         if (district.value === 'All')
           district.value = ''
 
-        await axios.get('http://localhost:8000/api/v1/rank_farmers', {params: {ordering: localStorage.getItem('order'), district: district.value}}).then(resp => {
+        await axios.get('https://appdream.herokuapp.com/api/v1/rank_farmers', {params: {ordering: localStorage.getItem('order'), district: district.value}}).then(resp => {
           farmerList.value = resp.data
           if (district.value === '')
             district.value = 'All'

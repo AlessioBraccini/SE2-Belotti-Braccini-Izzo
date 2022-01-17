@@ -46,7 +46,7 @@ export default {
 
     const loadReport = async () => {
       try {
-        await axios.get('http://localhost:8000/api/v1/steering_initiatives').then(resp => {
+        await axios.get('https://appdream.herokuapp.com/api/v1/steering_initiatives').then(resp => {
           reportList.value = resp.data['reports_list']
         })
       }
@@ -60,7 +60,7 @@ export default {
 
     const viewSpecificReport = async (report) => {
       console.log(report)
-      await axios.get('http://localhost:8000/api/v1/download_reports',
+      await axios.get('https://appdream.herokuapp.com/api/v1/download_reports',
           { responseType: "blob",
             params: {
               author_id: report['author_id'],

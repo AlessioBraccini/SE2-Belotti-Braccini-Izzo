@@ -18,13 +18,13 @@ export default {
     let hum, temp
 
     const getHumidity = async () => {
-      await axios.get('http://localhost:8000/api/v1/humidity').then(resp => {
+      await axios.get('https://appdream.herokuapp.com/api/v1/humidity').then(resp => {
         hum = resp.data.humidity
       })
       return hum
     }
     const getTemp = async () => {
-      await axios.get('http://localhost:8000/api/v1/humidity').then(resp => {
+      await axios.get('https://appdream.herokuapp.com/api/v1/humidity').then(resp => {
         temp = resp.data.temperature
       })
       return temp

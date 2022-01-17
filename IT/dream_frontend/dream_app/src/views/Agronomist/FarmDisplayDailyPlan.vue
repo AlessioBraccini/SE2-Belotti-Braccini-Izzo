@@ -37,7 +37,7 @@ export default {
 
     const loadRankData = async () => {
       try {
-        await axios.get('http://localhost:8000/api/v1/rank_farmers', {params: {ordering: 'descending'}}).then(resp => {
+        await axios.get('https://appdream.herokuapp.com/api/v1/rank_farmers', {params: {ordering: 'descending'}}).then(resp => {
           farmerList.value = resp.data
 
           if(farmerList.value.length >= 7)

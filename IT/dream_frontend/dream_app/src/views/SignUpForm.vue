@@ -122,7 +122,7 @@ export default {
 
     const sendServer = async () => {
 
-      await axios.post('http://localhost:8000/api/v1/users/', {
+      await axios.post('https://appdream.herokuapp.com/api/v1/users/', {
         email: email.value,
         password: password.value,
         first_name: firstName.value,

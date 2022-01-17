@@ -18,7 +18,7 @@ export default {
     let irr
 
     const getIrrigation = async () => {
-      await axios.get('http://localhost:8000/api/v1/water_irrigation').then(resp => {
+      await axios.get('https://appdream.herokuapp.com/api/v1/water_irrigation').then(resp => {
         irr = resp.data.water_qty
       })
       return irr

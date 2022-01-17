@@ -63,7 +63,7 @@ export default {
 
     const loadRequests =  async () => {
       try {
-        await axios.get('http://localhost:8000/api/v1/help_request_by_id', {params:{request_id: localStorage.getItem('id')}})
+        await axios.get('https://appdream.herokuapp.com/api/v1/help_request_by_id', {params:{request_id: localStorage.getItem('id')}})
             .then(resp => {
               request.value = resp.data
         }).catch(() => {
@@ -79,7 +79,7 @@ export default {
 
     const send =  async () => {
       try {
-        await axios.post('http://localhost:8000/api/v1/help_request', {
+        await axios.post('https://appdream.herokuapp.com/api/v1/help_request', {
           reply: message.value,
           request_id: localStorage.getItem('id')
         }).then(() => {

@@ -44,7 +44,7 @@ export default {
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
     const loadPlans = async () => {
-      await axios.get('http://localhost:8000/api/v1/daily_plan')
+      await axios.get('https://appdream.herokuapp.com/api/v1/daily_plan')
           .then(resp => {
             planList.value = resp.data
           }).catch(err => {

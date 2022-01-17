@@ -43,7 +43,7 @@ export default {
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
-    axios.get('http://localhost:8000/api/v1/profile_info', {params: {farmer_id: localStorage.getItem('id')}} ).then(resp => {
+    axios.get('https://appdream.herokuapp.com/api/v1/profile_info', {params: {farmer_id: localStorage.getItem('id')}} ).then(resp => {
       farmerName.value = resp.data['full_name']
       email.value = resp.data['email']
       area.value = resp.data['area']

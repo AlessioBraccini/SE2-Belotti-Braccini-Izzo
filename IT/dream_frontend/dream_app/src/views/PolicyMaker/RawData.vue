@@ -35,14 +35,14 @@ export default {
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
-    axios.get('http://localhost:8000/api/v1/humidity' ).then(resp => {
+    axios.get('https://appdream.herokuapp.com/api/v1/humidity' ).then(resp => {
       hum.value = resp.data.humidity
       temp.value = resp.data.temperature
     }).catch(err => {
       console.log(err)
     })
 
-    axios.get('http://localhost:8000/api/v1/water_irrigation' ).then(resp => {
+    axios.get('https://appdream.herokuapp.com/api/v1/water_irrigation' ).then(resp => {
       irr.value = resp.data.water_qty
     }).catch(err => {
       console.log(err)
