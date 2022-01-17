@@ -3,26 +3,28 @@
     "node": "16.13.1",
     "npm": "8.1.2"
   },
-
   "name": "dream_app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "postinstall": "npm run build",
+    "start": "node server.js"
   },
   "dependencies": {
     "axios": "^0.24.0",
     "bulma": "^0.9.3",
     "bulma-toast": "^2.4.1",
+    "chart.js": "^3.7.0",
     "core-js": "^3.6.5",
+    "express": "^4.17.2",
+    "serve-static": "^1.14.2",
     "vue": "^3.2.26",
-    "vue-router": "^4.0.12",
-    "vue-toast-notification": "^3.0.0",
     "vue-chartjs": "^3.1.1",
-    "chart.js": "^3.7.0"
+    "vue-router": "^4.0.12",
+    "vue-toast-notification": "^3.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
