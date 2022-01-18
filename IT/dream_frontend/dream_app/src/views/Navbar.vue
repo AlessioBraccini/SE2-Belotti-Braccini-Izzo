@@ -152,9 +152,12 @@ export default {
   /* Show the dropdown menu on hover */
   .dropdown:hover .dropdown-content {display: block;}
 
-  @media only screen and (min-width: 1200px){
+  @media only screen and (min-width: 900px){
     .App-header {
       height: auto;
+    }
+    .dropdown{
+      top: 21px
     }
   }
 

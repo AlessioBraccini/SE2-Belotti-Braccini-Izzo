@@ -22,7 +22,7 @@
       </div>
 
     </div>
-    <div v-else class="rawText">Loading...</div>
+    <div v-else class="rawText">No farmer in the ranking</div>
   </div>
 
   <button @click="back" class="actionButton backBtn">Back</button>
@@ -125,8 +125,8 @@ export default {
   .rawText{
     position: relative;
     top: 45%;
-    left: 39%;
-    width: 100px;
+    left: 24%;
+    width: 300px;
   }
 
   .scrollDiv{
@@ -164,6 +164,11 @@ export default {
   @media only screen and (min-width: 600px)  {
     .backBtn{
       margin-bottom: 2%;
+    }
+    .rawText{
+      left: 37%;
+      margin-top: 50px;
+      padding-bottom: 50px;
     }
   }
 

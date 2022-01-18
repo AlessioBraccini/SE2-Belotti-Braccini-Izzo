@@ -19,7 +19,7 @@
       </div>
 
     </div>
-    <div v-else class="rawText">Loading...</div>
+    <div v-else class="rawText">No farmers in the ranking</div>
   </div>
 </template>
 
@@ -98,8 +98,10 @@ li{
 .rawText{
   position: relative;
   top: 45%;
-  left: 39%;
-  width: 100px;
+  left: 23%;
+  width: 300px;
+  margin-top: 50px;
+  padding-bottom: 50px;
 }
 
 .farmerName{
@@ -135,6 +137,11 @@ li{
     margin-right: 10%;
     margin-top: 10%;
   }
+  .rawText{
+    margin-top: 50px;
+    padding-bottom: 50px;
+  }
+
 
 }
 
@@ -145,6 +152,10 @@ li{
     height: 30%;
     left: 5%;
     top: 5%;
+  }
+  .rawText{
+    margin-top: 50px;
+    padding-bottom: 50px;
   }
 
 }

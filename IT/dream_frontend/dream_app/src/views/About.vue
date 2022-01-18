@@ -1,6 +1,6 @@
-<template>
-  Site created by:
-  Frontend: Alessio Braccini
+<template style="margin-left: 20px">
+  Site created by: <br>
+  Frontend: Alessio Braccini <br>
   Backend: Ottavia Belotti, Riccardo Izzo
 </template>
 
