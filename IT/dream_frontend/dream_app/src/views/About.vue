@@ -1,5 +1,7 @@
 <template>
-  about
+  Site created by:
+  Frontend: Alessio Braccini
+  Backend: Ottavia Belotti, Riccardo Izzo
 </template>
 
 <script>

@@ -35,6 +35,7 @@ export default {
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
+    // Retrieve the chart data and displayed them in a raw way
     axios.get('https://appdream.herokuapp.com/api/v1/humidity' ).then(resp => {
       hum.value = resp.data.humidity
       temp.value = resp.data.temperature
@@ -42,6 +43,7 @@ export default {
       console.log(err)
     })
 
+    // Retrieve the chart data and displayed them in a raw way
     axios.get('https://appdream.herokuapp.com/api/v1/water_irrigation' ).then(resp => {
       irr.value = resp.data.water_qty
     }).catch(err => {

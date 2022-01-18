@@ -21,6 +21,8 @@ import ViewReport from "@/views/PolicyMaker/ViewReport";
 import RawData from "@/views/PolicyMaker/RawData";
 import ViewSpecificPlan from "@/views/PolicyMaker/ViewSpecifiPlan";
 
+// Map of the site paths
+
 const routes = [
     {
         path: '/',
@@ -135,6 +137,8 @@ const routes = [
 
 // To cycle between farmers specification see this video for the links with the ':'
 // https://www.youtube.com/watch?v=juocv4AtrHo&list=PL4cUxeGkcC9hYYGbV60Vq3IXYNfDk8At1&index=9
+
+// Create a navigable history accessible through back and forward in the browser
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),

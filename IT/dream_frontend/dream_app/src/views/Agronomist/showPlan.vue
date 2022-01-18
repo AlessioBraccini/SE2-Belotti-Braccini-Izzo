@@ -43,6 +43,7 @@ export default {
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
+    // Load the list of the daily plans
     const loadPlans = async () => {
       await axios.get('https://appdream.herokuapp.com/api/v1/daily_plan')
           .then(resp => {
@@ -56,6 +57,7 @@ export default {
 
     loadPlans()
 
+    // Redirect the user to the specific plan by using its id
     const viewSpecificReport = (plan) => {
 
       localStorage.setItem('id', plan.toString())

@@ -51,7 +51,7 @@ export default {
     const confirmationMessage = ref('')
     const errMsg = ref('')
 
-
+    // Upload to the web server the file that want to send to the server
     const handleFileUpload = (event) => {
       file.value = event.target.files[0]
       fileName.value = event.target.files[0].name
@@ -59,6 +59,7 @@ export default {
         errMsg.value = ''
     }
 
+    // Submit the file to the server and check that it is a pdf file
     const submitFile =  () => {
 
       if (fileName.value.length) {

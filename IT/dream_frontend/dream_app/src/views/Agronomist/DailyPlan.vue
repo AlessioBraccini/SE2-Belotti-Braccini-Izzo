@@ -93,6 +93,7 @@ export default {
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
+    // Send the daily plan to the server, it performs some control, like date and non-emptiness, before the upload
     const uploadDailyPlan =  async () => {
       try {
         dateErr.value = ''
@@ -102,7 +103,7 @@ export default {
         if (date.value) {
           if (takenFarmerList.value.length){
             await axios.post('https://appdream.herokuapp.com/api/v1/daily_plan', {
-              visit_farmers_list: takenFarmerListId.value,   // lista di id dei farmers
+              visit_farmers_list: takenFarmerListId.value,   // list of farmers id
               date: date.value
             }).then(() => {
               scroll(0,0)
@@ -131,6 +132,7 @@ export default {
       }
     }
 
+    // Load the farmers list and how many times it has been visited
     const loadFarmerData = async () => {
       try {
         await axios.get('https://appdream.herokuapp.com/api/v1/farms_list').then(resp => {
@@ -146,6 +148,7 @@ export default {
     if (!farmerList.value.length)
       loadFarmerData()
 
+    // Add the farmer in the temporary list
     const addFarmer = (farmer) => {
       if(takenFarmerListId.value.indexOf(farmerList.value[farmer]['farmer_id']) === -1) {
         takenFarmerList.value.push(farmerList.value[farmer])
@@ -153,11 +156,13 @@ export default {
       }
     }
 
+    // Remove the farmer from the temporary list
     const removeFarmer = (farmer) => {
       takenFarmerList.value.splice(farmer, 1)
       takenFarmerListId.value.splice(farmer, 1)
     }
 
+    // Button to access other pages
     const back = () => {
       router.push({name: 'AgroHome'})
     }

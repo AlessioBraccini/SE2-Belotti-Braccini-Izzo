@@ -44,6 +44,7 @@ export default {
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
+    // Download the list steering initiative from the server
     const loadReport = async () => {
       try {
         await axios.get('https://appdream.herokuapp.com/api/v1/steering_initiatives').then(resp => {
@@ -58,6 +59,7 @@ export default {
 
     loadReport()
 
+    // Retrieve and download the specific report using the author_id, the publication date and the file name
     const viewSpecificReport = async (report) => {
       console.log(report)
       await axios.get('https://appdream.herokuapp.com/api/v1/download_reports',

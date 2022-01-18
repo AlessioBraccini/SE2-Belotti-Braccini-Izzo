@@ -22,6 +22,7 @@ export default {
   setup(){
     const name = ref(localStorage.getItem('name'))
 
+    // Redirect buttons methods
 
     const bigRanking = () => {
       localStorage.setItem('order', 'descending')

@@ -17,6 +17,7 @@ export default {
 
     let irr
 
+    // Retrieve the chart data and store them in irr variable
     const getIrrigation = async () => {
       await axios.get('https://appdream.herokuapp.com/api/v1/water_irrigation').then(resp => {
         irr = resp.data.water_qty
@@ -24,6 +25,7 @@ export default {
       return irr
     }
 
+    // Create the graph
     const ctx = document.getElementById('irrigationChart');
     new Chart(ctx, {
       type: "bar",

@@ -48,6 +48,7 @@ export default {
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
+    // Load the farmers ranking in descending order
     const loadRankData = async () => {
       try {
         await axios.get('https://appdream.herokuapp.com/api/v1/rank_farmers', {params: {ordering: 'descending'}}).then(resp => {
@@ -63,6 +64,7 @@ export default {
     if (!farmerList.value.length)
       loadRankData()
 
+    // Redirect to the specific info page by the farmer id
     const viewSpecificInfo = (farmer) => {
 
       localStorage.setItem('id', farmer['user_id'])

@@ -29,10 +29,6 @@ export default {
   name: "LoginPage",
 
   setup(){
-
-    // agro ale@b.it
-    // ale99magic
-
     const email = ref('');
     const password = ref('');
     const passwordError = ref('');
@@ -43,6 +39,7 @@ export default {
       location.reload()
     }
 
+    // Retrieve the information of the user in order to load the right homepage
     const loadUserData = async () => {
       try {
         return await axios.get('https://appdream.herokuapp.com/api/v1/users/me/')
@@ -53,7 +50,7 @@ export default {
       }
     }
 
-
+    // Post in the server the credential, return if they are correct o not
     const handleSubmit = async () => {
 
       passwordError.value = ''
@@ -68,6 +65,7 @@ export default {
 
             axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
+            // Load the correct homepage
             let data = await loadUserData()
             let role = data.data['job_role']
             localStorage.setItem('name', data.data['first_name'] + ' ' + data.data['last_name'] )

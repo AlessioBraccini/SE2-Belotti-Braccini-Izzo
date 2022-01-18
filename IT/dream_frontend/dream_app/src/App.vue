@@ -1,5 +1,5 @@
 <template>
-
+  <!-- This is the place where all the vue page will displayed -->
   <router-view/>
 
 </template>
@@ -10,7 +10,6 @@ export default {
   name: 'App',
   components: {
   }
-
 
 }
 </script>

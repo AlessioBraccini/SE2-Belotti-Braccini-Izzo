@@ -47,6 +47,8 @@ export default {
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
+    // Load the requests arrived from the farmers
+
     const loadRequests =  async () => {
       try {
         await axios.get('https://appdream.herokuapp.com/api/v1/help_request').then(resp => {
@@ -62,6 +64,7 @@ export default {
 
     loadRequests()
 
+    // Open new message by its id using vue router
     const openMsg = (id) => {
       localStorage.setItem('id', id['request_id'])
       router.push({name: 'ReplyReq'})

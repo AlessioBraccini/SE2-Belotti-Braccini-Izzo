@@ -36,6 +36,7 @@ export default {
     const farmerList = ref([])
     const error = ref(null)
 
+    // Load the farmers ranking by passing a specific ordering
     const loadRankData = async () => {
       try {
         await axios.get('https://appdream.herokuapp.com/api/v1/rank_farmers',  {params: {ordering: props.ordering, district: ''}}).then(resp => {

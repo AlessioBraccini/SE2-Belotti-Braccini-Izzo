@@ -40,8 +40,6 @@
 </template>
 
 <script>
-// import axios from "axios";
-
 import axios from "axios";
 import {ref} from "vue";
 import NavbarAgro from "@/views/Navbar";
@@ -61,6 +59,7 @@ export default {
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
+    // Load the specific help request by using its id
     const loadRequests =  async () => {
       try {
         await axios.get('https://appdream.herokuapp.com/api/v1/help_request_by_id', {params:{request_id: localStorage.getItem('id')}})
@@ -77,6 +76,7 @@ export default {
 
     loadRequests()
 
+    // Send to the server the reply of the request and come back to the home page
     const send =  async () => {
       try {
         await axios.post('https://appdream.herokuapp.com/api/v1/help_request', {

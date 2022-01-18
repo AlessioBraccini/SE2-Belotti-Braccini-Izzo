@@ -29,6 +29,7 @@ export default {
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
+    // Let the user logout the app
     const logout = () => {
 
       axios.post('https://appdream.herokuapp.com/api/v1/token/logout/')
@@ -42,6 +43,7 @@ export default {
       })
     }
 
+    // Return to the right home page according to their role
     const returnHome = () => {
       switch (localStorage.getItem('role')){
         case 'A': router.push({name: 'AgroHome'}); break;

@@ -74,7 +74,6 @@ export default {
     const name = localStorage.getItem('name')
     const farmerList = ref([])
     const date = new Date().toJSON().slice(0,10)
-    // const date = '2022-01-07'
     const annotations = ref('')
     const error = ref(null)
     const dateErr = ref('')
@@ -87,6 +86,7 @@ export default {
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
+    // Load the daily plan of the current day by using its date
     const loadDailyPlan = async () => {
       await axios.get('https://appdream.herokuapp.com/api/v1/update_daily_plan', {params: {date: date}})
           .then(resp => {
@@ -100,6 +100,7 @@ export default {
           })
     }
 
+    // Load the list of the farmer to allow the agro to add some farmer
     const loadFarmerData = async () => {
       try {
         await axios.get('https://appdream.herokuapp.com/api/v1/farms_list').then(resp => {
@@ -115,6 +116,7 @@ export default {
 
     loadFarmerData()
 
+    // Add farmer to the temporary list
     const addFarmer = (farmer) => {
       if(farmerListId.value.indexOf(completeFarmerList.value[farmer]['farmer_id']) === -1) {
         farmerList.value.push(completeFarmerList.value[farmer])
@@ -122,6 +124,7 @@ export default {
       }
     }
 
+    // Remove farmer to the temporary list
     const removeFarmer = (farmer) => {
       farmerList.value.splice(farmer, 1)
       farmerListId.value.splice(farmer, 1)
@@ -131,6 +134,7 @@ export default {
       router.go(-1)
     }
 
+    // Upload in the server the updated version of the plan
     const confirmUpdate = async () => {
         await axios.post ('https://appdream.herokuapp.com/api/v1/update_daily_plan', {
           visit_farmers_list: farmerListId.value,

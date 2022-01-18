@@ -1,5 +1,5 @@
 <template>
-  <div class="square" @click="openBig">
+  <div class="square">
 
     <h3>Farmers Ranking</h3>
 
@@ -35,6 +35,7 @@ export default {
     const farmerList = ref([])
     const error = ref(null)
 
+    // Load the farmers ranking in descending order
     const loadRankData = async () => {
       try {
         await axios.get('https://appdream.herokuapp.com/api/v1/rank_farmers', {params: {ordering: 'descending'}}).then(resp => {

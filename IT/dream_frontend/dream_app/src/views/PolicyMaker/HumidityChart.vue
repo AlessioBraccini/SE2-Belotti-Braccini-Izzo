@@ -17,12 +17,15 @@ export default {
 
     let hum, temp
 
+    // Retrieve the humidity chart data and store them in hum variable
     const getHumidity = async () => {
       await axios.get('https://appdream.herokuapp.com/api/v1/humidity').then(resp => {
         hum = resp.data.humidity
       })
       return hum
     }
+
+    // Retrieve the temperature chart data and store them in temp variable
     const getTemp = async () => {
       await axios.get('https://appdream.herokuapp.com/api/v1/humidity').then(resp => {
         temp = resp.data.temperature
@@ -30,7 +33,7 @@ export default {
       return temp
     }
 
-
+    // Create the graph
     const ctx = document.getElementById('humidityChart');
     new Chart(ctx,{
       type: "bar",

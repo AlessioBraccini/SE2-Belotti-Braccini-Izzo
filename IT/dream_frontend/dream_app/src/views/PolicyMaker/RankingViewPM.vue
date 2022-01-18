@@ -92,6 +92,7 @@ export default {
 
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
+    // Load the farmers ranking by passing a specific ordering and a specific district
     const loadRankData = async () => {
       console.log(district.value)
       try {
@@ -113,6 +114,7 @@ export default {
     if (!farmerList.value.length)
       loadRankData()
 
+    // Redirect to the specific info of a user by using its id
     const viewSpecificInfo = (farmer) => {
 
       localStorage.setItem('id', farmer['user_id'])
@@ -120,6 +122,7 @@ export default {
       router.push({name: 'SpecificInfo'})
     }
 
+    // Refresh the ranking if the district is changed
     const changeDistrict = () => {
       loadRankData()
     }

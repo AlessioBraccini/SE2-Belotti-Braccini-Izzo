@@ -85,8 +85,7 @@ export default {
 
     const description = ref('');
 
-
-
+    // Collect the weather info by calling an external api service by passing it the name of the district
     const loadWeather = async () => {
 
       await fetch('https://api.openweathermap.org/data/2.5/weather?q='+ localStorage.getItem('district') +'&units=metric&appid=547eaf1664e44666701371efa7605159')
