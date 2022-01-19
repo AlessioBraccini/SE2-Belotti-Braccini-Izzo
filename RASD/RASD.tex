@@ -305,14 +305,6 @@ In the following subsections we can see a list of the most common scenarios \tex
         \item He takes note of the desirable contact information and closes the app
     \end{itemize}
 
-    \item Chandran is an old farmer that has been cultivating mais for all his life. He has recently decided to move out from his previous field in order to give it to his son, Aakesh. Aakesh has already his own land near his dad's one, so he wants to add the new gifted area to his DREAM account. Furthermore, he found out that wheat is more productive and more bug-resistant than mais, so he also wants to change the crop type for both the lands from mais to wheat.
-    \begin{itemize}
-        \item He logs in DREAM app
-        \item He presses the "Profile Edit" button in order to change his area and crop type
-        \item He changes the two value by inserting a new area and a new crop type
-        \item He confirms by pressing the "Confirm" button
-    \end{itemize}
-
     \item Sahil is a farmer that would like to share some best-practices about a particular product that he has cultivated last year. Before using DREAM, Sahil could have achieved this by word of mouth, restricted to only his closer friends, while now he can share them with all the app's users.
     He decides to open a new discussion on the forum.
     \begin{itemize}
@@ -483,12 +475,11 @@ The application has been thought for the three different user categories that fo
     \item \textbf{Policy makers} are government's employees that are in charge of analysing the general agricolture trends among all the districts in Telangana, then promote based state-wide policies to better the whole food system. Their main goal is not only to secure the current provision, but also to identify now the best practices that will lead to a flourishing food production in the future. By doing so, the plan is to grow more resilient and profitable crops and prepare the lands to face future menaces, for instance the climate that is getting more hostile or the foreseen increment of the food demand. As a consequence, they want to be notified about the best performing farmers in order to contact them and get more insight from them about their procedures, with the aim to acquire best practises to be shared and applied on a larger scale. At the same time, they need to know who, on the other hand, is performing particularly badly, so that they can be given the help they need to better their results, since obtaining the foresaid goal requires the structure to run smoothly in all its parts. 
     Policy makers also need a feedback system that let them be aware of the true impact \textit{a posteriori} of the initiatives carried out by the agronomists in collaboration with the knowledge and practice of the best farmers.
     \item \textbf{Farmers} are interested in functionalities that will help with their day-to-day life at work, so they would like to receive in one place all the information about the weather to plan before hand the work day and useful data, like suggestions and news about the specific crop they cultivate, if some crop's illness is spreading in their area and how to treat it, which fertilizers boost the plant's production, etc. Moreover, they should insert data about their own production and ask for help to a regional agronomist through the app if it's needed. Being part of a larger community of people that share the same purpose (such as being more productive) brings more knowledge in general, so it's easier for the farmers to get in touch with their collegues that grow the same crops and might have faced the same challenges they do through the in-app forum. The feature allows them to enlarge their pool of acquaintances and brings them together online, even though they might be kilometers away from each other.
-    \item \textbf{Agronomists} are the experts in the agricolture field, so the main function needed for them is the possibility of helping out the farmers that reach out to them. Each agronomist is in charge of a specific geographical area in Telangana, in order to be efficiently present on the territory in a fair and useful way according to the actual helping demand. In fact, they visit each farm spread among their area at least twice a year. That said, agronomists would like some functionalities that help them planning out their trips on the field in an simple yet flexible way. Furthermore, they would like to be notified of the farms' performace, especially the ones scoring poor results in order to plan their visits more often for those, depending on the problem their facing. Nonetheless, in order to make a complete and exhaustive report about the area productivity for the central government, they are also interested into acknowledging the top performing farms. %wheather forecast? go deeper in explaining daily plan funct?
+    \item \textbf{Agronomists} are the experts in the agriculture field, so the main function needed for them is the possibility of helping out the farmers that reach out to them. Each agronomist is in charge of a specific geographical area in Telangana, in order to be efficiently present on the territory in a fair and useful way according to the actual helping demand. In fact, they visit each farm spread among their area at least twice a year. That said, agronomists would like some functionalities that help them planning out their trips on the field in an simple yet flexible way. Furthermore, they would like to be notified of the farms' performace, especially the ones scoring poor results in order to plan their visits more often for those, depending on the problem their facing. Nonetheless, in order to make a complete and exhaustive report about the area productivity for the central government, they are also interested into acknowledging the top performing farms. %wheather forecast? go deeper in explaining daily plan funct?
 \end{itemize}
 \subsection{Assumptions, dependencies and constraints}
 \newcounter{assumptionCtr}
 \begin{itemize}
-    \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Agronomists actually stick to the scheduled daily plan
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Agronomists correct their schedule at the end of the day if deviations occur
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Each user registers only once, according to their job, and always feeds correct information to the app
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: The internet connection works properly when the application is being used\footnotemark
@@ -597,11 +588,11 @@ Users that wish to experience the app's full functionalities should have a devic
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Reach out to farmers in need of help\\\hline
-            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
-            \cellcolor{pink!50}D4 & The internet connection works properly when the application is being used\\\hline
-            \cellcolor{pink!50}D8 & Agronomists always reply to farmers requests of help \\\hline
-            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
-            \cellcolor{pink!50}D14 & Each Telangana's district has one and only one Agronomist\\\hline
+            \cellcolor{pink!50}D2 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D3 & The internet connection works properly when the application is being used\\\hline
+            \cellcolor{pink!50}D7 & Agronomists always reply to farmers requests of help \\\hline
+            \cellcolor{pink!50}D11 & Users own an IT device to connect to the application\\\hline
+            \cellcolor{pink!50}D13 & Each Telangana's district has one and only one Agronomist\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R2 & The system shall allow users to be identified by an email of their choosing\\\hline
             \cellcolor{SpringGreen!50}R4 & The system must inform the user to try later if they are experimenting connectivity issues .\\\hline
@@ -620,11 +611,11 @@ Users that wish to experience the app's full functionalities should have a devic
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Identification of well-performing and under-performing farmers\\\hline
-            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
-            \cellcolor{pink!50}D4 & The internet connection works properly when the application is being used\\\hline
-            \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production\\\hline
-            \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity.\\\hline
-            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
+            \cellcolor{pink!50}D2 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D3 & The internet connection works properly when the application is being used\\\hline
+            \cellcolor{pink!50}D8 & Farmers periodically insert data about their crop status and resulting production\\\hline
+            \cellcolor{pink!50}D9 & Data inserted by the Farmers sticks to the reality of the produced quantity.\\\hline
+            \cellcolor{pink!50}D11 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R2 & The system shall allow users to be identified by an email of their choosing\\\hline
             \cellcolor{SpringGreen!50}R4 & The system must inform the user to try later if they are experimenting connectivity issues .\\\hline
@@ -641,17 +632,17 @@ Users that wish to experience the app's full functionalities should have a devic
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
              \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Visualize the results of steering initiatives\\\hline
-            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
-            \cellcolor{pink!50}D4 & The internet connection works properly when the application is being used\\\hline
-            \cellcolor{pink!50}D5 & The sensors measuring humidity level of the soil work properly\\\hline
-            \cellcolor{pink!50}D7 & Water irrigation system sends the information accurately, with an error of at most 1\% \\\hline
-            \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production\\\hline
-            \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity\\\hline
-            \cellcolor{pink!50}D11 & Agronomists periodically report their initiatives to the central government. \\\hline
-            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
-            \cellcolor{pink!50}D13 & Devices external to the system (e.g. humidity sensors, water irrigation systems, weather stations) are active and working properly for 99.9\% of the year\\\hline
-            \cellcolor{pink!50}D14 & Each Telangana's district has one and only one Agronomist\\\hline
-            \cellcolor{pink!50}D15 & Sensor data, irrigation system data, weather forecast reports and news sources can be accessed by the app through \\\hline
+            \cellcolor{pink!50}D2 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D3 & The internet connection works properly when the application is being used\\\hline
+            \cellcolor{pink!50}D4 & The sensors measuring humidity level of the soil work properly\\\hline
+            \cellcolor{pink!50}D6 & Water irrigation system sends the information accurately, with an error of at most 1\% \\\hline
+            \cellcolor{pink!50}D8 & Farmers periodically insert data about their crop status and resulting production\\\hline
+            \cellcolor{pink!50}D9 & Data inserted by the Farmers sticks to the reality of the produced quantity\\\hline
+            \cellcolor{pink!50}D10 & Agronomists periodically report their initiatives to the central government. \\\hline
+            \cellcolor{pink!50}D11 & Users own an IT device to connect to the application\\\hline
+            \cellcolor{pink!50}D12 & Devices external to the system (e.g. humidity sensors, water irrigation systems, weather stations) are active and working properly for 99.9\% of the year\\\hline
+            \cellcolor{pink!50}D13 & Each Telangana's district has one and only one Agronomist\\\hline
+            \cellcolor{pink!50}D14 & Sensor data, irrigation system data, weather forecast reports and news sources can be accessed by the app through \\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R2 & The system shall allow users to be identified by an email of their choosing\\\hline
             \cellcolor{SpringGreen!50}R4 & The system must inform the user to try later if they are experimenting connectivity issues\\\hline
@@ -664,10 +655,10 @@ Users that wish to experience the app's full functionalities should have a devic
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Visualize relevant data for the business\\\hline
-            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
-            \cellcolor{pink!50}D4 & The internet connection works properly when the application is being used\\\hline
-            \cellcolor{pink!50}D6 & Weather forecasts are accurate up to a 80\% for the short-term and up to 60\% on the long-term.\\\hline
-            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
+            \cellcolor{pink!50}D2 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
+            \cellcolor{pink!50}D3 & The internet connection works properly when the application is being used\\\hline
+            \cellcolor{pink!50}D5 & Weather forecasts are accurate up to a 80\% for the short-term and up to 60\% on the long-term.\\\hline
+            \cellcolor{pink!50}D11 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R2 & The system shall allow users to be identified by an email of their choosing\\\hline
             \cellcolor{SpringGreen!50}R3 & The system must suggest to the users the area in which they are during the registration phase if the IT device is equipped with GPS technology. In any case, the final decision will be up to the registering user\\\hline
@@ -682,11 +673,11 @@ Users that wish to experience the app's full functionalities should have a devic
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Keep track of the production\\\hline
-            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
-            \cellcolor{pink!50}D4 & The internet connection works properly when the application is being used\\\hline
-            \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production.\\\hline
-            \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity\\\hline
-            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
+            \cellcolor{pink!50}D2 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D3 & The internet connection works properly when the application is being used\\\hline
+            \cellcolor{pink!50}D8 & Farmers periodically insert data about their crop status and resulting production.\\\hline
+            \cellcolor{pink!50}D9 & Data inserted by the Farmers sticks to the reality of the produced quantity\\\hline
+            \cellcolor{pink!50}D11 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app\\\hline
             \cellcolor{SpringGreen!50}R4 & The system must inform the user to try later if they are experimenting connectivity issues .\\\hline
             \cellcolor{SpringGreen!50}R9 & The system must let Farmers insert their production information every day.\\\hline   
@@ -699,11 +690,11 @@ Users that wish to experience the app's full functionalities should have a devic
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
              \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Request for help/suggestion\\\hline
-            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
-            \cellcolor{pink!50}D4 & The internet connection works properly when the application is being used.\\\hline
-            \cellcolor{pink!50}D8 & Agronomists always reply to farmers' requests of help.\\\hline
-            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
-            \cellcolor{pink!50}D14 & Each Telangana's district has one and only one Agronomist\\\hline
+            \cellcolor{pink!50}D2 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
+            \cellcolor{pink!50}D3 & The internet connection works properly when the application is being used.\\\hline
+            \cellcolor{pink!50}D7 & Agronomists always reply to farmers' requests of help.\\\hline
+            \cellcolor{pink!50}D11 & Users own an IT device to connect to the application\\\hline
+            \cellcolor{pink!50}D13 & Each Telangana's district has one and only one Agronomist\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R4 & The system must inform the user to try later if they are experimenting connectivity issues .\\\hline
             \cellcolor{SpringGreen!50}R10 & The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
@@ -717,9 +708,9 @@ Users that wish to experience the app's full functionalities should have a devic
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Create and participate in discussions concerning the agricolture field\\\hline
-            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
-            \cellcolor{pink!50}D4 & The internet connection works properly when the application is being used.\\\hline
-            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
+            \cellcolor{pink!50}D2 & Each user registers only once, according to their job, and always feeds correct information to the app.\\\hline
+            \cellcolor{pink!50}D3 & The internet connection works properly when the application is being used.\\\hline
+            \cellcolor{pink!50}D11 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R4 & The system must inform the user to try later if they are experimenting connectivity issues .\\\hline
             \cellcolor{SpringGreen!50}R11 & The system must allow every user registered as Farmer to access the forum, to create new discussions and to post replies to already existing ones.\\\hline
@@ -731,10 +722,10 @@ Users that wish to experience the app's full functionalities should have a devic
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Receive requests for help/suggestion all in one place\\\hline
-            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
-            \cellcolor{pink!50}D4 & The internet connection works properly when the application is being used.\\\hline
-            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
-            \cellcolor{pink!50}D14 & Each Telangana's district has one and only one Agronomist\\\hline
+            \cellcolor{pink!50}D2 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D3 & The internet connection works properly when the application is being used.\\\hline
+            \cellcolor{pink!50}D11 & Users own an IT device to connect to the application\\\hline
+            \cellcolor{pink!50}D13 & Each Telangana's district has one and only one Agronomist\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R4 & The system must inform the user to try later if they are experimenting connectivity issues .\\\hline
             \cellcolor{SpringGreen!50}R10 & The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
@@ -747,11 +738,11 @@ Users that wish to experience the app's full functionalities should have a devic
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
             \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Visualize area statistics\\\hline
-            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
-            \cellcolor{pink!50}D4 & The internet connection works properly when the application is being used.\\\hline
-            \cellcolor{pink!50}D9 & Farmers periodically insert data about their crop status and resulting production.\\\hline
-            \cellcolor{pink!50}D10 & Data inserted by the Farmers sticks to the reality of the produced quantity\\\hline
-            \cellcolor{pink!50}D12 & Users own an IT device to connect to the application\\\hline
+            \cellcolor{pink!50}D2 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D3 & The internet connection works properly when the application is being used.\\\hline
+            \cellcolor{pink!50}D8 & Farmers periodically insert data about their crop status and resulting production.\\\hline
+            \cellcolor{pink!50}D9 & Data inserted by the Farmers sticks to the reality of the produced quantity\\\hline
+            \cellcolor{pink!50}D11 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R4 & The system must inform the user to try later if they are experimenting connectivity issues .\\\hline
             \cellcolor{SpringGreen!50}R8 & The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.\\\hline
@@ -765,10 +756,9 @@ Users that wish to experience the app's full functionalities should have a devic
         \begin{tabular}{|c | p{0.69\textwidth}|}
             \hline
              \cellcolor{blue!30}\textbf{\stepcounter{goalCtr2}G\arabic{goalCtr2}} &  Easy daily planning procedure\\\hline
-             \cellcolor{pink!50}D1 & Agronomists actually stick to the scheduled daily plan.\\\hline
-             \cellcolor{pink!50}D2 & Agronomists correct their schedule at the end of the day if deviations occur.\\\hline
-            \cellcolor{pink!50}D3 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
-            \cellcolor{pink!50}D4 & The internet connection works properly when the application is being used.\\\hline  
+             \cellcolor{pink!50}D1 & Agronomists correct their schedule at the end of the day if deviations occur.\\\hline
+            \cellcolor{pink!50}D2 & Each user registers only once, according to their job, and always feeds correct information to the app\\\hline
+            \cellcolor{pink!50}D3 & The internet connection works properly when the application is being used.\\\hline  
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R4 & If users are experimenting connectivity issues,the system must inform them to try later.\\\hline
             \cellcolor{SpringGreen!50}R13 & The system must allow the Agronomists to add a new schedule for the day each day.\\\hline
@@ -995,32 +985,6 @@ Users that wish to experience the app's full functionalities should have a devic
 
 
             \item \textbf {Farmers}
-            
-            \begin{table}[H]
-                \item[] \textbf{Profile Edit}
-                \item[] 
-                \centering
-                \begin{tabular}{|c |m{.69\textwidth}|}
-                    \hline
-                    \textbf{Use Case} & Profile Edit\\ \hline
-                    \textbf{Actor} & Farmers\\ \hline
-                    \textbf{Entry condition} & User wants to modify or update its profile\\  \hline
-                    \textbf{Flow of events} & \begin{enumerate}
-                                                \item User presses the "Setting" button on its home page
-                                                \item User modifies the interest data (username, password, crop type or area)
-                                                \item User presses "Confirm" button
-                                                \item System applies the change
-                                                \item User receives a confirmation message
-                                                \item User is redirect to hom epage
-                                            \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & User receives a confirmation message\\ \hline
-                    \textbf{Exceptions} &  \begin{enumerate}
-                        \item User choose an already taken username
-                        \item User choose the old password
-                    \end{enumerate}
-                    An error message is shown and the flow of events starts again from point 2\\ \hline                    
-                \end{tabular}
-            \end{table}
 
             \begin{table}[H]
                 \item[] \textbf{Insert Production Data}
@@ -1326,31 +1290,30 @@ Users that wish to experience the app's full functionalities should have a devic
                     \cellcolor{SpringGreen!50}\textbf{7)View Farmers Ranking}\centering &  R1) The system must allow only registered and logged-in users to use the app.
 
                                                                                            R7) The system must give Policy Makers up-to-date ranking of the best and worst performing farmers.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{8)Profile Edit}\centering &  R1) The system must allow only registered and logged-in users to use the app.\\\hline
                                 
-                    \cellcolor{SpringGreen!50}\textbf{9)Insert Production Data}\centering & R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{8)Insert Production Data}\centering & R1) The system must allow only registered and logged-in users to use the app.
 
                                                                                   R9) The system must let Farmers insert their production information every day.
                                                                                   
                                                                                   R4) The system must inform the user to try later if they are experimenting connectivity issues .\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{10)Check news}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{9)Check news}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                                                                        
                                                                                  R20) The system must present news concerning crop only if relevant to the Farmer's own crop type.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{11)Post in the Forum}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{10)Post in the Forum}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                R4) The system must inform the user to try later if they are experimenting connectivity issues .
                                                                                
                                                                                R11) The system must allow every user registered as Farmer to access the forum, to create new discussions and to post replies to already existing ones.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{12)Check Weather Forecast}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{11)Check Weather Forecast}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                     R19) The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{13)Send an Help Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{12)Send an Help Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
 
                                                                                             R4) The system must inform the user to try later if they are experimenting connectivity issues.
 
                                                                                             R10) The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
                                                                                   
-                    \cellcolor{SpringGreen!50}\textbf{14)Confirm Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{13)Confirm Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                           R13) The system must allow the Agronomists to add a new schedule for the day each day.
 
@@ -1363,7 +1326,7 @@ Users that wish to experience the app's full functionalities should have a devic
                                                                                           R16) The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day.
                                                                                           
                                                                                           R17) The system must register the already uploaded schedule as definitive if the user doesn't confirm the daily plan for day \textit{x} before 23:59 of the day \textit{x}.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{15)Update Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{14)Update Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                          R13) The system must allow the Agronomists to add a new schedule for the day each day.
                                                                                         
@@ -1371,16 +1334,16 @@ Users that wish to experience the app's full functionalities should have a devic
 
                                                                                          R17) The system must register the already uploaded schedule as definitive if the user doesn't confirm the daily plan for day \textit{x} before 23:59 of the day \textit{x}.\\\hline
                     
-                    \cellcolor{SpringGreen!50}\textbf{16)Manage Farmers Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{15)Manage Farmers Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                     R12) The system must notify Agronomists of unresolved requests of help from Farmers.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{17)Insert Responsibility Area}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{16)Insert Responsibility Area}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                         R2) The system must suggest to the users the area in which they are during the registration phase if the IT device is equipped with GPS technology. In any case, the final decision will be up to the registering user\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{18)Check Wheather Forecasat}\centering & R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{17)Check Weather Forecast}\centering & R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                      R19) The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{19)View Farmers Area Ranking}\centering&  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{18)View Farmers Area Ranking}\centering&  R1) The system must allow only registered and logged-in users to use the app.
 
                                                                                        R8) The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.
                                                                                        
@@ -1461,17 +1424,6 @@ Users that wish to experience the app's full functionalities should have a devic
             \end{center}
 
             \item \textbf{Farmers}\\
-            
-            \textbf{Profile Edit}
-            \begin{center}
-                \begin{figure}[H]
-                    %\vspace{-120px}
-                    \includegraphics[scale=0.4, center]{assets/Sequence diagrams/Farmer/Profile Edit.png}
-                    \caption{Farmers - Profile Edit Sequence Diagram}
-                    \label{fig: sequence_editprofile}
-                \end{figure}
-            \end{center}
-            
             
             \textbf{Insert Production Data}
             \begin{center}

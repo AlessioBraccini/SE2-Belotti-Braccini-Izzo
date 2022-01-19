@@ -167,8 +167,19 @@ export default {
       router.push({name: 'AgroHome'})
     }
 
-    const updateDailyPlan = () => {
-      router.push({name: 'UpdatePlan'})
+    const updateDailyPlan = async () => {
+
+        try {
+          await axios.get('https://appdream.herokuapp.com/api/v1/update_daily_plan', {params: {date: new Date().toJSON().slice(0,10)}}).then(resp => {
+            if (resp.data.visit_farmers_list.length)
+              router.push({name: 'UpdatePlan'})
+            else
+              errorMsg.value = 'No plan created for today'
+          })
+        }
+        catch (err){
+          error.value = err.message
+        }
     }
 
     const showDailyPlan = () => {
@@ -225,6 +236,8 @@ export default {
     left: 5%;
     border-radius: 10px;
     height: 30px;
+    border: 0;
+    background-color: white;
   }
 
   .farmerArea{

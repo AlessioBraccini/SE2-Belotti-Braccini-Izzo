@@ -3,7 +3,7 @@
 
   <div class="square">
 
-    <h3>Steering Initiative</h3>
+    <h3>Daily Plans</h3>
 
     <div v-if="error" style="text-align: center">{{ error }}</div>
     <div v-else-if="planList.length" class="scrollDiv">
