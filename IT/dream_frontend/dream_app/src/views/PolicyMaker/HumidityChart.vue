@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <p style="text-align: center">Soil Humidity and Average Temperature</p>
     <div class="inner">
       <canvas id="humidityChart"></canvas>
     </div>
@@ -107,7 +108,7 @@ export default {
           y1: {
             type: 'linear',
             position: 'right',
-            max: 60,
+            max: 100,
             min: 0,
             grid: {
               drawOnChartArea: false,

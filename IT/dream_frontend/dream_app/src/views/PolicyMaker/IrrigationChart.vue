@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <p style="text-align: center">Water used for Irrigation</p>
     <div class="inner">
       <canvas id="irrigationChart"></canvas>
     </div>
@@ -66,7 +67,7 @@ export default {
           'Yadadri Bhuvanagiri'],
         datasets: [
           { type: 'bar',
-            label: "Used Water (l)",
+            label: "Used Water (t)",
             data: await getIrrigation(),
             backgroundColor: "rgba(54,73,93,.5)",
             borderColor: "#36495d",
@@ -85,7 +86,7 @@ export default {
             type: 'linear',
             position: 'left',
             min: 0,
-            max: 100
+            max: 10000
           },
         },
       },
