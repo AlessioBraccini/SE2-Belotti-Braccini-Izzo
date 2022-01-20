@@ -2,7 +2,7 @@
   <Navbar :name="name"/>
 
   <div class="square">
-    <div style="overflow: scroll">
+    <div>
       <h3>Raw data</h3>
       <p class="firstRow">Data are ordered by district in alphabetical order</p>
       <ul class="ulExt">

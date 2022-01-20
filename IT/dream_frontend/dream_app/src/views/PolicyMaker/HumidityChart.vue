@@ -132,7 +132,7 @@ export default {
     margin-top: 20px;
   }
   .inner{
-    width: 855px;
+    width: 860px;
     margin-bottom:20px;
   }
 
