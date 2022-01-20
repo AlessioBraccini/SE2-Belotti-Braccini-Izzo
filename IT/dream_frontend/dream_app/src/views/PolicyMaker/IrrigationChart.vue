@@ -3,6 +3,7 @@
     <p style="text-align: center">Water used for Irrigation</p>
     <div class="inner">
       <canvas id="irrigationChart"></canvas>
+      <p style="text-align: center">Total amount of water: {{ totalWater }}</p>
     </div>
   </div>
 </template>
@@ -10,9 +11,15 @@
 <script>
 import Chart from 'chart.js/auto'
 import axios from "axios";
+import {ref} from "vue";
 
 export default {
   name: 'IrrigationChart',
+
+  setup(){
+    let totalWater = ref(0)
+    return {totalWater}
+  },
 
   async mounted() {
 
@@ -22,6 +29,9 @@ export default {
     const getIrrigation = async () => {
       await axios.get('https://appdream.herokuapp.com/api/v1/water_irrigation').then(resp => {
         irr = resp.data.water_qty
+        for (let i = 0; i < resp.data.water_qty.length; i++) {
+          this.totalWater += resp.data.water_qty[i]
+        }
       })
       return irr
     }

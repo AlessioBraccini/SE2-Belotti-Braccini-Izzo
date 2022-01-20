@@ -3,16 +3,26 @@
     <p style="text-align: center">Soil Humidity and Average Temperature</p>
     <div class="inner">
       <canvas id="humidityChart"></canvas>
+      <p style="text-align: center">Average Humidity: {{ avgHumidity.toFixed(2) }}</p>
+      <p style="text-align: center">Average Temperature: {{ avgTemp.toFixed(2) }}</p>
     </div>
+
   </div>
 </template>
 
 <script>
 import Chart from 'chart.js/auto'
 import axios from "axios";
+import {ref} from "vue";
 
 export default {
   name: 'HumidityChart',
+
+  setup(){
+    let avgHumidity = ref(0)
+    let avgTemp = ref(0)
+    return {avgHumidity, avgTemp}
+  },
 
   async mounted() {
 
@@ -22,6 +32,10 @@ export default {
     const getHumidity = async () => {
       await axios.get('https://appdream.herokuapp.com/api/v1/humidity').then(resp => {
         hum = resp.data.humidity
+        for (let i = 0; i < resp.data.humidity.length; i++) {
+          this.avgHumidity += resp.data.humidity[i]
+        }
+        this.avgHumidity /= resp.data.humidity.length
       })
       return hum
     }
@@ -30,6 +44,10 @@ export default {
     const getTemp = async () => {
       await axios.get('https://appdream.herokuapp.com/api/v1/humidity').then(resp => {
         temp = resp.data.temperature
+        for (let i = 0; i < resp.data.temperature.length; i++) {
+          this.avgTemp += resp.data.temperature[i]
+        }
+        this.avgTemp /= resp.data.temperature.length
       })
       return temp
     }

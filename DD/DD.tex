@@ -14,6 +14,7 @@
 \newcounter{testexample}
 \usepackage{xparse}
 \usepackage{subcaption}
+\usepackage{amsmath}
 
 \hyphenation{Te-lan-ga-na}
 \hyphenation{an-a-lys-ing}
@@ -313,10 +314,11 @@ In later diagrams, some parts, like the login phase or returning to home page, w
         \label{fig:signup}
     \end{figure}
 \end{center}
-Sign up is pretty standard: user registers himself/herself by inserting first name, last name, email, password, job role and living district. If the user is a farmer, he/she chooses also the crop type the farm deals with.
-Users can also select manually their location without the use of GPS while farmer users can use it to detect their location.
+Sign up is pretty standard: user registers himself/herself by inserting first name, last name, email, password, job role and district (if the user isn't a Policy Maker).
+If the user is a farmer, in a subsequent page, he/she chooses also the crop type the farm deals with.
+Farmer can select manually their address without the use of GPS.
 
-At the end of the process, if every check results succesful, the user is registered to the database by the \textit{DataManager} component.
+At the end of the process, if every check results successful, the user is registered to the database by the \textit{DataManager} component.
 
 \newpage
 \textbf{Log In}
@@ -340,7 +342,7 @@ In case of success, the user can log in the system and use its functionalities a
         \label{fig: report}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between components that occur when displaying the steering initiatives (previously stored in the database) to a policy maker user.
+This sequence diagram represents the interactions between components that occur when displaying the steering initiatives (previously uploaded in the database by an agronomist) to a policy maker user.
 
 \newpage
 \textbf{Check Soil Humidity Data}
@@ -352,8 +354,7 @@ This sequence diagram represents the interactions between components that occur 
     \end{figure}
 \end{center}
 This sequence diagram represents the interactions between components that occur when displaying the sensors data regarding soil humidity to a policy maker user.
-The business logic running on the Application Server retrieves these data from an external source, furthermore it handles them just temporarely since they are not modified by the \textit{DREAM} system and they're fetched on user demand.   
-The user can also specify the area of the region by using the parameter 'area', so it's simpler to check a specific area instead of the whole region.
+The business logic running on the Application Server retrieves these data from an external source, furthermore it handles them just temporarily since they are not modified by the \textit{DREAM} system and they're fetched on user demand.
 
 \newpage
 \textbf{Check Water Irrigation Data} 
@@ -453,10 +454,10 @@ The \textit{WeatherManager} component uses the \textit{OpenWeatherAPI} component
 \end{center}
 This sequence diagram represents the interactions between the components needed to manage the help requests that the farmers send to the agronomists.
 When a farmer sends an help request, the system saves it in the database.
-When the agronomist is online, an automatic script checks if there are some unread messages in the database and sends them to the agronomist.
+When the agronomist is online, the system checks if there are some unread messages in the database and sends them to the agronomist.
 The agronomist replies to the request and saves it into the database. 
-When the farmer is online another automatic script checks if there are some unread replies in the database and displays them to the farmer.
-Since the exchange is necessarly asyncronous because of the fact that the receiver of the message might be offline in the moment of the delivery, the messages have to be stored on the database and the unread ones have to be fetched each time the user is back online.   
+When the farmer is online the system checks if there are some unread replies in the database and displays them to the farmer.
+Since the exchange is necessarily asynchronous because of the fact that the receiver of the message might be offline in the moment of the delivery, the messages have to be stored on the database and the unread ones have to be fetched each time the user is back online.
 
 \newpage
 \textbf{Daily Plan Management}
@@ -562,12 +563,14 @@ The 27-28th of November, it rains heavily in Medak again. The 29th of November, 
 
 \subsubsection{Farmers location} In order to locate a farm the user has two options:
     \begin{itemize}
-        \item Address: farm can be located through the address inserted by the user at the beginning.
+        \item Address: farm can be located through the address inserted by the user during the sign up phase.
         The address is verified by the \textit{LocationModule}.
-        \item GPS coordinates: if the address hasn't been inserted by the user or, if the \textit{LocationModule} don't find the address, the user can manually specify the coordinates with the help of the map service.
+        \item GPS coordinates: if the address hasn't been inserted by the user or, if the \textit{LocationModule} doesn't find the address, the user can manually specify the coordinates with the help of the \textit{MapService}.
     \end{itemize}
-\subsubsection{Agronomist daily plan} Everyday the agronomist has to fill out the daily plan.
-This can be manually updated and confirmed until the end of the day, otherwise the system automatically confirms the plan at 23:59 of the same day.
+
+\subsubsection{Agronomist daily plan} An agronomist has to have a ready daily plan.
+During the daytime it can be manually updated until the end of the day where the system automatically confirms the plan.
+An empty plan means that the agronomist hasn't visited any farmer.
 
 \newpage
 \section{User Interface Design}
