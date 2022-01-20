@@ -131,6 +131,13 @@ This document also extends in part to the implementation and testing plan, where
 \subsection{Revision history}
 \begin{itemize}
     \item Version 1.0: initial version
+    \item Version 1.1: update after the implementation
+    \begin{itemize}
+        \item[--] update high-level-architecture: GoogleMaps and OpenWeather now communicates with the Web Server
+        \item[--] update component diagrams: LocationModule, MapServiceManager and WeatherManager now are in the Web Server, this changes are reflected also in the component interfaces diagram
+        \item[--] update deployment diagram: change hosting platform and load balancer
+        \item[--] delete EditProfile sequence diagram, update SignUp and CheckWeatherForecast sequence diagrams
+    \end{itemize}
 \end{itemize}
 \subsection{Reference documents}
 \begin{itemize}
@@ -185,12 +192,11 @@ The tiers are separated by firewalls in order to guarantee a higher level of sec
 A thin client is used to prevent heavy computation loads client side, in this way all the heavy operations are executed at server side.
 The client's devices can be a personal computer, a mobile device or any kind of IT device able to connect to the Web Server through a web browser. In fact, the four-tiers architecture has been specifically chosen to allow the widest variety of commercial devices to access the application, without the need of developing an OS-specific one for each of them.
 The Web Server manages the HTTP requests by the users and forwards them to the Application Server.
-It also manages all the external APIs including Google Maps API and OpenWeatherAPI.
-This allows to retrieve data like weather information directly from it in order to show them to the user.
-To enable the geolocalization, the Application Server uses the API provided by Google Maps.
+It also manages all the external APIs including GoogleMapsAPI and OpenWeatherAPI.
+The first one enable the geolocalization while the other one allows to retrieve data like weather information directly from it in order to show them to the user.
 The Application Server communicates with the Database Server and manipulates data following its business logic.
-It also manages the news, the water irrigation service and the humidity service.
-The Database Server manages all the internal data sources and communicates directly with the Application Server.
+It also manages the external services such as the news, the water irrigation service and the humidity service.
+Finally the Database Server manages all the internal data sources and communicates directly with the Application Server.
 All the components will be described in depth in the following sections
 
 \subsection{Component view}
@@ -204,15 +210,15 @@ All the components will be described in depth in the following sections
 \end{center}
 
 This image gives a high level representation of the components of the system.
-On the left are shown the provided interfaces between the Web Server and the Application Server that in this scheme is represented as a "black box"; a complete description of it is provided in the next section.
+On the left are shown the provided interfaces between the Web Server and the Application Server that in this scheme is represented as a "black box", a complete description of it is provided in the next section.
 All the interfaces basically represent the main functionalities requested by the client application.
-On the right-hand side, there are the requested interfaces. Among these there are the news, the water irrigation system and the humidity sensors.
+On the right-hand side, there are the external requested interfaces. Among these there are the news, the water irrigation system and the humidity system.
 Finally, the DBMS interface manages the DBMS service and it's responsible of the communication between the Application Server and the Database Server.
 
 \subsubsection*{Application Server Component View}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.45, center]{assets/application-server-component.png}
+        \includegraphics[scale=0.55, center]{assets/application-server-component.png}
         \caption{Application Server Component Diagram}
         \label{fig: application_server_component_view}
     \end{figure}
@@ -223,9 +229,8 @@ External elements in the diagram are represented in a simplified way.
 \begin{itemize}
     \item \textbf{AccountManager}: this component handles all the basic requests made by the client.
     The \textit{AuthenticationService} manages the authentication process that is composed by the log in, the log out and the sign up services. 
-    It also includes the edit profile routine invoked by an user editing the personal account.
     Once a user is logged in, all the specific functionalities are provided by the component that manages this type of user.
-    \item \textbf{PolicyMakerManager}: it manages the policy maker services, these include: download of steering initiatives' reports submitted by agronomists, farmers' ranking, visualization of water irrigation system data and humidity sensors data.
+    \item \textbf{PolicyMakerManager}: it manages the policy maker services, these include: download of steering initiatives' reports submitted by agronomists, farmers' ranking, visualization of water irrigation sensors data and humidity sensors data.
     The steering initiative service and the ranking service are linked through an interface to the internal database, on the other side the water irrigation service and the humidity sensor service are considered external services and are managed by the \textit{SensorsDataManager}.
     \item \textbf{AgronomistManager}: it manages the agronomist services, these include: answer help requests, creation and updating of daily plans and farmers' ranking.
     The daily plan service and the ranking service are linked to the internal database, instead the answer request service communicates directly with the \textit{HelpRequestManager} component.
@@ -249,14 +254,14 @@ External elements in the diagram are represented in a simplified way.
 \end{itemize}
 
 \subsubsection*{Web Server Component View}
-The main components of the Web Server are:
+Regarding the Web Server the main components are:
 \begin{itemize}
-    \item \textbf{LocationModule}: this module provides the interface that allows the geolocalization of the farm based on the GPS or on the address provided by the farmer.
+    \item \textbf{LocationModule}: this module provides the interface that allows the geolocalization of the farm based on the GPS (functionality available for farmer users) or on the address provided by the farmer.
     In order to provide this service, it communicates with the \textit{MapServiceManager}.
-    \item \textbf{MapServiceManager}: this component communicates directly with the external API provided by Google Maps, it provides information regarding the the district and allows the user to visualize the map of a specific location.
+    \item \textbf{MapServiceManager}: this component communicates directly with the external API provided by \textit{Google Maps}, it provides information regarding the district and allows the user to visualize the map of a specific location.
     Mainly it adapts the data received by the API in a comprehensible way for the other components.
     \item \textbf{WeatherManager}: this component manages the service related to the weather forecast.
-    It interacts with the external component \textit{WeatherForecastService} in order to get the weather data tailored to the user location.
+    It interacts with the external API provided by \textit{Open Weather} in order to get the weather data tailored to the user location.
 \end{itemize}
 
 \newpage
@@ -279,7 +284,7 @@ The devices shown in the diagram are:
     This increase availability and reliability of the application.
     The one selected are the \textit{Heroku HTTP routers} provided by the hosting service. More details in section \ref{server_availability}.
     \item \textbf{Web Server}: it manages the HTTPS requests from the clients and route them to the \textit{Application Server} for processing.
-    In the other way around, it is responsible of the incoming response from the application server, they are managed by serving an HTML file to the client in addition to CSS and JS sheets.
+    It is responsible of the incoming responses from the application server, they are managed by serving an HTML file to the client in addition to CSS and JS sheets.
     The result page is built with a client-side scripting.
     It also manages the external APIs such as the Google Maps API and the OpenWeatherAPI.
     Finally, web servers are duplicated to ensure high scalability and to guarantee good performance in case of a single point of failure.
@@ -309,8 +314,7 @@ In later diagrams, some parts, like the login phase or returning to home page, w
     \end{figure}
 \end{center}
 Sign up is pretty standard: user registers himself/herself by inserting first name, last name, email, password, job role and living district. If the user is a farmer, he/she chooses also the crop type the farm deals with.
-The \textit{LocationModule} and the \textit{MapServiceManager} are used in this phase in order to ease the users in the selection of their location using the GPS. 
-However users can also select manually their location without the use of GPS.
+Users can also select manually their location without the use of GPS while farmer users can use it to detect their location.
 
 At the end of the process, if every check results succesful, the user is registered to the database by the \textit{DataManager} component.
 
@@ -511,6 +515,7 @@ Please note that the methods described in \textit{Figure (\ref{fig: component_in
 \subsubsection{Servers availability and response time} 
 \label{server_availability}
 In order to guarantee the availability of 99.998\% promised in the RASD, replicas of the web servers and the application servers are needed, this prevents the system to crash in case of a point failure.
+Servers replication is done by the hosting service Heroku.
 The response time described in the RASD is 0.5 seconds, the load balancer will allow to reach this goal by distributing the incoming requests from users among the replicas.
 The database server is replicated as well for the same reasons.
 So that, in case of failure the system can continue to work, thanks to the distributed nature of the system. 
