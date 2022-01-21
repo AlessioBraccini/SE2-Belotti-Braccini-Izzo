@@ -3,8 +3,8 @@
     <p style="text-align: center">Soil Humidity and Average Temperature</p>
     <div class="inner">
       <canvas id="humidityChart"></canvas>
-      <p style="text-align: center">Average Humidity: {{ avgHumidity.toFixed(2) }}</p>
-      <p style="text-align: center">Average Temperature: {{ avgTemp.toFixed(2) }}</p>
+      <p style="text-align: center">Average Humidity: {{ avgHumidity.toFixed(2) }} %</p>
+      <p style="text-align: center">Average Temperature: {{ avgTemp.toFixed(2) }} °C</p>
     </div>
 
   </div>

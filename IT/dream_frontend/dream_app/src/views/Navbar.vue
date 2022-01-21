@@ -101,6 +101,7 @@ export default {
     font-size: 30px;
     color: white;
     left: 0;
+    padding: 0;
   }
 
   .usernameStyle{

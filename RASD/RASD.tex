@@ -563,13 +563,13 @@ Users that wish to experience the app's full functionalities should have a devic
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must allow the Agronomists to add a new schedule for the day each day.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must suggest to the Agronomists which farms to visit while planning the Daily Plan based upon the last visit day following a FIFO policy.\\\hline
+    R\arabic{RequirementCtr}    & The system must suggest to the Agronomists which farms to visit while planning the Daily Plan based on the number of received visits.\\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must suggest to the Agronomists only the farms among the ones in their competence area.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day.\\\hline
+    R\arabic{RequirementCtr}    & The system must allow the Agronomists to update their schedule during the day.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must register the already uploaded schedule as definitive if the user doesn't confirm the daily plan for day \textit{x} before 23:59 of the day \textit{x}. \\\hline
+    R\arabic{RequirementCtr}    & The system must register the already uploaded schedule as definitive at 23:59 of the current day. \\\hline
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area.\\\hline
     \stepcounter{RequirementCtr}
@@ -762,10 +762,10 @@ Users that wish to experience the app's full functionalities should have a devic
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R4 & If users are experimenting connectivity issues,the system must inform them to try later.\\\hline
             \cellcolor{SpringGreen!50}R13 & The system must allow the Agronomists to add a new schedule for the day each day.\\\hline
-            \cellcolor{SpringGreen!50}R14 & The system must suggest to the Agronomists which farms to visit while planning the Daily Plan based upon the last visit day following a FIFO policy.\\\hline
+            \cellcolor{SpringGreen!50}R14 & The system must suggest to the Agronomists which farms to visit while planning the Daily Plan based on the number of received visits.\\\hline
             \cellcolor{SpringGreen!50}R15 & The system must suggest to the Agronomists only the farms among the ones in their competence area.\\\hline
             \cellcolor{SpringGreen!50}R16 & The system must allow the Agronomists to update their schedule during he day and to confirm the execution before the end of the day.\\\hline
-            \cellcolor{SpringGreen!50}R17 & The system must register the already uploaded schedule as definitive if the user doesn't confirm the daily plan for day \textit{x} before 23:59 of the day \textit{x}.\\\hline
+            \cellcolor{SpringGreen!50}R17 & The system must register the already uploaded schedule as definitive at 23:59 of the current day.\\\hline
         \end{tabular}
     \end{center}
 \end{table}
@@ -1323,16 +1323,16 @@ Users that wish to experience the app's full functionalities should have a devic
 
                                                                                           R15) The system must suggest to the Agronomists only the farms among the ones in their competence area.
                                                                                         
-                                                                                          R16) The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day.
+                                                                                          R16) The system must allow the Agronomists to update their schedule during the day.
                                                                                           
-                                                                                          R17) The system must register the already uploaded schedule as definitive if the user doesn't confirm the daily plan for day \textit{x} before 23:59 of the day \textit{x}.\\\hline
+                                                                                          R17) The system must register the already uploaded schedule as definitive at 23:59 of the current day.\\\hline
                     \cellcolor{SpringGreen!50}\textbf{14)Update Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                          R13) The system must allow the Agronomists to add a new schedule for the day each day.
                                                                                         
-                                                                                         R16) The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day.
+                                                                                         R16) The system must allow the Agronomists to update their schedule during the day.
 
-                                                                                         R17) The system must register the already uploaded schedule as definitive if the user doesn't confirm the daily plan for day \textit{x} before 23:59 of the day \textit{x}.\\\hline
+                                                                                         R17) The system must register the already uploaded schedule as definitive at 23:59 of the current day.\\\hline
                     
                     \cellcolor{SpringGreen!50}\textbf{15)Manage Farmers Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
@@ -1592,7 +1592,7 @@ The peak of usage is expected to be during the working hours, so it means that i
 
 \subsubsection{Security}
 All the data stored by the system must be encrypted with a standard algorithm like the AES (Advanced Encryption Standard).
-The communication passes through a secure channel powered by the SSL protocol.
+The communication passes through a secure channel powered by the HTTPS and SSL protocol.
 All data should be stored in compliance with PDPA's regulation.
 \subsubsection{Maintainability}
 The maintainability is guaranteed by high standard of code, the use of design patterns will enhance this point and guarantee high reusability.
