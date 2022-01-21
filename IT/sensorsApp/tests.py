@@ -72,7 +72,6 @@ class TestWaterIrrigation(TestCase):
         self.assertEqual(response.status_code, 200)
 
         json_response = json.loads(response.content)
-        print(json_response)
 
         # verify that there is one value for each district in Telangana
         self.assertEqual(len(json_response['water_qty']), 33)
