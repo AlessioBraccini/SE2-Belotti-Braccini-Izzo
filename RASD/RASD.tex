@@ -496,7 +496,7 @@ The application has been thought for the three different user categories that fo
     \item \stepcounter{assumptionCtr}D\arabic{assumptionCtr}: Sensor data, irrigation system data, weather forecast reports and news source can be accessed by the app through API
 \end{itemize}
 \footnotetext{This constraint is purposely stronger than what it could be in order to simplify a future implementation of the prototype (e.g. it won't allow local storaging of data while the device is not connected to internet, just one agronomist per district, etc.). It could be relaxed in a further release of the application.}
-\newpage
+
 \section{Specific Requirements}
 
 \subsection{External Interface Requirements}
@@ -541,7 +541,7 @@ Users that wish to experience the app's full functionalities should have a devic
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr} & The system shall allow users to be identified by an email of their choosing.\\\hline
     \stepcounter{RequirementCtr}
-    R\arabic{RequirementCtr}    & The system must suggest to the users the area in which they are during the registration phase if the IT device is equipped with GPS technology. In any case, the final decision will be up to the registering user.\\\hline  
+    R\arabic{RequirementCtr}    & The system must suggest to the farmer users the area in which they are during the registration phase if the IT device is equipped with GPS technology. In any case, the final decision will be up to the registering user.\\\hline  
     \stepcounter{RequirementCtr}
     R\arabic{RequirementCtr}    & The system must inform the user to try later if they are experimenting connectivity issues.\\\hline
     \stepcounter{RequirementCtr}
@@ -661,7 +661,7 @@ Users that wish to experience the app's full functionalities should have a devic
             \cellcolor{pink!50}D11 & Users own an IT device to connect to the application\\\hline
             \cellcolor{SpringGreen!50}R1 & The system must allow only registered and logged-in users to use the app.\\\hline
             \cellcolor{SpringGreen!50}R2 & The system shall allow users to be identified by an email of their choosing\\\hline
-            \cellcolor{SpringGreen!50}R3 & The system must suggest to the users the area in which they are during the registration phase if the IT device is equipped with GPS technology. In any case, the final decision will be up to the registering user\\\hline
+            \cellcolor{SpringGreen!50}R3 & The system must suggest to the farmer users the area in which they are during the registration phase if the IT device is equipped with GPS technology. In any case, the final decision will be up to the registering user\\\hline
             \cellcolor{SpringGreen!50}R4 & The system must inform the user to try later if they are experimenting connectivity issues .\\\hline
             \cellcolor{SpringGreen!50}R19 & The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomists.\\\hline
             \cellcolor{SpringGreen!50}R20 & The system must present news concerning crop only if relevant to the Farmer's own crop type.\\\hline
@@ -1112,24 +1112,25 @@ Users that wish to experience the app's full functionalities should have a devic
             \item \textbf{Agronomist}
             
             \begin{table}[H]
-                \item[] \textbf{Confirm Daily Plan}
+                \item[] \textbf{Compose Daily Plan}
                 \item[] 
                 \centering
                 \begin{tabular}{|c| m{.69\textwidth}|}
                     \hline
-                    \textbf{Use Case} & Confirm Daily Plan\\ \hline
+                    \textbf{Use Case} & Compose Daily Plan\\ \hline
                     \textbf{Actor} & Agronomist\\ \hline
-                    \textbf{Entry condition} & User wants to confirm its daily plan\\  \hline
+                    \textbf{Entry condition} & User wants to compose his/her daily plan\\  \hline
                     \textbf{Flow of events} & \begin{enumerate}
-                                                \item User presses the daily "Daily Plan" button
-                                                \item User chooses the farmers that he want to visit during the day
-                                                \item User checks if the farmers has at least two visit
+                                                \item User presses the "Daily Plan" button
+                                                \item User chooses a visit date for the plan
+                                                \item User chooses the farmers that he/she wants to visit during that day
                                                 \item User confirms the plan with the "Confirm" button
-                                                \item System displays a confirmation button and redirects the user to the home page
+                                                \item System displays a confirmation message and redirects the user to the home page
                                             \end{enumerate}\\ \hline
                     \textbf{Exit condition} & System displays a confirmation message\\ \hline
                     \textbf{Exceptions} &  \begin{enumerate}
-                        \item At the end of the year a farmer has less than two visit
+                        \item There already exists a plan for the day chosen
+                        \item User inserted a visit date in the past
                         \item Internet connection isn't working
                     \end{enumerate}
                     An error message is shown and the flow of events starts again from point 1\\ \hline                    
@@ -1148,7 +1149,6 @@ Users that wish to experience the app's full functionalities should have a devic
                     \textbf{Flow of events} & \begin{enumerate}
                                                 \item User presses the "Daily Plan" button
                                                 \item User presses the "Update Daily Plan" button
-                                                \item User writes its deviations
                                                 \item User add or remove farmers according the daily plan
                                                 \item User confirms the plan with the "Confirm" button
                                                 \item System diplays a confirmation message and redirects the user to the home page
@@ -1175,44 +1175,17 @@ Users that wish to experience the app's full functionalities should have a devic
                     \textbf{Flow of events} & \begin{enumerate}
                                                 \item System displays the notification of an incoming message
                                                 \item User presses the inbox icon
-                                                \item User inserts the object
-                                                \item User replys the request
+                                                \item User replies the request
                                                 \item User sends the message by pressing the "Send" button
                                                 \item System displays a confirmation message and redirects the user to the inbox page
                                             \end{enumerate}\\ \hline
                     \textbf{Exit condition} & System displays the user a confirmation message\\ \hline
                     \textbf{Exceptions} &  \begin{enumerate}
-                        \item Object field is empty
                         \item Message field is empty 
                         \item User press the "Cancel" button
                         \item Internet connection isn't working   
                     \end{enumerate}
                     An error message is shown and the flow of events starts again from point 2\\ \hline                    
-                \end{tabular}
-            \end{table}
-
-            \begin{table}[H]
-                \item[] \textbf{Insert responsibility Area}
-                \item[] 
-                \centering
-                \begin{tabular}{|c |m{.69\textwidth}|}
-                    \hline
-                    \textbf{Use Case} & Insert responsibility Area\\ \hline
-                    \textbf{Actor} & Agronomist\\ \hline
-                    \textbf{Entry condition} & User wants to update its own coverage area\\  \hline
-                    \textbf{Flow of events} & \begin{enumerate}
-                                                \item User presses the settings button
-                                                \item User selects the new responsibility area
-                                                \item User presses the "Confirm" button 
-                                                \item System displays a confirmation message and redirects the user to the home page
-                                            \end{enumerate}\\ \hline
-                    \textbf{Exit condition} & System displays a confirmation message\\ \hline
-                    \textbf{Exceptions} &  \begin{enumerate}
-                        \item User press the "Cancel" button
-                        \item User select an already taken area
-                        \item Internet connection isn't working
-                    \end{enumerate}
-                    An error message is shown and the flow of events starts again from point 1\\ \hline                    
                 \end{tabular}
             \end{table}
 
@@ -1313,7 +1286,7 @@ Users that wish to experience the app's full functionalities should have a devic
 
                                                                                             R10) The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help.\\\hline
                                                                                   
-                    \cellcolor{SpringGreen!50}\textbf{13)Confirm Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{13)Compose Daily Plan}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                           R13) The system must allow the Agronomists to add a new schedule for the day each day.
 
@@ -1337,13 +1310,11 @@ Users that wish to experience the app's full functionalities should have a devic
                     \cellcolor{SpringGreen!50}\textbf{15)Manage Farmers Request}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                     R12) The system must notify Agronomists of unresolved requests of help from Farmers.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{16)Insert Responsibility Area}\centering &  R1) The system must allow only registered and logged-in users to use the app.
                     
-                                                                                        R2) The system must suggest to the users the area in which they are during the registration phase if the IT device is equipped with GPS technology. In any case, the final decision will be up to the registering user\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{17)Check Weather Forecast}\centering & R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{16)Check Weather Forecast}\centering & R1) The system must allow only registered and logged-in users to use the app.
                     
                                                                                      R19) The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist.\\\hline
-                    \cellcolor{SpringGreen!50}\textbf{18)View Farmers Area Ranking}\centering&  R1) The system must allow only registered and logged-in users to use the app.
+                    \cellcolor{SpringGreen!50}\textbf{17)View Farmers Area Ranking}\centering&  R1) The system must allow only registered and logged-in users to use the app.
 
                                                                                        R8) The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.
                                                                                        
@@ -1473,11 +1444,11 @@ Users that wish to experience the app's full functionalities should have a devic
             \newpage
             \item \textbf{Agronomists}\\
             
-            \textbf{Confirm Daily Plan}\\
+            \textbf{Compose Daily Plan}\\
             \begin{center}
                 \begin{figure}[H]
                     \includegraphics[scale=0.55, center]{assets/Sequence diagrams/Agronomist/Confirm Daily Plan.png}
-                    \caption{Agronomists - Confirm Daily Plan Sequence Diagram}
+                    \caption{Agronomists - Compose Daily Plan Sequence Diagram}
                     \label{fig: sdAgronomist_confirmDailyPlan}
                 \end{figure}
             \end{center}
@@ -1496,15 +1467,6 @@ Users that wish to experience the app's full functionalities should have a devic
                     \includegraphics[scale=0.60, center]{assets/Sequence diagrams/Agronomist/Manage Farmers Request.png}
                     \caption{Agronomists - Manage Farmers Request Sequence Diagram}
                     \label{fig: sdAgronomist_manageFarmersRequest}
-                \end{figure}
-            \end{center}
-            \newpage
-            \textbf{Insert Responsibility Area}\\
-            \begin{center}
-                \begin{figure}[H]
-                    \includegraphics[scale=0.65, center]{assets/Sequence diagrams/Agronomist/Insert Responsibility Area.png}
-                    \caption{Agronomists - Insert responsibility Area Sequence Diagram}
-                    \label{fig: sdAgronomist_insertResponsibilityArea}
                 \end{figure}
             \end{center}
             \newpage
