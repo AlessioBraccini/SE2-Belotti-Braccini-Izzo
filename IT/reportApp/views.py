@@ -148,7 +148,7 @@ class DownloadReport(APIView):
             # send file
             response = FileResponse(file_handle, content_type='multipart/form-data')
             response['Content-Length'] = report.file.size
-            response['Content-Disposition'] = 'attachment; filename="%s"' % report.file.name
+            response['Content-Disposition'] = 'attachment; filename="%s.pdf"' % report.file.name
         else:
             response = Response(status=status.HTTP_403_FORBIDDEN)
 
