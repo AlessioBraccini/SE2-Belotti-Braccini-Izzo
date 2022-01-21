@@ -161,9 +161,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Static files (CSS, JavaScript, Images)
 
 # Google Drive Storage Settings
-# GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = None
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = None
 # contents of your json private key file into an environment variable named GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS
-GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = '../../dreamproject-338909-4cffdfd653e2.json'
+# GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = '../../dreamproject-338909-4cffdfd653e2.json'
 GOOGLE_DRIVE_STORAGE_SERVICE_EMAIL = 'dream-415@dreamproject-338909.iam.gserviceaccount.com'
 GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = '/'  # OPTIONAL, no sub dir needed
 
