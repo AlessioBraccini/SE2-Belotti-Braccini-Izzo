@@ -134,10 +134,11 @@ This document also extends in part to the implementation and testing plan, where
     \item Version 1.0: initial version
     \item Version 1.1: update after the implementation
     \begin{itemize}
-        \item[--] update high-level-architecture: GoogleMaps and OpenWeather now communicates with the Web Server
-        \item[--] update component diagrams: LocationModule, MapServiceManager and WeatherManager now are in the Web Server, this changes are reflected also in the component interfaces diagram
-        \item[--] update deployment diagram: change hosting platform and load balancer
-        \item[--] delete EditProfile sequence diagram, update SignUp and CheckWeatherForecast sequence diagrams
+        \item[--] Update high-level-architecture: GoogleMaps and OpenWeather now communicates with the Web Server
+        \item[--] Update component diagrams: LocationModule, MapServiceManager and WeatherManager now are in the Web Server, this changes are reflected also in the component interfaces diagram
+        \item[--] Update deployment diagram: change hosting platform and load balancer
+        \item[--] Delete EditProfile sequence diagram, update SignUp and CheckWeatherForecast sequence diagrams
+        \item[--] Update integration and testing 
     \end{itemize}
 \end{itemize}
 \subsection{Reference documents}
@@ -219,7 +220,7 @@ Finally, the DBMS interface manages the DBMS service and it's responsible of the
 \subsubsection*{Application Server Component View}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.55, center]{assets/application-server-component.png}
+        \includegraphics[scale=0.67, center]{assets/application-server-component.png}
         \caption{Application Server Component Diagram}
         \label{fig: application_server_component_view}
     \end{figure}
@@ -254,6 +255,7 @@ External elements in the diagram are represented in a simplified way.
     Both services are used by the \textit{PolicyMakerManager}.
 \end{itemize}
 
+
 \subsubsection*{Web Server Component View}
 Regarding the Web Server the main components are:
 \begin{itemize}
@@ -287,7 +289,7 @@ The devices shown in the diagram are:
     \item \textbf{Web Server}: it manages the HTTPS requests from the clients and route them to the \textit{Application Server} for processing.
     It is responsible of the incoming responses from the application server, they are managed by serving an HTML file to the client in addition to CSS and JS sheets.
     The result page is built with a client-side scripting.
-    It also manages the external APIs such as the Google Maps API and the OpenWeatherAPI.
+    It also manages the external APIs such as the GoogleMapsAPI and the OpenWeatherAPI.
     Finally, web servers are duplicated to ensure high scalability and to guarantee good performance in case of a single point of failure.
     \item \textbf{Application Server}: it runs the core functionalities of the system, here there is the application logic.
     It also manages some external services such as the news, the water irrigation service and humidity service.
@@ -295,7 +297,7 @@ The devices shown in the diagram are:
     Finally, it establishes the connection with the data tier through the DBMS interface. The \textit{Application Server} and the \textit{Database Server} are connected through an internal LAN, there are no firewalls between them in order to increase the average connection speed.
 
     \item \textbf{Database Server}: it represents the data tier, it receives the data insertions and data queries from the \textit{Application Server} and manages them.
-    PostreSQL has been selected as the main database infrastructure, this allows to easily manage in a secure way the data storage and requests.
+    PostgreSQL has been selected as the main database infrastructure, this allows to easily manage in a secure way the data storage and requests.
     
 \end{itemize}
 \newpage
@@ -309,13 +311,13 @@ In later diagrams, some parts, like the login phase or returning to home page, w
 \textbf{Sign Up}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/SignUp.png}
+        \includegraphics[scale=0.67, center]{assets/SequenceDiagram/SignUp.png}
         \caption{Sign Up}
         \label{fig:signup}
     \end{figure}
 \end{center}
 Sign up is pretty standard: user registers himself/herself by inserting first name, last name, email, password, job role and district (if the user isn't a Policy Maker).
-If the user is a farmer, in a subsequent page, he/she chooses also the crop type the farm deals with.
+If the user is a farmer, in a following page, he/she chooses also the crop type the farm deals with.
 Farmer can select manually their address without the use of GPS.
 
 At the end of the process, if every check results successful, the user is registered to the database by the \textit{DataManager} component.
@@ -330,25 +332,25 @@ At the end of the process, if every check results successful, the user is regist
     \end{figure}
 \end{center}
 
-The Log In phase simply consists in the user action of inserting their email (unique key in the database) and password in the login fields, then the system checks if the pair corresponds to an user entry in the database.
+The Log In phase simply consists in the user action of inserting their email (unique key in the database) and password in the login fields, then the system checks if the pair corresponds to a user entry in the database.
 In case of success, the user can log in the system and use its functionalities available for that particular type of account chosen during the Sign Up phase.
 
 \newpage
 \textbf{View Steering Initiative Reports}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.6, center]{assets/SequenceDiagram/ViewInitiativeReport.png}
+        \includegraphics[scale=0.75, center]{assets/SequenceDiagram/ViewInitiativeReport.png}
         \caption{View Initiative Report}
         \label{fig: report}
     \end{figure}
 \end{center}
-This sequence diagram represents the interactions between components that occur when displaying the steering initiatives (previously uploaded in the database by an agronomist) to a policy maker user.
+This sequence diagram represents the interactions between components that occur when displaying the steering initiatives (previously uploaded in the database by agronomists) to a policy maker user.
 
 \newpage
 \textbf{Check Soil Humidity Data}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.7, center]{assets/SequenceDiagram/CheckSoilHumidityData.png}
+        \includegraphics[scale=0.80, center]{assets/SequenceDiagram/CheckSoilHumidityData.png}
         \caption{Check Soil Humidity Data}
         \label{fig: humidity}
     \end{figure}
@@ -360,7 +362,7 @@ The business logic running on the Application Server retrieves these data from a
 \textbf{Check Water Irrigation Data} 
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.7, center]{assets/SequenceDiagram/CheckWaterIrrigationData.png}
+        \includegraphics[scale=0.80, center]{assets/SequenceDiagram/CheckWaterIrrigationData.png}
         \caption{Check Water Irrigation Data}
         \label{fig: irrigation}
     \end{figure}
@@ -372,7 +374,7 @@ The function is the same of the above mentioned case.
 \textbf{View Farmers Ranking}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.8, center]{assets/SequenceDiagram/ViewFarmersRanking.png}
+        \includegraphics[scale=0.85, center]{assets/SequenceDiagram/ViewFarmersRanking.png}
         \caption{View Farmers Ranking}
         \label{fig: ranking}
     \end{figure}
@@ -447,7 +449,7 @@ The \textit{WeatherManager} component uses the \textit{OpenWeatherAPI} component
 \textbf{Help Request}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.5, center]{assets/SequenceDiagram/HelpRequestManager.png}
+        \includegraphics[scale=0.55, center]{assets/SequenceDiagram/HelpRequestManager.png}
         \caption{Help Request}
         \label{fig: helpRequest}
     \end{figure}
@@ -464,7 +466,7 @@ Since the exchange is necessarily asynchronous because of the fact that the rece
 \begin{center}
     \begin{figure}[H]
         
-        \includegraphics[scale=0.55, center]{assets/SequenceDiagram/ManageDailyPlan.png}
+        \includegraphics[scale=0.70, center]{assets/SequenceDiagram/ManageDailyPlan.png}
         \caption{Daily Plan}
         \label{fig: dailyPlan}
     \end{figure}
@@ -472,12 +474,12 @@ Since the exchange is necessarily asynchronous because of the fact that the rece
 This sequence diagram represents the interactions between components in managing the daily plan.
 In the diagram, there are both the creation and the updating of the daily plan.
 
-
+\newpage
 \subsection{Component interfaces}
 
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.55, center]{assets/component-interfaces.png}
+        \includegraphics[scale=0.60, center]{assets/component-interfaces.png}
         \caption{Component Interfaces Diagram}
         \label{fig: component_interfaces}
     \end{figure}
@@ -565,12 +567,11 @@ The 27-28th of November, it rains heavily in Medak again. The 29th of November, 
     \begin{itemize}
         \item Address: farm can be located through the address inserted by the user during the sign up phase.
         The address is verified by the \textit{LocationModule}.
-        \item GPS coordinates: if the address hasn't been inserted by the user or, if the \textit{LocationModule} doesn't find the address, the user can manually specify the coordinates with the help of the \textit{MapService}.
+        \item GPS coordinates: if the address hasn't been inserted by the user or, if the \textit{LocationModule} doesn't find the address, the user can manually specify the coordinates with the help of the \textit{MapServiceManager}.
     \end{itemize}
 
-\subsubsection{Agronomist daily plan} An agronomist has to have a ready daily plan.
-During the daytime it can be manually updated until the end of the day where the system automatically confirms the plan.
-An empty plan means that the agronomist hasn't visited any farmer.
+\subsubsection{Agronomist daily plan} An agronomist can have at most one daily plan per day.
+During the daytime it can be manually updated until the end of the visit day, when the system is going to automatically confirm the plan. If the agronomist doesn't manage to visit any of the farms planned for a day, he/she can update the plan and remove all the farmers from it so that it is going to be delete it from the database.
 
 \newpage
 \section{User Interface Design}
@@ -615,7 +616,7 @@ An empty plan means that the agronomist hasn't visited any farmer.
     \begin{itemize}
         \item[R1)] The system must allow only registered and logged-in users to use the app
         \item[R2)] The system shall allow users to be identified by an email of their choosing
-        \item[R3)] The system must suggest to the users the area in which they are during the registration phase, if the IT device is equipped with GPS technology. In any case, the final decision will be up to the registering user
+        \item[R3)] The system must suggest to the farmer users the area in which they are during the registration phase if the IT device is equipped with GPS technology. In any case, the final decision will be up to the registering userthe registering user
     \end{itemize}
     & 
     \begin{itemize}
@@ -719,11 +720,11 @@ An empty plan means that the agronomist hasn't visited any farmer.
     \\\hline
 
     \begin{itemize}
-        \item[R13)] The system must allow the agronomists to add a new schedule for the day each day
-        \item[R14)] The system must suggest to the agronomists which farms to visit while planning the daily plan based upon the last visit day following a FIFO policy
+        \item[R13)] The system must allow the Agronomists to add a new schedule for the day each day
+        \item[R14)] he system must suggest to the Agronomists which farms to visit while planning the Daily Plan based on the number of received visits.
         \item[R15)] The system must suggest to the agronomists only the farms among the ones in their competence area  
-        \item[R16)] The system must allow the Agronomists to update their schedule during the day and to confirm the execution before the end of the day
-        \item[R17)] The system must register the already uploaded schedule as definitive if the user doesn't confirm the daily plan for day \textit{x} before 23:59 of the day \textit{x}  
+        \item[R16)] The system must allow the Agronomists to update their schedule during the day
+        \item[R17)] The system must register the already uploaded schedule as definitive at 23:59 of the current day  
     \end{itemize}
 
     &
@@ -871,10 +872,8 @@ As already said, bottom-up approach is going to be followed in implementing the 
 
 \begin{figure}[H]
     \centering
-    \subfloat[\centering MapServiceManager]{{\includegraphics[scale=0.56]{assets/Test/farmLocationTest.png} }}%
-    \qquad\qquad
-    \subfloat[\centering WeatherManager]{{\includegraphics[scale=0.39]{assets/Test/weatherTest.png} }}%
-    \caption{Integration of MapServiceManager and Weather Manager components}%
+    \includegraphics[scale=0.56]{assets/Test/farmLocationTest.png} 
+    \caption{Integration of MapServiceManager component}%
     \label{fig: integration_MapServiceManager_WeatherManager}%
 \end{figure}
 
@@ -887,8 +886,7 @@ As already said, bottom-up approach is going to be followed in implementing the 
     \label{fig: integration_SensorDataManager_NewsManager}%
 \end{figure}
 
-After the first group implementation and testing, it's time for the implementation of the middle tier: \emph{RankingManager} and \emph{HelpRequestManager} (fig. \ref{fig: integration_RankingManager_HelpRequestManager}), \emph{ForumManager}
- and \emph{LocationModule} (fig. \ref{fig: integration_ForumManager_LocationModule}).
+After the first group implementation and testing, it's time for the implementation of the middle tier: \emph{RankingManager} and \emph{HelpRequestManager} (fig. \ref{fig: integration_RankingManager_HelpRequestManager}) and \emph{ForumManager}(fig. \ref{fig: integration_ForumManager_LocationModule}).
 \begin{figure}[H]
     \centering
     \subfloat[\centering RankingManager]{{\includegraphics[scale=0.5]{assets/Test/rankingTest.png}}}%
@@ -899,10 +897,8 @@ After the first group implementation and testing, it's time for the implementati
 \end{figure}
 \begin{figure}[H]
     \centering
-    \subfloat[\centering ForumManager]{{\includegraphics[scale=0.5]{assets/Test/forumTest.png}}}%
-    \qquad\qquad
-    \subfloat[\centering LocationModule]{{\includegraphics[scale=0.5]{assets/Test/locationModuleTest.png}}}%
-    \caption{Integration of ForumManager and LocationModule components}%
+    \includegraphics[scale=0.5]{assets/Test/forumTest.png}%
+    \caption{Integration of ForumManager component}%
     \label{fig: integration_ForumManager_LocationModule}%
 \end{figure}
 

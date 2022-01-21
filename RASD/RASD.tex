@@ -39,7 +39,7 @@
     {\large Professor\par
         Elisabetta \textsc{Di Nitto}}
     \vfill
-    {\large \textbf{Version 1.2}\\ \today \par}
+    {\large \textbf{Version 1.3}\\ \today \par}
 \end{titlepage}
 
 \hypersetup{%
@@ -112,14 +112,12 @@ The user base is expected to include a large part of Telangana's population, bri
     Here the agronomist can manage all the incoming request for help or suggestion and will have an higher chance of intervening promptly in critical situations before it's too late. In fact, having just one place in which all the requests that need attention are cumulated makes easier for them to not miss any, rather than losing them because of the different means they could come from and in a unstructured way.
     \item \textbf{(\stepcounter{goalCtr}G\arabic{goalCtr}) Visualize area statistics}\\
     Keep track of the area general performance through a list of best-performing farmers and visualize data about whether forecast.
-    %The list of best-performing farmers is based on the productivity over a selected period of time.
     \item \textbf{(\stepcounter{goalCtr}G\arabic{goalCtr}) Easy daily planning procedure}\\
     The daily plan consists in a list of farms to be visited during the day.
     Since, by regulations, every farm must be visited at least twice a year, with particular attention to the under-performing ones that should be visited more often, agronomists wish to be suggested of which are the farms that are due to be visited or the ones that have not been visited yet during the year.
 \end{enumerate}
 
 \subsubsection{Key Performance Indexes}
-%mettere dopo i goals?
 To assess if the application is well integrating within the context for which it has been developed and it is actually serving its purpose, it is important to lay out some \textit{key performance indexes} (KPI) in order to deem the application as successful. Monitoring KPIs after the application has been deployed gives the opportunity to check if the the system is having a positive impact and working towards goals or, in the worst case scenario, identifies in which aspects it is lacking, so that it can be reworked tackling its defects.
 \begin{itemize}  
     \item \textbf{(K1) Yield per plant/acre}: production quantity over the field area in which the crop has been grown.
@@ -244,6 +242,12 @@ The previous KPIs are thought as indexes to understand if the application is rea
     \item Version 1.0: first version published
     \item Version 1.1: removed some technical aspects that should have been discussed more in detail in the associated DD document
     \item Version 1.2: after the meeting with the industrial tutor, we added a KPI section. Then we added in some Scenarios how things worked before the application, then how the application solves the procedures required.
+    \item Version 1.3: updates after the implementation
+    \begin{itemize}
+        \item[--] Update some requirements
+        \item[--] Removed "profile edit" functionality, since it wasn't a core one
+        \item[--] Update some use cases diagrams and tables 
+    \end{itemize}
 \end{itemize}
 \subsection{Reference documents}
 \begin{itemize}
@@ -1130,7 +1134,6 @@ Users that wish to experience the app's full functionalities should have a devic
                     \textbf{Exit condition} & System displays a confirmation message\\ \hline
                     \textbf{Exceptions} &  \begin{enumerate}
                         \item There already exists a plan for the day chosen
-                        \item User inserted a visit date in the past
                         \item Internet connection isn't working
                     \end{enumerate}
                     An error message is shown and the flow of events starts again from point 1\\ \hline                    
