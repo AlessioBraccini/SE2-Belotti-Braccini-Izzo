@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'gdstorage',
     'userApp.apps.UserappConfig',
     'app.apps.AppConfig',
     'planningApp.apps.PlanningappConfig',
@@ -65,6 +66,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'djoser',
+
 ]
 
 MIDDLEWARE = [
@@ -171,3 +173,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 import dj_database_url
 DATABASES['default'].update(dj_database_url.config(conn_max_age=500))
+
+# Google Drive Storage Settings
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = None
+# contents of your json private key file into an environment variable named GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS
+# GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = '<base google drive path for file uploads>' # OPTIONAL, no sub dir needed
