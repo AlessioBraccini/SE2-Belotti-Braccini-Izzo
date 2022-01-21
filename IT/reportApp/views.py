@@ -146,7 +146,7 @@ class DownloadReport(APIView):
                 return Response({"message": "No file found"}, status=status.HTTP_404_NOT_FOUND)
 
             # send file
-            response = FileResponse(file_handle, content_type='pdf')
+            response = FileResponse(file_handle, content_type='multipart/form-data')
             response['Content-Length'] = report.file.size
             response['Content-Disposition'] = 'attachment; filename="%s"' % report.file.name
         else:
