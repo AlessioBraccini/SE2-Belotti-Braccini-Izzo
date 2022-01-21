@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -54,7 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'gdstorage',
+    # 'gdstorage',
     'userApp.apps.UserappConfig',
     'app.apps.AppConfig',
     'planningApp.apps.PlanningappConfig',
@@ -157,10 +159,16 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Static files (CSS, JavaScript, Images)
+
+# Google Drive Storage Settings
+# GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = None
+# contents of your json private key file into an environment variable named GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS
+# GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = '../../dreamproject-338909-4cffdfd653e2.json'
+# GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = '/'  # OPTIONAL, no sub dir needed
+
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-import os
-PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
-STATIC_ROOT  =   os.path.join(BASE_DIR, 'staticfiles')
+PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra lookup directories for collect static to find static files
@@ -171,10 +179,9 @@ STATICFILES_DIRS = (
 #  Add configuration for static files storage using whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-import dj_database_url
+# Google Drive Storage, substituting WhiteNoise
+# STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+
 DATABASES['default'].update(dj_database_url.config(conn_max_age=500))
 
-# Google Drive Storage Settings
-GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = None
-# contents of your json private key file into an environment variable named GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS
-# GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = '<base google drive path for file uploads>' # OPTIONAL, no sub dir needed
+

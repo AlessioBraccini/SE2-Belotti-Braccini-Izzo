@@ -102,23 +102,18 @@ development cycle.
 Testing, instead, means check that the critical parts of the application
 works in a correct way, as described in the DD document.
 
-The code and the releases can be found on the DREAM repository
-hosted on GitHub, reachable at this link:
-https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo.
-
 
 \subsection{Definitions, Acronyms, Abbreviations}
 \begin{itemize}
-    \item API: Application Programming Interface.
-    \item DBMS: DataBase Management System.
-    \item DD: Design Document.
-    \item DOM: Document Object Model.
-    \item HTTP: HyperText Transfer Protocol.
-    \item JS: JavaScript.
-    \item REST: REpresentational State Transfer.
-    \item RASD: Requirements Analysis and Specification Document.
-    \item UI: User Interface.
-    \item URL: Uniform Resource Locator.
+    \item API: Application Programming Interface
+    \item DBMS: DataBase Management System
+    \item DD: Design Document
+    \item HTTP: HyperText Transfer Protocol
+    \item JS: JavaScript
+    \item REST: REpresentational State Transfer
+    \item RASD: Requirements Analysis and Specification Document
+    \item UI: User Interface
+    \item URL: Uniform Resource Locator
 \end{itemize}
 \subsection{Revision History}
 \subsection{References}
@@ -132,6 +127,21 @@ https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo.
 
 \section{Development}
 \subsection{Implemented Functionalities}
+Given the three types of user, we decided to implement th functionalities for Policy Maker users and Agronomist user. In particular:
+\subsubsection*{Policy Maker}
+\begin{itemize}
+    \item Farmers ranking
+    \item Visualization of humidity sensors and water irrigation systems data as graphs
+    \item Retrieving agronomists' reports about steering initiatives
+\end{itemize}
+\subsubsection*{Agronomist}
+\begin{itemize}
+    \item Farmers ranking tailored on the agronomist's district
+    \item Uploading reports concerning steering initiatives
+    \item Creation and updating of daily plans
+    \item Help requests inbox
+    \item Weather widget
+\end{itemize}
 \subsection{Adopted Development Frameworks}
 Model-View-Controller paradigm
 \subsubsection{Programming Language}
