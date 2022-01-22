@@ -114,6 +114,8 @@ works in a correct way, as described in the DD document.
     \item RASD: Requirements Analysis and Specification Document
     \item UI: User Interface
     \item URL: Uniform Resource Locator
+    \item WSGI: Web Server Gateway Interface
+    \item ASGI: Asynchronous Server Gateway Interface
 \end{itemize}
 \subsection{Revision History}
 \begin{itemize}
@@ -203,6 +205,28 @@ Postgresql
         \label{fig: backend_structure}
     \end{figure}
 \end{center}
+
+% basic description
+
+\begin{itemize}
+    \item \textbf{IT}: root directory, container for the project
+    \item \textbf{dream\_backend}: folder that contains the configuration files of the project
+    \item \textbf{\_\_init.py\_\_}: it tells the Python interpreter that the directory is a Python package
+    \item \textbf{settings.py}: main setting file for the Django project, used to configure all the applications and middleware, it also handles the database settings
+    \item \textbf{urls.py}: URL declarations for the Django project, it contains all the endpoints that the website should have
+    \item \textbf{wsgi.py}: entry-point for WSGI-compatible web servers to serve your project, it describes the way how servers interact with the applications
+    \item \textbf{asgi.py}: entry-point for ASGI-compatible web servers to serve your project, ASGI works similar to WSGI but comes with some additional functionality
+    \item \textbf{migrations}: Django's way of propagating changes to the models into the database schema, when changes occur this folder is populated with the records of them
+    \item \textbf{admin.py}: used for registering the Django models into the Django administration, it allows to display them in the Django admin panel
+    \item \textbf{apps.py}: common configuration file for all Django apps, used to configure the attributes of the app
+    \item \textbf{models.py}: it defines the structure of the database, it allows the user to create database tables for the app with proper relationships using Python classes. It tells about the actual design, relationships between the data sets and their attribute constraints
+    \item \textbf{tests.py}: used to test the overall working of the app through unit tests
+    \item \textbf{views.py}: provide an interface through which a user interacts with a Django website, it contains the business logic of the app
+    \item \textbf{manage.py}: command-line utility for executing Django commands; these includes debugging, deploying and running
+\end{itemize}
+
+% describe apps
+% flow of requests
 
 \subsection{Frontend Structure}
 
