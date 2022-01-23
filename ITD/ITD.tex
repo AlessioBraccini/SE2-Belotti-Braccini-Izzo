@@ -105,12 +105,14 @@ works in a correct way, as described in the DD document.
 
 \subsection{Definitions, Acronyms, Abbreviations}
 \begin{itemize}
+    \item ACID: Atomicity-Consistency-Isolation-Durability
     \item API: Application Programming Interface
     \item CSRF: Cross Site Request Forgery
     \item DBMS: DataBase Management System
     \item DD: Design Document
     \item HTTP: HyperText Transfer Protocol
     \item JS: JavaScript
+    \item ORM: Object-Relational Mapping
     \item REST: REpresentational State Transfer
     \item RASD: Requirements Analysis and Specification Document
     \item UI: User Interface
@@ -160,9 +162,6 @@ Model-View-Controller paradigm
 \subsubsection{Programming Language}
 The programming language of choice for the DREAM backend is Python.
 
-For the client side we chose JavaScript, a text-based programming language, that allows to build interactive web pages. It handles the user's interaction with the elements present on the page.
-Alongside JavaScript, we used HTML and CSS to give structure and style to the page.
-
 \begin{itemize}
     \item \textbf{Pros:}
     \begin{itemize}
@@ -176,12 +175,15 @@ Alongside JavaScript, we used HTML and CSS to give structure and style to the pa
     \end{itemize}
 \end{itemize}
 
+For the client side we chose JavaScript, a text-based programming language, that allows to build interactive web pages. It handles the user's interaction with the elements present on the page.
+Alongside JavaScript, we used HTML and CSS to give structure and style to the page.
+
 \subsubsection{Django Framework}
 Django is Python web framework whose key is rapid development without sacrificing well structured code. In fact, the framework encourages to follow the MVC pattern and embeds it into its Django apps structure.
 
 It is \textbf{secure}, since it provides the developers security tools (e.g. automatic user's passwords encryption, CSRF protection, SSL/HTTPS support, etc.) that have been implemented by experts in the field. See more about security in section \ref{REST}.
 
-It is \textbf{supportive}, given that it has lots of database operation support thanks to the \emph{Object-relational mapping} feature which easily maps DB tables to \emph{Django Model} components (Model in MVC pattern) within the code, basic queries can be done transparently and in a very readable fashion without losing in performance. Moreover, it allows to configure the \emph{Admin Interface} from where we, as backend developers, can easily manage the database, like monitoring at a glance the entries in all the DB tables and create new ones for testing purposes. A part from the DB integration,  Django allows the creation of custom \emph{endpoint URLs} from where the frontend will make the backend calls. While the \emph{Django View} components make a dedicated place for managing HTTP requests,a ctiong as the Controller in MVC design. Django would also support \emph{Template} components as its Views in MVC pattern, but in this project it hasn't been used because of the different framework choice to handle the presentaion part (see section \ref{Vue}). 
+It is \textbf{supportive}, given that it has lots of database operation support thanks to the \emph{Object-relational mapping} (ORM) feature which easily maps DB tables to \emph{Django Model} components (Model in MVC pattern) within the code, basic queries can be done transparently and in a very readable fashion without losing in performance. Moreover, it allows to configure the \emph{Admin Interface} from where we, as backend developers, can easily manage the database, like monitoring at a glance the entries in all the DB tables and create new ones for testing purposes. A part from the DB integration,  Django allows the creation of custom \emph{endpoint URLs} from where the frontend will make the backend calls. Meanwhile the \emph{Django View} components come to be a dedicated place for managing HTTP requests, acting as the Controller in MVC design. Django would also support \emph{Template} components as its Views in MVC pattern, but in this project it hasn't been used because of the different framework choice to handle the presentaion part (see section \ref{Vue}). 
 
 Furthermore, Django is \textbf{extensively documented} and \textbf{scalable} since it's being used in very demanding professional contexts, being one of the frameworks of choice of well known social media platforms that experience high loads of requests due to their intensive usage from their user base.
 
@@ -217,7 +219,7 @@ the weather condition of a specific territory.
 This return us not only the basics information but also more specific ones.
 
 \subsection{DataBase}
-Postgresql
+Our database system of choice is PostgreSQL, a well known object-relational database. It is reliable, robust, ACID-compliant and ensures high performance. 
 
 \section{Source Code}
 \subsection{Backend Structure}
