@@ -230,6 +230,9 @@ Postgresql
 \end{center}
 
 % basic description
+The back-end of the application follows the common Django project structure as shown in the figure above.
+This section describes the structure of the project and the role of each app.\newline
+Here is represented the structure of the back-end:
 
 \begin{itemize}
     \item \textbf{IT}: root directory, container for the project
@@ -248,7 +251,48 @@ Postgresql
     \item \textbf{manage.py}: command-line utility for executing Django commands; these includes debugging, deploying and running
 \end{itemize}
 
+\begin{center}
+    \begin{figure}[H]
+        \includegraphics[scale=0.55, center]{assets/django_request_response_flow.png}
+        \caption{Django Request-Response Cycle}
+        \label{fig: django_flow}
+    \end{figure}
+\end{center}
+
 % describe apps
+All the functionalities of the website are managed by different apps, these are the ones implemented:
+\begin{itemize}
+    \item \textbf{app}: implements common functionalities that cover the entire application, it has one endpoint:
+    \begin{itemize}
+        \item[--] \textbf{farms\_list}: handled by \textit{FarmView} view, it manages GET requests by returning a list of farms
+    \end{itemize}
+    \item \textbf{userApp}: implements the custom authentication system of the application, it contains all the models regarding the user. It has one endpoint that is used to check if a user is authenticated or not
+    \item \textbf{helpRequestApp}: implements the functionalities about the help requests with two endpoints:
+    \begin{itemize}
+        \item[--] \textbf{help\_request}: handled by \textit{HelpRequests} view, it manages GET requests by returning the list of help requests and POST requests to reply to an existing requests
+        \item[--] \textbf{help\_request\_by\_id}: handled by \textit{HelpRequestByID} view, it manages GET requests by returning a single help request associated to the unique id specified as a parameter
+    \end{itemize}
+    \item \textbf{planningApp}: implements the functionalities about the daily plan with two endpoints:
+    \begin{itemize}
+        \item[--] \textbf{daily\_plan}: handled by \textit{DailyPlanView} view, it manages GET requests by returning the list of dates for the daily plan and POST requests to upload a new daily plan
+        \item[--] \textbf{update\_daily\_plan}: handled by \textit{UpdateVisits} view, it manages GET requests by returning the list of farmers in the current daily plan and POST requests to perform an update of an already existing daily plan
+    \end{itemize}
+    \item \textbf{rankingApp}: implements the functionalities about the ranking with two endpoints:
+    \begin{itemize}
+        \item[--] \textbf{rank\_farmers}: handled by \textit{RankFarmers} view, it manages GET requests by returning the ranking as a list of farmers
+        \item[--] \textbf{profile\_info}: handled by \textit{ProfileFarmers} view, it manages GET requests by returning the profile info of a selected farmer
+    \end{itemize}
+    \item \textbf{reportApp}: implements the functionalities about the steering initiatives with two endpoints:
+    \begin{itemize}
+        \item[--] \textbf{steering\_initiatives}: handled by \textit{SteeringInitiativeView} view, it manages GET requests by returning the list of reports uploaded to the app and POST requests to upload a new report
+        \item[--] \textbf{download\_reports}: handled by \textit{DownloadReport} view, it manages GET requests by returning a specific reports based on some parameters
+    \end{itemize}
+    \item \textbf{sensorsApp}: implements the functionalities about the sensors (humidity and water irrigation) with two endpoints:
+    \begin{itemize}
+        \item[--] \textbf{humidity}: handled by \textit{Humidity} view, it manages GET requests by returning a list with humidity and temperature values for each district
+        \item[--] \textbf{water\_irrigation}: handled by \textit{WaterIrrigation} view, it manages GET requests by returning a list of water quantity values for each district
+    \end{itemize}
+\end{itemize}
 % flow of requests
 
 \subsection{Frontend Structure}
