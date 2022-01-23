@@ -65,8 +65,15 @@ export default {
         await axios.get('https://appdream.herokuapp.com/api/v1/help_request_by_id', {params:{request_id: localStorage.getItem('id')}})
             .then(resp => {
               request.value = resp.data
-        }).catch(() => {
+        }).catch(err => {
           error.value = 'No message for you'
+              if (err.response.status === 401){
+                localStorage.clear()
+                localStorage.setItem('reload', null)
+                alert("You lost the connection please log in again");
+                router.push({name: 'Login'})
+              }
+
         })
       }
       catch(err) {
@@ -89,8 +96,14 @@ export default {
           setTimeout(function() {
             router.push({name: 'AgroHome'})
           }, 1250);
-        }).catch(() => {
+        }).catch(err => {
           console.log('error')
+          if (err.response.status === 401){
+            localStorage.clear()
+            localStorage.setItem('reload', null)
+            alert("You lost the connection please log in again");
+            router.push({name: 'Login'})
+          }
         })
       }
       catch(err) {

@@ -53,8 +53,14 @@ export default {
       try {
         await axios.get('https://appdream.herokuapp.com/api/v1/help_request').then(resp => {
           requests.value = resp.data
-        }).catch(() => {
+        }).catch(err => {
           error.value = 'No message for you'
+          if (err.response.status === 401){
+            localStorage.clear()
+            localStorage.setItem('reload', null)
+            alert("You lost the connection please log in again");
+            router.push({name: 'Login'})
+          }
         })
       }
       catch(err) {

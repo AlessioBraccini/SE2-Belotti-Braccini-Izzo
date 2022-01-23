@@ -13,6 +13,7 @@
 import Chart from 'chart.js/auto'
 import axios from "axios";
 import {ref} from "vue";
+import router from "../../router";
 
 export default {
   name: 'HumidityChart',
@@ -47,6 +48,13 @@ export default {
           this.avgTemp += resp.data.temperature[i]
         }
         this.avgTemp /= resp.data.temperature.length
+      }).catch(err => {
+        if (err.response.status === 401){
+          localStorage.clear()
+          localStorage.setItem('reload', null)
+          alert("You lost the connection please log in again");
+          router.push({name: 'Login'})
+        }
       })
       return temp
     }

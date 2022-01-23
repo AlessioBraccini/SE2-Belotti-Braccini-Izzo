@@ -103,6 +103,13 @@ export default {
           farmerList.value = resp.data
           if (district.value === '')
             district.value = 'All'
+        }).catch(err => {
+          if (err.response.status === 401){
+            localStorage.clear()
+            localStorage.setItem('reload', null)
+            alert("You lost the connection please log in again");
+            router.push({name: 'Login'})
+          }
         })
       }
       catch (err){

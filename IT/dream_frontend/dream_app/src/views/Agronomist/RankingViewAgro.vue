@@ -53,6 +53,13 @@ export default {
       try {
         await axios.get('https://appdream.herokuapp.com/api/v1/rank_farmers', {params: {ordering: 'descending'}}).then(resp => {
           farmerList.value = resp.data
+        }).catch(err => {
+          if (err.response.status === 401){
+            localStorage.clear()
+            localStorage.setItem('reload', null)
+            alert("You lost the connection please log in again");
+            router.push({name: 'Login'})
+          }
         })
       }
       catch (err){

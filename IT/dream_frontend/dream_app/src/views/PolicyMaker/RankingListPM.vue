@@ -26,6 +26,7 @@
 <script>
 import {ref} from "vue";
 import axios from "axios";
+import router from "../../router";
 
 export default {
   name: "RankingListPM",
@@ -44,6 +45,13 @@ export default {
 
           if(farmerList.value.length >= 7)
             farmerList.value = farmerList.value.slice(0,7)
+        }).catch(err => {
+          if (err.response.status === 401){
+            localStorage.clear()
+            localStorage.setItem('reload', null)
+            alert("You lost the connection please log in again");
+            router.push({name: 'Login'})
+          }
         })
       }
       catch (err){

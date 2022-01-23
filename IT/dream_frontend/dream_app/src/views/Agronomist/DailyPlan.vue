@@ -113,8 +113,15 @@ export default {
                 router.push({name: 'AgroHome'})
               }, 1250);
 
-            }).catch(() => {
+            }).catch(err => {
               errorMsg.value = 'You have already make a plan for this day'
+
+              if (err.response.status === 401){
+                localStorage.clear()
+                localStorage.setItem('reload', null)
+                alert("You lost the connection please log in again");
+                router.push({name: 'Login'})
+              }
             })
           }
           else {

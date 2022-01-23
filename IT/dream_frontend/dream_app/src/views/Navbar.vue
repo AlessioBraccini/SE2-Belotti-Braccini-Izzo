@@ -41,10 +41,14 @@ export default {
         router.push({name: 'Login'})
 
       })
-      .catch(() => {
-        localStorage.clear()
-        localStorage.setItem('reload', null)
-        router.push({name: 'Login'})
+      .catch(err => {
+        console.log(err.response.status)
+        if (err.response.status.status === 401){
+          localStorage.clear()
+          localStorage.setItem('reload', null)
+          alert("You lost the connection please log in again");
+          router.push({name: 'Login'})
+        }
       })
     }
 

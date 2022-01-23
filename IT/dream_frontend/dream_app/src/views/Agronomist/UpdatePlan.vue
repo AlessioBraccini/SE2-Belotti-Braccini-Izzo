@@ -97,6 +97,12 @@ export default {
           }).catch(err => {
             console.log(err)
             errorMsg.value = 'No plan for today'
+            if (err.response.status === 401){
+              localStorage.clear()
+              localStorage.setItem('reload', null)
+              alert("You lost the connection please log in again");
+              router.push({name: 'Login'})
+            }
           })
     }
 
@@ -106,6 +112,13 @@ export default {
         await axios.get('https://appdream.herokuapp.com/api/v1/farms_list').then(resp => {
           completeFarmerList.value = resp.data
           loadDailyPlan()
+        }).catch(err => {
+          if (err.response.status === 401){
+            localStorage.clear()
+            localStorage.setItem('reload', null)
+            alert("You lost the connection please log in again");
+            router.push({name: 'Login'})
+          }
         })
       }
       catch (err){
