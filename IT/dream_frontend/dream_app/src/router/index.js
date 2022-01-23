@@ -111,7 +111,7 @@ const routes = [
         component: RankingViewPM
     },
     {
-        path: '/policymakerHome/steeringInitiative',
+        path: '/steeringInitiative',
         name: 'ViewReport',
         component: ViewReport
     },

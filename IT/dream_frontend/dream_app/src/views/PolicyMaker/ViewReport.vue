@@ -31,6 +31,7 @@ import Navbar from "@/views/Navbar";
 import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";
+import NProgress from "nprogress"
 
 export default {
   name: "ViewReport",
@@ -61,7 +62,7 @@ export default {
 
     // Retrieve and download the specific report using the author_id, the publication date and the file name
     const viewSpecificReport = async (report) => {
-      console.log(report)
+      NProgress.start()
       await axios.get('https://appdream.herokuapp.com/api/v1/download_reports',
           { responseType: "blob",
             params: {
@@ -79,6 +80,8 @@ export default {
             link.download = report['file_name'];
             link.click();
             URL.revokeObjectURL(link.href);
+
+            NProgress.done()
           }
       ).catch(err => {
         console.log(err)
@@ -87,7 +90,11 @@ export default {
     }
 
     const back = () => {
-      router.push({name: 'PMHome'})
+      switch (localStorage.getItem('role')){
+        case 'A': router.push({name: 'WriteReport'}); break;
+        case 'P': router.push({name: 'PMHome'}); break;
+        case 'F': router.push({name: 'FarmerHome'}); break;
+      }
     }
 
     return{ name, reportList, error, back, viewSpecificReport }
@@ -96,6 +103,7 @@ export default {
 </script>
 
 <style scoped>
+
   h3{
     margin: 0;
     padding: 10px 0 0 0;

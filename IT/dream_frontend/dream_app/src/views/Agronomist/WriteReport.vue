@@ -21,6 +21,7 @@
   </div>
   <div>
     <button @click="submitFile" class="submitBtn actionButton">Submit</button>
+    <button @click="pushReport" class="actionButton backBtn">View Send Report</button>
     <button @click="back" class="actionButton backBtn">Back</button>
   </div>
 
@@ -37,6 +38,8 @@ import NavbarAgro from "@/views/Navbar";
 import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";
+import NProgress from "nprogress"
+
 
 export default {
   name: "WriteReport",
@@ -61,7 +64,7 @@ export default {
 
     // Submit the file to the server and check that it is a pdf file
     const submitFile =  () => {
-
+      NProgress.start()
       if (fileName.value.length) {
         const ext = fileName.value.slice(fileName.value.length-3,fileName.value.length)
         if (ext === 'pdf'){
@@ -77,6 +80,7 @@ export default {
                 }
               })
               .then(() => {
+                NProgress.done()
                 scroll(0, 0)
                 confirmationMessage.value = 'Successful send'
 
@@ -96,11 +100,15 @@ export default {
 
     }
 
+    const pushReport = () => {
+      router.push({ name: 'ViewReport' })
+    }
+
     const back = () => {
       router.push({name: 'AgroHome'})
     }
 
-    return{name, file, fileName, confirmationMessage, errMsg, submitFile, handleFileUpload, back}
+    return{name, file, fileName, confirmationMessage, errMsg, submitFile, handleFileUpload, back, pushReport}
   }
 }
 </script>
@@ -220,7 +228,7 @@ export default {
     margin-top: 5px;
   }
 
-  @media only screen and (min-width: 612px) {
+  @media only screen and (min-width: 930px) {
 
     .background{
       width: 70%;
@@ -229,8 +237,8 @@ export default {
     }
 
     .backBtn, .submitBtn {
-      width: 30%;
-      margin-right: 10%;
+      width: 20%;
+      margin-right: 5%;
       left: 16%;
       margin-top: 5%;
       margin-bottom: 2%;
