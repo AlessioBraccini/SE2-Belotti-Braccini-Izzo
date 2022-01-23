@@ -41,6 +41,11 @@ export default {
         router.push({name: 'Login'})
 
       })
+      .catch(() => {
+        localStorage.clear()
+        localStorage.setItem('reload', null)
+        router.push({name: 'Login'})
+      })
     }
 
     // Return to the right home page according to their role
