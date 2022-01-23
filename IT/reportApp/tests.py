@@ -70,8 +70,6 @@ class ReportsTest(TestCase):
         self.assertNotEqual(response2.status_code, status.HTTP_200_OK)
 
     def testGetReports(self):
-        # todo: add another report from the same agro and one from another agro
-
         url = "/api/v1/steering_initiatives"
         file = SimpleUploadedFile("/Users/Ottavia/Documents/bonus.pdf", b"pdf")
         headers = {'content_type': 'multipart/form-data'}
@@ -99,3 +97,20 @@ class ReportsTest(TestCase):
             self.assertEqual(report['pub_date'], datetime.date.today())
 
     # todo: two different agro uploading same title report, agro get the reports (only his)
+
+    def testDeletedUserReport(self):
+        url = "/api/v1/steering_initiatives"
+        file = SimpleUploadedFile("/Users/Ottavia/Documents/bonus.pdf", b"pdf")
+        headers = {'content_type': 'multipart/form-data'}
+        data = {
+            'title': "A day in a life of an agronomist",
+            'file': file
+        }
+        self.client_agro.post(url, data, headers=headers)
+        self.userA.delete()
+
+        response = self.client_pm.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data['reports_list']), 0) # report has been deleted as well
+
