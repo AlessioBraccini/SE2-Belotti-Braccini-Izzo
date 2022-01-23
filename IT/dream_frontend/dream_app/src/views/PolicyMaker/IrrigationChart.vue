@@ -16,10 +16,10 @@ import {ref} from "vue";
 export default {
   name: 'IrrigationChart',
 
-  setup(){
-    let totalWater = ref(0)
-    return {totalWater}
-  },
+  // setup(){
+  //   let totalWater = ref(0)
+  //   return {totalWater}
+  // },
 
   async mounted() {
 
