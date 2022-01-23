@@ -308,8 +308,76 @@ Here is represented the structure of the web app:
 
 
 
+\newpage
 \section{Testing}
-\subsection{Backend Testing}
+
+In this section we described how we tested the application following the general guidelines given in the Design Document.
+The testing process has been divided into unit testing and integration testing.
+We decided to test only the back-end because most of the logic resides here.
+In any case, the system testing and the post-deployment testing phases also covered the functioning of the front-end.
+
+\subsection{Unit Testing}
+For each app in the back-end we wrote the test cases in tests.py file using \textbf{unittest}, a built-in module from the Python standard library.
+\subsubsection*{helpRequestApp}
+\begin{itemize}
+    \item Attempt to get the list of help requests by a user through a GET request on \textit{help\_request} endpoint
+    \item Attempt to get the list of help requests in case of an invalid user
+    \item Attempt to reply to an existing help request through a POST request on \textit{help\_request} endpoint, verify the correct deletion of the old help request which is replaced by the reply
+    \item Attempt to reply to an existing help request in case of an invalid user
+    \item Attempt to get a single help request given the id through a POST request on \textit{help\_request\_by\_id} endpoint
+    \item Attempt to get a single help request given the id in case of an invalid user
+\end{itemize}
+\subsubsection*{planningApp}
+\begin{itemize}
+    \item Attempt to upload a new daily plan through a POST request on \textit{daily\_plan} endpoint
+    \item Attempt to upload a new daily plan with an invalid region
+    \item Attempt to upload a new daily plan with an invalid date
+    \item Attempt to upload a new daily plan with an duplicated farmer
+    \item Attempt to upload a new daily plan with an invalid user (not an agronomist)
+    \item Attempt to retrieve the daily plans through a GET request on \textit{daily\_plan} endpoint
+    \item Attempt to retrieve only the daily plans associated to the current user
+    \item Attempt to update a daily plan through a POST request on \textit{update\_daily\_plan} endpoint
+    \item Attempt to update an old daily plan
+    \item Attempt to remove a daily plan
+    \item Attempt to update a daily plan before creating it
+\end{itemize}
+\subsubsection*{rankingApp}
+\begin{itemize}
+    \item Attempt from an agronomist to get the ranking with "descending" order specified in the parameters through a GET request on \textit{rank\_farmers} endpoint
+    \item Attempt from an agronomist to get the ranking with "ascending" order specified in the parameters
+    \item Attempt from a policymaker to get the ranking with "descending" order and district among the parameters
+    \item Attempt from a policymaker to get the ranking with "ascending" order and district among the parameters
+    \item Attempt from a policymaker to get the ranking with different districts
+    \item Attempt from a policymaker to get the ranking with "ascending" order but without the district among the parameters
+    \item Attempt from a policymaker to get the ranking with "descending" order but without the district among the parameters
+    \item Attempt to get informations about a farmer in the ranking through a GET request on \textit{profile\_info} endpoint
+    \item Attempt to get informations about a farmer in the ranking in case of an invalid user
+\end{itemize}
+\subsubsection*{reportApp}
+\begin{itemize}
+    \item Attempt from an agronomist to upload a new report through a POST request on \textit{steering\_initiatives} endpoint
+    \item Attempt from a policymaker to upload a new report
+    \item Attempt to upload duplicated reports
+    \item Attempt to get the list of reports through a GET request on \textit{steering\_initiatives} endpoint
+\end{itemize}
+\subsubsection*{sensorsApp}
+\begin{itemize}
+    \item Attempt to get data about humidity sensors through a GET request on \textit{humidity} endpoint
+    \item Attempt to get data about water irrigation sensors through a GET request on \textit{water\_irrigation} endpoint
+\end{itemize}
+
+There is a total of 32 tests with a percentage of success of 100\%, this establishes the stability of the system.
+All the tests can be verified by running "python manage.py test" in the root directory.
+
+\subsection{System Testing}
+A part of the testing phase was also dedicated by manually testing the app through the web browser and with Postman, a tool for making HTTP GET/POST requests with custom parameters.
+In this way we tested the authentication phase and all the functionalities provided by the system.
+All the tests have been performed successfully.
+
+\subsection{Post-deployment Testing}
+After the deploy the application has been extensively tested on a daily basis. This allowed to test the entire system and the interactions between the components both on front-end and back-end.
+We also invited a couple of testers in order to stress the app.
+
 
 % \section{Build} %don't really have to build
 
