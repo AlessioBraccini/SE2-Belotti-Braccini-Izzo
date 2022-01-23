@@ -106,6 +106,7 @@ works in a correct way, as described in the DD document.
 \subsection{Definitions, Acronyms, Abbreviations}
 \begin{itemize}
     \item API: Application Programming Interface
+    \item CSRF: Cross Site Request Forgery
     \item DBMS: DataBase Management System
     \item DD: Design Document
     \item HTTP: HyperText Transfer Protocol
@@ -152,28 +153,43 @@ Model-View-Controller paradigm
 \subsubsection{Programming Language}
 The programming language of choice for the DREAM backend is Python.
 
-For the client side we choose to use Javascript, a text-based programming language, that allows to build interactive web pages.
-Alongside Javascript, that allow the interaction with the user of the elements present in the page, we used HTML and CSS to give structure and style to the page.
+For the client side we chose JavaScript, a text-based programming language, that allows to build interactive web pages. It handles the user's interaction with the elements present on the page.
+Alongside JavaScript, we used HTML and CSS to give structure and style to the page.
 
 \begin{itemize}
     \item \textbf{Pros:}
     \begin{itemize}
-        \item[+] Allow fast Development
-        \item[+] Readability
-        \item[+] Widely spread among WebApps  
+        \item[+] \textbf{Allow fast development}: Python is a very high-level programming language, so the built-in functions and reliable third-parties libraries allow us to spend the development time focusing on implementing the desired custom behaviors rather than building basic and non-functional features that are shared among most web apps.
+        \item[+] \textbf{Readability}: Python's syntax is very clear and human-friendly.
+        \item[+] \textbf{Large community and widely spread among WebApps}: being used a lot by the web app developers' community, the internet is full of help for troubleshooting. Moreover, this has resulted in a very extensive support through libraries dedicated to web developing and integration with frontend frameworks.
     \end{itemize}
     \item \textbf{Cons:}
     \begin{itemize}
-        \item[-] Slow 
+        \item[-] \textbf{Speed}: being an interpreted language, Python suffers of slower computation in comparison to other compiled languages (e.g. C++, Java, etc.).
     \end{itemize}
 \end{itemize}
 
 \subsubsection{Django Framework}
+Django is Python web framework whose key is rapid development without sacrificing well structured code. In fact, the framework encourages to follow the MVC pattern and embeds it into its Django apps structure.
+
+It is \textbf{secure}, since it provides the developers security tools (e.g. automatic user's passwords encryption, CSRF protection, SSL/HTTPS support, etc.) that have been implemented by experts in the field. See more about security in section \ref{REST}.
+
+It is \textbf{supportive}, given that it has lots of database operation support thanks to the \emph{Object-relational mapping} feature which easily maps DB tables to \emph{Django Model} components (Model in MVC pattern) within the code, basic queries can be done transparently and in a very readable fashion without losing in performance. Moreover, it allows to configure the \emph{Admin Interface} from where we, as backend developers, can easily manage the database, like monitoring at a glance the entries in all the DB tables and create new ones for testing purposes. A part from the DB integration,  Django allows the creation of custom \emph{endpoint URLs} from where the frontend will make the backend calls. While the \emph{Django View} components make a dedicated place for managing HTTP requests,a ctiong as the Controller in MVC design. Django would also support \emph{Template} components as its Views in MVC pattern, but in this project it hasn't been used because of the different framework choice to handle the presentaion part (see section \ref{Vue}). 
+
+Furthermore, Django is \textbf{extensively documented} and \textbf{scalable} since it's being used in very demanding professional contexts, being one of the frameworks of choice of well known social media platforms that experience high loads of requests due to their intensive usage from their user base.
 
 \subsubsection{Django REST Framework}
+\label{REST}
+We decided to pair REST framework to our Django backend since REST allows even more security features.
+
+We used its authentication policies, in particular the \textbf{REST Token-based authentication} that ensures an authorized clients' connection to the backend, so that every interaction with the application server is safe from an authentication point of view: unknown users can access none of the backend's functionalities.
+
+We used the \emph{Djoser} REST library to handle users login and signup. The choice has been taken to make sure that such standard operations are carried out without flaws, especially in handling sensitive data (i.e. passwords). Moreover, \emph{Djoser} is compatible with custom User Models, so it enables us to delegate the authentication phase to it even with our custom User model.
+
+Furthermore, Django REST gives an extensive support in building \emph{Django Views}, from basic skeleton function (\texttt{@api\_view}) for managing all types of HTTP requests, up to more functional and request-specific functionalities.
 
 \subsubsection{Vue.js}
-
+\label{Vue}
 Vue.js is an open-source model–view–viewmodel front end JavaScript framework that allow to create user interfaces and single-page applications.
 Vue.js features an incrementally adaptable architecture that focuses on declarative rendering and component composition.
 The core library is focused on the view layer only.
