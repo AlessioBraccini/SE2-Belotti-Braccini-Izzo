@@ -204,10 +204,15 @@ Vue.js features an incrementally adaptable architecture that focuses on declarat
 The core library is focused on the view layer only.
 Advanced features required for complex applications such as routing, state management and build tooling are offered via officially maintained supporting libraries and packages.
 
-We used this framework to build up the client-side rendering of pages because its easy usage as it integrate in a single .vue file, also called components,
-the HTML, CSS and javascript part.
-
-In order to communicate with the backend we use the javascript library Axios.
+We used this framework to build up the client-side rendering of pages because of the easy usability as it integrate in a single .vue file, also called components,
+the three main blocks of a web application.
+The structure of a Vue file is intuitive, it is compose by three blocks:
+\begin{itemize}
+    \item HTML: where you can write the structure of the component.
+    \item JavaScript: where you can insert the interactive part of the component.
+    \item CSS: where you can insert the style of the HTML structure, it can be scoped to the actual component or not.
+\end{itemize}
+In order to communicate with the backend we use the JavaScript library Axios.
 It is a promise-based HTTP Client for node.js and the browser.
 On the server-side it uses the native node.js http module, while on the client it uses XMLHttpRequests.
 It transforms in an automatic way the json reply that arrives from the server in vue ready XMLHttpRequests.
@@ -220,6 +225,10 @@ This return us not only the basics information but also more specific ones.
 
 \subsection{DataBase}
 Our database system of choice is PostgreSQL, a well known object-relational database. It is reliable, robust, ACID-compliant and ensures high performance. 
+We decided to use PostgreSQL as Database system, Chiedo
+
+\subsubsection{Heroku}
+Chiedo parte 2
 
 \section{Source Code}
 \subsection{Backend Structure}
@@ -305,8 +314,28 @@ Of course, following the four tier architecture described in the Design Document
 the front-end web application can also be deployed to a dedicated web server,
 which will then make requests to a different backend server.
 Here is represented the structure of the web app:
+\begin{itemize}
+    \item \textbf{node\_modules}: here are stored all the installed dependencies of the project listed in the \textit{package.json} file.
+    It's generated automatically every time the project is set up.
+    \item \textbf{public}: in this folder is present the \textit{index.html} file.
+    This is the point where all the generated code will injected in order to displays it on the browser.
+    During the building phase the files in this directory don't change.
+    \item \textbf{src}: this is the main folder of the project. It is divided in several sub folder:
+    \begin {itemize}
+        \item \textbf{assets}: it contains all the images needed by the front-end like the icons of the weather or the logo in the login page.
+        \item \textbf{router}: it contains the JavaScript file that list all the routes used to navigate the front-end.
+        \item \textbf{views}: it contains all the vue component needed by the front-end.
+        They are divided in category, e.g. Policymaker or Agronomist, in order to better separate the different logic.
+    \end{itemize}
+\end{itemize}
 
+There are other several files needed by Vue to run the project. The most important are:
+\begin{itemize}
+    \item \textbf{package.json}: it contains the list of all the dependency installed in the project.
+    \item \textbf{server.js}: a simple JavaScript file needed by Heroku in order to start the web server and accept the incoming requests.
+\end{itemize}
 
+When the build process is finish the web ready files are put in the dist directory.
 
 \newpage
 \section{Testing}
@@ -383,9 +412,20 @@ We also invited a couple of testers in order to stress the app.
 
 
 \section{Installation}
+As a web application (we decide to host the project on a real server and) a completely running version of this software is available on: \url{https://dreamapplication.herokuapp.com/}.
+
+However if you want to install it on your machine you can follow the guide below.
 \subsection{Requirements}
 \subsection{Backend Installation}
 \subsection{Frontend Installation}
+Node.js is required in order to run the frontend, please install it if you don't have it on your device.
+
+\begin{itemize}
+    \item [1] Download from the \href{https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo}{\textbf{Github repository}} the \textit{dist} folder
+    \item [2] Open the terminal in the dist folder
+    \item [3] Type \texttt{serve dist}
+    \item [4] Follow the instructions
+\end{itemize}
 
 \section{Effort Spent}
 \begin{tabular}{|c||c|}
