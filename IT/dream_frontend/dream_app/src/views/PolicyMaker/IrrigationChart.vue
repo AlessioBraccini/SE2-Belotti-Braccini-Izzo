@@ -11,7 +11,7 @@
 <script>
 import Chart from 'chart.js/auto'
 import axios from "axios";
-import {ref} from "vue";
+// import {ref} from "vue";
 
 export default {
   name: 'IrrigationChart',
