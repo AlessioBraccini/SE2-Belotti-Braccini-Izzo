@@ -3,7 +3,7 @@
     <p style="text-align: center">Water used for Irrigation</p>
     <div class="inner">
       <canvas id="irrigationChart"></canvas>
-      <p style="text-align: center">Total amount of water: {{ totalWater }} t</p>
+<!--      <p style="text-align: center">Total amount of water: {{ totalWater }} t</p>-->
     </div>
   </div>
 </template>
