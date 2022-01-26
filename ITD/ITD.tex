@@ -130,28 +130,29 @@ works in a correct way, as described in the DD document.
     \item REST Framework: \url{https://www.django-rest-framework.org/}
     \item Vue.js: \url{https://vuejs.org/}
     \item Axios: \url{https://axios-http.com/docs/intro}
+    \item Heroku: \url{https://devcenter.heroku.com/categories/reference}
+    \item PostgreSQL: \url{https://www.postgresql.org/docs/14/index.html}
 \end{itemize}
 
 \newpage
 \section{Development}
 \subsection{Implemented Functionalities}
-Given the three types of user, we decided to implement the functionalities for Policy Maker users and Agronomist user. In particular:
+Given the three types of user, we decided to implement the functionalities for Policy Maker and Agronomist users. In particular:
 \subsubsection*{Policy Maker}
 \begin{itemize}
-    \item Farmers ranking of the whole region or grouped by district
-    \item Visualization of humidity and water irrigation sensors data display
-    for simplicity as graphs
+    \item Farmers ranking in ascending/descending order of the whole region or grouped by district
+    \item Visualization through graphs of data about humidity and water irrigation sensors
     \item Download agronomists' reports about steering initiatives
 \end{itemize}
 \subsubsection*{Agronomist}
 \begin{itemize}
-    \item Farmers ranking tailored on the agronomist's district
+    \item Farmers ranking in ascending/descending order tailored on the agronomist's district
     \item Uploading of reports concerning steering initiatives
     \item Creation and updating of daily plans
     \item Help requests inbox
     \item Weather widget
 \end{itemize}
-For the details about these functionalities please read the RASD document.
+For the details about these functionalities please refer to the RASD document.
 \newpage
 \subsection{Adopted Development Frameworks}
 Model-View-Controller paradigm
@@ -162,6 +163,14 @@ Model-View-Controller paradigm
     \subfloat{{\includegraphics[scale=0.4]{assets/Rest-Logo.png}}}%
     \caption{Django Framework and REST Framework logo}
 \end{figure}
+\begin{center}
+    \begin{figure}[H]
+        \includegraphics[scale=0.65, center]{assets/Vue-Logo.png}
+        \caption{Vue.js Framework logo}
+        \label{fig: vue_logo}
+    \end{figure}
+\end{center}
+
 \subsubsection{Programming Language}
 The programming language of choice for the DREAM backend is Python.
 
@@ -228,16 +237,17 @@ This return us not only the basics information but also more specific ones like 
 
 \subsection{DataBase}
 Our database system of choice is PostgreSQL, a well known object-relational database. It is reliable, robust, ACID-compliant and ensures high performance. 
+Furthermore it is supported excellently by Django.
 We decided to use PostgreSQL as Database system, Chiedo
 
 \subsection{Heroku}
 We choose to host our project in a server in order to make it reachable by everyone
 that have a browser and an internet connection.
-The hosting service we chose is Heroku that is a platform as a service (PaaS)
+The hosting service we choose is Heroku, a platform as a service (PaaS)
 that enables developers to build, run, and operate applications entirely
 in the cloud.
 
-We created two different server one for the backend and one for the frontend.
+We created two different server, one for the backend and one for the frontend.
 Heroku give also the possibility to register a personalized domain for reach the
 website
 We choose:
@@ -406,6 +416,7 @@ For each app in the back-end we wrote the test cases in tests.py file using \tex
     \item Attempt from a policymaker to upload a new report
     \item Attempt to upload duplicated reports
     \item Attempt to get the list of reports through a GET request on \textit{steering\_initiatives} endpoint
+    \item Attempt to get a report that has been deleted
 \end{itemize}
 \subsubsection*{sensorsApp}
 \begin{itemize}
