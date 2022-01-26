@@ -132,28 +132,31 @@ works in a correct way, as described in the DD document.
     \item Axios: \url{https://axios-http.com/docs/intro}
 \end{itemize}
 
-
+\newpage
 \section{Development}
 \subsection{Implemented Functionalities}
-Given the three types of user, we decided to implement th functionalities for Policy Maker users and Agronomist user. In particular:
+Given the three types of user, we decided to implement the functionalities for Policy Maker users and Agronomist user. In particular:
 \subsubsection*{Policy Maker}
 \begin{itemize}
-    \item Farmers ranking
-    \item Visualization of humidity sensors and water irrigation systems data as graphs
-    \item Retrieving agronomists' reports about steering initiatives
+    \item Farmers ranking of the whole region or grouped by district
+    \item Visualization of humidity and water irrigation sensors data display
+    for simplicity as graphs
+    \item Download agronomists' reports about steering initiatives
 \end{itemize}
 \subsubsection*{Agronomist}
 \begin{itemize}
     \item Farmers ranking tailored on the agronomist's district
-    \item Uploading reports concerning steering initiatives
+    \item Uploading of reports concerning steering initiatives
     \item Creation and updating of daily plans
     \item Help requests inbox
     \item Weather widget
 \end{itemize}
+For the details about these functionalities please read the RASD document.
+\newpage
 \subsection{Adopted Development Frameworks}
 Model-View-Controller paradigm
 
-\begin{figure}
+\begin{figure}[H]
     \subfloat{{\includegraphics[scale=0.05]{assets/Django-Logo.png}}}%
     \qquad
     \subfloat{{\includegraphics[scale=0.4]{assets/Rest-Logo.png}}}%
@@ -183,7 +186,8 @@ Django is Python web framework whose key is rapid development without sacrificin
 
 It is \textbf{secure}, since it provides the developers security tools (e.g. automatic user's passwords encryption, CSRF protection, SSL/HTTPS support, etc.) that have been implemented by experts in the field. See more about security in section \ref{REST}.
 
-It is \textbf{supportive}, given that it has lots of database operation support thanks to the \emph{Object-relational mapping} (ORM) feature which easily maps DB tables to \emph{Django Model} components (Model in MVC pattern) within the code, basic queries can be done transparently and in a very readable fashion without losing in performance. Moreover, it allows to configure the \emph{Admin Interface} from where we, as backend developers, can easily manage the database, like monitoring at a glance the entries in all the DB tables and create new ones for testing purposes. A part from the DB integration,  Django allows the creation of custom \emph{endpoint URLs} from where the frontend will make the backend calls. Meanwhile the \emph{Django View} components come to be a dedicated place for managing HTTP requests, acting as the Controller in MVC design. Django would also support \emph{Template} components as its Views in MVC pattern, but in this project it hasn't been used because of the different framework choice to handle the presentaion part (see section \ref{Vue}). 
+It is \textbf{supportive}, given that it has lots of database operation support thanks to the \emph{Object-relational mapping} (ORM) feature which easily maps DB tables to \emph{Django Model} components (Model in MVC pattern) within the code, basic queries can be done transparently and in a very readable fashion without losing in performance.
+Moreover, it allows to configure the \emph{Admin Interface} from where authorized users can easily manage the database, like monitoring at a glance the entries in all the DB tables and create new ones for testing purposes. A part from the DB integration,  Django allows the creation of custom \emph{endpoint URLs} from where the frontend will make the backend calls. Meanwhile the \emph{Django View} components come to be a dedicated place for managing HTTP requests, acting as the Controller in MVC design. Django would also support \emph{Template} components as its Views in MVC pattern, but in this project it hasn't been used because of the different framework choice to handle the presentaion part (see section \ref{Vue}).
 
 Furthermore, Django is \textbf{extensively documented} and \textbf{scalable} since it's being used in very demanding professional contexts, being one of the frameworks of choice of well known social media platforms that experience high loads of requests due to their intensive usage from their user base.
 
@@ -199,36 +203,50 @@ Furthermore, Django REST gives an extensive support in building \emph{Django Vie
 
 \subsubsection{Vue.js}
 \label{Vue}
-Vue.js is an open-source model–view–viewmodel front end JavaScript framework that allow to create user interfaces and single-page applications.
-Vue.js features an incrementally adaptable architecture that focuses on declarative rendering and component composition.
+Vue.js is a famous frontend JavaScript framework that allow the creation of user interfaces and single-page applications.
 The core library is focused on the view layer only.
 Advanced features required for complex applications such as routing, state management and build tooling are offered via officially maintained supporting libraries and packages.
 
 We used this framework to build up the client-side rendering of pages because of the easy usability as it integrate in a single .vue file, also called components,
-the three main blocks of a web application.
+the three main blocks of a web application paradigm.
+
 The structure of a Vue file is intuitive, it is compose by three blocks:
 \begin{itemize}
-    \item HTML: where you can write the structure of the component.
-    \item JavaScript: where you can insert the interactive part of the component.
-    \item CSS: where you can insert the style of the HTML structure, it can be scoped to the actual component or not.
+    \item HTML: the part where the structure of the component is created.
+    \item JavaScript: where is placed the interactive part, or better the logic, of the component.
+    \item CSS: the part where is placed the style of the HTML structure, it can be scoped to the actual component or not.
 \end{itemize}
-In order to communicate with the backend we use the JavaScript library Axios.
-It is a promise-based HTTP Client for node.js and the browser.
-On the server-side it uses the native node.js http module, while on the client it uses XMLHttpRequests.
-It transforms in an automatic way the json reply that arrives from the server in vue ready XMLHttpRequests.
+In order to communicate with the backend we use the JavaScript library Axios that is a promise-based HTTP Client for Node.js.
+On the server-side it uses the native Node.js http module, while on the client it uses XMLHttpRequests.
+Axios killer feature is that it can transform in an automatic way the json reply that arrives from the server in JavaScript ready XMLHttpRequests.
 
 \subsection{API Integration}
 \subsubsection{OpenWeatherMap API}
 To allow the user to retrieve the weather information we use this external api service that let us know in real time
-the weather condition of a specific territory.
-This return us not only the basics information but also more specific ones.
+the weather condition of a specific place in the World.
+This return us not only the basics information but also more specific ones like pressure or wind speed and direction.
 
 \subsection{DataBase}
 Our database system of choice is PostgreSQL, a well known object-relational database. It is reliable, robust, ACID-compliant and ensures high performance. 
 We decided to use PostgreSQL as Database system, Chiedo
 
-\subsubsection{Heroku}
-Chiedo parte 2
+\subsection{Heroku}
+We choose to host our project in a server in order to make it reachable by everyone
+that have a browser and an internet connection.
+The hosting service we chose is Heroku that is a platform as a service (PaaS)
+that enables developers to build, run, and operate applications entirely
+in the cloud.
+
+We created two different server one for the backend and one for the frontend.
+Heroku give also the possibility to register a personalized domain for reach the
+website
+We choose:
+\begin{itemize}
+    \item \url{dreamapplication.herokuapp.com} as frontend domain
+    \item \url{appdream.herokuapp.com} as backend domain
+\end{itemize}
+
+
 
 \section{Source Code}
 \subsection{Backend Structure}
@@ -308,7 +326,7 @@ All the functionalities of the website are managed by different apps, these are 
 
 \subsection{Frontend Structure}
 
-The front-end web application is contained into the dream\_frontend folder of
+The frontend web app is contained into the \textit{dream\_frontend/dream\_app} folder of
 the IT directory.
 Of course, following the four tier architecture described in the Design Document,
 the front-end web application can also be deployed to a dedicated web server,
@@ -323,8 +341,8 @@ Here is represented the structure of the web app:
     \item \textbf{src}: this is the main folder of the project. It is divided in several sub folder:
     \begin {itemize}
         \item \textbf{assets}: it contains all the images needed by the front-end like the icons of the weather or the logo in the login page.
-        \item \textbf{router}: it contains the JavaScript file that list all the routes used to navigate the front-end.
-        \item \textbf{views}: it contains all the vue component needed by the front-end.
+        \item \textbf{router}: it contains the JavaScript file that list all the routes used to navigate the frontend.
+        \item \textbf{views}: it contains all the vue component needed by the frontend.
         They are divided in category, e.g. Policymaker or Agronomist, in order to better separate the different logic.
     \end{itemize}
 \end{itemize}
@@ -335,15 +353,15 @@ There are other several files needed by Vue to run the project. The most importa
     \item \textbf{server.js}: a simple JavaScript file needed by Heroku in order to start the web server and accept the incoming requests.
 \end{itemize}
 
-When the build process is finish the web ready files are put in the dist directory.
+When the build process is finish the web ready files are put in the \textit{dist} directory.
 
 \newpage
 \section{Testing}
 
 In this section we described how we tested the application following the general guidelines given in the Design Document.
 The testing process has been divided into unit testing and integration testing.
-We decided to test only the back-end because most of the logic resides here.
-In any case, the system testing and the post-deployment testing phases also covered the functioning of the front-end.
+We decided to test only the backend because most of the logic resides here.
+In any case, the system testing and the post-deployment testing phases also covered the functioning of the frontend.
 
 \subsection{Unit Testing}
 For each app in the back-end we wrote the test cases in tests.py file using \textbf{unittest}, a built-in module from the Python standard library.
@@ -412,19 +430,24 @@ We also invited a couple of testers in order to stress the app.
 
 
 \section{Installation}
-As a web application (we decide to host the project on a real server and) a completely running version of this software is available on: \url{https://dreamapplication.herokuapp.com/}.
+As a web application we chose to deploy the project on a real server and
+a completely running version of this software is available on:
+\url{https://dreamapplication.herokuapp.com/}.
 
 However if you want to install it on your machine you can follow the guide below.
 \subsection{Requirements}
+Node.js is required in order to run the frontend, please install it if you don't
+have it on your device.
+
 \subsection{Backend Installation}
 \subsection{Frontend Installation}
-Node.js is required in order to run the frontend, please install it if you don't have it on your device.
 
 \begin{itemize}
-    \item [1] Download from the \href{https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo}{\textbf{Github repository}} the \textit{dist} folder
-    \item [2] Open the terminal in the dist folder
-    \item [3] Type \texttt{serve dist}
-    \item [4] Follow the instructions
+    \item [1] Open a terminal and move to \textit{dream\_app} folder
+    \item [2] Run \texttt{npm run build} command
+    \item [3] Move to \textit{dist} folder
+    \item [4] Run \texttt{serve dist} command
+    \item [5] Follow the instructions
 \end{itemize}
 
 \section{Effort Spent}
