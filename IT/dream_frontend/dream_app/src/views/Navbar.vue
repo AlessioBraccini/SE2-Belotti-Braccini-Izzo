@@ -19,6 +19,7 @@
 import profileimg1 from '../assets/profile.png'
 import axios from "axios";
 import router from "@/router";
+import {serverUrl} from "../config";
 
 export default {
   name: "Navbar",
@@ -32,7 +33,7 @@ export default {
     // Let the user logout the app
     const logout = () => {
 
-      axios.post('https://appdream.herokuapp.com/api/v1/token/logout/')
+      axios.post(serverUrl + '/api/v1/token/logout/')
       .then(() => {
         localStorage.clear()
 

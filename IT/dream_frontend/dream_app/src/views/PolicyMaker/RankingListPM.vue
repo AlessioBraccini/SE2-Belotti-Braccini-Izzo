@@ -27,6 +27,7 @@
 import {ref} from "vue";
 import axios from "axios";
 import router from "../../router";
+import {serverUrl} from "../../config";
 
 export default {
   name: "RankingListPM",
@@ -40,7 +41,7 @@ export default {
     // Load the farmers ranking by passing a specific ordering
     const loadRankData = async () => {
       try {
-        await axios.get('https://appdream.herokuapp.com/api/v1/rank_farmers',  {params: {ordering: props.ordering, district: ''}}).then(resp => {
+        await axios.get(serverUrl + '/api/v1/rank_farmers',  {params: {ordering: props.ordering, district: ''}}).then(resp => {
           farmerList.value = resp.data
 
           if(farmerList.value.length >= 7)

@@ -14,6 +14,7 @@ import Chart from 'chart.js/auto'
 import axios from "axios";
 import {ref} from "vue";
 import router from "../../router";
+import {serverUrl} from "../../config";
 
 export default {
   name: 'HumidityChart',
@@ -30,7 +31,7 @@ export default {
 
     // Retrieve the humidity chart data and store them in hum variable
     const getHumidity = async () => {
-      await axios.get('https://appdream.herokuapp.com/api/v1/humidity').then(resp => {
+      await axios.get(serverUrl + '/api/v1/humidity').then(resp => {
         hum = resp.data.humidity
         for (let i = 0; i < resp.data.humidity.length; i++) {
           this.avgHumidity += resp.data.humidity[i]
@@ -42,7 +43,7 @@ export default {
 
     // Retrieve the temperature chart data and store them in temp variable
     const getTemp = async () => {
-      await axios.get('https://appdream.herokuapp.com/api/v1/humidity').then(resp => {
+      await axios.get(serverUrl + '/api/v1/humidity').then(resp => {
         temp = resp.data.temperature
         for (let i = 0; i < resp.data.temperature.length; i++) {
           this.avgTemp += resp.data.temperature[i]

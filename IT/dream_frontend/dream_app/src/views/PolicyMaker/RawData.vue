@@ -20,6 +20,7 @@ import Navbar from "@/views/Navbar";
 import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";
+import {serverUrl} from "../../config";
 
 export default {
   name: "RawData",
@@ -36,7 +37,7 @@ export default {
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
     // Retrieve the chart data and displayed them in a raw way
-    axios.get('https://appdream.herokuapp.com/api/v1/humidity' ).then(resp => {
+    axios.get(serverUrl + '/api/v1/humidity' ).then(resp => {
       hum.value = resp.data.humidity
       temp.value = resp.data.temperature
     }).catch(err => {
@@ -50,7 +51,7 @@ export default {
     })
 
     // Retrieve the chart data and displayed them in a raw way
-    axios.get('https://appdream.herokuapp.com/api/v1/water_irrigation' ).then(resp => {
+    axios.get(serverUrl + '/api/v1/water_irrigation' ).then(resp => {
       irr.value = resp.data.water_qty
     }).catch(err => {
       console.log(err)

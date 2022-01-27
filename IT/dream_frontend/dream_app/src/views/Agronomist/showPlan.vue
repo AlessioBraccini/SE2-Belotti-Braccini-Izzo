@@ -29,7 +29,7 @@ import Navbar from "@/views/Navbar";
 import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";
-
+import {serverUrl} from "../../config";
 export default {
   name: "ShowPlan",
   components: {Navbar},
@@ -45,7 +45,7 @@ export default {
 
     // Load the list of the daily plans
     const loadPlans = async () => {
-      await axios.get('https://appdream.herokuapp.com/api/v1/daily_plan')
+      await axios.get(serverUrl + '/api/v1/daily_plan')
           .then(resp => {
             planList.value = resp.data
           }).catch(err => {

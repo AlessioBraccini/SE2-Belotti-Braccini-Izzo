@@ -39,7 +39,7 @@ import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";
 import NProgress from "nprogress"
-
+import {serverUrl} from "../../config";
 
 export default {
   name: "WriteReport",
@@ -72,7 +72,7 @@ export default {
           formData.append('file', file.value);
           formData.append('title', fileName.value)
 
-          axios.post('https://appdream.herokuapp.com/api/v1/steering_initiatives',
+          axios.post(serverUrl + '/api/v1/steering_initiatives',
               formData,
               {
                 headers: {

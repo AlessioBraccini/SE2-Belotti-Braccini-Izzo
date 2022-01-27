@@ -43,6 +43,7 @@ import NavbarAgro from "../../views/Navbar";
 import {ref} from "vue";
 import axios from "axios";
 import router from "../../router";
+import {serverUrl} from "../../config";
 
 export default {
   name: "RankingViewPM",
@@ -99,7 +100,7 @@ export default {
         if (district.value === 'All')
           district.value = ''
 
-        await axios.get('https://appdream.herokuapp.com/api/v1/rank_farmers', {params: {ordering: localStorage.getItem('order'), district: district.value}}).then(resp => {
+        await axios.get(serverUrl + '/api/v1/rank_farmers', {params: {ordering: localStorage.getItem('order'), district: district.value}}).then(resp => {
           farmerList.value = resp.data
           if (district.value === '')
             district.value = 'All'

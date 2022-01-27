@@ -12,6 +12,7 @@
 import Chart from 'chart.js/auto'
 import axios from "axios";
 import {ref} from "vue";
+import {serverUrl} from "../../config";
 
 export default {
   name: 'IrrigationChart',
@@ -27,7 +28,7 @@ export default {
 
     // Retrieve the chart data and store them in irr variable
     const getIrrigation = async () => {
-      await axios.get('https://appdream.herokuapp.com/api/v1/water_irrigation').then(resp => {
+      await axios.get(serverUrl + '/api/v1/water_irrigation').then(resp => {
         irr = resp.data.water_qty
         for (let i = 0; i < resp.data.water_qty.length; i++) {
           this.totalWater += resp.data.water_qty[i]

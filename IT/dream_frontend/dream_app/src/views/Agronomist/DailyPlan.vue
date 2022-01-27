@@ -72,7 +72,7 @@ import {ref} from "vue";
 import axios from "axios";
 import NavbarAgro from "@/views/Navbar";
 import router from "@/router";
-
+import {serverUrl} from "../../config";
 
 export default {
   name: "DailyPlan",
@@ -102,7 +102,7 @@ export default {
 
         if (date.value) {
           if (takenFarmerList.value.length){
-            await axios.post('https://appdream.herokuapp.com/api/v1/daily_plan', {
+            await axios.post(serverUrl + '/api/v1/daily_plan', {
               visit_farmers_list: takenFarmerListId.value,   // list of farmers id
               date: date.value
             }).then(() => {
@@ -142,7 +142,7 @@ export default {
     // Load the farmers list and how many times it has been visited
     const loadFarmerData = async () => {
       try {
-        await axios.get('https://appdream.herokuapp.com/api/v1/farms_list').then(resp => {
+        await axios.get(serverUrl + '/api/v1/farms_list').then(resp => {
           farmerList.value = resp.data
         })
       }
@@ -177,7 +177,7 @@ export default {
     const updateDailyPlan = async () => {
 
         try {
-          await axios.get('https://appdream.herokuapp.com/api/v1/update_daily_plan', {params: {date: new Date().toJSON().slice(0,10)}}).then(resp => {
+          await axios.get(serverUrl + '/api/v1/update_daily_plan', {params: {date: new Date().toJSON().slice(0,10)}}).then(resp => {
             if (resp.data.visit_farmers_list.length)
               router.push({name: 'UpdatePlan'})
             else

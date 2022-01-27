@@ -64,7 +64,7 @@ import {ref} from "vue";
 import axios from "axios";
 import NavbarAgro from "@/views/Navbar";
 import router from "@/router";
-
+import {serverUrl} from "../../config";
 
 export default {
   name: "DailyPlan",
@@ -88,7 +88,7 @@ export default {
 
     // Load the daily plan of the current day by using its date
     const loadDailyPlan = async () => {
-      await axios.get('https://appdream.herokuapp.com/api/v1/update_daily_plan', {params: {date: date}})
+      await axios.get(serverUrl + '/api/v1/update_daily_plan', {params: {date: date}})
           .then(resp => {
             farmerList.value = resp.data['visit_farmers_list']
 
@@ -109,7 +109,7 @@ export default {
     // Load the list of the farmer to allow the agro to add some farmer
     const loadFarmerData = async () => {
       try {
-        await axios.get('https://appdream.herokuapp.com/api/v1/farms_list').then(resp => {
+        await axios.get(serverUrl + '/api/v1/farms_list').then(resp => {
           completeFarmerList.value = resp.data
           loadDailyPlan()
         }).catch(err => {
@@ -149,7 +149,7 @@ export default {
 
     // Upload in the server the updated version of the plan
     const confirmUpdate = async () => {
-        await axios.post ('https://appdream.herokuapp.com/api/v1/update_daily_plan', {
+        await axios.post (serverUrl + '/api/v1/update_daily_plan', {
           visit_farmers_list: farmerListId.value,
           date: date
         }).then(() => {

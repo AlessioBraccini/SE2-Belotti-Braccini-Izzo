@@ -36,6 +36,7 @@ import NavbarAgro from "@/views/Navbar";
 import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";
+import {serverUrl} from "../../config";
 export default {
   name: "RankingView",
   components: {NavbarAgro},
@@ -51,7 +52,7 @@ export default {
     // Load the farmers ranking in descending order
     const loadRankData = async () => {
       try {
-        await axios.get('https://appdream.herokuapp.com/api/v1/rank_farmers', {params: {ordering: 'descending'}}).then(resp => {
+        await axios.get(serverUrl + '/api/v1/rank_farmers', {params: {ordering: 'descending'}}).then(resp => {
           farmerList.value = resp.data
         }).catch(err => {
           if (err.response.status === 401){

@@ -32,6 +32,7 @@ import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";
 import NProgress from "nprogress"
+import {serverUrl} from "../../config";
 
 export default {
   name: "ViewReport",
@@ -48,7 +49,7 @@ export default {
     // Download the list steering initiative from the server
     const loadReport = async () => {
       try {
-        await axios.get('https://appdream.herokuapp.com/api/v1/steering_initiatives').then(resp => {
+        await axios.get(serverUrl + '/api/v1/steering_initiatives').then(resp => {
           reportList.value = resp.data['reports_list']
         })
       }
@@ -63,7 +64,7 @@ export default {
     // Retrieve and download the specific report using the author_id, the publication date and the file name
     const viewSpecificReport = async (report) => {
       NProgress.start()
-      await axios.get('https://appdream.herokuapp.com/api/v1/download_reports',
+      await axios.get(serverUrl + '/api/v1/download_reports',
           { responseType: "blob",
             params: {
               author_id: report['author_id'],

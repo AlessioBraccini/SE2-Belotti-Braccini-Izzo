@@ -24,6 +24,7 @@ import { ref } from "vue";
 import router from "@/router"
 import axios from "axios";
 import image from '../assets/dreamLogo.png'
+import {serverUrl} from "../config";
 
 export default {
   name: "LoginPage",
@@ -42,7 +43,7 @@ export default {
     // Retrieve the information of the user in order to load the right homepage
     const loadUserData = async () => {
       try {
-        return await axios.get('https://appdream.herokuapp.com/api/v1/users/me/')
+        return await axios.get(serverUrl + '/api/v1/users/me/')
       }
       catch (err){
         console.log('err load ' + err)
@@ -55,7 +56,7 @@ export default {
 
       passwordError.value = ''
 
-      await axios.post('https://appdream.herokuapp.com/api/v1/token/login/', {
+      await axios.post(serverUrl + '/api/v1/token/login/', {
         email: email.value,
         password: password.value,
       })

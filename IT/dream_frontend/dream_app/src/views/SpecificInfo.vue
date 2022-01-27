@@ -25,6 +25,8 @@ import NavbarAgro from "@/views/Navbar";
 import axios from "axios";
 import {ref} from "vue";
 import router from "@/router";
+import {serverUrl} from "../config";
+
 export default {
   name: "SpecificInfo",
   components: {NavbarAgro},
@@ -44,7 +46,7 @@ export default {
     axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
     // Retrieve the info of the farmer in order to display them to the user
-    axios.get('https://appdream.herokuapp.com/api/v1/profile_info', {params: {farmer_id: localStorage.getItem('id')}} ).then(resp => {
+    axios.get(serverUrl + '/api/v1/profile_info', {params: {farmer_id: localStorage.getItem('id')}} ).then(resp => {
       farmerName.value = resp.data['full_name']
       email.value = resp.data['email']
       area.value = resp.data['area']

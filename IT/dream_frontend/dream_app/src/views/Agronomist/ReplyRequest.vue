@@ -44,7 +44,7 @@ import axios from "axios";
 import {ref} from "vue";
 import NavbarAgro from "@/views/Navbar";
 import router from "@/router";
-
+import {serverUrl} from "../../config";
 export default {
   name: "ReplyRequest",
   components: {NavbarAgro},
@@ -62,7 +62,7 @@ export default {
     // Load the specific help request by using its id
     const loadRequests =  async () => {
       try {
-        await axios.get('https://appdream.herokuapp.com/api/v1/help_request_by_id', {params:{request_id: localStorage.getItem('id')}})
+        await axios.get(serverUrl + '/api/v1/help_request_by_id', {params:{request_id: localStorage.getItem('id')}})
             .then(resp => {
               request.value = resp.data
         }).catch(err => {
@@ -86,7 +86,7 @@ export default {
     // Send to the server the reply of the request and come back to the home page
     const send =  async () => {
       try {
-        await axios.post('https://appdream.herokuapp.com/api/v1/help_request', {
+        await axios.post(serverUrl + '/api/v1/help_request', {
           reply: message.value,
           request_id: localStorage.getItem('id')
         }).then(() => {
