@@ -9,10 +9,15 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import json
 from pathlib import Path
 import os
 import dj_database_url
+import environ
+
+# Set up environment to read environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=(f_+4l*td*=chaj$$vpr*_)^zapbfpvg_lsgxp0m6+kh6b(8r'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -56,7 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'gdstorage',
+    'gdstorage',
     'userApp.apps.UserappConfig',
     'app.apps.AppConfig',
     'planningApp.apps.PlanningappConfig',
@@ -111,9 +116,9 @@ WSGI_APPLICATION = 'dream_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dream_db',
-        'USER': 'dream_admin',
-        'PASSWORD': 'dream_pwd',
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PWD'),
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -161,9 +166,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Static files (CSS, JavaScript, Images)
 
 # Google Drive Storage Settings
-# If running tests in local mode, uncomment following line:
-# GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = '../../dreamproject-338909-4cffdfd653e2.json'
-# else (when deployed on heroku), uncomment following line:
 GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = None
 # Contents of json private key file must be in an environment variable named GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS
 
@@ -182,7 +184,6 @@ STATIC_URL = '/static/'
 
 #  Add configuration for static files storage using whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 
 DATABASES['default'].update(dj_database_url.config(conn_max_age=500))
 
