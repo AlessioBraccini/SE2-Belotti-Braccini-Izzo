@@ -19,7 +19,7 @@
 import profileimg1 from '../assets/profile.png'
 import axios from "axios";
 import router from "@/router";
-import {serverUrl} from "../config";
+import {serverUrl} from "../../config";
 
 export default {
   name: "Navbar",

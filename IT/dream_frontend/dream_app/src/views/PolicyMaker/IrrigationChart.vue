@@ -12,7 +12,7 @@
 import Chart from 'chart.js/auto'
 import axios from "axios";
 import {ref} from "vue";
-import {serverUrl} from "../../config";
+import {serverUrl} from "../../../config";
 
 export default {
   name: 'IrrigationChart',

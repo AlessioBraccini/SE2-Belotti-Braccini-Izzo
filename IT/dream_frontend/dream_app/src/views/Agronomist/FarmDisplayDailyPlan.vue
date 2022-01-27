@@ -26,7 +26,7 @@
 <script>
 import {ref} from "vue";
 import axios from "axios";
-import {serverUrl} from "../../config";
+import {serverUrl} from "../../../config";
 export default {
   name: "RankingList",
 

@@ -35,7 +35,7 @@ import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";
 import NavbarAgro from "@/views/Navbar";
-import {serverUrl} from "../../config";
+import {serverUrl} from "../../../config";
 
 export default {
   name: "HelpRequests",

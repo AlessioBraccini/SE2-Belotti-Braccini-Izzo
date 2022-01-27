@@ -25,7 +25,7 @@ import NavbarAgro from "@/views/Navbar";
 import axios from "axios";
 import {ref} from "vue";
 import router from "@/router";
-import {serverUrl} from "../config";
+import {serverUrl} from "../../config";
 
 export default {
   name: "SpecificInfo",

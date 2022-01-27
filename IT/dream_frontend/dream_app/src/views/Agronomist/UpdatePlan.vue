@@ -64,7 +64,7 @@ import {ref} from "vue";
 import axios from "axios";
 import NavbarAgro from "@/views/Navbar";
 import router from "@/router";
-import {serverUrl} from "../../config";
+import {serverUrl} from "../../../config";
 
 export default {
   name: "DailyPlan",
