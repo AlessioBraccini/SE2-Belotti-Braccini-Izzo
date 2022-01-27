@@ -124,6 +124,10 @@ DATABASES = {
     }
 }
 
+# If .env DATABASE_URL is set, it overrides the database config above (used by Heroku)
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
 # Authentication
 AUTH_USER_MODEL = 'userApp.User'
 
@@ -182,9 +186,3 @@ STATIC_URL = '/static/'
 
 #  Add configuration for static files storage using whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# DATABASES['default'].update(dj_database_url.config(conn_max_age=500))
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
-
-
