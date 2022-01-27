@@ -173,7 +173,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = None
 # Contents of json private key file must be in an environment variable named GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS
 
-GOOGLE_DRIVE_STORAGE_SERVICE_EMAIL = 'dream-415@dreamproject-338909.iam.gserviceaccount.com'
+# .env variable GOOGLE_DRIVE_STORAGE_SERVICE_EMAIL needed
 GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = '/'  # OPTIONAL, no sub dir needed
 
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
