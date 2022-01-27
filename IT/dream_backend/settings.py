@@ -121,9 +121,6 @@ DATABASES = {
         'PASSWORD': env('DATABASE_PWD'),
         'HOST': 'localhost',
         'PORT': '',
-    },
-    'heroku_db': {
-        'ENGINE': 'django.db.backends.postgresql',
     }
 }
 
@@ -188,6 +185,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # DATABASES['default'].update(dj_database_url.config(conn_max_age=500))
 db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['heroku_db'].update(db_from_env)
+DATABASES['default'].update(db_from_env)
 
 
