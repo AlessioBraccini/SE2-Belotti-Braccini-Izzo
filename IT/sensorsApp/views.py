@@ -53,8 +53,8 @@ class Humidity(APIView):
                         temperature_avg += data[n].temperature
                     humidity_avg /= count
                     temperature_avg /= count
-                    humidity_list.append(humidity_avg)
-                    temperature_list.append(temperature_avg)
+                    humidity_list.append(round(humidity_avg, 2))
+                    temperature_list.append(round(temperature_avg, 2))
             except HumiditySensor.DoesNotExist:
                 humidity_list.append(0)
                 temperature_list.append(0)
@@ -101,7 +101,7 @@ class WaterIrrigation(APIView):
                     for n in range(count):
                         avg += data[n].water_qty
                     avg /= count
-                    water_qty_list.append(avg)
+                    water_qty_list.append(round(avg, 2))
             except WaterIrrigationSensor.DoesNotExist:
                 water_qty_list.append(0)
 
