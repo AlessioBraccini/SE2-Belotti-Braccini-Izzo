@@ -75,7 +75,7 @@ export default {
     left: 5%;
   }
 
-  @media only screen and (min-width: 612px) {
+  @media only screen and (min-width: 700px) {
     .localButton {
       width: 26.5%;
       margin-right: 5%;

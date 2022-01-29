@@ -154,11 +154,10 @@ li{
 
 }
 
-@media only screen and (min-width: 620px) and (max-width: 1000px) {
+@media only screen and (min-width: 700px) and (max-width: 1000px) {
 
   .square{
     width: 90%;
-    height: 30%;
     left: 5%;
     top: 5%;
   }

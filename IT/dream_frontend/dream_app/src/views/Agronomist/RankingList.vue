@@ -131,12 +131,12 @@ export default {
     font-weight: bold;
   }
 
-  @media only screen and (min-width: 620px)  {
+  @media only screen and (min-width: 700px)  {
     .square{
       width: 90%;
-      height: 32%;
       left: 5%;
       top: 5%;
+      height: 380px;
     }
     .rawText{
       left: 37%;
@@ -145,12 +145,12 @@ export default {
     }
   }
 
-  @media only screen and (min-width: 530px) and (max-width: 620px) {
+  @media only screen and (min-width: 530px) and (max-width: 699px) {
     .square{
       width: 90%;
-      height: 320px;
       left: 5%;
       top: 5%;
+      height: 330px;
     }
   }
 
