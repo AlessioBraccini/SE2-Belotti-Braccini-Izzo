@@ -13,6 +13,7 @@
 \usepackage[most]{tcolorbox}
 \usepackage{xparse}
 \usepackage{subcaption}
+\usepackage{listings}
 
 \hyphenation{Te-lan-ga-na}
 \hyphenation{an-a-lys-ing}
@@ -27,6 +28,41 @@
 {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}
 {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+% JSON style for listings
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+    basicstyle=\small\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=2pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
 
 
 \def\exampletext{Example}
@@ -443,16 +479,66 @@ We also invited a couple of testers in order to stress the app.
 
 
 \section{Installation}
-As a web application we chose to deploy the project on a real server and
-a completely running version of this software is available on:
+As a web application we chose to deploy it on Heroku, so
+a fully running version of the software is available at:
 \url{https://dreamapplication.herokuapp.com/}.
 
-However if you want to install it on your machine you can follow the guide below.
+We strongly suggest you to use the deployed version instead of installing the software locally, since this would require some changes both in backend and frontend source code.
+Mind that, running the backend locally requires some adjustments to deal with static files. In fact, to be able to deploy the backend on a Cloud Application Platform such as Heroku, the storage of static files (i.e. Steering Initiatives reports uploaded by agronomists) has been managed through Google Drive. 
+
+However, if you wish to install it on your machine you can follow the guide below. 
+
 \subsection{Requirements}
-Node.js is required in order to run the frontend, please install it if you don't
+\textbf{Node.js} is required in order to run the frontend, please install it if you don't
 have it on your device.
 
+To run the backend, \textbf{Python 3.10} or a compatible version is mandatory. Moreover, \texttt{\textbf{pip}} command must be installed too, in order to resolve the project's dependencies.
+
+\begin{itemize}
+    \item \textbf{Python and Pip}
+    \begin{itemize}
+        \item Download Python 3.10 or equivalent from \url{https://www.python.org/downloads/}
+        \item Install latest version of Pip referencing \url{https://pip.pypa.io/en/stable/installation/}
+    \end{itemize}
+    \item \textbf{Node.js}
+\end{itemize}
+
 \subsection{Backend Installation}
+\begin{itemize}
+    \item[1)] Download the latest zip archive from the Relase Page on the project's GitHub repository
+    \item[2)] Extract all the files in the same folder
+    \item[3)] Create a \texttt{.env} file in the same folder with the following fields and fill it:
+    \begin{itemize}
+        \item[\textit{i.}] \texttt{SECRET\_KEY} is the key used by Django to manage authentication and hashing messages. You can set your own.
+        \item[\textit{ii.}] \texttt{DATABASE\_NAME}, \texttt{DATABASE\_USER} and \texttt{DATABASE\_PWD} are credential to access your local PostgreSQL database. If you wish to use a not local PostgreSQL database, you can also provide the \texttt{DATABASE\_URL} variable.
+        \item[\textit{iii.}] \texttt{LOCAL\_STATIC\_FILES} can be set either to \texttt{True} or \texttt{False} to indicate if you want to store static files locally or on Google Drive.
+        \begin{itemize}
+            \item If \texttt{True} (or not set), then the \emph{Steering Initiatives} reports uploaded to the app will be stored in 'generated/reports'
+            \item If \texttt{False}, then the reports are going to be stored on Google Drive
+        \end{itemize} 
+        \item[\textit{iv.}] \texttt{GOOGLE\_DRIVE\_STORAGE\_JSON\_KEY\_FILE\_CONTENTS} and \texttt{GOOGLE\_\\DRIVE\_STORAGE\_SERVICE\_MAIL} must be set if \texttt{LOCAL\_STATIC\_\\FILES=false}. This happens because a Google Drive API is going to be used to store static files. You have to:
+        \begin{itemize}
+            \item Create a service account on a project in Google Developers Console: this will be your service email
+            \item Generate a secret service key a store it in a safe place. Copy and paste its content in the JSON Key variable
+        \end{itemize}      
+    \end{itemize}
+    \begin{lstlisting}[language=json]
+SECRET_KEY=your_backend_secret_key
+
+DATABASE_NAME=your_database_name
+DATABASE_USER=your_database_admin_username
+DATABASE_PWD=your_database_password
+
+LOCAL_STATIC_FILES=true/false
+
+# if LOCAL_STATIC_FILE=false then the following variables must be set as well
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS={your_JSON_key_file_content_for_Google_Drive_API}
+GOOGLE_DRIVE_STORAGE_SERVICE_EMAIL=your_project.iam.gserviceaccount.com
+    \end{lstlisting}  
+    \item[4)] Save \texttt{.env}
+    \item[5)] Run shell script to start the backend 
+\end{itemize}
+
 \subsection{Frontend Installation}
 Firstly you have to specify in the config.js file (contained in \newline \textit{IT/dream\_frontend/dream\_application}) if you want to run the backend online or locally on your device.
 Inside the file you will find a configuration string and you have to insert the url of the chosen backend
