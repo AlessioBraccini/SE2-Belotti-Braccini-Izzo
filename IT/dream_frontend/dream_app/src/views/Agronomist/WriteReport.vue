@@ -21,7 +21,7 @@
   </div>
   <div>
     <button @click="submitFile" class="submitBtn actionButton">Submit</button>
-    <button @click="pushReport" class="actionButton backBtn">View Send Report</button>
+    <button @click="pushReport" class="actionButton backBtn">View Sended Report</button>
     <button @click="back" class="actionButton backBtn">Back</button>
   </div>
 
