@@ -10,6 +10,7 @@ from sensorsApp.models import HumiditySensor, WaterIrrigationSensor
 
 User = get_user_model()
 
+
 # Create your views here.
 
 
@@ -38,16 +39,25 @@ class Humidity(APIView):
 
         for district in User.DISTRICTS:
             try:
-                data = HumiditySensor.objects.get(district=district[0])
-                humidity_list.append(data.humidity)
-                temperature_list.append(data.temperature)
+                data = HumiditySensor.objects.filter(district=district[0])
+                count = data.count()
+
+                if count == 0:
+                    humidity_list.append(0)
+                    temperature_list.append(0)
+                else:
+                    humidity_avg = 0
+                    temperature_avg = 0
+                    for n in range(count):
+                        humidity_avg += data[n].humidity
+                        temperature_avg += data[n].temperature
+                    humidity_avg /= count
+                    temperature_avg /= count
+                    humidity_list.append(humidity_avg)
+                    temperature_list.append(temperature_avg)
             except HumiditySensor.DoesNotExist:
                 humidity_list.append(0)
                 temperature_list.append(0)
-            except HumiditySensor.MultipleObjectsReturned:
-                data = HumiditySensor.objects.filter(district=district[0])
-                humidity_list.append(data[0].humidity)
-                temperature_list.append(data[0].temperature)
 
         context = {
             'humidity': humidity_list,
@@ -82,13 +92,18 @@ class WaterIrrigation(APIView):
 
         for district in User.DISTRICTS:
             try:
-                data = WaterIrrigationSensor.objects.get(district=district[0])
-                water_qty_list.append(data.water_qty)
+                data = WaterIrrigationSensor.objects.filter(district=district[0])
+                count = data.count()
+                if count == 0:
+                    water_qty_list.append(0)
+                else:
+                    avg = 0
+                    for n in range(count):
+                        avg += data[n].water_qty
+                    avg /= count
+                    water_qty_list.append(avg)
             except WaterIrrigationSensor.DoesNotExist:
                 water_qty_list.append(0)
-            except WaterIrrigationSensor.MultipleObjectsReturned:
-                data = WaterIrrigationSensor.objects.filter(district=district[0])
-                water_qty_list.append(data[0].water_qty)
 
         context = {
             'water_qty': water_qty_list,
