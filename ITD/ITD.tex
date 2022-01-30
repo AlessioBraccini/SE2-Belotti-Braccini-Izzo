@@ -15,6 +15,7 @@
 \usepackage{subcaption}
 \usepackage{listings}
 
+
 \hyphenation{Te-lan-ga-na}
 \hyphenation{an-a-lys-ing}
 \hyphenation{a-gron-o-mists}
@@ -35,7 +36,7 @@
 \definecolor{delim}{RGB}{20,105,176}
 \colorlet{numb}{magenta!60!black}
 
-\lstdefinelanguage{json}{
+\lstdefinelanguage{shell}{
     basicstyle=\small\ttfamily,
     numbers=left,
     numberstyle=\scriptsize,
@@ -61,7 +62,8 @@
       {\{}{{{\color{delim}{\{}}}}{1}
       {\}}{{{\color{delim}{\}}}}}{1}
       {[}{{{\color{delim}{[}}}}{1}
-      {]}{{{\color{delim}{]}}}}{1},
+      {]}{{{\color{delim}{]}}}}{1}
+      {>}{{{\color{delim}{>}}}}{1},
 }
 
 
@@ -522,7 +524,7 @@ To run the backend, \textbf{Python 3.10} or a compatible version is mandatory. M
             \item Generate a secret service key a store it in a safe place. Copy and paste its content in the JSON Key variable
         \end{itemize}      
     \end{itemize}
-    \begin{lstlisting}[language=json]
+    \begin{lstlisting}[language=shell]
 SECRET_KEY=your_backend_secret_key
 
 DATABASE_NAME=your_database_name
@@ -536,7 +538,43 @@ GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS={your_JSON_key_file_content_for_Goog
 GOOGLE_DRIVE_STORAGE_SERVICE_EMAIL=your_project.iam.gserviceaccount.com
     \end{lstlisting}  
     \item[4)] Save \texttt{.env}
-    \item[5)] Run shell script to start the backend 
+    \item[5a)] If you are on a Unix-like system (Linux or MacOS), you can run the Makefile in the \textit{dream\_pkg} via \texttt{make run} command: this will install all the dependencies, update the database schema and start the backend server. However, if you wish to do that manually, you can follow the commands below:
+    \begin{lstlisting}[language=shell]
+# create virtual environment
+dream_pkg:~$ python3 -m venv IT/venv
+
+# activate venv
+dream_pkg:~$ source IT/venv/bin/activate
+
+# install dependencies
+dream_pkg:~$ pip install -r IT/requirements.txt
+
+# update database schema
+dream_pkg:~$ python3 IT/manage.py makemigrations
+dream_pkg:~$ python3 IT/manage.py migrate
+
+# start backend server
+dream_pkg:~$ python3 IT/manage.py runserver
+    \end{lstlisting}
+    \item[5b)] If you are on Windows, run the following commands:
+    \begin{lstlisting}[language=shell]
+# create a new virtual environment
+C:\dream_pkg\> python -m venv c:\dream_pkg\IT\venv
+
+# activate venv: 2 options
+C:\dream_pkg\> IT\venv\Scripts\activate.bat  #for cmd.exe
+PS C:\dream_pkg\> IT\venv\Scripts\Activate.ps1  #for PowerShell
+  
+# install dependencies
+C:\dream_pkg\> pip install -r IT\requirements.txt
+
+# update database schema
+C:\dream_pkg\> python IT/manage.py makemigrations
+C:\dream_pkg\> python IT/manage.py migrate
+
+# start backend server
+C:\dream_pkg\> python IT/manage.py runserver
+    \end{lstlisting}
 \end{itemize}
 
 \subsection{Frontend Installation}
