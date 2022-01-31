@@ -134,11 +134,11 @@ The code can be found in the official project repository on GitHub at the link: 
 \subsection{Purpose}
 
 This document aims to describe how the implementation and integration
-testing took place.
+testing haven taken place.
 Implementation is the last step of the DREAM application
 development cycle.
 Testing, instead, means check that the critical parts of the application
-works in a correct way, as described in the DD document.
+work in a correct way, as described in the DD document.
 
 
 \subsection{Definitions, Acronyms, Abbreviations}
@@ -191,9 +191,23 @@ Given the three types of user, we decided to implement the functionalities for P
     \item Weather widget
 \end{itemize}
 For the details about these functionalities please refer to the RASD document.
+
+Farmer user's functionalities have not been implemented at this stage.
 \newpage
 \subsection{Adopted Development Frameworks}
-Model-View-Controller paradigm
+The chosen frameworks, both for frontend and backend developing, inheritly force the standard and well suited architectural patters. In particular, Django Framework forces a \emph{Model-View-Controller} (MVC) while Vue.js a \emph{Model-View-ViewModel} (MVVM) which is declination of MVC pattern better suited for frontend developing. 
+
+\paragraph{MVC} In the MVC patter, the \textbf{model} is the one in charge of defining the data storage, the \textbf{view} is majorly associated with the User Interface (UI) and it is used to provide the visual representation of the MVC mode, also handling the communication between the user (inputs, requests, etc.) and the controller, while \textbf{controller} is the connection between models and views.
+
+\paragraph{MVVM} In the MVVM patter, the \textbf{model} is the data access layer and represents real state content. The \textbf{views} displays a representation of the model and receives the user's interaction with the view. Both of these are as in MVC patter. While, the \textbf{view-model} is an abstraction of the view exposing public properties and commands. Instead of the controller of the MVC pattern, the MVVM has a \textbf{binder} which automates communication between the view and its bound properties in the view model.
+\paragraph{}
+All in all, the advantages of using MVC (and similarly MVVM) can be summed up as: 
+\begin{itemize}
+    \item The \textbf{structured organization} that helps managing large application, making the design choice more scalable
+    \item The support for the invocation of \textbf{asynchronous methods}, making the backend and frontend integration very fast and dynamic
+    \item The \textbf{easy modification}, making it suited to further develop the project, even after this prototype, without affecting the already present architecture, easing the mantainment
+    \item It allows a \textbf{test-driven development}, since it simplifies the testing process
+\end{itemize}
 
 \begin{figure}[H]
     \subfloat{{\includegraphics[scale=0.05]{assets/Django-Logo.png}}}%
@@ -210,8 +224,9 @@ Model-View-Controller paradigm
 \end{center}
 
 \subsubsection{Programming Language}
-The programming language of choice for the DREAM backend is Python.
+The programming language of choice for DREAM's backend is \textbf{Python}, an interpreted high-level general-purpose programming language, supporting multiple programming paradigms.
 
+For what concerns DREAM's development requirements, Python has more advantages than disadvantages.
 \begin{itemize}
     \item \textbf{Pros:}
     \begin{itemize}
@@ -225,7 +240,7 @@ The programming language of choice for the DREAM backend is Python.
     \end{itemize}
 \end{itemize}
 
-For the client side we chose JavaScript, a text-based programming language, that allows to build interactive web pages. It handles the user's interaction with the elements present on the page.
+For the client side we chose \textbf{JavaScript}, a text-based programming language, that allows to build interactive web pages. It handles the user's interaction with the elements present on the page.
 Alongside JavaScript, we used HTML and CSS to give structure and style to the page.
 
 \subsubsection{Django Framework}
@@ -516,7 +531,7 @@ To run the backend, \textbf{Python 3.10} or a compatible version is mandatory. M
         \item[\textit{iii.}] \texttt{LOCAL\_STATIC\_FILES} can be set either to \texttt{True} or \texttt{False} to indicate if you want to store static files locally or on Google Drive.
         \begin{itemize}
             \item If \texttt{True} (or not set), then the \emph{Steering Initiatives} reports uploaded to the app will be stored in 'generated/reports'
-            \item If \texttt{False}, then the reports are going to be stored on Google Drive
+            \item If \texttt{False}, then the reports are going to be stored on Google Drive (refer to next point)
         \end{itemize} 
         \item[\textit{iv.}] \texttt{GOOGLE\_DRIVE\_STORAGE\_JSON\_KEY\_FILE\_CONTENTS} and \texttt{GOOGLE\_\\DRIVE\_STORAGE\_SERVICE\_MAIL} must be set if \texttt{LOCAL\_STATIC\_\\FILES=false}. This happens because a Google Drive API is going to be used to store static files. You have to:
         \begin{itemize}
@@ -538,7 +553,7 @@ GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS={your_JSON_key_file_content_for_Goog
 GOOGLE_DRIVE_STORAGE_SERVICE_EMAIL=your_project.iam.gserviceaccount.com
     \end{lstlisting}  
     \item[4)] Save \texttt{.env}
-    \item[5a)] If you are on a Unix-like system (Linux or MacOS), you can run the Makefile in the \textit{dream\_pkg} via \texttt{make run} command: this will install all the dependencies, update the database schema and start the backend server. However, if you wish to do that manually, you can follow the commands below:
+    \item[5a)] If you are on a Unix-like system (Linux-Debian or MacOS) with bash/zsh shell, you can run the Makefile in the \textit{dream\_pkg} via \texttt{make run} command: this will install all the dependencies, update the database schema and start the backend server. However, if you wish to do that manually, you can follow the commands below:
     \begin{lstlisting}[language=shell]
 # create virtual environment
 dream_pkg:~$ python3 -m venv IT/venv
@@ -578,7 +593,7 @@ C:\dream_pkg\> python IT/manage.py runserver
 \end{itemize}
 
 \subsection{Frontend Installation}
-Firstly you have to specify in the config.js file (contained in \newline \textit{IT/dream\_frontend/dream\_application}) if you want to run the backend online or locally on your device.
+Firstly, you have to specify in the config.js file (contained in \newline \textit{IT/dream\_frontend/dream\_application}) if you want to run the backend online or locally on your device.
 Inside the file you will find a configuration string and you have to insert the url of the chosen backend
 (by default is set to online backend but some choices are already available).
 
