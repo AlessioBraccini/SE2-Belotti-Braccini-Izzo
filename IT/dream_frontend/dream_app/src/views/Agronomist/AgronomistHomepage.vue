@@ -104,9 +104,7 @@ export default {
     display: inline-block;
     background-color: red;
     border-radius: 50%;
-    width: 27px;
-    height: 27px;
-
+    width: 25px;
   }
 
   @media only screen and (min-width: 750px) {
