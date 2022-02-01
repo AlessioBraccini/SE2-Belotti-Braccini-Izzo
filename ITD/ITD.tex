@@ -14,6 +14,7 @@
 \usepackage{xparse}
 \usepackage{subcaption}
 \usepackage{listings}
+\usepackage{tikz}
 
 
 \hyphenation{Te-lan-ga-na}
@@ -29,6 +30,9 @@
 {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}
 {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+
 
 % JSON style for listings
 \colorlet{punct}{red!60!black}
@@ -192,8 +196,58 @@ Given the three types of user, we decided to implement the functionalities for P
 \end{itemize}
 For the details about these functionalities please refer to the RASD document.
 
-Farmer user's functionalities have not been implemented at this stage.
+\paragraph{Not implemented functionalities}
+Farmer user's functionalities have not been implemented at this stage. To take care of the farmers' data lack, some entries has been inserted in the database to mimic the normal behaviour and let agronomist and policy maker users experience the prototype application. In particular, farmer users, help requests and sensors data have been made up.
 \newpage
+\subsection{Implemented Requirements}
+In the following list of requirements, the implemented ones are checked with a tick, while the other ones refer to the farmer user type so they have not been implemented.
+\newcounter{RequirementCtr}
+\begin{itemize}
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must allow only registered and logged-in users to use the app. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system shall allow users to be identified by an email of their choosing. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must suggest to the farmer users the area in which they are during the registration phase if the IT device is equipped with GPS technology. In any case, the final decision will be up to the registering user. $\times$
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must inform the user to try later if they are experimenting connectivity issues. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation systems and soil humidity sensors. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must allow Policy Makers to retrieve all agronomists' steering initiative reports uploaded to the database. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must give Policy Makers up-to-date ranking of the best and worst performing farmers. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must use a fair and scientific score to rank the Farmers in order to represent the real situation. $\times$
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must let Farmers insert their production information every day. $\times$
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must provide the contact of the agronomist appointed to the area of the Farmer requesting professional help. $\times$
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must allow every user registered as Farmer to access the forum, to create new discussions and to post replies to already existing ones.
+    \stepcounter{RequirementCtr} $\times$
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must notify Agronomists of unresolved requests of help from Farmers. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must allow the Agronomists to add a new schedule for the day each day. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must suggest to the Agronomists which farms to visit while planning the Daily Plan based on the number of received visits. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must suggest to the Agronomists only the farms among the ones in their competence area. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must allow the Agronomists to update their schedule during the day. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must register the already uploaded schedule as definitive at 23:59 of the current day. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must show weather forecasts relevant to the area concerning the Farmer or the Agronomist. \checkmark
+    \stepcounter{RequirementCtr}
+    \item[\textbf{R\arabic{RequirementCtr}.}] The system must present news concerning crop only if relevant to the Farmer's own crop type. $\times$
+\end{itemize}
+
+\subsection{Design Choices}
+We would like to point out that the prototype's UI has been designed mainly for mobile browsing, because it is more comfortable to use a smartphone on the field from a farmer perspective. However, it is completely functional on laptops and computers too, even if it's slightly less graphically enjoyable.
+
 \subsection{Adopted Development Frameworks}
 The chosen frameworks, both for frontend and backend developing, inheritly force the standard and well suited architectural patters. In particular, Django Framework forces a \emph{Model-View-Controller} (MVC) while Vue.js a \emph{Model-View-ViewModel} (MVVM) which is declination of MVC pattern better suited for frontend developing. 
 
@@ -253,6 +307,17 @@ Moreover, it allows to configure the \emph{Admin Interface} from where authorize
 
 Furthermore, Django is \textbf{extensively documented} and \textbf{scalable} since it's being used in very demanding professional contexts, being one of the frameworks of choice of well known social media platforms that experience high loads of requests due to their intensive usage from their user base.
 
+\paragraph{Django Middlewares}
+To manage the communication between backend and frontend, we use mainly the following Django middlewares:
+\begin{itemize}
+    \item \textit{SecurityMiddleware}
+    \item \textit{SessionMiddleware}
+    \item \textit{CsrfViewMiddleware}
+    \item \textit{AuthenticationMiddleware}
+\end{itemize}
+
+Furthermore, since we used Django REST Framework, the \textit{CorsMiddleware} is the one dealing with the message exchanges between frontend and backend (i.e. POST and GET).
+
 \subsubsection{Django REST Framework}
 \label{REST}
 We decided to pair REST framework to our Django backend since REST allows even more security features.
@@ -291,7 +356,6 @@ This return us not only the basics information but also more specific ones like 
 \subsection{DataBase}
 Our database system of choice is PostgreSQL, a well known object-relational database. It is reliable, robust, ACID-compliant and ensures high performance. 
 Furthermore it is supported excellently by Django.
-We decided to use PostgreSQL as Database system, Chiedo
 
 \subsection{Heroku}
 We choose to host our project in a server in order to make it reachable by everyone
@@ -322,9 +386,9 @@ We choose:
 \end{center}
 
 % basic description
-The back-end of the application follows the common Django project structure as shown in the figure above.
+The backend of the application follows the common Django project structure as shown in the figure above.
 This section describes the structure of the project and the role of each app.\newline
-Here is represented the structure of the back-end:
+Here is represented the structure of the backend:
 
 \begin{itemize}
     \item \textbf{IT}: root directory, container for the project
@@ -392,7 +456,7 @@ All the functionalities of the website are managed by different apps, these are 
 The frontend web app is contained into the \textit{dream\_frontend/dream\_app} folder of
 the IT directory.
 Of course, following the four tier architecture described in the Design Document,
-the front-end web application can also be deployed to a dedicated web server,
+the frontend web application can also be deployed to a dedicated web server,
 which will then make requests to a different backend server.
 Here is represented the structure of the web app:
 \begin{itemize}
@@ -403,7 +467,7 @@ Here is represented the structure of the web app:
     During the building phase the files in this directory don't change.
     \item \textbf{src}: this is the main folder of the project. It is divided in several sub folder:
     \begin {itemize}
-        \item \textbf{assets}: it contains all the images needed by the front-end like the icons of the weather or the logo in the login page.
+        \item \textbf{assets}: it contains all the images needed by the frontend like the icons of the weather or the logo in the login page.
         \item \textbf{router}: it contains the JavaScript file that list all the routes used to navigate the frontend.
         \item \textbf{views}: it contains all the vue component needed by the frontend.
         They are divided in category, e.g. Policymaker or Agronomist, in order to better separate the different logic.
@@ -429,7 +493,7 @@ We decided to test only the backend because most of the logic resides here.
 In any case, the system testing and the post-deployment testing phases also covered the functioning of the frontend.
 
 \subsection{Unit Testing}
-For each app in the back-end we wrote the test cases in tests.py file using \textbf{unittest}, a built-in module from the Python standard library.
+For each app in the backend we wrote the test cases in tests.py file using \textbf{unittest}, a built-in module from the Python standard library.
 \subsubsection*{helpRequestApp}
 \begin{itemize}
     \item Attempt to get the list of help requests by a user through a GET request on \textit{help\_request} endpoint
@@ -483,12 +547,12 @@ There is a total of 32 tests with a percentage of success of 100\%, this establi
 All the tests can be verified by running "python manage.py test" in the root directory.
 
 \subsection{System Testing}
-A part of the testing phase was also dedicated by manually testing the app through the web browser and with Postman, a tool for making HTTP GET/POST requests with custom parameters.
+A part of the testing phase was also dedicated by manually testing the app through the web browser and with Postman, a tool for generating HTTP GET/POST requests with custom parameters and inspect the backend server replies.
 In this way we tested the authentication phase and all the functionalities provided by the system.
 All the tests have been performed successfully.
 
 \subsection{Post-deployment Testing}
-After the deploy the application has been extensively tested on a daily basis. This allowed to test the entire system and the interactions between the components both on front-end and back-end.
+After the deploy, the application has been extensively tested. This allowed to test the entire system and the interactions between the components both on frontend and backend.
 We also invited a couple of testers in order to stress the app.
 
 
@@ -509,7 +573,9 @@ However, if you wish to install it on your machine you can follow the guide belo
 \textbf{Node.js} is required in order to run the frontend, please install it if you don't
 have it on your device.
 
-To run the backend, \textbf{Python 3.10} or a compatible version is mandatory. Moreover, \texttt{\textbf{pip}} command must be installed too, in order to resolve the project's dependencies.
+To run the backend, \textbf{Python 3.10} or a compatible version is mandatory. Moreover, \texttt{\textbf{pip}} command must be installed too, in order to resolve the project's dependencies. 
+
+A \textbf{PostgreSQL database} must be set and running as well.
 
 \begin{itemize}
     \item \textbf{Python and Pip}
@@ -518,11 +584,18 @@ To run the backend, \textbf{Python 3.10} or a compatible version is mandatory. M
         \item Install latest version of Pip referencing \url{https://pip.pypa.io/en/stable/installation/}
     \end{itemize}
     \item \textbf{Node.js}
+    \begin{itemize}
+        \item Download the latest version of Node.js \url{https://nodejs.org/it/download/}
+    \end{itemize}
+    \item \textbf{PostgreSQL}
+    \begin{itemize}
+        \item Download the installer of the latest version from \url{https://www.postgresql.org/download/} for your OS
+    \end{itemize}
 \end{itemize}
 
 \subsection{Backend Installation}
 \begin{itemize}
-    \item[1)] Download the latest zip archive from the Relase Page on the project's GitHub repository
+    \item[1)] Download the latest zip archive from the Release Page on the project's GitHub repository
     \item[2)] Extract all the files in the same folder
     \item[3)] Create a \texttt{.env} file in the same folder with the following fields and fill it:
     \begin{itemize}
@@ -553,7 +626,8 @@ GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS={your_JSON_key_file_content_for_Goog
 GOOGLE_DRIVE_STORAGE_SERVICE_EMAIL=your_project.iam.gserviceaccount.com
     \end{lstlisting}  
     \item[4)] Save \texttt{.env}
-    \item[5a)] If you are on a Unix-like system (Linux-Debian or MacOS) with bash/zsh shell, you can run the Makefile in the \textit{dream\_pkg} via \texttt{make run} command: this will install all the dependencies, update the database schema and start the backend server. However, if you wish to do that manually, you can follow the commands below:
+    \item[5)] Make sure you have your PostgreSQL database ready and running
+    \item[6a)] If you are on a Unix-like system (Linux-Debian or MacOS) with bash/zsh shell, you can run the Makefile in the \textit{dream\_pkg} via \texttt{make run} command: this will install all the dependencies, update the database schema and start the backend server. However, if you wish to do that manually, you can follow the commands below:
     \begin{lstlisting}[language=shell]
 # create virtual environment
 dream_pkg:~$ python3 -m venv IT/venv
@@ -571,7 +645,7 @@ dream_pkg:~$ python3 IT/manage.py migrate
 # start backend server
 dream_pkg:~$ python3 IT/manage.py runserver
     \end{lstlisting}
-    \item[5b)] If you are on Windows, run the following commands:
+    \item[6b)] If you are on Windows, run the following commands:
     \begin{lstlisting}[language=shell]
 # create a new virtual environment
 C:\dream_pkg\> python -m venv c:\dream_pkg\IT\venv
@@ -593,7 +667,7 @@ C:\dream_pkg\> python IT/manage.py runserver
 \end{itemize}
 
 \subsection{Frontend Installation}
-Firstly, you have to specify in the config.js file (contained in \newline \textit{IT/dream\_frontend/dream\_application}) if you want to run the backend online or locally on your device.
+Firstly, you have to specify in the config.js file (contained in \newline \textit{IT/dream\_frontend/dream\_app}) if you want to run the backend online or locally on your device.
 Inside the file you will find a configuration string and you have to insert the url of the chosen backend
 (by default is set to online backend but some choices are already available).
 
