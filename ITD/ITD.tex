@@ -137,13 +137,10 @@
 The code can be found in the official project repository on GitHub at the link: \url{https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo}.
 \subsection{Purpose}
 
-This document aims to describe how the implementation and integration
-testing haven taken place.
-Implementation is the last step of the DREAM application
-development cycle.
-Testing, instead, means check that the critical parts of the application
-work in a correct way, as described in the DD document.
-
+This document aims to describe how the implementation and integration testing have taken place.
+Implementation is the last step of the DREAM application development cycle.
+It also verifies that the DREAM system satisfies its functional requirements described in the RASD document.
+For this reason the testing phase has the goal to check that the critical parts of the application work in a correct way, as described in the DD document.
 
 \subsection{Definitions, Acronyms, Abbreviations}
 \begin{itemize}
@@ -249,7 +246,7 @@ In the following list of requirements, the implemented ones are checked with a t
 We would like to point out that the prototype's UI has been designed mainly for mobile browsing, because it is more comfortable to use a smartphone on the field from a farmer perspective. However, it is completely functional on laptops and computers too, even if it's slightly less graphically enjoyable.
 
 \subsection{Adopted Development Frameworks}
-The chosen frameworks, both for frontend and backend developing, inheritly force the standard and well suited architectural patters. In particular, Django Framework forces a \emph{Model-View-Controller} (MVC) while Vue.js a \emph{Model-View-ViewModel} (MVVM) which is declination of MVC pattern better suited for frontend developing. 
+The chosen frameworks, both for frontend and backend developing, inheritly force the standard and well suited architectural patters. In particular, Django Framework forces a \emph{Model-View-Controller} (MVC) while Vue.js a \emph{Model-View-ViewModel} (MVVM) which is a declination of MVC pattern better suited for frontend developing. 
 
 \paragraph{MVC} In the MVC patter, the \textbf{model} is the one in charge of defining the data storage, the \textbf{view} is majorly associated with the User Interface (UI) and it is used to provide the visual representation of the MVC mode, also handling the communication between the user (inputs, requests, etc.) and the controller, while \textbf{controller} is the connection between models and views.
 
@@ -337,7 +334,7 @@ Advanced features required for complex applications such as routing, state manag
 We used this framework to build up the client-side rendering of pages because of the easy usability as it integrate in a single .vue file, also called components,
 the three main blocks of a web application paradigm.
 
-The structure of a Vue file is intuitive, it is compose by three blocks:
+The structure of a Vue file is intuitive, it is composed by three blocks:
 \begin{itemize}
     \item HTML: the part where the structure of the component is created.
     \item JavaScript: where is placed the interactive part, or better the logic, of the component.
@@ -360,7 +357,7 @@ Furthermore it is supported excellently by Django.
 \subsection{Heroku}
 We choose to host our project in a server in order to make it reachable by everyone
 that have a browser and an internet connection.
-The hosting service we choose is Heroku, a platform as a service (PaaS)
+The hosting service that we have chosen is Heroku, a platform as a service (PaaS)
 that enables developers to build, run, and operate applications entirely
 in the cloud.
 
@@ -469,7 +466,7 @@ Here is represented the structure of the web app:
     \begin {itemize}
         \item \textbf{assets}: it contains all the images needed by the frontend like the icons of the weather or the logo in the login page.
         \item \textbf{router}: it contains the JavaScript file that list all the routes used to navigate the frontend.
-        \item \textbf{views}: it contains all the vue component needed by the frontend.
+        \item \textbf{views}: it contains all the vue components needed by the frontend.
         They are divided in category, e.g. Policymaker or Agronomist, in order to better separate the different logic.
     \end{itemize}
 \end{itemize}
@@ -488,7 +485,7 @@ When the build process is finish the web ready files are put in the \textit{dist
 \section{Testing}
 
 In this section we described how we tested the application following the general guidelines given in the Design Document.
-The testing process has been divided into unit testing and integration testing.
+The testing process has been divided into unit testing, system testing and post-deployment testing.
 We decided to test only the backend because most of the logic resides here.
 In any case, the system testing and the post-deployment testing phases also covered the functioning of the frontend.
 
@@ -561,7 +558,7 @@ We also invited a couple of testers in order to stress the app.
 
 \section{Installation}
 As a web application we chose to deploy it on Heroku, so
-a fully running version of the software is available at:
+a fully running version of the software is available at:\newline
 \url{https://dreamapplication.herokuapp.com/}.
 
 We strongly suggest you to use the deployed version instead of installing the software locally, since this would require some changes both in backend and frontend source code.
@@ -595,7 +592,7 @@ A \textbf{PostgreSQL database} must be set and running as well.
 
 \subsection{Backend Installation}
 \begin{itemize}
-    \item[1)] Download the latest zip archive from the Release Page on the project's GitHub repository
+    \item[1)] Download the latest zip archive from the Releases section on the project's GitHub repository
     \item[2)] Extract all the files in the same folder
     \item[3)] Create a \texttt{.env} file in the same folder with the following fields and fill it:
     \begin{itemize}
@@ -674,12 +671,12 @@ Inside the file you will find a configuration string and you have to insert the 
 \begin{itemize}
     \item [1] Open a terminal and move to \textit{dream\_app} folder
     \item [2] Run \texttt{npm install} command
-    \item [4] Run \texttt{serve dist} command to start the frontend server
-    \item [5] Follow the instructions
+    \item [3] Run \texttt{serve dist} command to start the frontend server
+    \item [4] Follow the instructions
 \end{itemize}
 
 The process will install the needed node modules and build the project automatically.
-If you want to build it by yourself you can use this command: \texttt{npm run build}
+If you want to build it by yourself you can use this command: \texttt{npm run build}.
 
 \section{Effort Spent}
 \begin{tabular}{|c||c|}
