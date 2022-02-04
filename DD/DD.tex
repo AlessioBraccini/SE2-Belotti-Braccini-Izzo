@@ -234,8 +234,8 @@ External elements in the diagram are represented in a simplified way.
     Once a user is logged in, all the specific functionalities are provided by the component that manages this type of user.
     \item \textbf{PolicyMakerManager}: it manages the policy maker services, these include: download of steering initiatives' reports submitted by agronomists, farmers' ranking, visualization of water irrigation sensors data and humidity sensors data.
     The steering initiative service and the ranking service are linked through an interface to the internal database, on the other side the water irrigation service and the humidity sensor service are considered external services and are managed by the \textit{SensorsDataManager}.
-    \item \textbf{AgronomistManager}: it manages the agronomist services, these include: answer help requests, creation and updating of daily plans and farmers' ranking.
-    The daily plan service and the ranking service are linked to the internal database, instead the answer request service communicates directly with the \textit{HelpRequestManager} component.
+    \item \textbf{AgronomistManager}: it manages the agronomist services, these include: answer help requests, creation and updating of daily plans, farmers' ranking and uploading of steering initiatives.
+    The daily plan service, the ranking service and the upload reports services are linked to the internal database, instead the answer request service communicates directly with the \textit{HelpRequestManager} component.
     \item \textbf{FarmerManager}: it manages the farmer services, these include: submit help requests, insert production data and participate in the forum.
     It includes one external interface that communicates with the \textit{NewsManager} component.
     In this case, only the production service is linked directly to the internal database, instead the ask request service is linked to the \textit{HelpRequestManager} component, while the forum service exposes an interface to connect to the \textit{ForumManager} component.
@@ -473,6 +473,17 @@ Since the exchange is necessarily asynchronous because of the fact that the rece
 \end{center}
 This sequence diagram represents the interactions between components in managing the daily plan.
 In the diagram, there are both the creation and the updating of the daily plan.
+
+\newpage
+\textbf{Upload Steering Initiative}
+\begin{center}
+    \begin{figure}[H]
+        \includegraphics[scale=0.45, center] {assets/SequenceDiagram/uploadReport.png}
+        \caption{Upload Report}
+        \label{fig: uploadReport}
+    \end{figure}
+\end{center}
+This sequence diagram represents the interactions between components in managing the uploading of the Steering Initiative.
 
 \newpage
 \subsection{Component interfaces}

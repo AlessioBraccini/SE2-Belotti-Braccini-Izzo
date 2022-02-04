@@ -464,7 +464,7 @@ There are four types of data:
     \item \textbf{District statistics:} visualize district related data like wheather forecast or the rank of the farmers in that region.
     \item \textbf{Manage farmers requests:} agronomists reply to farmers' requests for help or suggestion.
     \item \textbf{Manage daily plan:} allow the agronomist to make their daily plan by registring the scheduled visits to the farmers. At the end of the day an agronomist must confirm if they were able to complete the plan or specify the deviations occurred during the day. Updating the daily plan because of a deviation means either adding a farm that has been visited during that day that was not originally in the plan, or removing one from the schedule if the agronomist has not been able to pay a visit that same day.  
-\end{itemize}
+
 \begin{center}
     \begin{figure}[H]
         \includegraphics[width=\textwidth]{assets/BPMN/DailyPlanBpmn}
@@ -472,7 +472,9 @@ There are four types of data:
         \label{fig: dailyplan}
     \end{figure}
 \end{center}
-
+    \item \textbf{Write Steering Initiatives:} let the agronomists upload their
+    steering initiative reports regarding the general result of the applied strategies.
+\end{itemize}
 \subsection{User characteristics}
 The application has been thought for the three different user categories that follows:
 \begin{itemize}
@@ -1240,6 +1242,32 @@ Users that wish to experience the app's full functionalities should have a devic
         
         \newpage
 
+            \begin{table}[H]
+                \item[] \textbf{Upload Steering Initiative}
+                \item[]
+                \centering
+                \begin{tabular}{|c |m{.69\textwidth}|}
+                    \hline
+                    \textbf{Use Case} & Upload a Steering initiative report\\ \hline
+                    \textbf{Actor} & Agronomist\\ \hline
+                    \textbf{Entry condition} & User wants to write a report\\  \hline
+                    \textbf{Flow of events} & \begin{enumerate}
+                                                  \item User presses the "Steering Initiative" button
+                                                  \item User chooses the pdf he wants to upload
+                                                  \item User uploads the pdf
+                                                  \item User presses the "Submit" button
+                                                  \item System shows a confirmation message
+                    \end{enumerate}\\ \hline
+                    \textbf{Exit condition} & System displays a confirmation message\\ \hline
+                    \textbf{Exceptions} & \begin{enumerate}
+                                              \item Internet connection isn't working
+                                              \item File is not a pdf
+                                              \item File is bigger than 5MB
+                    \end{enumerate}
+                    An error message is shown and the flow of events starts again from point 1\\ \hline
+                \end{tabular}
+            \end{table}
+
         \item \textbf{Use Cases to requirement mapping}
         
         \item[] \begin{longtable}{|p{0.31\textwidth}|p{0.69\textwidth}|}
@@ -1250,7 +1278,7 @@ Users that wish to experience the app's full functionalities should have a devic
                     \cellcolor{SpringGreen!50}\textbf{2)Log In}\centering & R2) The system shall allow users to be identified by a username of their choosing. \\\hline
                     \cellcolor{SpringGreen!50}\textbf{3)View Initiative Reports}\centering &  R1) The system must allow only registered and logged-in users to use the app.
 
-                                                                                              R6) The system must allow Policy Makers to retrieve all agronomists' steering initiative rep orts uploaded to the database.\\\hline
+                                                                                              R6) The system must allow Policy Makers to retrieve all agronomists' steering initiative reports uploaded to the database.\\\hline
                     \cellcolor{SpringGreen!50}\textbf{4)Check Soil Humidity Data}\centering &  R1) The system must allow only registered and logged-in users to use the app.
 
                                                                                                R5) The system must allow Policy Makers to see up-to-date statistic data, accordingly to the database, about water irrigation systems and soil humidity sensors.\\\hline
@@ -1322,8 +1350,11 @@ Users that wish to experience the app's full functionalities should have a devic
                                                                                        R8) The system must use a fair and scientific score to rank the Farmers in order to represent the real situation.
                                                                                        
                                                                                        R18) The system must give Agronomists up-to-date ranking of the best and worst performing farmers in their responsibility area.\\\hline
-                    
-        \end{longtable}
+                    \cellcolor{SpringGreen!50}\textbf{18)Upload Steering Initiative}\centering&  R1) The system must allow only registered and logged-in users to use the app.
+
+                                                                                                R4) The system must inform the user to try later if they are experimenting connectivity issues .\\\hline
+
+            \end{longtable}
     
     \end{itemize}
 
@@ -1490,6 +1521,13 @@ Users that wish to experience the app's full functionalities should have a devic
                     \label{fig: sdAgronomist_viewFarmersAreaRanking}
                 \end{figure}
             \end{center}
+            \begin{center}
+                  \begin{figure}[H]
+                      \includegraphics[scale=0.7, center]{assets/Sequence diagrams/Agronomist/Upload_Report.png}
+                      \caption{Agronomists - View Farmers Area Ranking Sequence Diagram}
+                      \label{fig: sdAgronomist_writeReport}
+                  \end{figure}
+            \end{center}
         \end{itemize}
         \newpage
 
@@ -1594,7 +1632,7 @@ Here we present some of the instances satifying the predicates that have been ge
 \begin{center}
     \begin{figure}[H]
         \includegraphics[scale=0.40, center]{assets/AlloyInstances/helpRequests.png}
-        \caption{Predicate requestHelpAndGetResponseP}
+        \caption{Predicate requestHelpAndGetResponse}
         \label{fig: helpRequestAlloy}
     \end{figure}
 \end{center}

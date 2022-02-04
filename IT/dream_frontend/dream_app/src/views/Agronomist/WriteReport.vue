@@ -4,7 +4,7 @@
 
   <div class="background">
     <h2>Upload File</h2>
-    <div class="text1">You can upload 1 pdf file:</div>
+    <div class="text1">You can upload 1 pdf file(Max 5MB):</div>
     <div class="fileInput">
       <p class="innerText">Select your file</p>
       <input type="file" @change="handleFileUpload( $event )" required />
