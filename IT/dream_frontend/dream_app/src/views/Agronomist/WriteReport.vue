@@ -91,6 +91,7 @@ export default {
               .catch(err => {
                 console.log('FAILURE!! ' + err);
                 if (err.response.status === 401){
+                  NProgress.done()
                   localStorage.clear()
                   localStorage.setItem('reload', null)
                   alert("You lost the connection please log in again");
@@ -98,11 +99,15 @@ export default {
                 }
               });
         }
-        else
+        else {
           errMsg.value = '!You can upload only pdf file'
+          NProgress.done()
+        }
       }
-      else
+      else {
         errMsg.value = '!No file selected'
+        NProgress.done()
+      }
 
     }
 
