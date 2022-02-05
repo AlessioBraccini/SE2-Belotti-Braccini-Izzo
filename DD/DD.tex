@@ -656,19 +656,15 @@ During the daytime it can be manually updated until the end of the visit day, wh
     \begin{itemize}
         \item PolicyMakerManager
         \begin{itemize}
+            \setlength{\itemindent}{-5px}
             \item WaterIrrigationService
             \item HumiditySensorService
-            \item SteeringInitiativeService
             \item RankingService
         \end{itemize}
         \item SteeringInitiativeManager
         \item DataManager
         \item SensorsDataManager
         \item RankingManager
-        \item Agronomist
-        \begin{itemize}
-            \item SteeringInitiativeService
-        \end{itemize}
     \end{itemize}
     \\\hline
 
@@ -790,10 +786,6 @@ During the daytime it can be manually updated until the end of the visit day, wh
     \end{itemize}
     &
     \begin{itemize}
-        \item AgronomistManager
-        \begin{itemize}
-            \item SteeringInitiativeService
-        \end{itemize}
         \item SteeringInitiativeManager
     \end{itemize}\\\hline
 \end{longtable}
@@ -942,13 +934,13 @@ Finally, the last group, composed by the components with most dependencies, does
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5, center]{assets/Test/agroTest.png}
+    \includegraphics[scale=0.5, center]{assets/Test/agrosTest.png}
     \caption{Integration of AgronomistManager components}
     \label{fig: integration_AgronomistManager}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5, center]{assets/Test/farmerTest.png}
+    \includegraphics[scale=0.5, center]{assets/Test/farmersTest.png}
     \caption{Integration of FarmerManager components}
     \label{fig: integration_FarmerManager}
 \end{figure}
