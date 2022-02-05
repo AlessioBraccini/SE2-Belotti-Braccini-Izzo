@@ -220,7 +220,7 @@ Finally, the DBMS interface manages the DBMS service and it's responsible of the
 \subsubsection*{Application Server Component View}
 \begin{center}
     \begin{figure}[H]
-        \includegraphics[scale=0.67, center]{assets/application-server-component.png}
+        \includegraphics[scale=0.45, center]{assets/application-server-component.png}
         \caption{Application Server Component Diagram}
         \label{fig: application_server_component_view}
     \end{figure}
@@ -249,6 +249,7 @@ External elements in the diagram are represented in a simplified way.
     \item \textbf{RankingManager}: it manages the ranking system for both the policy maker and the agronomist.
     It is responsible for calculating the final score used to compare the farmers in the ranking.
     More details on how to calculate it can be found in \textit{Section (\ref{other_design_decisions})}.
+    \item \textbf{SteeringInitiativeManager}: it manages the steering initiatives for both agronomists and policy makers. It communicates with the \textit{AgronomistManager} in order to let the user write the report and with the \textit{PolicyMakerManager} in order to visualize it.
     \item \textbf{NewsManager}: this component manages the service related to the news, it provides updated suggestions about crops and fertilizers for the farmers.
     To do this, it interacts with the external component \textit{NewsService}.
     \item \textbf{SensorsDataManager}: this component handles two external APIs, the first one is provided by the water irrigation system and the other one provided by the humidity sensors.
@@ -660,12 +661,13 @@ During the daytime it can be manually updated until the end of the visit day, wh
             \item SteeringInitiativeService
             \item RankingService
         \end{itemize}
+        \item SteeringInitiativeManager
         \item DataManager
         \item SensorsDataManager
         \item RankingManager
         \item Agronomist
         \begin{itemize}
-            \item UploadReportService
+            \item SteeringInitiativeService
         \end{itemize}
     \end{itemize}
     \\\hline
@@ -790,8 +792,9 @@ During the daytime it can be manually updated until the end of the visit day, wh
     \begin{itemize}
         \item AgronomistManager
         \begin{itemize}
-            \item UploadReportService
+            \item SteeringInitiativeService
         \end{itemize}
+        \item SteeringInitiativeManager
     \end{itemize}\\\hline
 \end{longtable}
 
@@ -812,38 +815,39 @@ Here, we present a summary of the table above for a more immediate visualization
         RankingManager & RM\\
         NewsManager:& NM\\
         WeatherManager:& WM\\
-        SensorsDataManager:& SDM\\\hline
+        SensorsDataManager:& SDM\\
+        SteeringInitiativeManager& SIM\\\hline
         
     \end{tabular}
     \caption{Components' legend}
 \end{table}
 \newpage
-\setlength\LTleft{-1.94cm}
-\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\setlength\LTleft{-2.5cm}
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 
     \hline
-    & \cellcolor{blue!30}AcM & \cellcolor{blue!30}LM & \cellcolor{blue!30}MSM & \cellcolor{blue!30}PMM & \cellcolor{blue!30}AgM & \cellcolor{blue!30}FaM & \cellcolor{blue!30}FoM & \cellcolor{blue!30}DM & \cellcolor{blue!30}HRM & \cellcolor{blue!30}RM & \cellcolor{blue!30}NM & \cellcolor{blue!30}WM & \cellcolor{blue!30}SDM\\\hline
-    \cellcolor{SpringGreen!50}R1 & x & x & x &    &       &       &   &       &  &&    &   &\\\hline
-    \cellcolor{SpringGreen!50}R2 & x & x & x &    &       &       &   &       &  &&    &   &\\\hline
-    \cellcolor{SpringGreen!50}R3 & x & x & x &    &       &       &   &       &  &&    &   &\\\hline
-    \cellcolor{SpringGreen!50}R4 & x &  &  &    &       &       &   &       &  &&    &   &\\\hline
-    \cellcolor{SpringGreen!50}R5 &    & & & x & & && x && & &&x\\\hline
-    \cellcolor{SpringGreen!50}R6 &    & & & x & & && x && & &&x\\\hline
-    \cellcolor{SpringGreen!50}R7 &    & & & x & & && x && & &&x\\\hline
-    \cellcolor{SpringGreen!50}R8 &    & & & & & && x && & &&\\\hline
-    \cellcolor{SpringGreen!50}R9 &    & & & & & x && x && & &&\\\hline
-    \cellcolor{SpringGreen!50}R10 &    & & & & x & x && x & x & & &&\\\hline
-    \cellcolor{SpringGreen!50}R11 &    & & & & & x & x & x && & &&\\\hline
-    \cellcolor{SpringGreen!50}R12 &    & & & & x &  &&  & x & & &&\\\hline
-    \cellcolor{SpringGreen!50}R13 &    & & & & x &  &&  &  & & &&\\\hline
-    \cellcolor{SpringGreen!50}R14 &    & & & & x &  &&  &  & & &&\\\hline
-    \cellcolor{SpringGreen!50}R15 &    & & & & x &  &&  &  & & &&\\\hline
-    \cellcolor{SpringGreen!50}R16 &    & & & & x &  &&  &  & & &&\\\hline
-    \cellcolor{SpringGreen!50}R17 &    & & & & x &  &&  &  & & &&\\\hline
-    \cellcolor{SpringGreen!50}R18 &    & & & & x &  &&  &  & x & &&\\\hline
-    \cellcolor{SpringGreen!50}R19 &    & & & & x & x &&  &  & & & x &\\\hline
-    \cellcolor{SpringGreen!50}R20 &    & & & & & x &&  &  & & x &&\\\hline
-    \cellcolor{SpringGreen!50}R21 & &&&& x &&&x &&&&&\\\hline
+    & \cellcolor{blue!30}AcM & \cellcolor{blue!30}LM & \cellcolor{blue!30}MSM & \cellcolor{blue!30}PMM & \cellcolor{blue!30}AgM & \cellcolor{blue!30}FaM & \cellcolor{blue!30}FoM & \cellcolor{blue!30}DM & \cellcolor{blue!30}HRM & \cellcolor{blue!30}RM & \cellcolor{blue!30}NM & \cellcolor{blue!30}WM & \cellcolor{blue!30}SDM & \cellcolor{blue!30}SIM\\\hline
+    \cellcolor{SpringGreen!50}R1 & x & x & x &    &       &       &   &       &  &&    &   &&\\\hline
+    \cellcolor{SpringGreen!50}R2 & x & x & x &    &       &       &   &       &  &&    &   &&\\\hline
+    \cellcolor{SpringGreen!50}R3 & x & x & x &    &       &       &   &       &  &&    &   &&\\\hline
+    \cellcolor{SpringGreen!50}R4 & x &  &  &    &       &       &   &       &  &&    &   &&\\\hline
+    \cellcolor{SpringGreen!50}R5 &    & & & x & & && x && & &&x&\\\hline
+    \cellcolor{SpringGreen!50}R6 &    & & & x & & && x && & &&x&x\\\hline
+    \cellcolor{SpringGreen!50}R7 &    & & & x & & && x && & &&x&\\\hline
+    \cellcolor{SpringGreen!50}R8 &    & & & & & && x && & &&&\\\hline
+    \cellcolor{SpringGreen!50}R9 &    & & & & & x && x && & &&&\\\hline
+    \cellcolor{SpringGreen!50}R10 &    & & & & x & x && x & x & & &&&\\\hline
+    \cellcolor{SpringGreen!50}R11 &    & & & & & x & x & x && & &&&\\\hline
+    \cellcolor{SpringGreen!50}R12 &    & & & & x &  &&  & x & & &&&\\\hline
+    \cellcolor{SpringGreen!50}R13 &    & & & & x &  &&  &  & & &&&\\\hline
+    \cellcolor{SpringGreen!50}R14 &    & & & & x &  &&  &  & & &&&\\\hline
+    \cellcolor{SpringGreen!50}R15 &    & & & & x &  &&  &  & & &&&\\\hline
+    \cellcolor{SpringGreen!50}R16 &    & & & & x &  &&  &  & & &&&\\\hline
+    \cellcolor{SpringGreen!50}R17 &    & & & & x &  &&  &  & & &&&\\\hline
+    \cellcolor{SpringGreen!50}R18 &    & & & & x &  &&  &  & x & &&&\\\hline
+    \cellcolor{SpringGreen!50}R19 &    & & & & x & x &&  &  & & & x &&\\\hline
+    \cellcolor{SpringGreen!50}R20 &    & & & & & x &&  &  & & x &&&\\\hline
+    \cellcolor{SpringGreen!50}R21 & &&&& x &&&x &&&&&&x\\\hline
     \caption{Component and requirement mapping}\\
 \end{longtable}
 
@@ -854,7 +858,7 @@ Multiple components will be implemented at the same time, in order to paralleliz
 The implementation's order of the component will be as follow:
 \begin{enumerate}
     \item DataManager, MapServiceManager, WeatherManager, SensorDataManager, NewsManager
-    \item RankingManager, HelpRequestsManager, ForumManager, LocationModule
+    \item RankingManager, SteeringInitiativeManager, HelpRequestsManager, ForumManager, LocationModule
     \item PolicyMakerManager, AgronomistManager, FarmerManager, AccountManager
 \end{enumerate}
 Each group is composed by independent modules so they can be easily developed in parallel.
@@ -862,7 +866,7 @@ Furthermore, it is expected that external services (e.g. GoogleMapsAPI, OpenWeat
 
 The \emph{DataManager} component should be implemented first since all the remaining components of the application server depend directly or indirectly on it for handling the communication with the database to store and retrieve data. \emph{MapServiceManager}, \emph{WeatherManager}, \emph{SensorDataManager} and \emph{NewsManager} components are independent from all the other ones because the former just communicates with the external services, by modifying the API's information so that it can be comprehensible by the Application server, and adapting the requests to the API's protocol.
 
-The second group depends on the first one but at the same time incapsulates building blocks for the third one.  \emph{RankingManager}, \emph{HelpRequestsManager} and \emph{ForumManager} directly exploit the \emph{DataManager} module to retrieve information, store data or carry out consistency and security checks. Moreover, \emph{LocationModule} also use the \emph{MapServiceManager} to access the map service that ease the registration to the farmers in localizing their farm. 
+The second group depends on the first one but at the same time incapsulates building blocks for the third one.  \emph{RankingManager}, \emph{SteeringInitiativeManager}, \emph{HelpRequestsManager} and \emph{ForumManager} directly exploit the \emph{DataManager} module to retrieve information, store data or carry out consistency and security checks. Moreover, \emph{LocationModule} also use the \emph{MapServiceManager} to access the map service that ease the registration to the farmers in localizing their farm. 
 
 Finally, \emph{PolicyMakerManager}, \emph{AgronomistManager}, \emph{FarmerManager} and \emph{AccountManager} are the component that mostly depend on all the lower level ones, as can be seen in figure \ref{fig: application_server_component_view}.
 \subsection{Integration Strategy}
