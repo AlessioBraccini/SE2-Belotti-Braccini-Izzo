@@ -633,24 +633,24 @@ dream_pkg:~$ python3 IT/manage.py migrate
 # start backend server
 dream_pkg:~$ python3 IT/manage.py runserver
     \end{lstlisting}
-    \item[6b)] If you are on Windows, run the following commands:
+    \item[6b)] If you are on Windows, either run the \texttt{setup.bat} file (double click on it) or run the following commands in PowerShell:
     \begin{lstlisting}[language=shell]
 # create a new virtual environment
-C:\dream_pkg\> python -m venv c:\dream_pkg\IT\venv
+C:\dream_pkg\> python -m venv .\IT\venv
 
 # activate venv: 2 options
-C:\dream_pkg\> IT\venv\Scripts\activate.bat  #for cmd.exe
-PS C:\dream_pkg\> IT\venv\Scripts\Activate.ps1  #for PowerShell
+C:\dream_pkg\> .\IT\venv\Scripts\activate.bat  #for cmd.exe
+PS C:\dream_pkg\> .\IT\venv\Scripts\Activate.ps1  #for PowerShell
   
 # install dependencies
-C:\dream_pkg\> pip install -r IT\requirements.txt
+C:\dream_pkg\> pip install -r .\IT\requirements.txt
 
 # update database schema
-C:\dream_pkg\> python IT/manage.py makemigrations
-C:\dream_pkg\> python IT/manage.py migrate
+C:\dream_pkg\> python .\IT\manage.py makemigrations
+C:\dream_pkg\> python .\IT\manage.py migrate
 
 # start backend server
-C:\dream_pkg\> python IT/manage.py runserver
+C:\dream_pkg\> python .\IT\manage.py runserver
     \end{lstlisting}
 \end{itemize}
 
