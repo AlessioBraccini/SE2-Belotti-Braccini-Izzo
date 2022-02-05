@@ -96,8 +96,6 @@ class ReportsTest(TestCase):
             self.assertEqual(report['author'], self.userA.complete_name())
             self.assertEqual(report['pub_date'], datetime.date.today())
 
-    # todo: two different agro uploading same title report, agro get the reports (only his)
-
     def testDeletedUserReport(self):
         url = "/api/v1/steering_initiatives"
         file = SimpleUploadedFile("/Users/Ottavia/Documents/bonus.pdf", b"pdf")

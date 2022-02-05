@@ -37,7 +37,6 @@ class DailyPlanView(APIView):
 
         if DailyPlan.objects.filter(agronomist_user=agro, date=date).count() > 0:
             return Response({"message": "This user already have a plan for this date"}, status=status.HTTP_403_FORBIDDEN)
-        # todo: normalize date to be always in format YYYY-MM-DD
         daily_plans = []
 
         for farmer_id in farmers_ids:
@@ -124,7 +123,6 @@ class UpdateVisits(APIView):
 
         if response.data['message'] == 'New daily plan saved successfully.':
             return Response({"message": "Daily plan for date " + date + " has been updated successfully."})
-        # todo: if error, reload the old_plan_entries
         return response
 
     @staticmethod
