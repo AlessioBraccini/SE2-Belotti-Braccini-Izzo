@@ -117,6 +117,7 @@ This document also extends in part to the implementation and testing plan, where
     \item \textbf{DREAM}: \emph{Data-driven predictive farming}
     \item \textbf{RASD}: Requirement Analysis and Specification Document
     \item \textbf{DD}: Design Document
+    \item \textbf{ITD}: Implementation Document
     \item \textbf{API}: Application Programming Interface
     \item \textbf{DBMS}: Database Management System
     \item \textbf{UML}: Unified Modeling Language
@@ -139,6 +140,13 @@ This document also extends in part to the implementation and testing plan, where
         \item[--] Update deployment diagram: change hosting platform and load balancer
         \item[--] Delete EditProfile sequence diagram, update SignUp and CheckWeatherForecast sequence diagrams
         \item[--] Update integration and testing 
+    \end{itemize}
+    \item Version 1.2: final update before the release
+    \begin{itemize}
+        \item[--] Update component diagrams: add SteeringInitiativeManager Component
+        \item[--] Update sequence diagrams with the new component
+        \item[--] Update diagrams in section 5.2.1 with the new component
+        \item[--] Update requirement mapping
     \end{itemize}
 \end{itemize}
 \subsection{Reference documents}
@@ -233,9 +241,9 @@ External elements in the diagram are represented in a simplified way.
     The \textit{AuthenticationService} manages the authentication process that is composed by the log in, the log out and the sign up services. 
     Once a user is logged in, all the specific functionalities are provided by the component that manages this type of user.
     \item \textbf{PolicyMakerManager}: it manages the policy maker services, these include: download of steering initiatives' reports submitted by agronomists, farmers' ranking, visualization of water irrigation sensors data and humidity sensors data.
-    The ranking service is linked through an interface to the internal database, on the other side the water irrigation service and the humidity sensor service are considered external services and are managed by the \textit{SensorsDataManager}. Finally SteeringInitiativeService is handled by \textit{SteeringInitiativeManager}.
+    The ranking service is linked through an interface to the internal database, on the other side the water irrigation service and the humidity sensor service are considered external services and are managed by the \textit{SensorsDataManager}. Finally SteeringInitiativeService is handled by the \textit{SteeringInitiativeManager}.
     \item \textbf{AgronomistManager}: it manages the agronomist services, these include: answer help requests, creation and updating of daily plans, farmers' ranking and uploading of steering initiatives.
-    The daily plan service and the ranking service are linked to the internal database, instead the answer request service communicates directly with the \textit{HelpRequestManager} component. Finally SteeringInitiativeService is handled by \textit{SteeringInitiativeManager}.
+    The daily plan service and the ranking service are linked to the internal database, instead the answer request service communicates directly with the \textit{HelpRequestManager} component. Finally SteeringInitiativeService is handled by the \textit{SteeringInitiativeManager}.
     \item \textbf{FarmerManager}: it manages the farmer services, these include: submit help requests, insert production data and participate in the forum.
     It includes one external interface that communicates with the \textit{NewsManager} component.
     In this case, only the production service is linked directly to the internal database, instead the ask request service is linked to the \textit{HelpRequestManager} component, while the forum service exposes an interface to connect to the \textit{ForumManager} component.
@@ -249,7 +257,7 @@ External elements in the diagram are represented in a simplified way.
     \item \textbf{RankingManager}: it manages the ranking system for both the policy maker and the agronomist.
     It is responsible for calculating the final score used to compare the farmers in the ranking.
     More details on how to calculate it can be found in \textit{Section (\ref{other_design_decisions})}.
-    \item \textbf{SteeringInitiativeManager}: it manages the steering initiatives for both agronomists and policy makers. It communicates with the \textit{AgronomistManager} in order to let the user write the report and with the \textit{PolicyMakerManager} in order to visualize it.
+    \item \textbf{SteeringInitiativeManager}: it manages the steering initiatives for both agronomists and policy makers. It communicates with the \textit{AgronomistManager} in order to let the user upload the report and with the \textit{PolicyMakerManager} in order to visualize it.
     \item \textbf{NewsManager}: this component manages the service related to the news, it provides updated suggestions about crops and fertilizers for the farmers.
     To do this, it interacts with the external component \textit{NewsService}.
     \item \textbf{SensorsDataManager}: this component handles two external APIs, the first one is provided by the water irrigation system and the other one provided by the humidity sensors.
@@ -887,14 +895,14 @@ In this section it is defined the order of the integration between components. T
 As already said, bottom-up approach is going to be followed in implementing the components. So firstly, \emph{DataManager} (fig. \ref{fig: integration_DataManager}), \emph{MapServiceManager} and \emph{WeatherManager} (fig. \ref{fig: integration_MapServiceManager_WeatherManager}), \emph{SensorDataManager} and \emph{NewsManager} (fig. \ref{fig: integration_SensorDataManager_NewsManager}) are implemented using drivers for higher-up components yet to be built.
 
 \begin{figure}[H]
-    \includegraphics[scale=0.5, center]{assets/Test/generalTest.png}
+    \includegraphics[scale=0.6, center]{assets/Test/generalTest.png}
     \caption{Integration of DataManager component}
     \label{fig: integration_DataManager}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.56]{assets/Test/farmLocationTest.png} 
+    \includegraphics[scale=0.6]{assets/Test/farmLocationTest.png} 
     \caption{Integration of MapServiceManager component}%
     \label{fig: integration_MapServiceManager_WeatherManager}%
 \end{figure}
@@ -908,18 +916,20 @@ As already said, bottom-up approach is going to be followed in implementing the 
     \label{fig: integration_SensorDataManager_NewsManager}%
 \end{figure}
 
-After the first group implementation and testing, it's time for the implementation of the middle tier: \emph{RankingManager} and \emph{HelpRequestManager} (fig. \ref{fig: integration_RankingManager_HelpRequestManager}) and \emph{ForumManager}(fig. \ref{fig: integration_ForumManager_LocationModule}).
+After the first group implementation and testing, it's time for the implementation of the middle tier: \emph{RankingManager}, \emph{HelpRequestManager} (fig. \ref{fig: integration_RankingManager_HelpRequestManager}), \emph{ForumManager}(fig. \ref{fig: integration_ForumManager_LocationModule}) and \emph{SteeringInitiativeManager}.
 \begin{figure}[H]
     \centering
     \subfloat[\centering RankingManager]{{\includegraphics[scale=0.5]{assets/Test/rankingTest.png}}}%
     \qquad\qquad
     \subfloat[\centering HelpRequestManager]{{\includegraphics[scale=0.5]{assets/Test/helpTest.png}}}%
-    \caption{Integration of RankingManager and HelpRequestManager components}%
+    \qquad\qquad
+    \subfloat[\centering SteeringInitiativeManager]{{\includegraphics[scale=0.7]{assets/Test/reportTest.png}}}%
+    \caption{Integration of RankingManager, HelpRequestManager and SteeringInitiativeManager components}%
     \label{fig: integration_RankingManager_HelpRequestManager}%
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{assets/Test/forumTest.png}%
+    \includegraphics[scale=0.55]{assets/Test/forumTest.png}%
     \caption{Integration of ForumManager component}%
     \label{fig: integration_ForumManager_LocationModule}%
 \end{figure}
@@ -928,31 +938,31 @@ Finally, the last group, composed by the components with most dependencies, does
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5, center]{assets/Test/pmTest.png}
+    \includegraphics[scale=0.6, center]{assets/Test/pmTest.png}
     \caption{Integration of PolicyMakerManager components}
     \label{fig: integration_PolicyMakerManager}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5, center]{assets/Test/agrosTest.png}
+    \includegraphics[scale=0.6, center]{assets/Test/agrosTest.png}
     \caption{Integration of AgronomistManager components}
     \label{fig: integration_AgronomistManager}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5, center]{assets/Test/farmersTest.png}
+    \includegraphics[scale=0.6, center]{assets/Test/farmersTest.png}
     \caption{Integration of FarmerManager components}
     \label{fig: integration_FarmerManager}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5, center]{assets/Test/accountTest.png}
+    \includegraphics[scale=0.7, center]{assets/Test/accountTest.png}
     \caption{Integration of AccountManager components}
     \label{fig: integration_AccountManager}
 \end{figure}
 
 \subsection{System testing}
-Once the whole application has been implemented and tested, the application server can be integrated in the whole distributed system. This brings new testing phases to carry out: stress and load testing. The purpose of these is to achieve data regarding availability. Load testing is especially important because of the high expect demand of users that will use the system. On the same note, performance testing would allow us to know the response time of the most frequent operations and requests such as retrieving sensors' data, ranking visualization, posting on the forum, weather forecast and news visualization, sending an help request and replying to one, retrieving of agronomists' reports, etc. Performance testing is a key aspect to fulfilling the RASD non-functional requirement of needing a response time of 0.5s. Moreover, the testing should consider important algorithms such as the retrieval of data from the database (queries and insertions) or response time from external APIs.
+Once the whole application has been implemented and tested, the application server can be integrated in the whole distributed system. This brings new testing phases to carry out: stress and load testing. The purpose of these is to achieve data regarding availability. Load testing is especially important because of the high expect demand of users that will use the system. On the same note, performance testing would allow us to know the response time of the most frequent operations and requests such as retrieving sensors' data, ranking visualization, posting on the forum, weather forecast and news visualization, sending an help request and replying to one, retrieving of agronomists' reports, etc. Performance testing is a key aspect to fulfilling the RASD non-functional requirement of needing a response time of 0.5s. Moreover, the testing should consider important algorithms such as the retrieval of data from the database (queries and insertions) or response time from external APIs. Full details on testing can be found in the ITD.
 
 \newpage
 \section{Effort Spent}
