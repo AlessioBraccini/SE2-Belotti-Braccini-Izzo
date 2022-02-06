@@ -5,7 +5,7 @@
 npm install
 ```
 
-### Compiles and start up the server
+### Start up the server
 ```
 serve dist
 ```
