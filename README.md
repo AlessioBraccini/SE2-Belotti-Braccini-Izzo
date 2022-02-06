@@ -17,7 +17,7 @@ The final version includes:
 * Web App
 
 ## Installation Instruction
-To locally install the software, refer to the guide in the [ITD](https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo/blob/main/DeliveryFolder/IT/ITD%20v1.0.pdf) file or [here](https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo/blob/main/IT/README.md).
+To locally install the software, refer to the guide in the [ITD](https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo/blob/main/DeliveryFolder/IT/ITD%20v1.0.pdf) file or [here](https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo/blob/main/IT/README.md) for the backend and [here](https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo/blob/main/IT/dream_frontend/dream_app/README.md) for the frontend.
 
 ## Software & Tools
 * **PyCharm** - main Backend IDE
