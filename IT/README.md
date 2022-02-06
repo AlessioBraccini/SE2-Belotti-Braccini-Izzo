@@ -5,7 +5,7 @@ After cloning the IT repo in PyCharm:
 1) Set a Python interpreter (i.e. Python 3.10), this will also create the Virtual Environment
 3) Activate the environment. If the default path has been set then run:
 ```shell
-source venv/bin/activate
+source IT/venv/bin/activate
 ```
 4) Install all the project's requirements, once the `venv` is active:
 ```shell
