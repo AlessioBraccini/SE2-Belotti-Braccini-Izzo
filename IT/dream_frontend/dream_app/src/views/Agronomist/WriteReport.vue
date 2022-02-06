@@ -21,7 +21,7 @@
   </div>
   <div>
     <button @click="submitFile" class="submitBtn actionButton">Submit</button>
-    <button @click="pushReport" class="actionButton backBtn">View Sended Report</button>
+    <button @click="pushReport" class="actionButton backBtn">View Sent Reports</button>
     <button @click="back" class="actionButton backBtn">Back</button>
   </div>
 
@@ -54,6 +54,8 @@ export default {
     const confirmationMessage = ref('')
     const errMsg = ref('')
 
+    axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
+
     // Upload to the web server the file that want to send to the server
     const handleFileUpload = (event) => {
       file.value = event.target.files[0]
@@ -82,7 +84,7 @@ export default {
               .then(() => {
                 NProgress.done()
                 scroll(0, 0)
-                confirmationMessage.value = 'Successful send'
+                confirmationMessage.value = 'Sent'
 
                 setTimeout(function () {
                   router.push({name: 'AgroHome'})
@@ -90,6 +92,12 @@ export default {
               })
               .catch(err => {
                 console.log('FAILURE!! ' + err);
+
+                if (err.response.status === 403){
+                  errMsg.value = 'You already upload this file'
+                  NProgress.done()
+                }
+
                 if (err.response.status === 401){
                   NProgress.done()
                   localStorage.clear()

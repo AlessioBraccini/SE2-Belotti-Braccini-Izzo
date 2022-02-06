@@ -60,6 +60,7 @@
 import {ref} from "vue";
 import NavbarAgro from "@/views/Navbar";
 import router from "@/router";
+import axios from "axios";
 
 export default {
   name: "WeatherAgro",
@@ -84,6 +85,8 @@ export default {
     const temperatureLow =ref(0);
 
     const description = ref('');
+
+    axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
     // Collect the weather info by calling an external api service by passing it the name of the district
     const loadWeather = async () => {

@@ -18,6 +18,8 @@ export default {
   name: 'IrrigationChart',
 
   setup(){
+    axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
+
     let totalWater = ref(0)
     return {totalWater}
   },

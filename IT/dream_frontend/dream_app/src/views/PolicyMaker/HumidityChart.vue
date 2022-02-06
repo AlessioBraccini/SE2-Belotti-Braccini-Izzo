@@ -20,6 +20,8 @@ export default {
   name: 'HumidityChart',
 
   setup(){
+    axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
+
     let avgHumidity = ref(0)
     let avgTemp = ref(0)
     return {avgHumidity, avgTemp}

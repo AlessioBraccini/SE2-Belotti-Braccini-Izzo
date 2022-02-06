@@ -14,6 +14,7 @@ import NavbarAgro from "@/views/Navbar";
 import {ref} from "vue";
 import RankingListPM from "@/views/PolicyMaker/RankingListPM";
 import router from "@/router";
+import axios from "axios";
 
 export default {
   name: "PolicyMakerHomepage",
@@ -21,6 +22,8 @@ export default {
 
   setup(){
     const name = ref(localStorage.getItem('name'))
+
+    axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
     // Redirect buttons methods
 

@@ -45,6 +45,7 @@ import x13d from "@/assets/weather/x13d.png"
 import x13n from "@/assets/weather/x13n.png"
 import x50d from "@/assets/weather/x50d.png"
 import x50n from "@/assets/weather/x50n.png"
+import axios from "axios";
 
 export default {
   name: "WeatherAgro",
@@ -59,6 +60,8 @@ export default {
     const description = ref('');
 
     const icon = ref('');
+
+    axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
     // Collect the weather info by calling an external api service by passing it the name of the district
     const loadWeather = async () => {

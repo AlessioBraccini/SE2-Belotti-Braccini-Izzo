@@ -17,6 +17,7 @@ import HumidityChart from "@/views/PolicyMaker/HumidityChart";
 import Navbar from "@/views/Navbar";
 import {ref} from "vue";
 import router from "@/router";
+import axios from "axios";
 
 export default {
   name: 'App',
@@ -25,6 +26,8 @@ export default {
   setup(){
 
     const name = ref(localStorage.getItem('name'))
+
+    axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
 
     const back = () => {
       router.push({name: 'PMHome'})

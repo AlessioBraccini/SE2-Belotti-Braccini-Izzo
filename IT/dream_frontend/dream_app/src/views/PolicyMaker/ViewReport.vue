@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="rawText">Loading...</div>
+    <div v-else class="rawText">No Reports Available</div>
   </div>
 
   <button @click="back" class="actionButton backBtn">Back</button>

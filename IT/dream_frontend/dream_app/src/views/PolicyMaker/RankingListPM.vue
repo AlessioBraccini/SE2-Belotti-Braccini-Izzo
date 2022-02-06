@@ -38,6 +38,8 @@ export default {
     const farmerList = ref([])
     const error = ref(null)
 
+    axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token')
+
     // Load the farmers ranking by passing a specific ordering
     const loadRankData = async () => {
       try {
