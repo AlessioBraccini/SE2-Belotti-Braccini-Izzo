@@ -6,6 +6,10 @@ After cloning the IT repo in PyCharm:
 3) Activate the environment. If the default path has been set then run:
 ```shell
 source IT/venv/bin/activate
+
+# Alternatively, for Windows:
+.\IT\venv\Scripts\Activate.ps1 #for PowerShell
+.\IT\venv\Scripts\activate.bat #for cmd.exe shell
 ```
 4) Install all the project's requirements, once the `venv` is active:
 ```shell
