@@ -67,3 +67,6 @@ python3 manage.py migrate
 ```shell
 python3 manage.py createsuperuser
 ```
+
+### Django Admin Interface
+The **Django Admin Interface** is a tool provided by Django that lets you easily access the in-app Models (linked to the database) and add/remove/modify database entries from there. This is useful in testing the prototype, since it makes it easier to load mock data. You can access it with a DREAM account with _superuser_ privileges (as created above) at the link: http://your_backend_url/admin/ (e.g. http://localhost:8000/admin/ if you're running the backend locally). Also, be sure to set `DEBUG=True` in [dream_backend/settings.py](https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo/blob/main/IT/dream_backend/settings.py). However, never leave this option active whenever you intend to use this in production because it would represent a security problem: we don't want people to reach this development console normally.
