@@ -158,14 +158,14 @@ The installation went very smoothly following the guide present in the ITD. The 
     \begin{itemize}
         \item[(a)] The plan is successfully created, however it is possible to add the same farmer multiple times.
         \item[(b)] We were able to change the schedule status on 10/02/2022, swapping between "completed" and "not completed", as many time as we'd like.
-        \item[(c)] The search results in showing the calendar of February 2022. In cell 10/02/2022 there is the list of farmers planned to be visited for that day. However, the view is a bit buggy (more in the following bullet point).
+        \item[(c)] The search results in showing the calendar of February 2022. In cell 10/02/2022 there is the list of farmers planned to be visited for that day. However, the view is a bit buggy (more in the \emph{Issues} section).
         \item[(d)] The WebApp crashes, probably because there are no schedules or farmers associated to that agronomist user yet. So this error has not been managed.
     \end{itemize} 
     \item[\textit{iv.}] \textbf{Issues}
     \begin{itemize}
         \item The same farmer can be added an infinite amount of times in a single schedule and it doesn't make sense.
         \item The visualization feature via monthly calendar doesn't practically work when an agronomist plans to visit more than 1 farm in a day, since the calendar cell is too small to fit more than that. This results in the list of added farmers to roll down behind the calendar and eventually pop up again where the latter is over. See \emph{fig. \ref{fig: calendar_bug}} for reference.
-        \item It doesn't really make sense that the visualization of reports is filtered by the exact date, but then the whole month is shown.
+        \item It doesn't really make sense that the visualization of reports is filtered by the exact date, but then the whole month is shown. 
     \end{itemize} 
 \end{itemize}
 \begin{figure}[H]
@@ -192,10 +192,16 @@ The installation went very smoothly following the guide present in the ITD. The 
     \end{itemize} 
     \item[\textit{iv.}] \textbf{Issues} 
     \begin{itemize}
-        \item Filling all the required fields, mostly the "best practices used" and "practices to be avoided" fields, is difficult because it's not likely that an agronomist can grasp what best and worst practices have been used by only referring to the data included in the report by the farmer.
+        \item Filling all the required fields, mostly the "best practices used" and "practices to be avoided" fields, is difficult because it's not likely that an agronomist can grasp what best and worst practices have been used by only referring to the data included in the report by the farmer (reference \emph{fig. \ref{fig: report_review}}).
         \item After the approval or rejection of a report, the webapp doesn't root back to the Home or even Report Queue, instead it stays on the specific report page as if something didn't work. Only a message at the bottom tells us that the report has been reviewed successfully. 
     \end{itemize}   
 \end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{assets/report_review.png}
+    \caption{Report review format}
+    \label{fig: report_review}
+\end{figure}
 
 
 \section{Project Inspection}
@@ -211,12 +217,13 @@ However, the steering initiatives aspect required by the specification is not ev
 Overall, we think the RASD is very well done.
 
 \subsubsection{DD}
-The general Application Server Component diagram presents all the manager components as black boxes, that are further developed later one by one. In general, this approach causes the interfaces between subcomponents to not be very clear. Also, the specific Performance Manager's diagram is not coherent with the main component diagram, because it is said to communicate with the \textit{Request Router} instead of the DBMS (\textit{AccessDB}).
+The general Application Server Component diagram presents all the manager components as black boxes, that are further developed later, one by one. Because of this approach, the interfaces between subcomponents are not very clear. Also, the specific \emph{Performance Manager}'s diagram is not coherent with the main component diagram, because it is said to communicate with the \textit{Request Router} instead of the DBMS (\textit{AccessDB}).
+Overall though, the presented components are enough and it seems like nothing crucial is missing, they are also thoroughly described as well.
 
 Finally, there are a lot of useful mockups to visualize the preview of the WebApp.
 
 \paragraph{Testing}
-The testing plan is detailed since there are specified all the Manager components to be tested and  which kind of test to perform on them, however, since they deeply specified them, we can say that they didn't take corner-cases tests into consideration. Comparing the test plan with the actual testing in the development phase, it seems that the group has focused on testing mostly correct behaviours but not assuring that unwanted ones don't occur as well. 
+The testing plan is detailed since there are specified all the Manager components to be tested and  which kind of test to perform on them, however, since they deeply specified them, we can say that they didn't take a lot of possible corner-case tests into consideration. Comparing the test plan with the actual testing in the development phase, it seems that the group has focused on testing mostly correct behaviours, but has not checked that unwanted ones don't occur as well. 
 
 \subsubsection{ITD}
 The ITD extensively explains the implemented functionalities, but the users' description reminds us that agronomists and policy makers should be able to send messages to each other directly in-app even though the chat feature is not implemented.
@@ -226,15 +233,19 @@ The frameworks choice has been a bit superficially motivated.
 The installation section is very well done: the guide is clear and the fact that a Docker container has been provided makes it very easy to install the software and start the server.
 
 \subsection{Architecture Quality}
-The architecture is 3-tier as stated in the DD: client, server (frontend and backend) and database. We believe it's a reasonable choice.
+The architecture is 3-tier as stated in the DD: client, server (frontend and backend) and database. We believe it's a reasonable and standard choice.
+
+MongoDB is also a well renowned NoSQL database system with high availability, so there's no doubt on its performance in serving the software.
 
 \subsection{Code Quality}
 The software has been written in Python using Django Framework to develop both backend and frontend. These two has been devided into two different Django Apps. 
 
-We'd like to point out that this is not a very maintainable choice because, for example, the backend functions providing the API for the frontend are all grouped in one python file (dreamAPI/view.py). In our opinion, it would have been better to divide all the backend functionalities in more Django App, so that every feature can have, at least, its own view.py (for the API functions) and model.py (for the database ORM) files, making the structure more modular.
+To us, this doesn't seem a very maintainable choice because, for example, the backend functions providing the API for the frontend are all grouped in one python file (dreamAPI/view.py). In our opinion, it would have been better to divide all the backend functionalities in more Django Apps, so that every feature can have, at least, its own view.py (for the API functions) and model.py (for the database ORM) files, making the structure more modular and easier to mantain.
+
+The code is well commented in the managers files (dreamAPI/services/*.py).
 
 \paragraph{Testing}
-The system has been tested (24 test cases present in total) and all the tests are brought out succesfully. However, they don't really test corner cases, since only the regular workflow has been checked, like saving and retrieving data, but without testing any exception that the code might raise. The crashing error found in the schedule functionality is an example that proves this point.
+The system has been tested (24 test cases present in total) and all the tests are brought out succesfully. However, they don't really test corner cases, since it seems that only the regular workflow has been checked (e.g. saving and retrieving data when the requests are mostly locially well formed), but without testing any exception that the code might raise. The crashing error found in the schedule functionality is an example that proves this point.
 
 \section{Conclusion}
 Overall, the developed software is functional, however it's not a great user experience because some design choices are not intuitive and at times complex, for instance the fact that everything is filtered by date is a bit of a hassle. Most of the time, the relevant periods would be "today", "last week", "last month" and so on; so we think it would be easier as a user to choose a pre-set period among those cited ones or consider the entire historical data of the database (in case of review farmer/agronomist performance) by default, while making the custom "filter-by-date" a secondary feature, since it would be likely less used and it's more time consuming. 
