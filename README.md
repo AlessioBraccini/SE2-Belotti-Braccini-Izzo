@@ -6,6 +6,7 @@ This repository contains all the deliverables produced for the project of _Softw
 
 **Students**: [Ottavia Belotti](https://github.com/OttaviaBelotti), [Alessio Braccini](https://github.com/AlessioBraccini), [Riccardo Izzo](https://github.com/RiccardoIzzo)
 
+**Final Evaluation**: 30
 ## Project Specification
 You can find the full specification [here](https://github.com/AlessioBraccini/SE2-Belotti-Braccini-Izzo/blob/main/01.%20Assignment%20RDD%20AY%202021-2022.pdf).
 
